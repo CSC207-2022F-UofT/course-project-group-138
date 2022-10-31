@@ -7,6 +7,11 @@ public class Inventory {
         this.weapon = new Weapon();
         this.armor = new Armor();
     }
+    public Inventory(Weapon weapon, Armor armor, int coins){
+        this.coins = coins;
+        this.weapon = weapon;
+        this.armor = armor;
+    }
     public Weapon getWeapon(){
         return this.weapon;
     }
