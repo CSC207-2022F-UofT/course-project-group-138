@@ -4,7 +4,7 @@ import merchant_interactions.*;
 import inventory.*;
 
 public class Player {
-    /* temporary */
+    /* temporary, used for Merchant methods, replace later with fully implemented Player */
 
     private Inventory playerInv;
 
