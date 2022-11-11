@@ -9,66 +9,18 @@ public class PaintMain {
 
     JButton clearBtn, blackBtn, redBtn, blueBtn, greenBtn, eraserBtn,
             doneBtn, size1Btn, size2Btn, size3Btn, size4Btn;
-    JButton lastButton = blackBtn;
+    JButton[] buttons = new JButton[]{clearBtn, blackBtn, redBtn, blueBtn, greenBtn,
+            eraserBtn, doneBtn, size1Btn, size2Btn, size3Btn, size4Btn};
+    PaintButtonBuilder buttonBuilder = new PaintButtonBuilder();
+    JFrame mainFrame;
 
-    DrawArea drawArea;
+    PaintCanvas canvas;
+    PaintEventHandler eventHandler = new PaintEventHandler(canvas,
+            buttonBuilder.getButtonMap());
     ActionListener actionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == clearBtn){
-                drawArea.clear();
-            } else if (e.getSource() == blackBtn) {
-                drawArea.black();
-                blackBtn.setBackground(Color.gray);
-                lastButton.setBackground(Color.white);
-                lastButton = blackBtn;
-            } else if (e.getSource() == redBtn){
-                drawArea.red();
-                redBtn.setBackground(Color.red);
-                lastButton.setBackground(Color.white);
-                lastButton = redBtn;
-            } else if (e.getSource() == blueBtn) {
-                drawArea.blue();
-                blueBtn.setBackground(Color.blue);
-                lastButton.setBackground(Color.white);
-                lastButton = blueBtn;
-            } else if (e.getSource() == greenBtn) {
-                drawArea.green();
-                greenBtn.setBackground(Color.green);
-                lastButton.setBackground(Color.white);
-                lastButton = greenBtn;
-            } else if (e.getSource() == eraserBtn) {
-                drawArea.eraser();
-                eraserBtn.setBackground(Color.gray);
-                lastButton.setBackground(Color.white);
-                lastButton = eraserBtn;
-            } else if (e.getSource() == size1Btn) {
-                drawArea.size1();
-                size1Btn.setBackground(Color.gray);
-                lastButton.setBackground(Color.white);
-                lastButton = size1Btn;
-            } else if (e.getSource() == size2Btn) {
-                drawArea.size2();
-                size2Btn.setBackground(Color.gray);
-                lastButton.setBackground(Color.white);
-                lastButton = size2Btn;
-            } else if (e.getSource() == size3Btn) {
-                drawArea.size3();
-                size3Btn.setBackground(Color.RED);
-                lastButton.setBackground(Color.white);
-                lastButton = size3Btn;
-            } else if (e.getSource() == size4Btn) {
-                drawArea.size4();
-                size4Btn.setBackground(Color.gray);
-                lastButton.setBackground(Color.white);
-                lastButton = size4Btn;
-            } else if (e.getSource() == doneBtn){
-                drawArea.done();
-                // add save code
-                // add exit code
-            }
-            lastButton.setOpaque(true);
-            lastButton.setBorderPainted(false);
+            eventHandler.handleButtonEvent(buttons, e);
         }
     };
 
@@ -76,50 +28,74 @@ public class PaintMain {
         new PaintMain().show();
     }
 
-    public void show(){
-        JFrame frame = new JFrame("uwu");
-        Container contents = frame.getContentPane();
-        contents.setLayout(new BorderLayout());
+    /**
+     * Presents the JFrame to screen
+     */
+    public void show() {
+        buildButtons();
+        buildLayout();
 
-        drawArea = new DrawArea();
+        mainFrame.setSize(1000, 1000);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
 
-        contents.add(drawArea, BorderLayout.CENTER);
+    }
 
+    /**
+     * Builds all the JButtons by providing neccessary information to
+     * the buttonBuilder class
+     */
+    public void buildButtons(){
+        // Build Color Buttons using buttonBuilder
+        blackBtn = buttonBuilder.buildPaintBtn("black", Color.BLACK);
+        redBtn = buttonBuilder.buildPaintBtn("red", Color.RED);
+        blueBtn = buttonBuilder.buildPaintBtn("blue", Color.BLUE);
+        greenBtn = buttonBuilder.buildPaintBtn("green", Color.GREEN);
+        eraserBtn = buttonBuilder.buildPaintBtn("erase", Color.WHITE);
+        // Build non-color Action Buttons using buttonBuilder
+        clearBtn = buttonBuilder.buildPaintBtn("clear");
+        doneBtn = buttonBuilder.buildPaintBtn("done");
+        // Build size changing Buttons using buttonBuilder
+        size1Btn = buttonBuilder.buildPaintBtn("1", 4);
+        size2Btn = buttonBuilder.buildPaintBtn("2", 7);
+        size3Btn = buttonBuilder.buildPaintBtn("3", 10);
+        size4Btn = buttonBuilder.buildPaintBtn("4", 13);
+    }
+
+    /**
+     * Builds the JFrame, JPanels, and sets the layout
+     */
+    public void buildLayout(){
+        mainFrame = new JFrame("Paint");
+        canvas = new PaintCanvas();
         JPanel controls = new JPanel();
         JPanel sizes = new JPanel();
-        clearBtn = new JButton("clear");
-        blackBtn = new JButton("black");
-        redBtn = new JButton("red");
-        blueBtn = new JButton("blue");
-        greenBtn = new JButton("green");
-        doneBtn = new JButton("done");
-        eraserBtn = new JButton("erase");
 
-        size1Btn = new JButton("1");
-        size2Btn = new JButton("2");
-        size3Btn = new JButton("3");
-        size4Btn = new JButton("4");
+        Container contents = mainFrame.getContentPane();
+        contents.setLayout(new BorderLayout());
+        contents.add(canvas, BorderLayout.CENTER);
+        contents.add(controls, BorderLayout.NORTH);
+        contents.add(sizes, BorderLayout.SOUTH);
+        addButtons(controls, sizes);
+    }
+
+    /**
+     * Adds an ActionListener to all the JButtons, and add the buttons
+     * to their respective JPanels
+     * @param controls
+     * @param sizes
+     */
+    public void addButtons(JPanel controls, JPanel sizes){
         JButton[] controlChoices = {clearBtn, eraserBtn, blackBtn, redBtn, blueBtn, greenBtn, doneBtn};
         JButton[] sizeChoices = {size1Btn, size2Btn, size3Btn, size4Btn};
-
-        for (JButton c: controlChoices){
+        for (JButton c : controlChoices) {
             c.addActionListener(actionListener);
             controls.add(c);
         }
-
-        for (JButton s: sizeChoices){
+        for (JButton s : sizeChoices) {
             s.addActionListener(actionListener);
             sizes.add(s);
         }
-
-        contents.add(controls, BorderLayout.NORTH);
-        contents.add(sizes, BorderLayout.SOUTH);
-
-
-        frame.setSize(1000, 1000);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
     }
 }
 

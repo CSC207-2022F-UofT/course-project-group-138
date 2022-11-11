@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class DrawArea extends JComponent{
+public class PaintCanvas extends JComponent{
     // canvas
     private Image image;
     private Graphics2D g2;
@@ -19,7 +19,7 @@ public class DrawArea extends JComponent{
     // mouse coord
     private int currentX, currentY, oldX, oldY;
 
-    public DrawArea(){
+    public PaintCanvas(){
         setDoubleBuffered(true);
         addMouseListener(new MouseAdapter() {
             @Override
@@ -55,47 +55,22 @@ public class DrawArea extends JComponent{
             g2 = (Graphics2D) image.getGraphics();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_OFF);
-            size1();
             clear();
         }
         g.drawImage(image, 0, 0, null);
     }
-
+    public void setPaintColor(Color color){
+        g2.setPaint(color);
+        lastColor = color;
+    }
+    public void setStrokeSize(int size){
+        g2.setStroke(new BasicStroke(size));
+    }
     public void clear(){
         g2.setPaint(Color.white);
         g2.fillRect(0, 0, getSize().width, getSize().height);
         g2.setPaint(lastColor);
         repaint();
-    }
-
-    public void red(){
-        g2.setPaint(Color.red);
-        lastColor = Color.red;
-    }
-    public void black() {
-        g2.setPaint(Color.black);
-        lastColor = Color.black;
-    }
-    public void blue(){
-        g2.setPaint(Color.blue);
-        lastColor = Color.blue;
-    }
-    public void green(){
-        g2.setPaint(Color.green);
-        lastColor = Color.green;
-    }
-    public void eraser() {g2.setPaint(Color.white);}
-    public void size1(){
-        g2.setStroke(new BasicStroke(4));
-    }
-    public void size2(){
-        g2.setStroke(new BasicStroke(7));
-    }
-    public void size3(){
-        g2.setStroke(new BasicStroke(10));
-    }
-    public void size4(){
-        g2.setStroke(new BasicStroke(13));
     }
 
     public void done() {
