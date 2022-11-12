@@ -6,22 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PaintMain {
-
+    // Declare Buttons/Button builder/Button Arrays
     JButton clearBtn, blackBtn, redBtn, blueBtn, greenBtn, eraserBtn,
             doneBtn, size1Btn, size2Btn, size3Btn, size4Btn;
-    JButton[] buttons = new JButton[]{clearBtn, blackBtn, redBtn, blueBtn, greenBtn,
-            eraserBtn, doneBtn, size1Btn, size2Btn, size3Btn, size4Btn};
+    JButton[] buttons;
     PaintButtonBuilder buttonBuilder = new PaintButtonBuilder();
+    // Declare UI
     JFrame mainFrame;
-
     PaintCanvas canvas;
-    PaintEventHandler eventHandler = new PaintEventHandler(canvas,
-            buttonBuilder.getButtonMap());
+    // Declare Event Handlers
+    PaintEventHandler eventHandler;
     ActionListener actionListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            eventHandler.handleButtonEvent(buttons, e);
-        }
+        public void actionPerformed(ActionEvent e) {eventHandler.handleButtonEvent(buttons, e);}
     };
 
     public static void main(String[] args) {
@@ -68,6 +65,7 @@ public class PaintMain {
     public void buildLayout(){
         mainFrame = new JFrame("Paint");
         canvas = new PaintCanvas();
+        eventHandler = new PaintEventHandler(canvas, buttonBuilder.getButtonMap());
         JPanel controls = new JPanel();
         JPanel sizes = new JPanel();
 
@@ -82,12 +80,13 @@ public class PaintMain {
     /**
      * Adds an ActionListener to all the JButtons, and add the buttons
      * to their respective JPanels
-     * @param controls
-     * @param sizes
+     * @param controls - JPanel containing all the control buttons
+     * @param sizes - JPanel containing all the size buttons
      */
     public void addButtons(JPanel controls, JPanel sizes){
         JButton[] controlChoices = {clearBtn, eraserBtn, blackBtn, redBtn, blueBtn, greenBtn, doneBtn};
         JButton[] sizeChoices = {size1Btn, size2Btn, size3Btn, size4Btn};
+        mergeBtnArrays(controlChoices, sizeChoices);
         for (JButton c : controlChoices) {
             c.addActionListener(actionListener);
             controls.add(c);
@@ -96,6 +95,17 @@ public class PaintMain {
             s.addActionListener(actionListener);
             sizes.add(s);
         }
+    }
+
+    /**
+     * Merges all the button arrays into one large button array named 'buttons'
+     * @param a - Array 1
+     * @param b - Array 2
+     */
+    private void mergeBtnArrays(JButton[] a, JButton[] b){
+        buttons = new JButton[a.length + b.length];
+        System.arraycopy(a, 0, buttons, 0, a.length);
+        System.arraycopy(b, 0, buttons, a.length, b.length);
     }
 }
 
