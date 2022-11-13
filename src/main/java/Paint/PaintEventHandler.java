@@ -1,41 +1,29 @@
 package Paint;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.HashMap;
 
 public class PaintEventHandler {
-    private HashMap buttonMap;
-    private HashMap<String, Color> colorMap = new HashMap();
-    String action;
+    private final HashMap<JButton, PaintAction> buttonMap;
     PaintCanvas canvas;
 
     /**
      * Constructs a new PaintEventHandler object
-     * @param drawArea
+     * @param canvas - the canvas of the paint program
+     * @param buttonMap - a Hashmap that maps each button to an action
      */
-    public PaintEventHandler(PaintCanvas drawArea, HashMap buttonMap){
-        this.canvas = drawArea;
+    public PaintEventHandler(PaintCanvas canvas, HashMap<JButton, PaintAction> buttonMap){
+        this.canvas = canvas;
         this.buttonMap = buttonMap;
-        createColorMap();
     }
     public void handleButtonEvent(JButton[] buttons, ActionEvent e) throws IOException {
         for (JButton p : buttons){
             if (p == e.getSource()){
-                PaintAction act = (PaintAction) buttonMap.get(p);
+                PaintAction act = buttonMap.get(p);
                 act.execute(canvas);
             }
         }
-    }
-    private void createColorMap(){
-        colorMap.put("black", Color.black);
-        colorMap.put("white", Color.white);
-        colorMap.put("red", Color.red);
-        colorMap.put("blue", Color.blue);
-        colorMap.put("green", Color.green);
-        colorMap.put("yellow", Color.yellow);
-        colorMap.put("eraser", Color.white);
     }
 }
