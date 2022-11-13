@@ -1,7 +1,7 @@
 package Paint;
 
 public class GeneralAction implements PaintAction{
-    private String action;
+    private final String action;
     public GeneralAction(String a){
         this.action = a;
     }
