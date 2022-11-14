@@ -1,3 +1,5 @@
+package inventory;
+
 public class Armor extends Equipment{
     public int price;
     public int hp;
@@ -10,14 +12,20 @@ public class Armor extends Equipment{
         this.hp = 0;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     public int getHp() {
         return hp;
     }
-    public void upgrade(int hp){
+
+    /**
+     * merchant_interactions.Merchant interactions
+     */
+
+    @Override
+    public int getPrice() {
+        return price;
+    }
+    @Override
+    public void upgrade(){
         this.hp += hp;
     }
 }

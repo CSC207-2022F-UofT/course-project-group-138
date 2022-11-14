@@ -1,3 +1,5 @@
+package inventory;
+
 public class Inventory {
     private int coins;
     private Weapon weapon;
@@ -21,6 +23,14 @@ public class Inventory {
     public Armor getArmor(){
         return this.armor;
     }
+    public void setCoins(int coins){
+        this.coins = coins;
+    }
+
+    /*
+     * Due to merchant_interactions.Merchant interactions below methods have been handled in the inventory.Weapon and inventory.Armor
+     * classes alone, not through inventory
+
     public void upgradeWeapon(int attack, int cost){
         this.weapon.upgrade(attack);
         this.coins -= cost;
@@ -29,8 +39,7 @@ public class Inventory {
         this.armor.upgrade(hp);
         this.coins -= cost;
     }
-    public void SetCoins(int coins){
-        this.coins = coins;
-    }
+
+     */
 
 }
