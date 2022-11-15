@@ -1,3 +1,5 @@
+package dungeon;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Dungeon {
         this.arrangeRooms(map, numberOfRooms);
         this.connectRooms(map, numberOfRooms, rand);
 
-        //TODO: Render Dungeon graph visualization to test map generation.
+        //TODO: Render dungeon.Dungeon graph visualization to test map generation.
 
         return map;
     }
