@@ -21,6 +21,12 @@ public class Dungeon {
         this.addRoom(startingRoom);
     }
 
+    /**
+     * Generates a random dungeon map with a random number of rooms within the class variable ranges.
+     *
+     * @param difficulty index (0 - 3) representing easy, medium, hard and maximum difficulty.
+     * @return a HashMap of all DungeonRooms (except starting room and gate room) as keys and all connected DungeonRooms as values.
+     */
     public HashMap<DungeonRoom, List<DungeonRoom>> generateDungeonMap(int difficulty) {
         Random rand = new Random();
         int enemyRange = rand.nextInt((ENEMY_RANGE[1] - ENEMY_RANGE[0]) + 1) + ENEMY_RANGE[0];
@@ -29,18 +35,28 @@ public class Dungeon {
 
         HashMap<DungeonRoom, List<DungeonRoom>> map = new HashMap<DungeonRoom, List<DungeonRoom>>();
 
-        this.arrangeRooms(map, numberOfRooms);
+        this.insertRooms(map, numberOfRooms);
         this.connectRooms(map, numberOfRooms, rand);
-
-        //TODO: Render dungeon.Dungeon graph visualization to test map generation.
 
         return map;
     }
 
+    /**
+     * Adds a new DungeonRoom to the Dungeon List rooms.
+     *
+     * @param newRoom the new room to be added.
+     */
     private void addRoom(DungeonRoom newRoom) {
         this.rooms.add(newRoom);
     }
 
+    /**
+     * Adds a connection between two DungeonRooms in the List rooms and in the HashMap.
+     *
+     * @param roomOne the first DungeonRoom.
+     * @param roomTwo the second DungeonRoom.
+     * @param map the HashMap of DungeonRooms to all connected DungeonRooms.
+     */
     private void addHallway(DungeonRoom roomOne, DungeonRoom roomTwo, HashMap<DungeonRoom, List<DungeonRoom>> map) {
         roomOne.addConnectedRoom(roomTwo);
         roomTwo.addConnectedRoom(roomOne);
@@ -48,7 +64,13 @@ public class Dungeon {
         map.get(roomTwo).add(roomOne);
     }
 
-    private void arrangeRooms(HashMap<DungeonRoom, List<DungeonRoom>> map, int numberOfRooms) {
+    /**
+     * Inserts the specified number of rooms into the HashMap and initializes an ArrayList for their values.
+     *
+     * @param map the HashMap to be inserted into.
+     * @param numberOfRooms the number of rooms to be inserted.
+     */
+    private void insertRooms(HashMap<DungeonRoom, List<DungeonRoom>> map, int numberOfRooms) {
         for (int i = 0; i < numberOfRooms + 1; i++) {
             DungeonRoom newRoom = new DungeonRoom();
             this.addRoom(newRoom);
@@ -56,6 +78,13 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Randomly connects each DungeonRoom in the HashMap to a random number of other DungeonRooms in the HashMap.
+     *
+     * @param map the HashMap of DungeonRooms to all connected DungeonRooms.
+     * @param numberOfRooms the number of rooms in the HashMap.
+     * @param rand a Random object.
+     */
     private void connectRooms(HashMap<DungeonRoom, List<DungeonRoom>> map, int numberOfRooms, Random rand) {
         for (int i = 1; i < numberOfRooms; i++) {
             int numberOfConnections = rand.nextInt(CONNECTION_RANGE[1] - CONNECTION_RANGE[0]) + CONNECTION_RANGE[0];
