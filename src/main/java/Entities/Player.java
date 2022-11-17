@@ -1,4 +1,4 @@
-package temporary_classes;
+package Entities;
 
 import inventory.*;
 
@@ -6,42 +6,35 @@ public class Player extends Character{
     /* temporary, used for Merchant methods, replace later with fully implemented Player */
 
     private Inventory playerInv;
-    private int HP;
-    private int NumOfEnemySlayed;
+    private int enemiesSlain;
 
     public Inventory getInventory(){
         return playerInv;
     }
 
-    public Player(Inventory inventory, int HP, int numOfSlayed){
+    public Player(Inventory inventory, int maxHp, int numOfSlayed){
         this.playerInv = inventory;
-        this.HP = HP;
-        this.NumOfEnemySlayed = numOfSlayed;
-
+        this.maxHp = maxHp;
+        this.enemiesSlain = numOfSlayed;
     }
     public int showBalance(){
         return this.playerInv.getCoins();
     }
-    public void showPosition(){
-
-    }
+    public void showPosition(){}
     public int getNumOfEnemySlain(){
-        return this.NumOfEnemySlayed;
+        return this.enemiesSlain;
     }
     public void setNumOfEnemySlain(int num){
-        this.NumOfEnemySlayed = num;
+        this.enemiesSlain = num;
     }
-
-    public int getHP(){
-        return this.HP;
+    public int getHp(){
+        return this.hp;
     }
-
-    public void setHP(int HP){
-        this.HP = HP;
+    public void setHp(int hp){
+        this.hp = hp;
     }
     public boolean isAlive(){
-        return this.HP > 0;
+        return this.hp > 0;
     }
-
 }
 
