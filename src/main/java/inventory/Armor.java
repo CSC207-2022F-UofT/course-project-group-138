@@ -17,7 +17,7 @@ public class Armor extends Equipment{
     }
 
     /**
-     * merchant_interactions.Merchant interactions
+     * Merchant interactions
      */
 
     @Override
