@@ -1,12 +1,11 @@
 package dungeon;
 
-import merchant_interactions.Merchant;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonRoom {
     private List<DungeonRoom> connectedRooms;
+    private DungeonRoom previousRoom;
     private Object nonPlayerCharacter;
     private String typeOfNPC;
 
@@ -24,22 +23,23 @@ public class DungeonRoom {
     }
 
     /**
-     * Add a new Merchant to the DungeonRoom.
+     * Add a new NPC to the DungeonRoom.
      *
-     * @param newNPC the new Merchant to be added.
+     * @param newNPC the new NPC to be added.
+     * @param type the type of NPC to be added (i.e. 'M' or 'E').
      */
-    public void addNPC(Merchant newNPC) {
+    public void addNPC(Object newNPC, String type) {
         this.nonPlayerCharacter = newNPC;
+        this.typeOfNPC = type;
     }
 
     /**
-     * Add a new Enemy to the DungeonRoom.
+     * Sets the previous room that this DungeonRoom was entered from.
      *
-     * @param newNPC the new Enemy to be added.
+     * @param room the previous room.
      */
-    public void addNPC(Object newNPC) {
-        //TODO: Replace argument class Object with Enemy, when Enemy class is merged onto main.
-        this.nonPlayerCharacter = newNPC;
+    public void setPreviousRoom(DungeonRoom room) {
+        this.previousRoom = room;           // TODO: Backtracking method in Dungeon.
     }
 
     /**
