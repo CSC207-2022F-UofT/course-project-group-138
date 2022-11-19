@@ -12,11 +12,13 @@ public class Dungeon {
     static int[] MERCHANT_RANGE = {1, 5};
     static int[] CONNECTION_RANGE = {1, 5};
     static double[] DIFFICULTY_RANGE = {0.10, 0.25, 0.50, 1.00};
+    private final double difficulty;
     private List<DungeonRoom> rooms;
     private DungeonRoom startingRoom;
 
-    public Dungeon() {
+    public Dungeon(int difficulty) {
         this.rooms = new ArrayList<DungeonRoom>();
+        this.difficulty = DIFFICULTY_RANGE[difficulty];
         this.startingRoom = new DungeonRoom();
         this.addRoom(startingRoom);
     }
@@ -24,14 +26,13 @@ public class Dungeon {
     /**
      * Generates a random dungeon map with a random number of rooms within the class variable ranges.
      *
-     * @param difficulty index (0 - 3) representing easy, medium, hard and maximum difficulty.
      * @return a HashMap of all DungeonRooms (except starting room and gate room) as keys and all connected DungeonRooms as values.
      */
-    public HashMap<DungeonRoom, List<DungeonRoom>> generateDungeonMap(int difficulty) {
+    public HashMap<DungeonRoom, List<DungeonRoom>> generateDungeonMap() {
         Random rand = new Random();
         int numberOfEnemies = rand.nextInt((ENEMY_RANGE[1] - ENEMY_RANGE[0]) + 1) + ENEMY_RANGE[0];
         int numberOfMerchants = rand.nextInt((MERCHANT_RANGE[1] - MERCHANT_RANGE[0]) + 1) + MERCHANT_RANGE[0];
-        int numberOfRooms = numberOfEnemies + numberOfMerchants + (int)round((numberOfEnemies + numberOfMerchants) * DIFFICULTY_RANGE[difficulty]);
+        int numberOfRooms = numberOfEnemies + numberOfMerchants + (int)round((numberOfEnemies + numberOfMerchants) * this.difficulty);
 
         HashMap<DungeonRoom, List<DungeonRoom>> map = new HashMap<DungeonRoom, List<DungeonRoom>>();
 
