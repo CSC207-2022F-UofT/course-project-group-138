@@ -1,9 +1,8 @@
 package inventory;
 
-import merchant_interactions.Purchasable;
+public interface Equipment {
+    int getPrice();
+    int getAttribute();
+    void upgrade();
 
-public abstract class Equipment implements Purchasable {
-    public abstract int getPrice();
-
-    public abstract void upgrade();
 }
