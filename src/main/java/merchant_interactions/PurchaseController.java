@@ -24,19 +24,15 @@ public class PurchaseController {
         else if (userInput.equals("inventory.Armor")){
             item = player.getInventory().getArmor();
         }
-        merchant = new Merchant(item);
+        merchant = new Merchant(item, steve);
     }
 
     /**
-     * Returns whether a purchase is successful; if so, deduct the Player's coins accordingly
+     * Returns whether a purchase is successful
      */
     public boolean purchase (){
-        int balance = steve.getInventory().getCoins();
-        if (merchant.checkAfford(balance) >= 0){
-            item.upgrade();
-            steve.getInventory().setCoins(merchant.checkAfford(balance));
-            return true;
-        }
-        return false;
+        return merchant.purchase();
     }
+
+
 }
