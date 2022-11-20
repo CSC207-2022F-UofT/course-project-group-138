@@ -3,6 +3,7 @@ package Paint;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class PaintEventHandler {
@@ -20,7 +21,7 @@ public class PaintEventHandler {
         this.buttonMap = buttonMap;
         createColorMap();
     }
-    public void handleButtonEvent(JButton[] buttons, ActionEvent e){
+    public void handleButtonEvent(JButton[] buttons, ActionEvent e) throws IOException {
         for (JButton p : buttons){
             if (p == e.getSource()){
                 PaintAction act = (PaintAction) buttonMap.get(p);
