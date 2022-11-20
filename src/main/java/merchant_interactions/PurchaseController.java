@@ -1,6 +1,6 @@
 package merchant_interactions;
 
-import character.*;
+import temporary_classes.*;
 import inventory.*;
 
 public class PurchaseController {
