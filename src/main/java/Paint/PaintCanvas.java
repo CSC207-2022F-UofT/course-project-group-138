@@ -83,10 +83,18 @@ public class PaintCanvas extends JComponent{
             throw new RuntimeException(e);
         }
     }
+
+    public void preview() throws IOException {
+        Image transparentImage = makeColorTransparent(imageToBufferedImage(image), Color.white);
+        BufferedImage previewImage = resizeImage(imageToBufferedImage(transparentImage), 500, 500);
+        ImageIcon previewImageIcon = new ImageIcon(previewImage);
+        PaintMain.preview.setIcon(previewImageIcon);
+    }
+
     public static Image makeColorTransparent(final BufferedImage im, final Color color) {
         final ImageFilter filter = new RGBImageFilter() {
             // the color we are looking for (white)... Alpha bits are set to opaque
-            public int markerRGB = color.getRGB() | 0xFFFFFFFF;
+            public final int markerRGB = 0xFFFFFFFF; // White i think...
 
             public int filterRGB(final int x, final int y, final int rgb) {
                 if ((rgb | 0xFF000000) == markerRGB) {
@@ -101,6 +109,15 @@ public class PaintCanvas extends JComponent{
         final ImageProducer ip = new FilteredImageSource(im.getSource(), filter);
         return Toolkit.getDefaultToolkit().createImage(ip);
     }
+
+    BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
+        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics2D = resizedImage.createGraphics();
+        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+        graphics2D.dispose();
+        return resizedImage;
+    }
+
     private static BufferedImage imageToBufferedImage(final Image image)
     {
         final BufferedImage bufferedImage =
