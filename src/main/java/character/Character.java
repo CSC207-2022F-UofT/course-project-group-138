@@ -74,8 +74,11 @@ public abstract class Character {
         return this.y;
     }
 
-    public void setPosition(int x, int y) {
+    public void setx(int x) {
         this.x += x;
+    }
+
+    public void sety(int y) {
         this.y += y;
     }
 
