@@ -2,7 +2,8 @@ package settings;
 
 public class Settings {
     /**
-     * This is a container class which holds all needed data about the game
+     * This is a container class which holds all needed data about the game. Makes everything more organized, easier to
+     * test, etc.
      */
     private static int PLAYER_SIZE, PLAYER_SPEED, MAX_HP;
 
