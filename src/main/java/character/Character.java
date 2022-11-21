@@ -14,7 +14,7 @@ public abstract class Character {
      */
     private final Inventory inv;
 
-    private final int HPmax;
+    private int HPmax;
 
     private int HP;
 
@@ -46,6 +46,14 @@ public abstract class Character {
         return this.inv.getCoins();
     }
 
+    public int getHPmax() {
+        return this.HPmax;
+    }
+
+    public void setHPmax(int upgrade) {
+        this.HPmax += upgrade;
+    }
+
     public int getHP(){
         return this.HP;
     }
@@ -66,8 +74,11 @@ public abstract class Character {
         return this.y;
     }
 
-    public void setPosition(int x, int y) {
+    public void setx(int x) {
         this.x += x;
+    }
+
+    public void sety(int y) {
         this.y += y;
     }
 
