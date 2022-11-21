@@ -1,6 +1,8 @@
 package dungeon;
 
+import character.Player;
 import inventory.Armor;
+import inventory.Inventory;
 import inventory.Weapon;
 import merchant_interactions.Merchant;
 
@@ -40,10 +42,11 @@ public class DungeonRoomBuilder {
                 if (this.merchantsAdded < this.numberOfMerchants) {
                     int randomItem = this.rand.nextInt(2);     // 0 = Armour, 1 = Weapon
                     if (randomItem == 0) {
-                        newRoom.addNPC(new Merchant(new Armor()), "M");
+                        newRoom.addNPC(new Merchant(new Armor(), new Player(new Inventory(), 0, 0, 0)), "M");
                     } else {
-                        newRoom.addNPC(new Merchant(new Weapon()), "M");
+                        newRoom.addNPC(new Merchant(new Weapon(), new Player(new Inventory(), 0, 0, 0)), "M");
                     }                                                 // TODO: Assign item properties randomly?
+                                                                      // TODO: Fix addNPC() implementation for CA
                     this.merchantsAdded++;
                 }
                 break;

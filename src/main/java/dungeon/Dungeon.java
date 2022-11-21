@@ -104,9 +104,26 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Inserts the starting room (first room) and the gate room (last room) of the Dungeon into the HashMap.
+     *
+     * @param map the HashMap to be inserted into.
+     * @param startRoom the first room.
+     * @param gateRoom the last room.
+     */
+    private void insertEndRooms(HashMap<DungeonRoom, List<DungeonRoom>> map, DungeonRoom startRoom, DungeonRoom gateRoom) {
+        map.put(startRoom, new ArrayList<DungeonRoom>());
+        map.put(gateRoom, new ArrayList<DungeonRoom>());
+    }
+
+    /**
+     * Connects the starting room (first room) and the gate room (last room) to two random different rooms in the Dungeon.
+     *
+     * @param map the HashMap of all other DungeonRooms to an ArrayList of connected DungeonRooms.
+     * @param rand a Random object.
+     */
     private void connectEndRooms(HashMap<DungeonRoom, List<DungeonRoom>> map, Random rand) {
         int randomSecondRoomIndex = rand.nextInt(this.rooms.size() + 1) - 1;
-        this.addHallway(this.startingRoom, this.rooms.get(randomSecondRoomIndex), map);
 
         DungeonRoom gateRoom = new DungeonRoom();
         int randomSecondLastRoomIndex = rand.nextInt(this.rooms.size() + 1) - 1;
@@ -115,6 +132,9 @@ public class Dungeon {
                 randomSecondLastRoomIndex = rand.nextInt(this.rooms.size() + 1) - 1;
             } while (randomSecondLastRoomIndex == randomSecondRoomIndex);
         }
+
+        this.insertEndRooms(map, this.startingRoom, gateRoom);
+        this.addHallway(this.startingRoom, this.rooms.get(randomSecondRoomIndex), map);
         this.addHallway(gateRoom, this.rooms.get(randomSecondLastRoomIndex), map);
     }
 }

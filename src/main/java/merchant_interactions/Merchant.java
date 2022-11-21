@@ -1,16 +1,17 @@
 package merchant_interactions;
 
-import temporary_classes.Player;
+import character.Player;
+import inventory.*;
 
 public class Merchant {
     /**
      * Use case for Purchasables
      */
 
-    private Purchasable item;
+    private Equipment item;
     private Player steve;
 
-    public Merchant(Purchasable item, Player player) {
+    public Merchant(Equipment item, Player player) {
         this.item = item;
         this.steve = player;
     }

@@ -1,6 +1,6 @@
 package inventory;
 
-public class Weapon extends Equipment {
+public class Weapon implements Equipment {
     private int attack;
     private int price;
 
@@ -23,7 +23,7 @@ public class Weapon extends Equipment {
         this.price = price;
     }
 
-    public int getAttack() {
+    public int getAttribute() {
         return attack;
     }
 
