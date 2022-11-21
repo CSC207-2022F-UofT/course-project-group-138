@@ -6,30 +6,80 @@ import inventory.*;
 public abstract class Character {
 
     /**
-     * An abstract class to be extended by Player and Enemy.
+     * An abstract class with some non abstract methods to be extended by Player and Enemy.
      */
 
     /**
-     * === Methods relating to health ===
+     * Instance Variables
      */
-    public abstract int getHP();
-    public abstract void setHP(int HP);
-    public abstract boolean isAlive();
+    private final Inventory inv;
+
+    private final int HPmax;
+
+    private int HP;
+
+    private int x;
+
+    private int y;
+
 
     /**
-     * === Methods relating to inventory ===
+     * === Constructors ===
      */
-    public abstract Inventory getInventory();
+    Character(Inventory inv, int HPmax, int x, int y) {
+        this.inv = inv;
+        this.HPmax = HPmax + inv.getArmor().getAttribute();
+        this.HP = HPmax;
+        this.x = x;
+        this.y = y;
+    }
+
 
     /**
-     * === Methods relating to position ===
+     * === Getters and Setters ===
      */
-    public abstract int getx();
-    public abstract int gety();
-    public abstract void setPosition(int x, int y);
+    public Inventory getInventory(){
+        return inv;
+    }
+
+    public int getCoins() {
+        return this.inv.getCoins();
+    }
+
+    public int getHP(){
+        return this.HP;
+    }
+
+    public void setHP(int HP){
+        this.HP += HP;
+    }
+
+    public void setHP() {
+        this.HP = this.HPmax;
+    }
+
+    public int getx(){
+        return this.x;
+    }
+
+    public int gety(){
+        return this.y;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x += x;
+        this.y += y;
+    }
+
 
     /**
-     * === Methods relating to other ===
+     * === Methods ===
      */
-    public abstract int attack();
+    public int attack() {
+        return getInventory().getWeapon().getAttribute();
+    }
+
+    public boolean isAlive(){
+        return this.HP > 0;
+    }
 }
