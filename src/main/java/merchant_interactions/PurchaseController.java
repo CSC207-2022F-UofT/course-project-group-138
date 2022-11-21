@@ -1,6 +1,6 @@
 package merchant_interactions;
 
-import Entities.*;
+import character.*;
 import inventory.*;
 
 public class PurchaseController {
