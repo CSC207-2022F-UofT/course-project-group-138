@@ -1,4 +1,4 @@
-package presenters;
+package settings;
 
 public class Settings {
     /**

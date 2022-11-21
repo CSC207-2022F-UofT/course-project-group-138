@@ -1,10 +1,12 @@
 package presenters;
 import character.Player;
+import settings.Settings;
 
+// Responsible for updating the player's x, y coordinates. (This is a use case)
 public class PlayerMover {
     private boolean up, down, left, right;
     private final int speed = Settings.getPlayerSpeed();
-    private Player player;
+    private final Player player;
 
     public PlayerMover(Player player){
         this.player = player;
@@ -13,30 +15,36 @@ public class PlayerMover {
         left = false;
         right = false;
     }
+
+    /**
+     * Update the player's x, y values if user is holding the movement direction is set to true.
+     */
     public void move() {
         if (up) {
-
+            player.changey(-speed);
         }
         if (down) {
-
+            player.changey(speed);
         }
         if (left) {
-
+            player.changex(-speed);
         }
         if (right) {
-
+            player.changex(speed);
         }
     }
-    public void setUp (boolean up){
+    // true should be passed into methods below iff player if holding down the corresponding movement key
+    // Method calls below should result from a call stack originating from <engine>
+    public void movingUp (boolean up){
         this.up = up;
     }
-    public void setDown (boolean down){
+    public void movingDown (boolean down){
         this.down = down;
     }
-    public void setLeft (boolean left){
+    public void movingLeft (boolean left){
         this.left = left;
     }
-    public void setRight (boolean right){
+    public void movingRight (boolean right){
         this.right = right;
     }
 }
