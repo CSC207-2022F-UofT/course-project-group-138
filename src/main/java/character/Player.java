@@ -13,11 +13,11 @@ public class Player extends Character{
     /**
      * === Constructor ===
      */
-    Player(Inventory inv, int HPmax, int x, int y, int kills){
+    public Player(Inventory inv, int HPmax, int x, int y, int kills){
         super(inv, HPmax, x, y);
         this.kills = kills;
     }
-    Player(Inventory inv, int HPmax, int x, int y) {
+    public Player(Inventory inv, int HPmax, int x, int y) {
         super(inv, HPmax, x, y);
         this.kills = 0;
     }

@@ -26,7 +26,7 @@ public abstract class Character {
     /**
      * === Constructors ===
      */
-    Character(Inventory inv, int HPmax, int x, int y) {
+    public Character(Inventory inv, int HPmax, int x, int y) {
         this.inv = inv;
         this.HPmax = HPmax + inv.getArmor().getAttribute();
         this.HP = HPmax;
