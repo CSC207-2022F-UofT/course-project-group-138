@@ -13,7 +13,7 @@ public class Enemy extends Character{
      * === Constructor ===
      */
 
-    Enemy(Inventory inv, int HPmax, int x, int y) {
+    public Enemy(Inventory inv, int HPmax, int x, int y) {
         super(inv, HPmax, x, y);
     }
 
