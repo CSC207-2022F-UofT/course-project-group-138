@@ -50,7 +50,7 @@ public abstract class Character {
         return this.HPmax;
     }
 
-    public void setHPmax(int upgrade) {
+    public void changeHPmax(int upgrade) {
         this.HPmax += upgrade;
     }
 
@@ -58,7 +58,7 @@ public abstract class Character {
         return this.HP;
     }
 
-    public void setHP(int HP){
+    public void changeHP(int HP){
         this.HP += HP;
     }
 
@@ -74,11 +74,11 @@ public abstract class Character {
         return this.y;
     }
 
-    public void setx(int x) {
+    public void changex(int x) {
         this.x += x;
     }
 
-    public void sety(int y) {
+    public void changey(int y) {
         this.y += y;
     }
 
