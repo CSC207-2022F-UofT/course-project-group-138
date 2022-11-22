@@ -1,5 +1,7 @@
 package dungeon;
 
+import settings.Settings;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +18,9 @@ public class Dungeon {
     private List<DungeonRoom> rooms;
     private DungeonRoom startingRoom;
 
-    public Dungeon(int difficulty) {
+    public Dungeon() {
         this.rooms = new ArrayList<DungeonRoom>();
-        this.difficulty = DIFFICULTY_RANGE[difficulty];
+        this.difficulty = DIFFICULTY_RANGE[Settings.getDifficulty()];               // TODO: Replace generic Settings object with game loop object.
         this.startingRoom = new DungeonRoom();
         this.addRoom(startingRoom);
     }

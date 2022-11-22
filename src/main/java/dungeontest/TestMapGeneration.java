@@ -18,9 +18,11 @@ public class TestMapGeneration {
     static int[] MERCHANT_RANGE = {1, 5};
     static double[] DIFFICULTY_RANGE = {0.10, 0.25, 0.50, 1.00};
 
+    // TODO: Update map generation tests to utilise Settings.setDifficulty().
+    // Map generation tests will not work correctly until ^ is implemented.
     @Test
     public void testLowDifficulty() {
-        Dungeon testDungeon = new Dungeon(0);
+        Dungeon testDungeon = new Dungeon();
         HashMap<DungeonRoom, List<DungeonRoom>> testMap = testDungeon.generateDungeonMap();
 
         int minRooms = ENEMY_RANGE[0] + MERCHANT_RANGE[0] + (int)Math.round((ENEMY_RANGE[0] + MERCHANT_RANGE[0]) * DIFFICULTY_RANGE[0]);
@@ -32,7 +34,7 @@ public class TestMapGeneration {
 
     @Test
     public void testMediumDifficulty() {
-        Dungeon testDungeon = new Dungeon(1);
+        Dungeon testDungeon = new Dungeon();
         HashMap<DungeonRoom, List<DungeonRoom>> testMap = testDungeon.generateDungeonMap();
 
         int minRooms = ENEMY_RANGE[0] + MERCHANT_RANGE[0] + (int)Math.round((ENEMY_RANGE[0] + MERCHANT_RANGE[0]) * DIFFICULTY_RANGE[1]);
@@ -44,7 +46,7 @@ public class TestMapGeneration {
 
     @Test
     public void testHighDifficulty() {
-        Dungeon testDungeon = new Dungeon(2);
+        Dungeon testDungeon = new Dungeon();
         HashMap<DungeonRoom, List<DungeonRoom>> testMap = testDungeon.generateDungeonMap();
 
         int minRooms = ENEMY_RANGE[0] + MERCHANT_RANGE[0] + (int)Math.round((ENEMY_RANGE[0] + MERCHANT_RANGE[0]) * DIFFICULTY_RANGE[2]);
@@ -56,7 +58,7 @@ public class TestMapGeneration {
 
     @Test
     public void testMaxDifficulty() {
-        Dungeon testDungeon = new Dungeon(3);
+        Dungeon testDungeon = new Dungeon();
         HashMap<DungeonRoom, List<DungeonRoom>> testMap = testDungeon.generateDungeonMap();
 
         int minRooms = ENEMY_RANGE[0] + MERCHANT_RANGE[0] + (int)Math.round((ENEMY_RANGE[0] + MERCHANT_RANGE[0]) * DIFFICULTY_RANGE[3]);
@@ -69,7 +71,7 @@ public class TestMapGeneration {
     @Test
     public void testGenerationVisualization() {
         Random rand = new Random();
-        Dungeon testDungeon = new Dungeon(rand.nextInt(4));
+        Dungeon testDungeon = new Dungeon();
         HashMap<DungeonRoom, List<DungeonRoom>> testMap = testDungeon.generateDungeonMap();
 
         System.setProperty("org.graphstream.ui", "swing");

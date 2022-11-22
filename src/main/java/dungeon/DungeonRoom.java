@@ -7,7 +7,6 @@ public class DungeonRoom {
     private List<DungeonRoom> connectedRooms;
     private DungeonRoom previousRoom;
     private Object nonPlayerCharacter;
-    private String typeOfNPC;
 
     public DungeonRoom() {
         this.connectedRooms = new ArrayList<DungeonRoom>();
@@ -26,11 +25,9 @@ public class DungeonRoom {
      * Add a new NPC to the DungeonRoom.
      *
      * @param newNPC the new NPC to be added.
-     * @param type the type of NPC to be added (i.e. 'M' or 'E').
      */
-    public void addNPC(Object newNPC, String type) {
+    public void addNPC(Object newNPC) {
         this.nonPlayerCharacter = newNPC;
-        this.typeOfNPC = type;
     }
 
     /**
