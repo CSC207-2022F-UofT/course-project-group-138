@@ -1,6 +1,6 @@
 package inventory;
 
-public class Armor extends Equipment{
+public class Armor implements Equipment {
     public int price;
     public int hp;
     public Armor(int hp, int price){
@@ -12,7 +12,7 @@ public class Armor extends Equipment{
         this.hp = 0;
     }
 
-    public int getHp() {
+    public int getAttribute() {
         return hp;
     }
 

@@ -1,6 +1,6 @@
 package merchant_interactions;
 
-import temporary_classes.*;
+import character.*;
 import inventory.*;
 
 public class PurchaseController {
@@ -9,7 +9,7 @@ public class PurchaseController {
      */
 
     private Player steve;
-    private Merchant merchant;
+    private Purchase purchase;
     private Equipment item;
 
     /**
@@ -28,14 +28,14 @@ public class PurchaseController {
         else if (userInput.equals("inventory.Armor")){
             item = player.getInventory().getArmor();
         }
-        merchant = new Merchant(item, steve);
+        purchase = new Purchase(item, steve);
     }
 
     /**
      * @return true if the purchase was successful.
      */
-    public boolean purchase (){
-        return merchant.purchase();
+    public boolean purchaseCheck (){
+        return purchase.purchaseCheck();
     }
 
 
