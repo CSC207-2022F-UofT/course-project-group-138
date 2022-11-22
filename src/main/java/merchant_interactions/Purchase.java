@@ -24,7 +24,7 @@ public class Purchase {
         return balance - item.getPrice();
     }
 
-    public boolean purchase (){
+    public boolean purchaseCheck (){
         int tempBalance = this.checkAfford(steve.getInventory().getCoins());
         if (tempBalance >= 0){
             item.upgrade();

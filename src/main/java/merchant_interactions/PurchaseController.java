@@ -9,7 +9,7 @@ public class PurchaseController {
      */
 
     private Player steve;
-    private Merchant merchant;
+    private Purchase purchase;
     private Equipment item;
 
     /**
@@ -24,14 +24,14 @@ public class PurchaseController {
         else if (userInput.equals("inventory.Armor")){
             item = player.getInventory().getArmor();
         }
-        merchant = new Merchant(item, steve);
+        purchase = new Purchase(item, steve);
     }
 
     /**
      * Returns whether a purchase is successful
      */
-    public boolean purchase (){
-        return merchant.purchase();
+    public boolean purchaseCheck (){
+        return purchase.purchaseCheck();
     }
 
 
