@@ -3,7 +3,7 @@ package merchant_interactions;
 import character.Player;
 import inventory.*;
 
-public class Merchant {
+public class Purchase {
     /**
      * Use case for Purchasables
      */
@@ -11,7 +11,7 @@ public class Merchant {
     private Equipment item;
     private Player steve;
 
-    public Merchant(Equipment item, Player player) {
+    public Purchase(Equipment item, Player player) {
         this.item = item;
         this.steve = player;
     }
