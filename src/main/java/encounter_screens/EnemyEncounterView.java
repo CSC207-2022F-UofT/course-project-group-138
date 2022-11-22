@@ -5,14 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MerchantEncounterView extends JFrame implements ActionListener {
-    private JButton purchase;
+public class EnemyEncounterView extends JFrame implements ActionListener {
+    private JButton attack;
 
-    MerchantEncounterView() {
+    EnemyEncounterView() {
+
 
         this.setVisible(true);
         this.setSize(630, 420);
-        this.setTitle("MerchantEncountered");
+        this.setTitle("EnemyEncountered");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of app
         this.setResizable(false); // can't resize
         this.setLocationRelativeTo(null); //centered
@@ -22,27 +23,21 @@ public class MerchantEncounterView extends JFrame implements ActionListener {
         this.getContentPane().setBackground(new Color(0x12345)); //rgb value
 
 
-        purchase = new JButton("purchase");
-        purchase.setBounds(255, 350, 120, 30);
+        attack = new JButton("attack");
+        attack.setBounds(255, 350, 120, 30);
 
-        purchase.addActionListener(this);
+        attack.addActionListener(this);
 
-        add(purchase);
-
-
-
-        // will add more buttons that characterize the features in the merchant class
+        add(attack);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == purchase){
+        if (e.getSource() == attack){
             System.out.println("Ha");
 
-            //should incorporate more features
+            //should incorporate the features in player and enemy.
+            JOptionPane.showMessageDialog(null, "oh no you died :(");
         }
     }
 }
-
-
-
