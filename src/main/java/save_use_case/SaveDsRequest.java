@@ -1,13 +1,15 @@
 package save_use_case;
 
-import entites.PlayerCreator;
+import character.Player;
 
 import java.time.LocalDateTime;
 
 public class SaveDsRequest {
     private String fileName;
 
-    private String playerCoins;
+    private Player player;
+
+    /*private String playerCoins;
 
     private String playerWeaponAttack;
 
@@ -21,11 +23,21 @@ public class SaveDsRequest {
 
     private String playerNumOfEnenmySlayed;
 
+    private String playerX;
+
+    private String playerY;*/
+
     private final LocalDateTime creationTime;
 
-    public SaveDsRequest(String fileName, String playerCoins, String playerWeaponAttack, String playerWeaponPrice,
+    public SaveDsRequest(String fileName, Player player, LocalDateTime creationTime) {
+        this.fileName = fileName;
+        this.player = player;
+        this.creationTime = creationTime;
+    }
+
+/*    public SaveDsRequest(String fileName, String playerCoins, String playerWeaponAttack, String playerWeaponPrice,
                          String playerArmorHp, String playerArmorPrice, String playerHp, String playerNumOfEnenmySlayed,
-                         LocalDateTime creationTime) {
+                         LocalDateTime creationTime, String playerX, String playerY) {
         this.fileName = fileName;
         this.playerCoins = playerCoins;
         this.playerWeaponAttack = playerWeaponAttack;
@@ -35,8 +47,10 @@ public class SaveDsRequest {
         this.playerHp = playerHp;
         this.playerNumOfEnenmySlayed = playerNumOfEnenmySlayed;
         this.creationTime = creationTime;
+        this.playerX = playerX
+        this.playerY = playerY;
 
-/*        PlayerCreator creator = new PlayerCreator();
+*//*        PlayerCreator creator = new PlayerCreator();
         this.fileName = fileName;
         this.player = creator.create(playerCoins,
                 playerWeaponAttack,
@@ -45,8 +59,8 @@ public class SaveDsRequest {
                 playerArmorPrice,
                 playerHp,
                 playerNumOfEnenmySlayed);
-        this.creationTime = creationTime;*/
-    }
+        this.creationTime = creationTime;*//*
+    }*/
     public String getFileName() {
         return fileName;
     }
@@ -55,33 +69,39 @@ public class SaveDsRequest {
         this.fileName = filename;
     }
 
-    public String getPlayerCoins() {
-        return playerCoins;
+    public int getPlayerCoins() {
+        return player.getCoins();
     }
 
-    public String getPlayerWeaponAttack() {
-        return playerWeaponAttack;
+    public int getPlayerWeaponAttack() {
+        return player.getInventory().getWeapon().getAttribute();
     }
 
-    public String getPlayerWeaponPrice() {
-        return playerWeaponPrice;
+    public int getPlayerWeaponPrice() {
+        return player.getInventory().getWeapon().getPrice();
     }
 
-    public String getPlayerArmorHp() {
-        return playerArmorHp;
+    public int getPlayerArmorHp() {
+        return player.getInventory().getArmor().getAttribute();
     }
 
-    public String getPlayerArmorPrice() {
-        return playerArmorPrice;
+    public int getPlayerArmorPrice() {
+        return player.getInventory().getArmor().getPrice();
     }
 
-    public String getPlayerNumOfEnenmySlayed() {
-        return playerNumOfEnenmySlayed;
+    public int getPlayerKills() {
+        return player.getKills();
     }
 
-    public String getPlayerHp() {
-        return playerHp;
+    public int getPlayerHp() {
+        return player.getHP();
     }
+
+    public int getPlayerX() {
+        return player.getx();
+    }
+
+    public int getPlayerY() { return player.gety(); }
 
     public LocalDateTime getCreationTime() {
         return creationTime;

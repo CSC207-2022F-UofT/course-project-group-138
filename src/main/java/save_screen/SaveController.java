@@ -1,9 +1,9 @@
 package save_screen;
 
+import character.Player;
 import save_use_case.SaveInputBoundry;
 import save_use_case.SaveRequest;
 import save_use_case.SaveResponse;
-import temporary_classes.Player;
 
 public class SaveController {
     final SaveInputBoundry PLAYER_INPUT;
