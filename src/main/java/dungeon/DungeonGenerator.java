@@ -1,20 +1,20 @@
 package dungeon;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 public class DungeonGenerator {
     private final Dungeon dungeon;
     private final HashMap<DungeonRoom, List<DungeonRoom>> map;
     private DungeonRoom currentRoom;
-    private List<DungeonRoom> previousRoomStack;
+    private Stack<DungeonRoom> previousRoomStack;
 
     public DungeonGenerator() {
         this.dungeon = new Dungeon();
         this.map = dungeon.generateDungeonMap();
         currentRoom = dungeon.getStartingRoom();
-        previousRoomStack = new ArrayList<DungeonRoom>();
+        previousRoomStack = new Stack<DungeonRoom>();
     }
 
     /**
@@ -38,7 +38,7 @@ public class DungeonGenerator {
      */
     public void goForward(DungeonRoom newRoom) {
         if (this.map.get(this.currentRoom).contains(newRoom)) {
-            this.push(this.currentRoom);
+            this.previousRoomStack.push(this.currentRoom);
             this.currentRoom = newRoom;
         }
     }
@@ -47,27 +47,6 @@ public class DungeonGenerator {
      * Moves the player back to the previous room they entered the current room from.
      */
     public void goBack() throws Exception {
-        this.currentRoom = pop();
-    }
-
-    /**
-     * Adds a room that the player is moving out of, to the stack of previous rooms.
-     *
-     * @param previousRoom the room the player is leaving.
-     */
-    private void push(DungeonRoom previousRoom) {
-        this.previousRoomStack.add(previousRoom);
-    }
-
-    /**
-     * Removes the most recently exited room from the stack of previous rooms.
-     *
-     * @return the exited DungeonRoom being removed.
-     */
-    private DungeonRoom pop() throws Exception {
-        if (this.previousRoomStack.size() == 0) {
-            throw new Exception("Stack Underflow");
-        }
-        return this.previousRoomStack.remove(this.previousRoomStack.size() - 1);
+        this.currentRoom = this.previousRoomStack.pop();
     }
 }
