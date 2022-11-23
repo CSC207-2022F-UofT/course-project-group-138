@@ -19,9 +19,9 @@ public class DungeonRoomBuilder {
     private int enemiesAdded;
     final private Random rand;
 
-    public DungeonRoomBuilder(int numberOfEnemies, int nummberOfMerchants) {
+    public DungeonRoomBuilder(int numberOfEnemies, int numberOfMerchants) {
         this.numberOfEnemies = numberOfEnemies;
-        this.numberOfMerchants = nummberOfMerchants;
+        this.numberOfMerchants = numberOfMerchants;
         this.enemiesAdded = 0;
         this.merchantsAdded = 0;
         this.rand = new Random();

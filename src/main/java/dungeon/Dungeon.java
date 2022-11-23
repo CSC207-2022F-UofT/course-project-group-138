@@ -48,6 +48,13 @@ public class Dungeon {
     }
 
     /**
+     * @return the starting room of the dungeon the player spawns in.
+     */
+    public DungeonRoom getStartingRoom() {
+        return startingRoom;
+    }
+
+    /**
      * Adds a new DungeonRoom to the Dungeon List rooms.
      *
      * @param newRoom the new room to be added.
