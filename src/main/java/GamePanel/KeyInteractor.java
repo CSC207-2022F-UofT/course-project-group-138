@@ -20,7 +20,7 @@ public class KeyInteractor implements KeyListener {
 
         if(code == KeyEvent.VK_W){
             upPressed = true;
-            System.out.println("Pressed " + e.getKeyChar());
+            System.out.println("Pressed");
         }
 
         if(code == KeyEvent.VK_S){

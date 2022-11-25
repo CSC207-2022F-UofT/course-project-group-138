@@ -2,8 +2,10 @@ package GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
 
     private final int originalSize = 16;
     private final int scale = 4;
@@ -29,9 +31,9 @@ public class GamePanel extends JPanel implements Runnable{
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(new Color(0x12345));
         this.setDoubleBuffered(true);
+
         this.addKeyListener(keyInteractor);
         this.setFocusable(true); //this GamePanel can recieve key input
-        this.requestFocusInWindow();
     }
 
     public void startGameThread(){
@@ -46,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
         // apply sleep method
 
         double drawInterval = 1000000000 / FPS; // .01666 seconds since 1*10^9 nano sec = 1 second
-        double nextDrawTime = System.nanoTime() + drawInterval; //when hit, draw again
+        double nextDrawTime = System.nanoTime() + drawInterval; //when hit, draw again.
 
         while (gameThread != null){
 
@@ -78,7 +80,6 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update(){
-//        System.out.println(keyInteractor);
         if (keyInteractor.upPressed){
             playerY -= playerSpeed;
         }
