@@ -1,11 +1,14 @@
 package encounter_screens;
 
 
+import character.Player;
+import inventory.Inventory;
+
 public class TestView {
     public static void main(String[] args) {
 
         EnemyEncounterView eev = new EnemyEncounterView();
-        MerchantEncounterView mev = new MerchantEncounterView();
+        MerchantEncounterView mev = new MerchantEncounterView(new Player(new Inventory(), 0, 0, 0));
 
 
 
