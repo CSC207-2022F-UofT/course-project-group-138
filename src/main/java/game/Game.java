@@ -1,7 +1,7 @@
-package game;
+package Game;
 
 import javax.swing.*;
-import game.Engine;
+import Game.Engine;
 
 // @TODO name this class the name of the game
 public class Game {
