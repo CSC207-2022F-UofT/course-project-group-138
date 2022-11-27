@@ -86,7 +86,10 @@ public class PaintCanvas extends JComponent{
 
     public void preview() throws IOException {
         Image transparentImage = makeColorTransparent(imageToBufferedImage(image), Color.white);
-        BufferedImage previewImage = resizeImage(imageToBufferedImage(transparentImage), 500, 500);
+        int x = transparentImage.getWidth(null);
+        int y = transparentImage.getHeight(null);
+        double scaler = y * 1.0 / x;
+        BufferedImage previewImage = resizeImage(imageToBufferedImage(transparentImage), 500, (int)(scaler * 500));
         ImageIcon previewImageIcon = new ImageIcon(previewImage);
         PaintMain.preview.setIcon(previewImageIcon);
     }
