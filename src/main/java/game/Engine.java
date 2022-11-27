@@ -1,11 +1,15 @@
 package Game;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 public class Engine {
     /**
      * This class will contain the main game loop.
      */
     private static Thread loop;
     private static boolean isRunning;
+    private static StateManager stateManager;
     public static void start(){
         loop.start();
     }
@@ -19,7 +23,6 @@ public class Engine {
             while (isRunning){
                 // looping stuff goes here
                 loopActions();
-
                 // Sleep this thread for 15ms in case CPU is omega powerful. (however might sleep for 5-20ms)
                 try {
                     Thread.sleep(15);
@@ -31,7 +34,25 @@ public class Engine {
     }
     private void loopActions(){
         //@TODO add loop stuff
+
     }
 
+    // Keyboard actions
+    private static class Keyboard implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent arg0) {
+            // don't need this
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            stateManager.keyPressed(e.getKeyCode());
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            stateManager.keyReleased(e.getKeyCode());
+        }
+    }
 
 }
