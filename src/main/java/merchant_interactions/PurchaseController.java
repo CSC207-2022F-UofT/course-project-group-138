@@ -22,10 +22,9 @@ public class PurchaseController {
     public PurchaseController (Player player, String userInput){
         steve = player;
         //TODO: Replace String with GUI.Button presses
-        if (userInput.equals("inventory.Weapon")){
+        if (userInput.equals("Weapon")) {
             item = player.getInventory().getWeapon();
-        }
-        else if (userInput.equals("inventory.Armor")){
+        } else if (userInput.equals("Armor")) {
             item = player.getInventory().getArmor();
         }
         purchase = new Purchase(item, steve);
@@ -35,8 +34,7 @@ public class PurchaseController {
      * @return true if the purchase was successful.
      */
     public boolean purchaseCheck (){
-        return purchase.purchaseCheck();
+        return purchase.purchaseAction();
     }
-
 
 }
