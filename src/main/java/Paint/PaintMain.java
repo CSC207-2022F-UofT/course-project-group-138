@@ -12,6 +12,7 @@ public class PaintMain {
     JButton clearBtn, blackBtn, redBtn, blueBtn, greenBtn, eraserBtn,
             prevBtn, doneBtn, size1Btn, size2Btn, size3Btn, size4Btn;
     JButton[] buttons;
+    JLabel sizeLabel, controlsLabel, previewLabel, canvasLabel;
     PaintButtonBuilder buttonBuilder = new PaintButtonBuilder();
     // Declare UI
     JFrame mainFrame;
@@ -77,22 +78,67 @@ public class PaintMain {
      * Builds the JFrame, JPanels, and sets the layout
      */
     public void buildLayout(){
+        // Canvas and main JFrame
         mainFrame = new JFrame("Paint");
         canvas = new PaintCanvas();
-        ImageIcon bg = new ImageIcon("src/main/photos/previewbg.png");
+        // Labels
+        sizeLabel = new JLabel("Sizes: ");
+        sizeLabel.setFont(new Font("Courier", Font.BOLD, 20));
+        controlsLabel = new JLabel("Controls: ");
+        controlsLabel.setFont(new Font("Courier", Font.BOLD, 20));
+        canvasLabel = new JLabel("Canvas");
+        canvasLabel.setFont(new Font("Courier", Font.BOLD, 20));
+        previewLabel = new JLabel("Preview");
+        previewLabel.setFont(new Font("Courier", Font.BOLD, 20));
+        // Preview window
+        ImageIcon bg = new ImageIcon("src/main/res/previewbg.png");
         preview = new JLabel(bg);
+        // Buttons
         eventHandler = new PaintEventHandler(canvas, buttonBuilder.getButtonMap());
         JPanel controls = new JPanel();
         JPanel sizes = new JPanel();
+        JPanel saving = new JPanel();
+        // Filler panel
+        JPanel filler = new JPanel();
 
         Container contents = mainFrame.getContentPane();
-        contents.setBackground(Color.BLACK);
-        contents.setLayout(new BorderLayout());
-        contents.add(canvas, BorderLayout.CENTER);
-        contents.add(controls, BorderLayout.NORTH);
-        contents.add(sizes, BorderLayout.SOUTH);
-        contents.add(preview, BorderLayout.EAST);
-        addButtons(controls, sizes);
+//        contents.setBackground(Color.BLACK);
+        filler.setPreferredSize(new Dimension(100, 10));
+        contents.setLayout(new GridBagLayout());
+
+        // Adding first row of components
+        Insets insets = new Insets(0, 0, 0,0);
+        addComponent(contents, sizeLabel, 0, 0, 1, 1, 0.5, 0.5,
+                GridBagConstraints.LINE_END, GridBagConstraints.NONE, insets);
+        addComponent(contents, sizes, 1, 0, 1, 1, 0.5, 0.5,
+                GridBagConstraints.LINE_START, GridBagConstraints.NONE, insets);
+        addComponent(contents, controlsLabel, 2, 0, 1, 1,  0.5, 0.5,
+                GridBagConstraints.LINE_END, GridBagConstraints.NONE, insets);
+        addComponent(contents, controls, 3, 0, 1, 1,  0.5, 0.5,
+                GridBagConstraints.LINE_START, GridBagConstraints.NONE, insets);
+
+        // Adding second row of components
+        addComponent(contents, canvasLabel, 1, 1, 1, 1,  0.1, 0.1,
+                GridBagConstraints.PAGE_END, GridBagConstraints.NONE, insets);
+
+        // Adding third row of components
+        addComponent(contents, previewLabel, 3, 2, 1, 1,  1, 1,
+                GridBagConstraints.PAGE_END, GridBagConstraints.NONE, insets);
+        insets = new Insets(10, 50, 0, 0);
+        addComponent(contents, canvas, 0, 2, 3, 2,  1, 1,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, insets);
+
+        // Adding fourth row of components
+        insets = new Insets(10, 10, 0, 10);
+        addComponent(contents, preview, 3, 3, 1, 1,   1, 1,
+                GridBagConstraints.PAGE_START, GridBagConstraints.NONE, insets);
+
+        // Adding fifth row of components
+        insets = new Insets(0, 0, 0,0);
+        addComponent(contents, saving, 3, 4, 1, 1,   1, 1,
+                GridBagConstraints.PAGE_START, GridBagConstraints.NONE, insets);
+
+        addButtons(controls, sizes, saving);
     }
 
     /**
@@ -101,10 +147,11 @@ public class PaintMain {
      * @param controls - JPanel containing all the control buttons
      * @param sizes - JPanel containing all the size buttons
      */
-    public void addButtons(JPanel controls, JPanel sizes){
-        JButton[] controlChoices = {clearBtn, eraserBtn, blackBtn, redBtn, blueBtn, greenBtn, prevBtn, doneBtn};
+    public void addButtons(JPanel controls, JPanel sizes, JPanel saving){
+        JButton[] controlChoices = {clearBtn, eraserBtn, blackBtn, redBtn, blueBtn, greenBtn};
         JButton[] sizeChoices = {size1Btn, size2Btn, size3Btn, size4Btn};
-        mergeBtnArrays(controlChoices, sizeChoices);
+        JButton[] savingChoices = {prevBtn, doneBtn};
+        mergeBtnArrays(controlChoices, sizeChoices, savingChoices);
         for (JButton c : controlChoices) {
             c.addActionListener(actionListener);
             controls.add(c);
@@ -113,6 +160,10 @@ public class PaintMain {
             s.addActionListener(actionListener);
             sizes.add(s);
         }
+        for (JButton p : savingChoices) {
+            p.addActionListener(actionListener);
+            saving.add(p);
+        }
     }
 
     /**
@@ -120,10 +171,18 @@ public class PaintMain {
      * @param a - Array 1
      * @param b - Array 2
      */
-    private void mergeBtnArrays(JButton[] a, JButton[] b){
-        buttons = new JButton[a.length + b.length];
+    private void mergeBtnArrays(JButton[] a, JButton[] b, JButton[] c){
+        buttons = new JButton[a.length + b.length + c.length];
         System.arraycopy(a, 0, buttons, 0, a.length);
         System.arraycopy(b, 0, buttons, a.length, b.length);
+        System.arraycopy(c, 0, buttons, a.length + b.length, c.length);
+    }
+    private static void addComponent(Container container, Component component, int gridx, int gridy,
+                                     int gridwidth, int gridheight, double weightx, double weighty, int anchor,
+                                     int fill, Insets insets) {
+        GridBagConstraints c = new GridBagConstraints(gridx, gridy, gridwidth, gridheight, weightx, weighty,
+                anchor, fill, insets, 0, 0);
+        container.add(component, c);
     }
 }
 
