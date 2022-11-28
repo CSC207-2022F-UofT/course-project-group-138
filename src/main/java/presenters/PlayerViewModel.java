@@ -15,13 +15,11 @@ public class PlayerViewModel extends Rectangle {
     private final Player player;
     // Gets the user drawn player image from "res"
     private Image playerImage;
-
     public PlayerViewModel(Player player) {
         super(player.getx() * Settings.getPlayerSize(), player.gety() * Settings.getPlayerSize(),
                 Settings.getPlayerSize(), Settings.getPlayerSize());
         this.player = player;
     }
-
     /**
      * This should be continuously called from the game loop, so that the view model can observe the changes
      */
@@ -29,8 +27,8 @@ public class PlayerViewModel extends Rectangle {
         super.x = player.getx();
         super.y = player.gety();
     }
-    public void setPlayerImage(Image image){
-        playerImage = image;
+    public void updatePlayerImage(){
+        playerImage = Settings.getPlayerImage();
     }
     /**
      * This will draw the user's drawn image onto graphics
