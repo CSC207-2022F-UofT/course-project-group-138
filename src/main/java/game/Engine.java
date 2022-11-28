@@ -14,14 +14,26 @@ public class Engine {
     private static boolean isRunning;
     private static StateManager stateManager;
     private static GameWindow gameWindow;
+    private static JPanel gamePanel; // temp for now
 
-    private JPanel gamePanel; // temp for now
+    /**
+     * Should be called after Engine instantiation.
+     */
     public void onCreate(){
         stateManager = new StateManager();
         gameWindow = new GameWindow();
-
     }
+
+    /**
+     * Starts the 'Engine', starts the loop.
+     */
     public static void start(){
+        isRunning = true;
+        // @TODO Should start on MenuState whenever that is implemented.
+        stateManager.setCurrState(new MainPlayingState());
+        gameWindow.addGamePanel(gamePanel); // change argument to new GamePanel() when that class is done
+        gameWindow.addKeyListener(new Keyboard());
+        gameWindow.createGameWindow();
         loop.start();
     }
     /**
@@ -44,7 +56,13 @@ public class Engine {
     }
     private void loopActions(){
         stateManager.loop();
+    }
 
+    /**
+     * End the game loop.
+     */
+    public void end(){
+        isRunning = false;
     }
 
     // Keyboard actions
