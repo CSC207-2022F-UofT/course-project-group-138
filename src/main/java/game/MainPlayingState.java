@@ -3,6 +3,7 @@ package Game;
 import character.Player;
 import dungeon.Dungeon;
 import presenters.PlayerMover;
+import presenters.PlayerViewModel;
 import settings.Initializer;
 
 import java.awt.event.KeyEvent;
@@ -16,6 +17,7 @@ public class MainPlayingState extends State{
      */
     Player player;
     PlayerMover playerMover;
+    PlayerViewModel playerViewModel;
     Dungeon dungeon;
 
     /**
@@ -29,6 +31,7 @@ public class MainPlayingState extends State{
         this.player = initializer.getPlayer();
         this.dungeon = initializer.getDungeon();
         this.playerMover = new PlayerMover(player);
+        this.playerViewModel = new PlayerViewModel(player);
     }
     @Override
     protected void loop() {
@@ -37,7 +40,7 @@ public class MainPlayingState extends State{
 
     @Override
     protected void render() {
-
+        // @TODO call PlayingStatePresenter
     }
 
     /**
@@ -56,6 +59,9 @@ public class MainPlayingState extends State{
     @Override
     protected void keyReleased(int code) {
         updatePlayerMover(code, false);
+    }
+    public Player getPlayer(){
+        return player;
     }
 
     /**
