@@ -1,5 +1,8 @@
 package Game;
 
+import presenters.GameWindow;
+
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -10,10 +13,17 @@ public class Engine {
     private static Thread loop;
     private static boolean isRunning;
     private static StateManager stateManager;
+    private static GameWindow gameWindow;
+
+    private JPanel gamePanel; // temp for now
+    public void onCreate(){
+        stateManager = new StateManager();
+        gameWindow = new GameWindow();
+
+    }
     public static void start(){
         loop.start();
     }
-
     /**
      * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
      * may require SwingUtilities.invokeLater since we are no longer on EDT.
@@ -33,7 +43,7 @@ public class Engine {
         });
     }
     private void loopActions(){
-        //@TODO add loop stuff
+        stateManager.loop();
 
     }
 

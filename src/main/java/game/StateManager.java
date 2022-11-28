@@ -11,5 +11,11 @@ public class StateManager {
     public void keyReleased(int keyCode){
         currState.keyReleased(keyCode);
     }
+    public void setCurrState(State newState){
+        currState = newState;
+    }
+    public void loop(){
+        currState.loop();
+    }
 
 }
