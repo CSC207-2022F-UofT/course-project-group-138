@@ -31,4 +31,10 @@ public class Initializer {
 
         //TODO: Call paint program for player, weapon, armor, enemy & merchant
     }
+    public Player getPlayer(){
+        return player;
+    }
+    public Dungeon getDungeon(){
+        return dungeon;
+    }
 }
