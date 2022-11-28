@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.*;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
@@ -16,6 +17,9 @@ public class StateManager {
     }
     public void loop(){
         currState.loop();
+    }
+    public void renderState(Graphics graphics){
+        currState.render();
     }
 
 }
