@@ -12,7 +12,7 @@ public class GameWindow {
      * This class acts as the main Game Window/UI presenter. It is responsible
      * for the JFrames and JPanels that the user sees
      */
-    private JFrame gameFrame;
+    private final JFrame gameFrame;
     private JPanel gamePanel;
 
     /**
