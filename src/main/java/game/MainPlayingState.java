@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import character.Player;
 import dungeon.Dungeon;

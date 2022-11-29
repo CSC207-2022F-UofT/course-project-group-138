@@ -1,7 +1,7 @@
 package presenters;
 
-import Game.MainPlayingState;
-import Game.State;
+import game.MainPlayingState;
+import game.State;
 
 import java.awt.*;
 

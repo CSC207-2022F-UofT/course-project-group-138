@@ -1,6 +1,6 @@
-package Game;
+package game;
 
-import Game.State;
+import game.State;
 
 public class EncounterState extends State {
     @Override
