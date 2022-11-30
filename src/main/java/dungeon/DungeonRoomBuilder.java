@@ -34,8 +34,8 @@ public class DungeonRoomBuilder {
      */
     public DungeonRoom buildNewRoom() {
         DungeonRoom newRoom = new DungeonRoom();
-        int dungeonRoomSize = Settings.getRoomSize();                  // TODO: Replace Settings generic object with game loop object
-        int difficulty = Settings.getDifficulty();                     // TODO: ^
+        int dungeonRoomSize = Settings.getRoomSize();
+        int difficulty = Settings.getDifficulty();
         int insertRandomNPC = this.rand.nextInt(3);             // 0 = Enemy, 1 = Merchant, 2 = None
         switch (insertRandomNPC) {
             case 0:
