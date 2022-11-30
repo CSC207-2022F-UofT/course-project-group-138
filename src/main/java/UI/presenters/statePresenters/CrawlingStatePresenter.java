@@ -29,9 +29,10 @@ public class CrawlingStatePresenter implements StatePresenter {
     }
     public void updatePlayerImage(){
         try {
-            playerImage = ImageIO.read(new File("res/characters.png"));
+            playerImage = ImageIO.read(new File("src/main/res/characters.png"));
         } catch (IOException e){
             System.out.println("Error retrieving characters.png");
+            e.printStackTrace();
         }
     }
 }
