@@ -1,6 +1,7 @@
 package UI.presenters;
 
 import entities.character.Player;
+import org.jetbrains.annotations.NotNull;
 import settings.Settings;
 
 import java.awt.*;
@@ -28,14 +29,18 @@ public class PlayerViewModel extends Rectangle {
         super.x = player.getx();
         super.y = player.gety();
     }
-    public void updatePlayerImage(){
-        playerImage = Settings.getPlayerImage();
+
+    /**
+     * Updates the image of this character. Must call this method before render method.
+     */
+    public void updateImage(Image image){
+        playerImage = image;
     }
     /**
      * This will draw the user's drawn image onto graphics
      * @param graphics - Graphics object in which the player will be drawn.
      */
-    public void render(Graphics graphics){
+    public void render(@NotNull Graphics graphics){
         graphics.drawImage(playerImage, super.x, super.y, super.width, super.height, null);
     }
 
