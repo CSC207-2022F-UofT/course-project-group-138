@@ -13,26 +13,28 @@ public class PurchaseController {
     private Equipment item;
 
     /**
-     * userInput is used temporarily in place for GUI button press, and should only take on the values
-     * of "inventory.Weapon" or "inventory.Armor"
+     * Passes the Player and the item to be upgraded to the Merchant.
+     *
+     * @param player the Player whose inventory is being accessed.
+     * @param userInput type of item to be upgraded, should only take on the values of
+     *                  "inventory.Weapon" or "inventory.Armor".
      */
     public PurchaseController (Player player, String userInput){
         steve = player;
-        if (userInput.equals("inventory.Weapon")){
+        //TODO: Replace String with GUI.Button presses
+        if (userInput.equals("Weapon")) {
             item = player.getInventory().getWeapon();
-        }
-        else if (userInput.equals("inventory.Armor")){
+        } else if (userInput.equals("Armor")) {
             item = player.getInventory().getArmor();
         }
         purchase = new Purchase(item, steve);
     }
 
     /**
-     * Returns whether a purchase is successful
+     * @return true if the purchase was successful.
      */
     public boolean purchaseCheck (){
-        return purchase.purchaseCheck();
+        return purchase.purchaseAction();
     }
-
 
 }

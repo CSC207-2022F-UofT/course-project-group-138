@@ -31,7 +31,7 @@ public class Inventory implements Inv{
     }
 
     /*
-     * Due to merchant_interactions.Merchant interactions below methods have been handled in the inventory.Weapon and inventory.Armor
+     * Due to Merchant interactions below methods have been handled in the inventory.Weapon and inventory.Armor
      * classes alone, not through inventory
 
     public void upgrade(){

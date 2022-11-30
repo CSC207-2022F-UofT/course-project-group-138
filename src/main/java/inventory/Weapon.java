@@ -28,7 +28,7 @@ public class Weapon implements Equipment {
     }
 
     /**
-     * merchant_interactions.Merchant interactions
+     * Merchant interactions
      */
 
     private final int UPGRADEAMOUNT = 3;
