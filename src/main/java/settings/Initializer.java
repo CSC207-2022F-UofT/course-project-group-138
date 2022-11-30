@@ -12,15 +12,10 @@ import java.util.List;
 import java.util.Random;
 
 public class Initializer {
-    private Dungeon dungeon;
-    private HashMap<DungeonRoom, List<DungeonRoom>> map ;
     private Player player;
     private Random random;
 
     public void init() {
-        dungeon = new Dungeon();
-        dungeon.generateDungeonMap();
-
         Weapon weapon = new Weapon(random.nextInt(Settings.getAttributeRange()) + 1,
                 random.nextInt(Settings.getPriceRange()) + 1);
         Armor armor = new Armor(random.nextInt(Settings.getAttributeRange()) + 1,
@@ -33,8 +28,5 @@ public class Initializer {
     }
     public Player getPlayer(){
         return player;
-    }
-    public Dungeon getDungeon(){
-        return dungeon;
     }
 }

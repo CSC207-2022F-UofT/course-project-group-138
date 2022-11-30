@@ -33,8 +33,9 @@ public abstract class ViewModel extends Rectangle {
     public void updateImage(Image image){
         characterImage = image;
     }
+
     /**
-     * This will draw the user's drawn image onto graphics
+     * This will draw this character's sprite
      * @param graphics - Graphics object in which the player will be drawn.
      */
     public void render(@NotNull Graphics graphics){

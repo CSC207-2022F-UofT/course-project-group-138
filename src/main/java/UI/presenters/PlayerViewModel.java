@@ -20,15 +20,6 @@ public class PlayerViewModel extends ViewModel {
     public PlayerViewModel(Character character, int size) {
         super(character, size);
     }
-    //@TODO add collide method, and make this class abstract
-
-
-    /**
-     * This will draw the user's drawn image onto graphics
-     * @param graphics - Graphics object in which the player will be drawn.
-     */
-    public void render(@NotNull Graphics graphics){
-        graphics.drawImage(characterImage, super.x, super.y, super.width, super.height, null);
-    }
+    // @TODO add collide method, and make this class abstract
 
 }

@@ -1,5 +1,6 @@
 package controllers.gameStates;
 
+import controllers.DungeonController;
 import entities.character.Player;
 import entities.dungeon.Dungeon;
 import settings.Settings;
@@ -19,7 +20,7 @@ public class CrawlingState extends State {
     Player player;
     PlayerMover playerMover;
     PlayerViewModel playerViewModel;
-    Dungeon dungeon;
+    DungeonController dungeonController;
 
     /**
      * Creates a MainPlayingState object. Initializes the player, dungeon, playerMover.
@@ -30,7 +31,7 @@ public class CrawlingState extends State {
         // The argument passed into the init method may change later...
         initializer.init();
         this.player = initializer.getPlayer();
-        this.dungeon = initializer.getDungeon();
+        this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         this.playerViewModel = new PlayerViewModel(player, Settings.getPlayerSize());
     }
