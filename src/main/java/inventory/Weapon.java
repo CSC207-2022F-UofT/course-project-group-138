@@ -1,6 +1,9 @@
-public class Weapon extends Equipment {
+package inventory;
+
+public class Weapon implements Equipment {
     private int attack;
     private int price;
+
     public Weapon(int attack, int price){
         this.attack = attack;
         this.price = price;
@@ -20,14 +23,20 @@ public class Weapon extends Equipment {
         this.price = price;
     }
 
-    public int getAttack() {
+    public int getAttribute() {
         return attack;
     }
+
+    /**
+     * Merchant interactions
+     */
+
+    private final int UPGRADEAMOUNT = 3;
 
     public int getPrice() {
         return price;
     }
-    public void upgrade(int attack){
+    public void upgrade(){
         this.attack += attack;
     }
 }

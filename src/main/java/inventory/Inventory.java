@@ -1,4 +1,6 @@
-public class Inventory {
+package inventory;
+
+public class Inventory implements Inv{
     private int coins;
     private Weapon weapon;
     private Armor armor;
@@ -15,22 +17,29 @@ public class Inventory {
     public Weapon getWeapon(){
         return this.weapon;
     }
-    public int getCoins(){
-        return this.coins;
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
     public Armor getArmor(){
         return this.armor;
     }
-    public void upgradeWeapon(int attack, int cost){
-        this.weapon.upgrade(attack);
-        this.coins -= cost;
+    public int getCoins(){
+        return this.coins;
     }
-    public void upgradeArmor(int hp, int cost){
-        this.armor.upgrade(hp);
-        this.coins -= cost;
-    }
-    public void SetCoins(int coins){
+    public void setCoins(int coins){
         this.coins = coins;
     }
+
+    /*
+     * Due to Merchant interactions below methods have been handled in the inventory.Weapon and inventory.Armor
+     * classes alone, not through inventory
+
+    public void upgrade(){
+        this.attribute += attribute;
+    }
+
+    }
+
+     */
 
 }
