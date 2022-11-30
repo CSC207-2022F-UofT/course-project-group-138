@@ -37,8 +37,7 @@ public class CrawlingState implements State {
         // @TODO uncomment below code when dungeonController is done
         //this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
-        this.playerViewModel = new PlayerViewModel(player, Settings.getPlayerSize());
-        this.presenter = new CrawlingStatePresenter();
+        initializePresenter();
     }
 
     public void loop() {
@@ -91,5 +90,16 @@ public class CrawlingState implements State {
                 this.playerMover.movingRight(bool);
                 break;
         }
+    }
+
+    /**
+     * Helper Method for initializing the PlayerViewModel and the CrawlingStatePresenter
+     */
+    private void initializePresenter(){
+        PlayerViewModel viewModel = new PlayerViewModel(player, Settings.getPlayerSize());
+        CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
+        crawlPresenter.setPlayerViewModel(viewModel);
+        this.playerViewModel = viewModel;
+        this.presenter = crawlPresenter;
     }
 }

@@ -2,7 +2,6 @@ package UI.presenters;
 
 import entities.character.Character;
 import org.jetbrains.annotations.NotNull;
-import settings.Settings;
 
 import java.awt.*;
 
