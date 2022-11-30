@@ -2,6 +2,7 @@ package controllers.gameStates;
 
 import entities.character.Player;
 import entities.dungeon.Dungeon;
+import settings.Settings;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
@@ -31,7 +32,7 @@ public class CrawlingState extends State {
         this.player = initializer.getPlayer();
         this.dungeon = initializer.getDungeon();
         this.playerMover = new PlayerMover(player);
-        this.playerViewModel = new PlayerViewModel(player);
+        this.playerViewModel = new PlayerViewModel(player, Settings.getPlayerSize());
     }
     @Override
     protected void loop() {

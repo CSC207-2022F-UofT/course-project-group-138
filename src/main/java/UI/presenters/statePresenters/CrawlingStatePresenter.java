@@ -17,7 +17,6 @@ public class CrawlingStatePresenter extends StatePresenter {
     Image playerImage;
     public CrawlingStatePresenter(Graphics graphics, State state) {
         super(graphics, state);
-        playerViewModel = new PlayerViewModel(((CrawlingState) state).getPlayer());
         updatePlayerImage();
     }
     @Override
@@ -25,6 +24,10 @@ public class CrawlingStatePresenter extends StatePresenter {
         playerViewModel.updateImage(playerImage);
         playerViewModel.render(graphics);
         // @TODO add render body here (call DungeonRoomPresenter)
+    }
+
+    public void setPlayerViewModel(PlayerViewModel playerViewModel) {
+        this.playerViewModel = playerViewModel;
     }
     public void updatePlayerImage(){
         try {
