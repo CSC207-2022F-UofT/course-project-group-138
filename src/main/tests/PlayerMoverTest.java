@@ -1,7 +1,7 @@
-import inventory.Inventory;
+import entities.inventory.Inventory;
 import org.junit.Test;
-import presenters.PlayerMover;
-import character.Player;
+import useCases.playerUseCases.PlayerMover;
+import entities.character.Player;
 import settings.Settings;
 
 public class PlayerMoverTest {

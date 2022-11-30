@@ -1,11 +1,10 @@
-import character.Player;
-import inventory.Armor;
-import inventory.Inventory;
-import inventory.Weapon;
-import merchant_interactions.Purchase;
-import merchant_interactions.PurchaseController;
+import entities.character.Player;
+import entities.inventory.Armor;
+import entities.inventory.Inventory;
+import entities.inventory.Weapon;
+import useCases.merchantUseCases.Purchase;
+import useCases.merchantUseCases.PurchaseController;
 import org.junit.Test;
-import settings.Settings;
 
 public class PurchaseTest {
     private Weapon weapon = new Weapon(1,2);

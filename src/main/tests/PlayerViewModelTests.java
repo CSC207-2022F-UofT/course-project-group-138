@@ -1,8 +1,8 @@
-import character.Player;
-import inventory.Inventory;
+import entities.character.Player;
+import entities.inventory.Inventory;
 import org.junit.Test;
-import presenters.PlayerMover;
-import presenters.PlayerViewModel;
+import useCases.playerUseCases.PlayerMover;
+import UI.presenters.PlayerViewModel;
 import settings.Settings;
 
 public class PlayerViewModelTests {

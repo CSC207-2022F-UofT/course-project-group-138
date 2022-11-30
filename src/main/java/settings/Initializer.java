@@ -1,11 +1,11 @@
 package settings;
 
-import character.Player;
-import dungeon.Dungeon;
-import dungeon.DungeonRoom;
-import inventory.Armor;
-import inventory.Inventory;
-import inventory.Weapon;
+import entities.character.Player;
+import entities.dungeon.Dungeon;
+import entities.dungeon.DungeonRoom;
+import entities.inventory.Armor;
+import entities.inventory.Inventory;
+import entities.inventory.Weapon;
 
 import java.util.HashMap;
 import java.util.List;

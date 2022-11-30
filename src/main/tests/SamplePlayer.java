@@ -1,7 +1,7 @@
-import character.Player;
-import inventory.Armor;
-import inventory.Inventory;
-import inventory.Weapon;
+import entities.character.Player;
+import entities.inventory.Armor;
+import entities.inventory.Inventory;
+import entities.inventory.Weapon;
 import settings.Settings;
 
 import java.util.Random;
