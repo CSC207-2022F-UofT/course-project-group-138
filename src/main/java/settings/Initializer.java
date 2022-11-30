@@ -17,9 +17,9 @@ public class Initializer {
     private Player player;
     private Random random;
 
-    public void init(int difficulty) {
-        dungeon= new Dungeon(difficulty);
-        map = dungeon.generateDungeonMap();
+    public void init() {
+        dungeon = new Dungeon();
+        dungeon.generateDungeonMap();
 
         Weapon weapon = new Weapon(random.nextInt(Settings.getAttributeRange()) + 1,
                 random.nextInt(Settings.getPriceRange()) + 1);

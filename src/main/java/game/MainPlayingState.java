@@ -27,7 +27,7 @@ public class MainPlayingState extends State{
         super();
         Initializer initializer = new Initializer();
         // The argument passed into the init method may change later...
-        initializer.init(0);
+        initializer.init();
         this.player = initializer.getPlayer();
         this.dungeon = initializer.getDungeon();
         this.playerMover = new PlayerMover(player);
