@@ -7,7 +7,7 @@ public class Settings {
      * This is a container class which holds all needed data about the game. Makes everything more organized, easier to
      * test, etc.
      */
-    private static int PLAYER_SIZE, PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH, FRAME_HEIGHT;
+    private static int PLAYER_SIZE, PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH, FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY;
     private static int[] INITIAL_POSITION;
     private static String gameName;
     private static Image playerImage;
@@ -34,6 +34,15 @@ public class Settings {
     public static void setPlayerImage(Image image){
         playerImage = image;
     }
+
+    public static void setRoomSize(int roomSize) {
+        ROOM_SIZE = roomSize;
+    }
+
+    public static void setDifficulty(int difficulty) {
+        DIFFICULTY = difficulty;
+    }
+
     public static int getMaxHp(){
         return MAX_HP;
     }
@@ -52,4 +61,12 @@ public class Settings {
     public static int getFrameHeight(){return FRAME_HEIGHT;}
     public static String getGameName(){return gameName;}
     public static Image getPlayerImage(){return playerImage;}
+
+    public static int getRoomSize() {
+        return ROOM_SIZE;
+    }
+
+    public static int getDifficulty() {
+        return DIFFICULTY;
+    }
 }
