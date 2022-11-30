@@ -1,4 +1,4 @@
-package UI.presenters.statePresenters;
+package UI.presenters;
 
 import entities.character.Character;
 import org.jetbrains.annotations.NotNull;

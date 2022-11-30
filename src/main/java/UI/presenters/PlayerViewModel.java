@@ -1,6 +1,5 @@
 package UI.presenters;
 
-import UI.presenters.statePresenters.ViewModel;
 import entities.character.Character;
 import org.jetbrains.annotations.NotNull;
 
