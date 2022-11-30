@@ -30,11 +30,12 @@ public class CrawlingState implements State {
      */
     public CrawlingState(){
         super();
+        // Call the initializer
         Initializer initializer = new Initializer();
-        // The argument passed into the init method may change later...
         initializer.init();
         this.player = initializer.getPlayer();
-        this.dungeonController = new DungeonController();
+        // @TODO uncomment below code when dungeonController is done
+        //this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         this.playerViewModel = new PlayerViewModel(player, Settings.getPlayerSize());
         this.presenter = new CrawlingStatePresenter();

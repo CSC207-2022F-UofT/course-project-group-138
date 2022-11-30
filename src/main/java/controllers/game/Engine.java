@@ -23,7 +23,7 @@ public class Engine {
     /**
      * Should be called after Engine instantiation.
      */
-    public void onCreate(){
+    public static void onCreate(){
         stateManager = new StateManager();
         gamePanel = new GamePanel(stateManager);
         gameWindow = new GameWindow();
@@ -71,7 +71,7 @@ public class Engine {
     /**
      * End the game loop.
      */
-    public void end(){
+    public static void end(){
         isRunning = false;
     }
 
