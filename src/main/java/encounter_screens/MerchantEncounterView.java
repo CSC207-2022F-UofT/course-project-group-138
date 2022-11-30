@@ -1,5 +1,8 @@
 package encounter_screens;
 
+import character.Player;
+import merchant_interactions.PurchaseController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class MerchantEncounterView extends JFrame implements ActionListener {
     private JButton purchase;
+    private Player player;
+    private PurchaseController purchaseController;
 
-    MerchantEncounterView() {
+    MerchantEncounterView(Player player) {
 
         this.setVisible(true);
         this.setSize(630, 420);
@@ -21,6 +26,9 @@ public class MerchantEncounterView extends JFrame implements ActionListener {
         this.setLayout(null);
         this.getContentPane().setBackground(new Color(0x12345)); //rgb value
 
+        this.player = player;
+        purchaseController = new PurchaseController(player, "Weapon");
+        //TODO: Change based on player input
 
         purchase = new JButton("purchase");
         purchase.setBounds(255, 350, 120, 30);
@@ -37,7 +45,7 @@ public class MerchantEncounterView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == purchase){
-            System.out.println("Ha");
+            purchaseController.purchaseCheck();
 
             //should incorporate more features
         }
