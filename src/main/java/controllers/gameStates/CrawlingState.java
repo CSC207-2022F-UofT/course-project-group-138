@@ -1,16 +1,18 @@
 package controllers.gameStates;
 
+import UI.presenters.statePresenters.CrawlingStatePresenter;
+import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
 import entities.character.Player;
-import entities.dungeon.Dungeon;
 import settings.Settings;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class CrawlingState extends State {
+public class CrawlingState implements State {
     /**
      * This class represents the state of the game where the player is free to move/roam around the map
      * There is no combat in this state, only movement and room transitions between various dungeon rooms.
@@ -21,6 +23,7 @@ public class CrawlingState extends State {
     PlayerMover playerMover;
     PlayerViewModel playerViewModel;
     DungeonController dungeonController;
+    StatePresenter presenter;
 
     /**
      * Creates a MainPlayingState object. Initializes the player, dungeon, playerMover.
@@ -34,24 +37,18 @@ public class CrawlingState extends State {
         this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         this.playerViewModel = new PlayerViewModel(player, Settings.getPlayerSize());
+        this.presenter = new CrawlingStatePresenter();
     }
-    @Override
-    protected void loop() {
+
+    public void loop() {
         playerMover.move();
         // @TODO call to DungeonRoomController
     }
-
-    @Override
-    protected void render() {
-        // @TODO call PlayingStatePresenter
-    }
-
     /**
      * Updates PlayerMover so that the associated direction boolean will be true
      * @param code - keyCode corresponding to the key
      */
-    @Override
-    protected void keyPressed(int code) {
+    public void keyPressed(int code) {
         updatePlayerMover(code, true);
     }
 
@@ -59,10 +56,16 @@ public class CrawlingState extends State {
      * Updates PlayerMover so that the associated direciton boolean will be false (since key released)
      * @param code - keyCode corresponding to the key
      */
-    @Override
-    protected void keyReleased(int code) {
+
+    public void keyReleased(int code) {
         updatePlayerMover(code, false);
     }
+
+    @Override
+    public StatePresenter getPresenter() {
+        return presenter;
+    }
+
     public Player getPlayer(){
         return player;
     }

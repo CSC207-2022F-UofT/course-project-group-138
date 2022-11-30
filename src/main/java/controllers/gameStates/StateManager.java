@@ -18,7 +18,7 @@ public class StateManager {
 
     }
     public void renderState(Graphics graphics){
-        currState.render();
+        currState.getPresenter().render(graphics);
     }
 
 }

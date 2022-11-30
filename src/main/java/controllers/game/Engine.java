@@ -1,5 +1,6 @@
 package controllers.game;
 
+import UI.GamePanel.GamePanel;
 import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.gameStates.StateManager;
@@ -15,14 +16,16 @@ public class Engine {
     private static Thread loop;
     private static boolean isRunning;
     private static StateManager stateManager;
+    // Below are references to presenters
     private static GameWindow gameWindow;
-    private static JPanel gamePanel; // temp for now
+    private static GamePanel gamePanel;
 
     /**
      * Should be called after Engine instantiation.
      */
     public void onCreate(){
         stateManager = new StateManager();
+        gamePanel = new GamePanel(stateManager);
         gameWindow = new GameWindow();
     }
 
@@ -33,7 +36,7 @@ public class Engine {
         isRunning = true;
         // @TODO Should start on MenuState whenever that is implemented.
         stateManager.setCurrState(new CrawlingState());
-        gameWindow.addGamePanel(gamePanel); // change argument to new GamePanel() when that class is done
+        gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
         gameLoop();
@@ -57,6 +60,10 @@ public class Engine {
             }
         });
     }
+
+    /**
+     * Things to do during the main game loop
+     */
     private static void loopActions(){
         stateManager.loop();
     }

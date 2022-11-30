@@ -1,23 +1,30 @@
 package controllers.gameStates;
 
-public class EncounterState extends State {
-    @Override
-    protected void loop() {
+import UI.presenters.statePresenters.EncounterStatePresenter;
+import UI.presenters.statePresenters.StatePresenter;
+
+import java.awt.*;
+
+public class EncounterState implements State {
+    StatePresenter presenter;
+    public EncounterState(){
+        this.presenter = new EncounterStatePresenter();
+    }
+    public void loop() {
+
+    }
+
+    public void keyPressed(int code) {
+
+    }
+
+
+    public void keyReleased(int code) {
 
     }
 
     @Override
-    protected void render() {
-
-    }
-
-    @Override
-    protected void keyPressed(int code) {
-
-    }
-
-    @Override
-    protected void keyReleased(int code) {
-
+    public StatePresenter getPresenter() {
+        return presenter;
     }
 }

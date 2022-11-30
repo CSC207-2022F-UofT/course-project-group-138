@@ -18,18 +18,19 @@ public class PlayerMover {
 
     /**
      * Update the player's x, y values if user is holding the movement direction is set to true.
+     * Checks whether player is hitting the edge of the frame.
      */
     public void move() {
-        if (up) {
+        if (up && player.gety() > 0) {
             player.changey(-speed);
         }
-        if (down) {
+        if (down && player.gety() < Settings.getFrameHeight()) {
             player.changey(speed);
         }
-        if (left) {
+        if (left && player.getx() > 0) {
             player.changex(-speed);
         }
-        if (right) {
+        if (right && player.getx() < 0) {
             player.changex(speed);
         }
     }

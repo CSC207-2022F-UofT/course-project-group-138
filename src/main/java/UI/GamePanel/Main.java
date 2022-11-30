@@ -12,13 +12,13 @@ public class Main {
         window.setResizable(false); //can't resize
         window.setLocationRelativeTo(null); //centered
 
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        // GamePanel gamePanel = new GamePanel();
+        // window.add(gamePanel);
 
         window.pack(); //fit the size
 
 
-        gamePanel.startGameThread(); //will initiate the game loop through the gamepanel class
+        // gamePanel.startGameThread(); //will initiate the game loop through the gamepanel class
 
 
 

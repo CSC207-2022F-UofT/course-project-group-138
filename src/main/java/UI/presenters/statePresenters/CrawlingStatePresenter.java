@@ -9,18 +9,16 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class CrawlingStatePresenter extends StatePresenter {
+public class CrawlingStatePresenter implements StatePresenter {
     /**
      * Facade class kinda
      */
     PlayerViewModel playerViewModel;
     Image playerImage;
-    public CrawlingStatePresenter(Graphics graphics, State state) {
-        super(graphics, state);
+    public CrawlingStatePresenter() {
         updatePlayerImage();
     }
-    @Override
-    public void render() {
+    public void render(Graphics graphics) {
         playerViewModel.updateImage(playerImage);
         playerViewModel.render(graphics);
         // @TODO add render body here (call DungeonRoomPresenter)
