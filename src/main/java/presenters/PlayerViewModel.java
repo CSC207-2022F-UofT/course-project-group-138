@@ -12,6 +12,7 @@ import java.awt.*;
     graphics (the view).
  */
 public class PlayerViewModel extends Rectangle {
+    //@TODO add collide method, and make this class abstract
     private final Player player;
     // Gets the user drawn player image from "res"
     private Image playerImage;

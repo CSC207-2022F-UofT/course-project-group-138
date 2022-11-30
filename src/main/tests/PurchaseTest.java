@@ -1,5 +1,3 @@
-package tests;
-
 import character.Player;
 import inventory.Armor;
 import inventory.Inventory;

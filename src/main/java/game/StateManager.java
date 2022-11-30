@@ -17,6 +17,7 @@ public class StateManager {
     }
     public void loop(){
         currState.loop();
+
     }
     public void renderState(Graphics graphics){
         currState.render();

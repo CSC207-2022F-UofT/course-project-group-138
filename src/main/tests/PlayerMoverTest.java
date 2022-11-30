@@ -1,4 +1,3 @@
-package tests;
 import inventory.Inventory;
 import org.junit.Test;
 import presenters.PlayerMover;

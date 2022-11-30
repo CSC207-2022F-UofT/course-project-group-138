@@ -30,17 +30,18 @@ public class Engine {
     public static void start(){
         isRunning = true;
         // @TODO Should start on MenuState whenever that is implemented.
-        stateManager.setCurrState(new MainPlayingState());
+        stateManager.setCurrState(new CrawlingState());
         gameWindow.addGamePanel(gamePanel); // change argument to new GamePanel() when that class is done
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
+        gameLoop();
         loop.start();
     }
     /**
      * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
      * may require SwingUtilities.invokeLater since we are no longer on EDT.
      */
-    private void gameLoop(){
+    private static void gameLoop(){
         loop = new Thread(()-> {
             while (isRunning){
                 // looping stuff goes here
@@ -54,7 +55,7 @@ public class Engine {
             }
         });
     }
-    private void loopActions(){
+    private static void loopActions(){
         stateManager.loop();
     }
 

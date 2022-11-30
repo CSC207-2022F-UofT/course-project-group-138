@@ -8,7 +8,7 @@ import settings.Initializer;
 
 import java.awt.event.KeyEvent;
 
-public class MainPlayingState extends State{
+public class CrawlingState extends State{
     /**
      * This class represents the state of the game where the player is free to move/roam around the map
      * There is no combat in this state, only movement and room transitions between various dungeon rooms.
@@ -23,7 +23,7 @@ public class MainPlayingState extends State{
     /**
      * Creates a MainPlayingState object. Initializes the player, dungeon, playerMover.
      */
-    public MainPlayingState(){
+    public CrawlingState(){
         super();
         Initializer initializer = new Initializer();
         // The argument passed into the init method may change later...
@@ -36,6 +36,7 @@ public class MainPlayingState extends State{
     @Override
     protected void loop() {
         playerMover.move();
+        // @TODO call to DungeonRoomController
     }
 
     @Override

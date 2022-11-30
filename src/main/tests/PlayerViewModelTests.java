@@ -1,5 +1,3 @@
-package tests;
-
 import character.Player;
 import inventory.Inventory;
 import org.junit.Test;
