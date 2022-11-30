@@ -7,7 +7,8 @@ public class Settings {
      * This is a container class which holds all needed data about the game. Makes everything more organized, easier to
      * test, etc.
      */
-    private static int PLAYER_SIZE, PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH, FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY;
+    private static int PLAYER_SIZE, PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH,
+            FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY, ENEMY_SIZE, MERCHANT_SIZE;
     private static int[] INITIAL_POSITION;
     private static String gameName;
     private static Image playerImage;
