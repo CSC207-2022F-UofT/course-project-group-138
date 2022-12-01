@@ -1,6 +1,6 @@
 package UI.GamePanel;
 
-import controllers.gameStates.StateManager;
+import controllers.StateManager;
 import settings.Settings;
 
 import javax.swing.*;

@@ -3,9 +3,8 @@ package controllers.game;
 import UI.GamePanel.GamePanel;
 import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
-import controllers.gameStates.StateManager;
+import controllers.StateManager;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

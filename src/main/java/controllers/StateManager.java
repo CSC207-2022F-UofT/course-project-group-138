@@ -1,4 +1,6 @@
-package controllers.gameStates;
+package controllers;
+
+import controllers.gameStates.State;
 
 import java.awt.*;
 
