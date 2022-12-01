@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        // @TODO don't need this class (already implemented)
 
         JFrame window = new JFrame();
         window.setVisible(true);

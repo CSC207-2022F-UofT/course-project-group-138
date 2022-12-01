@@ -1,4 +1,4 @@
-package UI.GamePanel;
+package UI.presenters;
 
 import controllers.StateManager;
 import settings.Settings;
@@ -20,5 +20,4 @@ public class GamePanel extends JPanel{
         Graphics2D graphics2D = (Graphics2D) graphics;
         stateManager.renderState(graphics2D);
     }
-
 }

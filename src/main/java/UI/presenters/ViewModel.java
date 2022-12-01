@@ -2,12 +2,14 @@ package UI.presenters;
 
 import entities.character.Character;
 import org.jetbrains.annotations.NotNull;
+import useCases.playerUseCases.FlipStrategy;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class ViewModel extends Rectangle {
     protected Character character;
-    protected Image characterImage;
+    protected BufferedImage characterImage;
     /**
      * Not to be called, contains code so that children can inherit.
      * @param character - The character object
@@ -28,9 +30,14 @@ public abstract class ViewModel extends Rectangle {
 
     /**
      * Updates the image of this character. Must call this method before render method.
+     *
+     * update: now calls the Flip animation strategy
      */
-    public void updateImage(Image image){
-        characterImage = image;
+    public void updateImage(BufferedImage image){
+        characterImage = FlipStrategy.flip(character, image);
+    }
+    public BufferedImage getAnimationFrame(BufferedImage characterImage){
+        return FlipStrategy.flip(character, characterImage);
     }
 
     /**

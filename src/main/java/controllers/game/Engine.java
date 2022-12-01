@@ -1,6 +1,6 @@
 package controllers.game;
 
-import UI.GamePanel.GamePanel;
+import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;

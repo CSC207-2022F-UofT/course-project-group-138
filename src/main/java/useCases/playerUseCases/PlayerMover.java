@@ -29,9 +29,11 @@ public class PlayerMover {
         }
         if (left && player.getx() > 0) {
             player.changex(-speed);
+            player.setFacing_right(false);
         }
         if (right && player.getx() < Settings.getFrameWidth()) {
             player.changex(speed);
+            player.setFacing_right(true);
         }
     }
     // true should be passed into methods below iff player if holding down the corresponding movement key

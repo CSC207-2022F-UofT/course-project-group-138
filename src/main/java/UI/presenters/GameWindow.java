@@ -47,6 +47,7 @@ public class GameWindow {
      * @param keyListener - A KeyListener to record user key input
      */
     public void addKeyListener(KeyListener keyListener){
+        // adds keyListener to the gamePanel
         gamePanel.addKeyListener(keyListener);
     }
     public void update(){
