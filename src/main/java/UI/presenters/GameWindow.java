@@ -5,6 +5,7 @@ import settings.Settings;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
 
 public class GameWindow {
     /**
@@ -24,6 +25,8 @@ public class GameWindow {
         // maybe add gameFrame.setBounds later. Might be unneccessary though
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setResizable(false);
+        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        gameFrame.setUndecorated(true);
         gameFrame.setTitle(Settings.getGameName());
         // Builds a new JFrame that is unresizable and exits on window close
     }
@@ -60,6 +63,9 @@ public class GameWindow {
         gameFrame.add(gamePanel);
         gameFrame.pack();
         gameFrame.setVisible(true);
+    }
+    public void close(){
+        gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
     }
 
 }

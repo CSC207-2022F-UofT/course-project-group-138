@@ -3,6 +3,7 @@ package controllers.gameStates;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
+import controllers.game.Engine;
 import entities.character.Player;
 import settings.Settings;
 import useCases.playerUseCases.PlayerMover;
@@ -90,6 +91,9 @@ public class CrawlingState implements State {
             case KeyEvent.VK_D:
                 this.playerMover.movingRight(bool);
                 break;
+            case KeyEvent.VK_ESCAPE:
+                // Closes application when user presses escape (May change later)
+                Engine.quit();
         }
     }
 

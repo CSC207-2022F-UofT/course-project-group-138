@@ -67,7 +67,9 @@ public class Engine {
         stateManager.loop();
         gameWindow.update();
     }
-
+    public static void quit(){
+        gameWindow.close();
+    }
     /**
      * End the game loop.
      */

@@ -10,7 +10,7 @@ public class Settings {
     private static int PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH,
             FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY, ENEMY_SIZE, MERCHANT_SIZE;
     private static int ROOM_SIZE_X, ROOM_SIZE_Y;
-    private static int PLAYER_SIZE = 100;
+    private static int PLAYER_SIZE = 130;
     private static int scalingFactor;
     private static int[] INITIAL_POSITION;
     private static String gameName = "Dungeons";
