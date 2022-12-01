@@ -18,7 +18,7 @@ public class CrawlingStatePresenter implements StatePresenter {
     public CrawlingStatePresenter() {
         updatePlayerImage();
     }
-    public void render(Graphics graphics) {
+    public void render(Graphics2D graphics) {
         playerViewModel.updateImage(playerImage);
         playerViewModel.render(graphics);
         // @TODO add render body here (call DungeonRoomPresenter)

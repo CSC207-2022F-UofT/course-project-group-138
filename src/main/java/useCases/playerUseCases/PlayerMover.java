@@ -30,7 +30,7 @@ public class PlayerMover {
         if (left && player.getx() > 0) {
             player.changex(-speed);
         }
-        if (right && player.getx() < 0) {
+        if (right && player.getx() < Settings.getFrameWidth()) {
             player.changex(speed);
         }
     }

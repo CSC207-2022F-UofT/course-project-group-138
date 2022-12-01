@@ -5,5 +5,5 @@ import controllers.gameStates.State;
 import java.awt.*;
 
 public interface StatePresenter {
-    public void render(Graphics graphics);
+    public void render(Graphics2D graphics);
 }

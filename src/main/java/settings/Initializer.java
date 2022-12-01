@@ -21,11 +21,12 @@ public class Initializer {
         Settings.setPriceRange(3);
         Settings.setAttributeRange(3);
         Settings.setMaxHp(3);
-
+        Settings.setPlayerSpeed(8);
         // Sets Window size based on monitor resolution
         Dimension d = getScreenSize();
         Settings.setFrameWidth((int) d.getWidth());
         Settings.setFrameHeight((int) d.getHeight());
+        Settings.determineScalingFactor();
         Settings.centerInitialPosition();
         Settings.setRoomSize(Math.min(Settings.getFrameWidth(), Settings.getFrameHeight()));
 

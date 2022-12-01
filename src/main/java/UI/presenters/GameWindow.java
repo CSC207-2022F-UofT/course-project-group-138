@@ -24,6 +24,7 @@ public class GameWindow {
         // maybe add gameFrame.setBounds later. Might be unneccessary though
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setResizable(false);
+        gameFrame.setTitle(Settings.getGameName());
         // Builds a new JFrame that is unresizable and exits on window close
     }
 
@@ -48,12 +49,14 @@ public class GameWindow {
     public void addKeyListener(KeyListener keyListener){
         gamePanel.addKeyListener(keyListener);
     }
-
+    public void update(){
+        gamePanel.repaint();
+    }
     /**
      * Creates the GameWindow
      */
     public void createGameWindow(){
-        gameFrame.setContentPane(gamePanel);
+        gameFrame.add(gamePanel);
         gameFrame.pack();
         gameFrame.setVisible(true);
     }

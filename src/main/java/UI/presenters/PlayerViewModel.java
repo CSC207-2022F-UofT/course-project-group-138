@@ -20,6 +20,6 @@ public class PlayerViewModel extends ViewModel {
     public PlayerViewModel(Character character, int size) {
         super(character, size);
     }
-    // @TODO add collide method, and make this class abstract
+    // @TODO add collide method
 
 }

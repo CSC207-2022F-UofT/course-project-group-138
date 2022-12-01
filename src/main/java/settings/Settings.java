@@ -7,11 +7,12 @@ public class Settings {
      * This is a container class which holds all needed data about the game. Makes everything more organized, easier to
      * test, etc.
      */
-    private static int PLAYER_SIZE, PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH,
+    private static int PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH,
             FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY, ENEMY_SIZE, MERCHANT_SIZE;
+    private static int PLAYER_SIZE = 100;
     private static int scalingFactor;
     private static int[] INITIAL_POSITION;
-    private static String gameName;
+    private static String gameName = "Dungeons";
     private static Image playerImage;
     public static void setMaxHp(int maxHp){
         MAX_HP = maxHp;
@@ -58,10 +59,10 @@ public class Settings {
         return MAX_HP;
     }
     public static int getPlayerSize(){
-        return PLAYER_SIZE;
+        return PLAYER_SIZE * scalingFactor;
     }
     public static int getPlayerSpeed(){
-        return PLAYER_SPEED;
+        return PLAYER_SPEED * scalingFactor;
     }
     public static int getAttributeRange() {return EQUIPMENT_ATTRIBUTE_RANGE;}
     public static int getPriceRange() {return PRICE_RANGE;}

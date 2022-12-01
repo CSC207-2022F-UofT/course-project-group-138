@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class MenuStatePresenter implements StatePresenter {
     @Override
-    public void render(Graphics graphics) {
+    public void render(Graphics2D graphics) {
 
     }
 }

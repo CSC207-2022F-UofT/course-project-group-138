@@ -1,6 +1,7 @@
 package UI.GamePanel;
 
 import controllers.gameStates.StateManager;
+import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,11 +11,14 @@ public class GamePanel extends JPanel{
     public GamePanel(StateManager stateManager){
         super();
         this.stateManager = stateManager;
+        this.setPreferredSize(new Dimension(Settings.getFrameWidth(), Settings.getFrameHeight()));
+        this.setBackground(Color.black);
+        this.setDoubleBuffered(true); // To improve rendering
     }
     protected void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        stateManager.renderState(graphics);
-        repaint();
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        stateManager.renderState(graphics2D);
     }
 
 }

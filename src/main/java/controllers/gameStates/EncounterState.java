@@ -14,12 +14,12 @@ public class EncounterState implements State {
 
     }
 
-    public void keyPressed(int code) {
+    public void keyPressEvents(int code) {
 
     }
 
 
-    public void keyReleased(int code) {
+    public void keyReleasedEvents(int code) {
 
     }
 

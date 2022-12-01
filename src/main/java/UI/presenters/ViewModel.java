@@ -37,7 +37,7 @@ public abstract class ViewModel extends Rectangle {
      * This will draw this character's sprite
      * @param graphics - Graphics object in which the player will be drawn.
      */
-    public void render(@NotNull Graphics graphics){
+    public void render(@NotNull Graphics2D graphics){
         graphics.drawImage(characterImage, super.x, super.y, super.width, super.height, null);
     }
 }

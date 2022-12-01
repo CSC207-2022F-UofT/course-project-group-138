@@ -7,7 +7,7 @@ import java.awt.*;
 public class EncounterStatePresenter implements StatePresenter {
 
     @Override
-    public void render(Graphics graphics) {
+    public void render(Graphics2D graphics) {
 
     }
 }

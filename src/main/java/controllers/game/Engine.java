@@ -66,6 +66,7 @@ public class Engine {
      */
     private static void loopActions(){
         stateManager.loop();
+        gameWindow.update();
     }
 
     /**

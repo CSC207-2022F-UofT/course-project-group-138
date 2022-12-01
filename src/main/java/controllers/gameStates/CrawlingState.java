@@ -42,13 +42,14 @@ public class CrawlingState implements State {
 
     public void loop() {
         playerMover.move();
+        playerViewModel.updatePosition();
         // @TODO call to DungeonRoomController
     }
     /**
      * Updates PlayerMover so that the associated direction boolean will be true
      * @param code - keyCode corresponding to the key
      */
-    public void keyPressed(int code) {
+    public void keyPressEvents(int code) {
         updatePlayerMover(code, true);
     }
 
@@ -57,7 +58,7 @@ public class CrawlingState implements State {
      * @param code - keyCode corresponding to the key
      */
 
-    public void keyReleased(int code) {
+    public void keyReleasedEvents(int code) {
         updatePlayerMover(code, false);
     }
 
