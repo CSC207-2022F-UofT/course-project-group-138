@@ -21,6 +21,7 @@ public abstract class Character {
     private int x;
 
     private int y;
+    private boolean facing_right = false;
 
 
     /**
@@ -73,15 +74,39 @@ public abstract class Character {
     public int gety(){
         return this.y;
     }
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
 
+    /**
+     * @param x - ncrement this character's y value by this amount
+     */
     public void changex(int x) {
         this.x += x;
     }
 
+    /**
+     *
+     * @param y- Increment this character's y value by this amount
+     */
     public void changey(int y) {
         this.y += y;
     }
 
+    /**
+     * Checks if this character is facing the right side. Otherwise, character is facing left side.
+     * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
+     * @param facing_right - True if and only if character is facing the right side
+     */
+    public void setFacing_right(boolean facing_right){
+        this.facing_right = facing_right;
+    }
+    public boolean isFacing_right(){
+        return facing_right;
+    }
 
     /**
      * === Methods ===

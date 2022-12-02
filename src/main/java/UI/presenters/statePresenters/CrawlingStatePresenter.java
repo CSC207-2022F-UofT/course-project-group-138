@@ -3,24 +3,24 @@ package UI.presenters.statePresenters;
 import UI.presenters.PlayerViewModel;
 import controllers.gameStates.CrawlingState;
 import controllers.gameStates.State;
+import useCases.BImageStrategy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class CrawlingStatePresenter extends StatePresenter {
+public class CrawlingStatePresenter implements StatePresenter {
     /**
      * Facade class kinda
      */
     PlayerViewModel playerViewModel;
-    Image playerImage;
-    public CrawlingStatePresenter(Graphics graphics, State state) {
-        super(graphics, state);
+    BufferedImage playerImage;
+    public CrawlingStatePresenter() {
         updatePlayerImage();
     }
-    @Override
-    public void render() {
+    public void render(Graphics2D graphics) {
         playerViewModel.updateImage(playerImage);
         playerViewModel.render(graphics);
         // @TODO add render body here (call DungeonRoomPresenter)
@@ -31,9 +31,11 @@ public class CrawlingStatePresenter extends StatePresenter {
     }
     public void updatePlayerImage(){
         try {
-            playerImage = ImageIO.read(new File("res/characters.png"));
+            Image img = ImageIO.read(new File("src/main/res/characters.png"));
+            playerImage = BImageStrategy.toBufferedImage(img);
         } catch (IOException e){
             System.out.println("Error retrieving characters.png");
+            e.printStackTrace();
         }
     }
 }

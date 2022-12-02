@@ -8,6 +8,7 @@ public class Game {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                Engine.onCreate();
                 Engine.start();
             }
         });
