@@ -94,22 +94,28 @@ public class PaintCanvas extends JComponent{
         PaintMain.preview.setIcon(previewImageIcon);
     }
 
-    public static Image makeColorTransparent(final BufferedImage im, final Color color) {
+    /**
+     * Removes all the pixels of specified RGB value from the background. Keeps only coloured pixels.
+     * @param image - The image to make transparent
+     * @param color - must implement
+     * @return - Image with transparent BG
+     */
+    public static Image makeColorTransparent(final BufferedImage image, final Color color) {
         final ImageFilter filter = new RGBImageFilter() {
-            // the color we are looking for (white)... Alpha bits are set to opaque
-            public final int markerRGB = 0xFFFFFFFF; // White i think...
+            // CHANGE BELOW TO CHANGE BACKGROUND COLOUR
+            public final int markerRGB = 0xFFFFFFFF; // This will be the BG colour the remove (RGB value)
 
             public int filterRGB(final int x, final int y, final int rgb) {
                 if ((rgb | 0xFF000000) == markerRGB) {
                     // Mark the alpha bits as zero - transparent
                     return 0x00FFFFFF & rgb;
                 } else {
-                    // nothing to do
+                    // Since this is not markerRGB, just return the color
                     return rgb;
                 }
             }
         };
-        final ImageProducer ip = new FilteredImageSource(im.getSource(), filter);
+        final ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
         return Toolkit.getDefaultToolkit().createImage(ip);
     }
 
