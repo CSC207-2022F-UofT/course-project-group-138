@@ -1,8 +1,11 @@
 package controllers.gameStates;
 
-public abstract class State {
-    protected abstract void loop();
-    protected abstract void render();
-    protected abstract void keyPressed(int code);
-    protected abstract void keyReleased(int code);
+import UI.presenters.statePresenters.StatePresenter;
+
+public interface State {
+    void loop();
+    void keyPressEvents(int code);
+    void keyReleasedEvents(int code);
+    StatePresenter getPresenter();
+
 }
