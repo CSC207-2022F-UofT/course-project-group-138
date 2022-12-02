@@ -29,8 +29,20 @@ public class PlayerCollisionHandler extends CollisionHandler {
                 character.setY(object.y - self.height);
             }
             else {
+                // BOTTOM INTERSECTION
                 self.y = object.y + self.height;
                 character.setY(object.y + self.height);
+            }
+        }
+        // CASE 2: Left/Right collision
+        else {
+            // RIGHT COLLISION
+            if (self.x < object.x){
+                character.setX(object.x - self.width);
+            }
+            // LEFT COLLISION
+            else {
+                character.setX(object.x + self.width);
             }
         }
     }
