@@ -2,6 +2,7 @@ package UI.presenters;
 
 import entities.character.Character;
 import org.jetbrains.annotations.NotNull;
+import settings.Settings;
 import useCases.playerUseCases.FlipStrategy;
 
 import java.awt.*;
@@ -45,7 +46,8 @@ public abstract class ViewModel extends Rectangle {
      * @param graphics - Graphics object in which the player will be drawn.
      */
     public void render(@NotNull Graphics2D graphics){
-        graphics.fillRect(0, 0, 1920, 1080);
+        graphics.setColor(Color.darkGray);
+        graphics.fillRect(0, 0, Settings.canvasWidth(), Settings.canvasHeight());
         graphics.drawImage(characterImage, super.x, super.y, super.width, super.height, null);
     }
 }

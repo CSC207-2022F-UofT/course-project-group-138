@@ -25,8 +25,9 @@ public class GameWindow {
         // maybe add gameFrame.setBounds later. Might be unneccessary though
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setResizable(false);
-        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        gameFrame.setUndecorated(true);
+        setFullScreen();
+//        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        gameFrame.setUndecorated(true);
         gameFrame.setTitle(Settings.getGameName());
         // Builds a new JFrame that is unresizable and exits on window close
     }
@@ -65,6 +66,11 @@ public class GameWindow {
         gameFrame.add(gamePanel);
         gameFrame.pack();
         gameFrame.setVisible(true);
+    }
+    private void setFullScreen(){
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(gameFrame);
     }
     public void close(){
         gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));

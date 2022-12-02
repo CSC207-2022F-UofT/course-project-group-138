@@ -11,6 +11,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class GamePanel extends JPanel{
+    /**
+     * GamePanel: A JPanel where graphics are displayed.
+     *
+     * Note: Graphics are NOT drawn directly to this JPanel;
+     * Graphics are first rendered onto a buffered image, then from buffered image to GamePanel.
+     */
     StateManager stateManager;
     BufferedImage gameCanvas;
     Graphics2D g2;
@@ -27,9 +33,17 @@ public class GamePanel extends JPanel{
         // Use this strategy for easy tile conversion
         this.g2 = (Graphics2D) gameCanvas.getGraphics();
     }
+
+    /**
+     * Draws to the Buffered Image (gameCanvas)
+     */
     public void drawCanvas(){
         stateManager.renderState(g2);
     }
+
+    /**
+     * Draws from Buffered Image to GamePanel
+     */
     public void drawScreen(){
         Graphics graphics = getGraphics();
         graphics.drawImage(gameCanvas, 0, 0, Settings.getFrameWidth(), Settings.getFrameHeight(), null);

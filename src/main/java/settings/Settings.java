@@ -41,7 +41,7 @@ public class Settings {
     /**
      * Frame width/height must be set before method call to center initial position.
      */
-    public static void centerInitialPosition(){setInitialPosition(getFrameWidth() / 2, getFrameHeight() / 2);}
+    public static void centerInitialPosition(){setInitialPosition(canvasWidth() / 2, canvasHeight() / 2);}
 
     public static void setFrameWidth(int frameWidth){
         FRAME_WIDTH = frameWidth;}
