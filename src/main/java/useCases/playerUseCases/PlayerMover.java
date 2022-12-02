@@ -7,6 +7,8 @@ public class PlayerMover {
     private boolean up, down, left, right;
     private final int speed = Settings.getPlayerSpeed();
     private final Player player;
+    private int width;
+    private int height;
 
     public PlayerMover(Player player){
         this.player = player;
@@ -24,14 +26,14 @@ public class PlayerMover {
         if (up && player.gety() > 0) {
             player.changey(-speed);
         }
-        if (down && player.gety() < Settings.getFrameHeight()) {
+        if (down && player.gety() < Settings.getFrameHeight() - Settings.getPlayerSize()) {
             player.changey(speed);
         }
         if (left && player.getx() > 0) {
             player.changex(-speed);
             player.setFacing_right(false);
         }
-        if (right && player.getx() < Settings.getFrameWidth()) {
+        if (right && player.getx() < Settings.getFrameWidth() - Settings.getPlayerSize()) {
             player.changex(speed);
             player.setFacing_right(true);
         }

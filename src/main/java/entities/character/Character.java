@@ -74,11 +74,24 @@ public abstract class Character {
     public int gety(){
         return this.y;
     }
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
 
+    /**
+     * @param x - ncrement this character's y value by this amount
+     */
     public void changex(int x) {
         this.x += x;
     }
 
+    /**
+     *
+     * @param y- Increment this character's y value by this amount
+     */
     public void changey(int y) {
         this.y += y;
     }
