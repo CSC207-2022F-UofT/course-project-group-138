@@ -45,6 +45,7 @@ public abstract class ViewModel extends Rectangle {
      * @param graphics - Graphics object in which the player will be drawn.
      */
     public void render(@NotNull Graphics2D graphics){
+        graphics.fillRect(0, 0, 1920, 1080);
         graphics.drawImage(characterImage, super.x, super.y, super.width, super.height, null);
     }
 }
