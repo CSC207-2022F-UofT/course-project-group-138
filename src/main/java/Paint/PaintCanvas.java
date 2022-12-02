@@ -51,7 +51,7 @@ public class PaintCanvas extends JComponent{
     @Override
     protected void paintComponent(Graphics g) {
         if (image == null){
-            image = createImage(getSize().width, getSize().height);
+            image = createImage(getSize().height, getSize().height);
             g2 = (Graphics2D) image.getGraphics();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_OFF);
@@ -86,10 +86,7 @@ public class PaintCanvas extends JComponent{
 
     public void preview() throws IOException {
         Image transparentImage = makeColorTransparent(imageToBufferedImage(image), Color.white);
-        int x = transparentImage.getWidth(null);
-        int y = transparentImage.getHeight(null);
-        double scaler = y * 1.0 / x;
-        BufferedImage previewImage = resizeImage(imageToBufferedImage(transparentImage), 500, (int)(scaler * 500));
+        BufferedImage previewImage = resizeImage(imageToBufferedImage(transparentImage), 500, 500);
         ImageIcon previewImageIcon = new ImageIcon(previewImage);
         PaintMain.preview.setIcon(previewImageIcon);
     }

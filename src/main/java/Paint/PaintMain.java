@@ -127,7 +127,7 @@ public class PaintMain {
         addComponent(contents, previewLabel, 4, 2, 1, 1,  1, 1,
                 GridBagConstraints.PAGE_END, GridBagConstraints.NONE, insets);
         insets = new Insets(10, 50, 0, 0);
-        addComponent(contents, canvas, 0, 2, 4, 2,  1, 1,
+        addComponent(contents, canvas, 1, 2, 4, 2,  1, 1,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH, insets);
 
         // Adding fourth row of components
@@ -137,7 +137,7 @@ public class PaintMain {
 
         // Adding fifth row of components
         insets = new Insets(0, 0, 0,0);
-        addComponent(contents, saving, 4, 4, 1, 1,   1, 1,
+        addComponent(contents, saving, 4, 4, 1, 1,   0.5, 0.5,
                 GridBagConstraints.PAGE_START, GridBagConstraints.NONE, insets);
 
         addButtons(controls, sizes, saving);
