@@ -1,7 +1,6 @@
 package UI.presenters;
 
 import entities.Entity;
-import entities.character.Character;
 import org.jetbrains.annotations.NotNull;
 import settings.Settings;
 
@@ -16,7 +15,7 @@ public abstract class ViewModel extends Rectangle {
      * @param entity - The character object
      * @param size - The size of the character, retrieved from Settings
      */
-    public ViewModel(Character entity, int size){
+    public ViewModel(Entity entity, int size){
         super(entity.getx() * size, entity.gety() * size, size, size);
         this.entity = entity;
     }

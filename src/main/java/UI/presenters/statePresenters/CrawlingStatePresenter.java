@@ -3,6 +3,7 @@ package UI.presenters.statePresenters;
 import UI.presenters.PlayerViewModel;
 import controllers.gameStates.CrawlingState;
 import controllers.gameStates.State;
+import gateways.ImageGateway;
 import useCases.BImageStrategy;
 
 import javax.imageio.ImageIO;
@@ -30,12 +31,6 @@ public class CrawlingStatePresenter implements StatePresenter {
         this.playerViewModel = playerViewModel;
     }
     public void updatePlayerImage(){
-        try {
-            Image img = ImageIO.read(new File("src/main/res/characters.png"));
-            playerImage = BImageStrategy.toBufferedImage(img);
-        } catch (IOException e){
-            System.out.println("Error retrieving characters.png");
-            e.printStackTrace();
-        }
+        playerImage = ImageGateway.getPlayerImage();
     }
 }

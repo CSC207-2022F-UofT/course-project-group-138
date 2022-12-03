@@ -2,15 +2,20 @@ package entities.dungeon;
 
 import entities.Entity;
 
-public class DungeonTile extends Entity {
+import java.awt.image.BufferedImage;
+
+public class DungeonTile {
     private boolean clips; // true if and only if it is collidable with player}
-    /**
-     * === Constructors ===
-     *
-     * @param x - x location in canvas
-     * @param y - y location in canvas
-     */
-    public DungeonTile(int x, int y) {
-        super(x, y);
+    private BufferedImage image;
+    public BufferedImage getImage(){
+        return image;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    public void setClips(boolean clips){
+        this.clips = clips;
     }
 }
