@@ -16,7 +16,7 @@ public class FlipStrategy {
      * @param characterImage - the image to flip
      * @return
      */
-    public static BufferedImage flip(Character character, BufferedImage characterImage){
+    public static BufferedImage getAnimationFrame(Character character, BufferedImage characterImage){
         if (character.isFacing_right()){
             AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
             tx.translate(-characterImage.getWidth(null), 0);

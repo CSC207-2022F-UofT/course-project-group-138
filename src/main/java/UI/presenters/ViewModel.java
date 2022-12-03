@@ -22,7 +22,9 @@ public abstract class ViewModel extends Rectangle {
     }
     /**
      * This should be continuously called from the game loop, so that the view model can observe the changes.
-     * This method updates the character's
+     * This method updates the character's rectangle position so that it matches with its actual position.
+     *
+     * This method is encapsulated here in case we want to implement movable enemies in the future.
      */
     public void updatePosition(){
         super.x = character.getx();
@@ -35,10 +37,7 @@ public abstract class ViewModel extends Rectangle {
      * update: now calls the Flip animation strategy
      */
     public void updateImage(BufferedImage image){
-        characterImage = FlipStrategy.flip(character, image);
-    }
-    public BufferedImage getAnimationFrame(BufferedImage characterImage){
-        return FlipStrategy.flip(character, characterImage);
+        characterImage = FlipStrategy.getAnimationFrame(character, image);
     }
 
     /**
