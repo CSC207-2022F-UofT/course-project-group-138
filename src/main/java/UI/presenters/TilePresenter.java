@@ -24,9 +24,9 @@ public class TilePresenter {
         for (int i = 0; i < tiles.length; i++){
             tiles[i] = new DungeonTile();
         }
-        tiles[0].setImage(ImageGateway.getSquareTileImage());
+        tiles[0].setImage(ImageGateway.getGround4());
         tiles[1].setImage(ImageGateway.getPinkFloorTileImage());
-        tiles[2].setImage(ImageGateway.getBrownWallTileImage());
+        tiles[2].setImage(ImageGateway.getGrassImage());
         tiles[3].setImage(ImageGateway.getBrickWallTileImage());
         tiles[4].setImage(ImageGateway.getStoneTileImage());
     }
@@ -38,6 +38,9 @@ public class TilePresenter {
 
         while (col < Settings.getColumns() && row < Settings.getRows()){
             int tileNum = tileMap[col][row];
+            if (tileNum == 2){
+                graphics2D.drawImage(tiles[0].getImage(), x, y, Settings.getTileSize(), Settings.getTileSize(), null);
+            }
             graphics2D.drawImage(tiles[tileNum].getImage(), x, y, Settings.getTileSize(), Settings.getTileSize(), null);
             col++;
             x += Settings.getTileSize();

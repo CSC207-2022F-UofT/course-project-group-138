@@ -36,7 +36,21 @@ public class ImageGateway {
     public static BufferedImage getSquareTileImage(){
         return getImage("src/main/res/tiles/square_tile.png");
     }
-
+    public static BufferedImage getFloor1Image(){
+        return getImage("src/main/res/tiles/floor1.png");
+    }
+    public static BufferedImage getGrassImage(){
+        return getImage("src/main/res/tiles/grass.png");
+    }
+    public static BufferedImage getGround3(){
+        return getImage("src/main/res/tiles/ground_03.png");
+    }
+    public static BufferedImage getGround4(){
+        return getImage("src/main/res/tiles/ground_04.png");
+    }
+    public static BufferedImage getBackground(){
+        return getImage("src/main/res/background/background.png");
+    }
     private static BufferedImage getImage(String fileName){
         try{
             // Convert to Buffered Image first

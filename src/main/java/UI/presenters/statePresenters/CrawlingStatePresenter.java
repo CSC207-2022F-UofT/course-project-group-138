@@ -19,8 +19,6 @@ public class CrawlingStatePresenter implements StatePresenter {
         updatePlayerImage();
     }
     public void render(Graphics2D graphics2D) {
-        graphics2D.setColor(Color.darkGray);
-        graphics2D.fillRect(0, 0, Settings.canvasWidth(), Settings.canvasHeight());
         tilePresenter.renderTiles(graphics2D);
         // Render Player after tiles
         playerViewModel.updateImage(currentPlayerImage);
