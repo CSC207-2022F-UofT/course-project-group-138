@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
     TLDR: This class (the view model) observes changes from player (the model) and communicates those changes to the
     graphics (the view).
  */
-public class PlayerViewModel extends ViewModel {
+public class PlayerViewModel extends CharacterViewModel{
     /**
      * Constructs a PlayerViewModel object.
      * @param character - This should be an instance of Player
@@ -24,6 +24,5 @@ public class PlayerViewModel extends ViewModel {
     public PlayerViewModel(Character character, int size) {
         super(character, size);
     }
-    // @TODO add collide method
 
 }
