@@ -14,12 +14,9 @@ public abstract class Character extends Entity {
      * Instance Variables
      */
     private final Inventory inv;
-
     private int HPmax;
-
     private int HP;
     private boolean facing_right = false;
-
     /**
      * === Constructors ===
      */
@@ -29,38 +26,30 @@ public abstract class Character extends Entity {
         this.HPmax = HPmax + inv.getArmor().getAttribute();
         this.HP = HPmax;
     }
-
     /**
      * === Getters and Setters ===
      */
     public Inventory getInventory(){
         return inv;
     }
-
     public int getCoins() {
         return this.inv.getCoins();
     }
-
     public int getHPmax() {
         return this.HPmax;
     }
-
     public void changeHPmax(int upgrade) {
         this.HPmax += upgrade;
     }
-
     public int getHP(){
         return this.HP;
     }
-
     public void changeHP(int HP){
         this.HP += HP;
     }
-
     public void setHP() {
         this.HP = this.HPmax;
     }
-
     /**
      * Checks if this character is facing the right side. Otherwise, character is facing left side.
      * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
@@ -72,14 +61,12 @@ public abstract class Character extends Entity {
     public boolean isFacing_right(){
         return facing_right;
     }
-
     /**
      * === Methods ===
      */
     public int attack() {
         return getInventory().getWeapon().getAttribute();
     }
-
     public boolean isAlive(){
         return this.HP > 0;
     }

@@ -30,6 +30,8 @@ public class ImageGateway {
     public static BufferedImage getBrownWallTileImage(){
         return getImage("src/main/res/tiles/brown_wall_tile.png");
     }
+    public static BufferedImage getBrokeRightTileImage(){return getImage("src/main/res/tiles/broke_right_tile.png");}
+    public static BufferedImage getBrokeLeftTileImage(){return getImage("src/main/res/tiles/broke_left_tile.png");}
     public static BufferedImage getBrickWallTileImage() {
         return getImage("src/main/res/tiles/brick_wall_tile.png");
     }
