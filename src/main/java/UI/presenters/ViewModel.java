@@ -30,6 +30,7 @@ public abstract class ViewModel extends Rectangle {
         super.x = entity.getx();
         super.y = entity.gety();
     }
+    public abstract void updateImage(BufferedImage image);
 
     /**
      * This will draw this character's sprite
