@@ -4,14 +4,10 @@ import controllers.gameStates.State;
 
 import java.awt.*;
 
-public class EncounterStatePresenter extends StatePresenter {
-    public EncounterStatePresenter(Graphics graphics, State state) {
-        super(graphics, state);
-    }
+public class EncounterStatePresenter implements StatePresenter {
 
     @Override
-    public void render() {
-        // @TODO add render body here
-        return;
+    public void render(Graphics2D graphics) {
+
     }
 }
