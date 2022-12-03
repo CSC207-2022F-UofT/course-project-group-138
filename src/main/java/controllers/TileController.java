@@ -1,6 +1,5 @@
 package controllers;
 
-import UI.presenters.TileViewModel;
 import entities.dungeon.DungeonTile;
 import settings.Settings;
 
@@ -8,7 +7,6 @@ import java.awt.*;
 
 public class TileController {
     DungeonTile[] tiles;
-    TileViewModel tViewModel;
     public TileController(){
         tiles = new DungeonTile[5];
     }

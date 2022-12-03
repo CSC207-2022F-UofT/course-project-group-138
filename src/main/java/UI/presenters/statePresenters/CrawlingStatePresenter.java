@@ -1,36 +1,43 @@
 package UI.presenters.statePresenters;
 
 import UI.presenters.PlayerViewModel;
-import controllers.gameStates.CrawlingState;
-import controllers.gameStates.State;
+import UI.presenters.TilePresenter;
 import gateways.ImageGateway;
-import useCases.BImageStrategy;
+import settings.Settings;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class CrawlingStatePresenter implements StatePresenter {
     /**
      * Facade class kinda
      */
     PlayerViewModel playerViewModel;
-    BufferedImage playerImage;
+    BufferedImage currentPlayerImage;
+    TilePresenter tilePresenter;
     public CrawlingStatePresenter() {
         updatePlayerImage();
     }
-    public void render(Graphics2D graphics) {
-        playerViewModel.updateImage(playerImage);
-        playerViewModel.render(graphics);
+    public void render(Graphics2D graphics2D) {
+        graphics2D.setColor(Color.darkGray);
+        graphics2D.fillRect(0, 0, Settings.canvasWidth(), Settings.canvasHeight());
+        tilePresenter.renderTiles(graphics2D);
+        // Render Player after tiles
+        playerViewModel.updateImage(currentPlayerImage);
+        playerViewModel.render(graphics2D);
+
         // @TODO add render body here (call DungeonRoomPresenter)
     }
 
     public void setPlayerViewModel(PlayerViewModel playerViewModel) {
         this.playerViewModel = playerViewModel;
     }
+
+    public void setTilePresenter(TilePresenter tilePresenter) {
+        this.tilePresenter = tilePresenter;
+    }
+
     public void updatePlayerImage(){
-        playerImage = ImageGateway.getPlayerImage();
+        currentPlayerImage = ImageGateway.getPlayerImage();
     }
 }

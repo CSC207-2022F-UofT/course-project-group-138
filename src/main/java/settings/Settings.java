@@ -10,10 +10,10 @@ public class Settings {
     private static int PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH,
             FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY, ENEMY_SIZE, MERCHANT_SIZE;
     private static int ROOM_SIZE_X, ROOM_SIZE_Y;
-    private static int tileSize = 93; // keeping resolution approx 1920 X 1080 p
-    private static int rows = 12; // to keep the 16 x 9 aspect ratio
-    private static int columns = 20;
-    private static int PLAYER_SIZE = 130;
+    private static final int tileSize = 93; // keeping resolution approx 1920 X 1080 p
+    private static final int rows = 12; // to keep the 16 x 9 aspect ratio
+    private static final int columns = 20;
+    private static int PLAYER_SIZE = 75;
     private static int scalingFactor;
     private static int[] INITIAL_POSITION;
     private static String gameName = "Dungeons";

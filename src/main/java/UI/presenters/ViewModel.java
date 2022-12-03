@@ -36,8 +36,7 @@ public abstract class ViewModel extends Rectangle {
      * @param graphics - Graphics object in which the player will be drawn.
      */
     public void render(@NotNull Graphics2D graphics){
-        graphics.setColor(Color.darkGray);
-        graphics.fillRect(0, 0, Settings.canvasWidth(), Settings.canvasHeight());
+
         graphics.drawImage(entityImage, super.x, super.y, super.width, super.height, null);
     }
 }

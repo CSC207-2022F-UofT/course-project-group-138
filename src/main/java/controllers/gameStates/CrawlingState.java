@@ -1,5 +1,6 @@
 package controllers.gameStates;
 
+import UI.presenters.TilePresenter;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
@@ -72,8 +73,10 @@ public class CrawlingState implements State {
      */
     private void initializePresenter(){
         PlayerViewModel viewModel = new PlayerViewModel(player, Settings.getPlayerSize());
+        TilePresenter tilePresenter = new TilePresenter();
         CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
         crawlPresenter.setPlayerViewModel(viewModel);
+        crawlPresenter.setTilePresenter(tilePresenter);
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
     }
