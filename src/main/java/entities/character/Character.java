@@ -1,9 +1,10 @@
 package entities.character;
 
+import entities.Entity;
 import entities.inventory.Inventory;
 
 
-public abstract class Character {
+public abstract class Character extends Entity {
 
     /**
      * An abstract class with some non abstract methods to be extended by Player and Enemy.
@@ -17,24 +18,17 @@ public abstract class Character {
     private int HPmax;
 
     private int HP;
-
-    private int x;
-
-    private int y;
     private boolean facing_right = false;
-
 
     /**
      * === Constructors ===
      */
     public Character(Inventory inv, int HPmax, int x, int y) {
+        super(x, y);
         this.inv = inv;
         this.HPmax = HPmax + inv.getArmor().getAttribute();
         this.HP = HPmax;
-        this.x = x;
-        this.y = y;
     }
-
 
     /**
      * === Getters and Setters ===
@@ -65,35 +59,6 @@ public abstract class Character {
 
     public void setHP() {
         this.HP = this.HPmax;
-    }
-
-    public int getx(){
-        return this.x;
-    }
-
-    public int gety(){
-        return this.y;
-    }
-    public void setX(int x){
-        this.x = x;
-    }
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    /**
-     * @param x - ncrement this character's y value by this amount
-     */
-    public void changex(int x) {
-        this.x += x;
-    }
-
-    /**
-     *
-     * @param y- Increment this character's y value by this amount
-     */
-    public void changey(int y) {
-        this.y += y;
     }
 
     /**

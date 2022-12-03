@@ -4,6 +4,7 @@ import UI.presenters.ViewModel;
 import entities.character.Character;
 import entities.dungeon.DungeonTile;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class TileViewModel extends ViewModel {
