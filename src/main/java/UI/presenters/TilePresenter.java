@@ -11,11 +11,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TilePresenter {
+    /**
+     * This class is responsible for Presenting every tile in the game. It follows that this
+     * class is respoonsible for presenting the entire map.
+     */
     private final DungeonTile[] tiles;
     private final MapReader mapReader;
+    // rectangular array representing the map in terms of tiles
     private int[][] tileMap;
     private final AnimationStrategy torchAnimator;
     private Rectangle tileRect;
+    // Sets that contain tile codes that stack on different tiles (special tiles)
     private final Set<Integer> floorTransparentTiles = new HashSet<>();
     private final Set<Integer> blackTransparentTiles = new HashSet<>();
     private final Set<Integer> wallTransparentTiles = new HashSet<>();
@@ -23,51 +29,61 @@ public class TilePresenter {
     private final Set<Integer> wallETransparentTiles = new HashSet<>();
     private final int tileSize = Settings.getTileSize();
 
+    /**
+     * Constructs a TilePresenter object, while noting the special tiles
+     */
     public TilePresenter(){
         mapReader = new MapReader();
         tiles = new DungeonTile[75];
 
         initializeTileArray();
         populateTileMap(0);
-        floorTransparentTiles.add(2);
-        floorTransparentTiles.add(34);
-        floorTransparentTiles.add(8);
-        floorTransparentTiles.add(10);
-        floorTransparentTiles.add(15);
-        floorTransparentTiles.add(16);
-        floorTransparentTiles.add(17);
-        floorTransparentTiles.add(18);
-        floorTransparentTiles.add(35);
-        floorTransparentTiles.add(36);
-        floorTransparentTiles.add(38);
-        floorTransparentTiles.add(40);
-        floorTransparentTiles.add(48);
-
-        for (int i = 49; i <= 56; i++){
-            floorTransparentTiles.add(i);
-        }
-
-
-        blackTransparentTiles.add(3);
-        blackTransparentTiles.add(4);
-        blackTransparentTiles.add(6);
-        blackTransparentTiles.add(7);
-        blackTransparentTiles.add(11);
-
-        wallTransparentTiles.add(33);
-        for (int i = 25; i <= 33; i++){
-            wallTransparentTiles.add(i);
-        }
-        wallTransparentTiles.add(37);
-
+        addSpecialTiles();
 
         torchAnimator = new AnimationStrategy(25, 8);
     }
 
+    public void renderTiles(Graphics2D graphics2D){
+        int col = 0;
+        int row = 0;
+        int x = 0;
+        int y = 0;
+
+        while (col < Settings.getColumns() && row < Settings.getRows()){
+            int tileNum = tileMap[col][row];
+            if (tileNum == 99){
+                tileNum = torchAnimator.getNextFrame();
+            }
+            if (tileNum == 98){
+                tileNum = torchAnimator.getNextFrame() + 24;
+            }
+            if (floorTransparentTiles.contains(tileNum)){
+                graphics2D.drawImage(tiles[0].getImage(), x, y, tileSize, tileSize, null);
+            } else if (blackTransparentTiles.contains(tileNum)) {
+                graphics2D.drawImage(tiles[9].getImage(), x, y, tileSize, tileSize, null);
+            } else if (wallTransparentTiles.contains(tileNum)) {
+                graphics2D.drawImage(tiles[12].getImage(), x, y, tileSize, tileSize, null);
+            }
+            graphics2D.drawImage(tiles[tileNum].getImage(), x, y, tileSize, tileSize, null);
+            miscTileCases(graphics2D, tileNum, x, y);
+            col++;
+            x += Settings.getTileSize();
+            if (col == Settings.getColumns()){
+                col = 0;
+                x = 0;
+                row++;
+                y += Settings.getTileSize();
+            }
+        }
+    }
+
     /**
      * Initialize all the tiles in the arrays and set their images.
+     *
+     * NOTE: This method does not access assets from resources directly.
+     * Instead, it calls the ImageGateway gateway, which returns the desired sprite.
      */
-    public void initializeTileArray(){
+    private void initializeTileArray(){
         for (int i = 0; i < tiles.length; i++){
             tiles[i] = new DungeonTile();
         }
@@ -127,41 +143,50 @@ public class TilePresenter {
         tiles[54].setImage(ImageGateway.getTorch6());
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
-
     }
-    public void renderTiles(Graphics2D graphics2D){
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
 
-        while (col < Settings.getColumns() && row < Settings.getRows()){
-            int tileNum = tileMap[col][row];
-            if (tileNum == 99){
-                tileNum = torchAnimator.getNextFrame();
-            }
-            if (tileNum == 98){
-                tileNum = torchAnimator.getNextFrame() + 24;
-            }
-            if (floorTransparentTiles.contains(tileNum)){
-                graphics2D.drawImage(tiles[0].getImage(), x, y, tileSize, tileSize, null);
-            } else if (blackTransparentTiles.contains(tileNum)) {
-                graphics2D.drawImage(tiles[9].getImage(), x, y, tileSize, tileSize, null);
-            } else if (wallTransparentTiles.contains(tileNum)) {
-                graphics2D.drawImage(tiles[12].getImage(), x, y, tileSize, tileSize, null);
-            }
-            graphics2D.drawImage(tiles[tileNum].getImage(), x, y, tileSize, tileSize, null);
-            miscTileCases(graphics2D, tileNum, x, y);
-            col++;
-            x += Settings.getTileSize();
-            if (col == Settings.getColumns()){
-                col = 0;
-                x = 0;
-                row++;
-                y += Settings.getTileSize();
-            }
+    /**
+     * Adds the special tiles to its respective type
+     */
+    private void addSpecialTiles(){
+        floorTransparentTiles.add(2);
+        floorTransparentTiles.add(34);
+        floorTransparentTiles.add(8);
+        floorTransparentTiles.add(10);
+        floorTransparentTiles.add(15);
+        floorTransparentTiles.add(16);
+        floorTransparentTiles.add(17);
+        floorTransparentTiles.add(18);
+        floorTransparentTiles.add(35);
+        floorTransparentTiles.add(36);
+        floorTransparentTiles.add(38);
+        floorTransparentTiles.add(40);
+        floorTransparentTiles.add(48);
+
+        for (int i = 49; i <= 56; i++){
+            floorTransparentTiles.add(i);
         }
+
+        blackTransparentTiles.add(3);
+        blackTransparentTiles.add(4);
+        blackTransparentTiles.add(6);
+        blackTransparentTiles.add(7);
+        blackTransparentTiles.add(11);
+
+        wallTransparentTiles.add(33);
+        for (int i = 25; i <= 33; i++){
+            wallTransparentTiles.add(i);
+        }
+        wallTransparentTiles.add(37);
     }
+
+    /**
+     * Renders the miscellaneous tile cases
+     * @param graphics2D - g2d object to render onto
+     * @param tileNum - miscellaneous tile in question
+     * @param x - x location to render
+     * @param y - y location to render
+     */
     private void miscTileCases(Graphics2D graphics2D, int tileNum, int x, int y){
         if (tileNum == 35){
             graphics2D.drawImage(tiles[18].getImage(), x, y, tileSize, tileSize, null);
@@ -174,6 +199,11 @@ public class TilePresenter {
         }
 
     }
+
+    /**
+     * Calls the load map method from the mapReader object. Gets the rectangular array.
+     * @param mapNum - code corresponding with each map
+     */
     private void populateTileMap(int mapNum){
         tileMap = mapReader.loadMap(mapNum);
     }
