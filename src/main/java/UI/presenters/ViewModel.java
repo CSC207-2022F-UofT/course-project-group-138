@@ -4,6 +4,7 @@ import entities.Entity;
 import org.jetbrains.annotations.NotNull;
 import settings.Settings;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -38,5 +39,6 @@ public abstract class ViewModel extends Rectangle {
     public void render(@NotNull Graphics2D graphics){
 
         graphics.drawImage(entityImage, super.x, super.y, super.width, super.height, null);
+        System.out.println(SwingUtilities.isEventDispatchThread());
     }
 }

@@ -5,7 +5,6 @@ import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -65,14 +64,8 @@ public class Engine {
      * Things to do during the main game loop
      */
     private static void loopActions(){
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                stateManager.loop();
-                gameWindow.update();
-            }
-        });
-
+        stateManager.loop(); // Loops and updates backend game logic
+        gameWindow.update(); // Loops and updates frontup UI
     }
     public static void quit(){
         gameWindow.close();
