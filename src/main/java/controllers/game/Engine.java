@@ -7,6 +7,7 @@ import controllers.StateManager;
 import settings.Settings;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.concurrent.atomic.AtomicReference;
@@ -31,9 +32,11 @@ public class Engine {
     public static void onCreate(){
         stateManager = new StateManager();
         gamePanel = new GamePanel(stateManager);
+
         gameWindow = new GameWindow();
-//        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
-//        timer = timerStrategy.initTimer();
+
+        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
+        timer = timerStrategy.initTimer();
         // threadStrategy = new MultithreadLoopStrategy();
     }
 
@@ -47,9 +50,9 @@ public class Engine {
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
-//        timer.start();
-        gameLoop();
-        loop.start();
+        timer.start();
+//        gameLoop();
+//        loop.start();
     }
     /**
      * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
