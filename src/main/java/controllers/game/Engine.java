@@ -4,10 +4,12 @@ import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;
+import settings.Settings;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Engine {
     /**
@@ -20,6 +22,7 @@ public class Engine {
     private static GameWindow gameWindow;
     private static GamePanel gamePanel;
     private static TimerLoopStrategy timerStrategy;
+    private static MultithreadLoopStrategy threadStrategy;
     private static Timer timer;
 
     /**
@@ -29,8 +32,9 @@ public class Engine {
         stateManager = new StateManager();
         gamePanel = new GamePanel(stateManager);
         gameWindow = new GameWindow();
-        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
-        timer = timerStrategy.initTimer();
+//        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
+//        timer = timerStrategy.initTimer();
+        // threadStrategy = new MultithreadLoopStrategy();
     }
 
     /**
@@ -43,24 +47,29 @@ public class Engine {
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
-        timer.start();
-//        gameLoop();
-//        loop.start();
+//        timer.start();
+        gameLoop();
+        loop.start();
     }
     /**
      * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
      * may require SwingUtilities.invokeLater since we are no longer on EDT.
      */
     private static void gameLoop(){
+
         loop = new Thread(()-> {
+            double interval = 1_000_000_000 / Settings.getFPS(); // time in nano seconds for 1/fps
+            double delta = 0;
+            long lastTime = System.nanoTime();
+            long currTime;
             while (isRunning){
-                // looping stuff goes here
-                loopActions();
-                // Sleep this thread for 15ms in case CPU is omega powerful. (however might sleep for 5-20ms)
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                currTime = System.nanoTime();
+                delta += (currTime - lastTime) / interval;
+                lastTime = currTime;
+
+                if (delta >= 1){ // meaning that it has reached the time interval required to be under FPS
+                    loopActions();
+                    delta--;
                 }
             }
         });
@@ -69,7 +78,7 @@ public class Engine {
     /**
      * Things to do during the main game loop
      */
-    private static void loopActions(){
+    public static void loopActions(){
         stateManager.loop(); // Loops and updates backend game logic
         gameWindow.update(); // Loops and updates frontup UI
     }

@@ -13,8 +13,8 @@ public class TimerLoopStrategy {
     static GameWindow gameWindow;
     Timer timer;
     public TimerLoopStrategy(StateManager gameStateManager, GameWindow gameWindow){
-        this.gameStateManager = gameStateManager;
-        this.gameWindow = gameWindow;
+        TimerLoopStrategy.gameStateManager = gameStateManager;
+        TimerLoopStrategy.gameWindow = gameWindow;
     }
     public Timer initTimer(){
         timer = new Timer(15, new Loop());
