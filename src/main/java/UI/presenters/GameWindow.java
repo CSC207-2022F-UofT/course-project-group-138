@@ -13,7 +13,7 @@ public class GameWindow {
      * for the JFrames and JPanels that the user sees
      */
     private final JFrame gameFrame;
-    private JPanel gamePanel;
+    private GamePanel gamePanel;
 
     /**
      * Constructs a JFrame, which will act as the game's main frame
@@ -25,8 +25,9 @@ public class GameWindow {
         // maybe add gameFrame.setBounds later. Might be unneccessary though
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setResizable(false);
-        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        gameFrame.setUndecorated(true);
+        setFullScreen();
+//        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        gameFrame.setUndecorated(true);
         gameFrame.setTitle(Settings.getGameName());
         // Builds a new JFrame that is unresizable and exits on window close
     }
@@ -35,7 +36,7 @@ public class GameWindow {
      * Acts as both a setter for gamePanel and an initializer
      * @param gamePanel - The JPanel containing main game UI
      */
-    public void addGamePanel(JPanel gamePanel){
+    public void addGamePanel(GamePanel gamePanel){
         // Create a dimension with width, height from Settings
         Dimension d = new Dimension(Settings.getFrameWidth(), Settings.getFrameHeight());
         this.gamePanel = gamePanel;
@@ -54,7 +55,9 @@ public class GameWindow {
         gamePanel.addKeyListener(keyListener);
     }
     public void update(){
-        gamePanel.repaint();
+        gamePanel.drawCanvas();
+        gamePanel.drawScreen();
+        // gamePanel.repaint();
     }
     /**
      * Creates the GameWindow
@@ -63,6 +66,11 @@ public class GameWindow {
         gameFrame.add(gamePanel);
         gameFrame.pack();
         gameFrame.setVisible(true);
+    }
+    private void setFullScreen(){
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(gameFrame);
     }
     public void close(){
         gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
