@@ -56,7 +56,7 @@ public class GameWindow {
     }
     public void update(){
         try {
-            SwingUtilities.invokeAndWait(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     gamePanel.drawCanvas();
