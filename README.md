@@ -7,6 +7,9 @@ We highly recommend you consider adding additional information that would help s
 Consider targeting what you include to your TA who will appreciate having this extra info when they are grading!
 
 
+## Delete everything below after completion
+
+
 ## Checklist For Your Project
 - [ ] Verify the correct settings for your project repository
 - [ ] Set up Github Projects
