@@ -5,6 +5,7 @@ import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -18,6 +19,8 @@ public class Engine {
     // Below are references to presenters
     private static GameWindow gameWindow;
     private static GamePanel gamePanel;
+    private static TimerLoopStrategy timerStrategy;
+    private static Timer timer;
 
     /**
      * Should be called after Engine instantiation.
@@ -26,6 +29,8 @@ public class Engine {
         stateManager = new StateManager();
         gamePanel = new GamePanel(stateManager);
         gameWindow = new GameWindow();
+        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
+        timer = timerStrategy.initTimer();
     }
 
     /**
@@ -38,8 +43,9 @@ public class Engine {
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
-        gameLoop();
-        loop.start();
+        timer.start();
+//        gameLoop();
+//        loop.start();
     }
     /**
      * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
