@@ -1,41 +1,41 @@
 package UI.presenters.statePresenters;
 
 import UI.presenters.PlayerViewModel;
-import controllers.gameStates.CrawlingState;
-import controllers.gameStates.State;
-import useCases.BImageStrategy;
+import UI.presenters.TilePresenter;
+import gateways.ImageGateway;
+import settings.Settings;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class CrawlingStatePresenter implements StatePresenter {
     /**
      * Facade class kinda
      */
     PlayerViewModel playerViewModel;
-    BufferedImage playerImage;
+    BufferedImage currentPlayerImage;
+    TilePresenter tilePresenter;
     public CrawlingStatePresenter() {
         updatePlayerImage();
     }
-    public void render(Graphics2D graphics) {
-        playerViewModel.updateImage(playerImage);
-        playerViewModel.render(graphics);
+    public void render(Graphics2D graphics2D) {
+        tilePresenter.renderTiles(graphics2D);
+        // Render Player after tiles
+        playerViewModel.updateImage(currentPlayerImage);
+        playerViewModel.render(graphics2D);
+
         // @TODO add render body here (call DungeonRoomPresenter)
     }
 
     public void setPlayerViewModel(PlayerViewModel playerViewModel) {
         this.playerViewModel = playerViewModel;
     }
+
+    public void setTilePresenter(TilePresenter tilePresenter) {
+        this.tilePresenter = tilePresenter;
+    }
+
     public void updatePlayerImage(){
-        try {
-            Image img = ImageIO.read(new File("src/main/res/characters.png"));
-            playerImage = BImageStrategy.toBufferedImage(img);
-        } catch (IOException e){
-            System.out.println("Error retrieving characters.png");
-            e.printStackTrace();
-        }
+        currentPlayerImage = ImageGateway.getPlayerImage();
     }
 }

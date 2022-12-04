@@ -1,11 +1,13 @@
 package controllers.gameStates;
 
+import UI.presenters.TilePresenter;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
 import controllers.game.Engine;
 import entities.character.Player;
 import settings.Settings;
+import useCases.KeyEventHandler;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
@@ -36,11 +38,10 @@ public class CrawlingState implements State {
         initializer.init();
         this.player = initializer.getPlayer();
         // @TODO uncomment below code when dungeonController is done
-        //this.dungeonController = new DungeonController();
+        // this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         initializePresenter();
     }
-
     public void loop() {
         playerMover.move();
         playerViewModel.updatePosition();
@@ -51,59 +52,31 @@ public class CrawlingState implements State {
      * @param code - keyCode corresponding to the key
      */
     public void keyPressEvents(int code) {
-        updatePlayerMover(code, true);
+        KeyEventHandler.handleCrawingStateEvents(code, true, playerMover);
     }
-
     /**
      * Updates PlayerMover so that the associated direciton boolean will be false (since key released)
      * @param code - keyCode corresponding to the key
      */
-
     public void keyReleasedEvents(int code) {
-        updatePlayerMover(code, false);
+        KeyEventHandler.handleCrawingStateEvents(code, false, playerMover);
     }
-
     @Override
     public StatePresenter getPresenter() {
         return presenter;
     }
-
     public Player getPlayer(){
         return player;
     }
-
-    /**
-     * Typical PC controls. WASD for up, left, down, right respectively
-     * @param code - keyCode corresponding to the key
-     * @param bool - the whether key is pressed or released
-     */
-    private void updatePlayerMover(int code, boolean bool){
-        switch(code) {
-            case KeyEvent.VK_W:
-                this.playerMover.movingUp(bool);
-                break;
-            case KeyEvent.VK_A:
-                this.playerMover.movingLeft(bool);
-                break;
-            case KeyEvent.VK_S:
-                this.playerMover.movingDown(bool);
-                break;
-            case KeyEvent.VK_D:
-                this.playerMover.movingRight(bool);
-                break;
-            case KeyEvent.VK_ESCAPE:
-                // Closes application when user presses escape (May change later)
-                Engine.quit();
-        }
-    }
-
     /**
      * Helper Method for initializing the PlayerViewModel and the CrawlingStatePresenter
      */
     private void initializePresenter(){
         PlayerViewModel viewModel = new PlayerViewModel(player, Settings.getPlayerSize());
+        TilePresenter tilePresenter = new TilePresenter();
         CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
         crawlPresenter.setPlayerViewModel(viewModel);
+        crawlPresenter.setTilePresenter(tilePresenter);
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
     }

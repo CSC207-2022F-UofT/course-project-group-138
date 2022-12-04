@@ -26,14 +26,14 @@ public class PlayerMover {
         if (up && player.gety() > 0) {
             player.changey(-speed);
         }
-        if (down && player.gety() < Settings.getFrameHeight() - Settings.getPlayerSize()) {
+        if (down && player.gety() < Settings.canvasHeight() - Settings.getPlayerSize()) {
             player.changey(speed);
         }
         if (left && player.getx() > 0) {
             player.changex(-speed);
             player.setFacing_right(false);
         }
-        if (right && player.getx() < Settings.getFrameWidth() - Settings.getPlayerSize()) {
+        if (right && player.getx() < Settings.canvasWidth() - Settings.getPlayerSize()) {
             player.changex(speed);
             player.setFacing_right(true);
         }
