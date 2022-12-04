@@ -122,4 +122,5 @@ public abstract class Character {
     public boolean isAlive(){
         return this.HP > 0;
     }
+
 }

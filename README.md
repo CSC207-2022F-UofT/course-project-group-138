@@ -1,8 +1,11 @@
-# Project Template
+# Course Project Group 138
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+Make use of the readme and any other features you find useful to help your TA navigate your project and understand what you have done!
+Your readme should be updated from the default one we provided and needs to at least contain information about how to run your code.
+If the setup process to run your code is complicated and isn't feasible for your TA to do quickly, it would be a good idea to include a small demo / screenshots to demonstrate your current functionality.
+We highly recommend you consider adding additional information that would help someone understand what you've been working on.
+Consider targeting what you include to your TA who will appreciate having this extra info when they are grading!
+
 
 ## Checklist For Your Project
 - [ ] Verify the correct settings for your project repository
