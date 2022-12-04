@@ -56,20 +56,33 @@ public class Engine {
      * may require SwingUtilities.invokeLater since we are no longer on EDT.
      */
     private static void gameLoop(){
-
+        /**
+         * Currently shows FPS for debugging on MacOS. @TODO remove later
+         */
         loop = new Thread(()-> {
             double interval = 1_000_000_000 / Settings.getFPS(); // time in nano seconds for 1/fps
             double delta = 0;
             long lastTime = System.nanoTime();
             long currTime;
+            long timer = 0;
+            int drawCount = 0;
             while (isRunning){
                 currTime = System.nanoTime();
                 delta += (currTime - lastTime) / interval;
+
+                timer += (currTime - lastTime);
+
                 lastTime = currTime;
 
                 if (delta >= 1){ // meaning that it has reached the time interval required to be under FPS
                     loopActions();
                     delta--;
+                    drawCount++;
+                }
+                if (timer >= 1000000000){
+                    System.out.println(drawCount);
+                    drawCount = 0;
+                    timer = 0;
                 }
             }
         });
