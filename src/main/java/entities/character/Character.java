@@ -47,6 +47,10 @@ public abstract class Character {
         return this.inv.getCoins();
     }
 
+    public void changeCoins(int coins) {
+        this.inv.changeCoins(coins);
+    }
+
     public int getHPmax() {
         return this.HPmax;
     }
@@ -82,7 +86,7 @@ public abstract class Character {
     }
 
     /**
-     * @param x - ncrement this character's y value by this amount
+     * @param x - Increment this character's y value by this amount
      */
     public void changex(int x) {
         this.x += x;
@@ -90,7 +94,7 @@ public abstract class Character {
 
     /**
      *
-     * @param y- Increment this character's y value by this amount
+     * @param y - Increment this character's y value by this amount
      */
     public void changey(int y) {
         this.y += y;
