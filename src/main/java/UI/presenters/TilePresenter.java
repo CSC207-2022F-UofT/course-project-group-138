@@ -71,12 +71,12 @@ public class TilePresenter {
         for (int i = 0; i < tiles.length; i++){
             tiles[i] = new DungeonTile();
         }
-        tiles[0].setImage(ImageGateway.getFloorPlain());
+        tiles[0].setImage(ImageGateway.getMud1());
         tiles[1].setImage(ImageGateway.getWallCenter());
         tiles[2].setImage(ImageGateway.getGrassImage());
         tiles[3].setImage(ImageGateway.getWallOuterEast());
         tiles[4].setImage(ImageGateway.getWallInnerSE());
-        tiles[5].setImage(ImageGateway.getSquareTileImage());
+        tiles[5].setImage(ImageGateway.getFloorPlain());
         tiles[6].setImage(ImageGateway.getWallInnerSW());
         tiles[7].setImage(ImageGateway.getWallOuterWest());
         tiles[8].setImage(ImageGateway.getDarknessBottom());

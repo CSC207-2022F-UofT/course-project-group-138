@@ -173,6 +173,9 @@ public class ImageGateway {
     public static BufferedImage getBoxLeft(){
         return getImage("src/main/res/tiles/items/box_left.png");
     }
+    public static BufferedImage getMud1(){
+        return getImage("src/main/res/tiles/items/floor_mud_mid_1.png");
+    }
 
 
 
