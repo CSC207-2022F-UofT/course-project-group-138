@@ -55,13 +55,17 @@ public class GameWindow {
         gamePanel.addKeyListener(keyListener);
     }
     public void update(){
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                gamePanel.drawCanvas();
-                gamePanel.drawScreen();
-            }
-        });
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    gamePanel.drawCanvas();
+                    gamePanel.drawScreen();
+                }
+            });
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         // gamePanel.repaint();
     }
