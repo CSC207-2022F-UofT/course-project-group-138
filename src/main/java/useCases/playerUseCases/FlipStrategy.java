@@ -14,9 +14,9 @@ public class FlipStrategy {
      * Flips the character image in the view model if and only if the character is facing right (left by default).
      * @param character - Determines which direction the character is facing
      * @param characterImage - the image to flip
-     * @return
+     * @return - flipped or unflipped character image
      */
-    public static BufferedImage flip(Character character, BufferedImage characterImage){
+    public static BufferedImage getAnimationFrame(Character character, BufferedImage characterImage){
         if (character.isFacing_right()){
             AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
             tx.translate(-characterImage.getWidth(null), 0);

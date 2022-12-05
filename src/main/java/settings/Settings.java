@@ -10,7 +10,10 @@ public class Settings {
     private static int PLAYER_SPEED, MAX_HP, EQUIPMENT_ATTRIBUTE_RANGE, PRICE_RANGE, FRAME_WIDTH,
             FRAME_HEIGHT, ROOM_SIZE, DIFFICULTY, ENEMY_SIZE, MERCHANT_SIZE;
     private static int ROOM_SIZE_X, ROOM_SIZE_Y;
-    private static int PLAYER_SIZE = 130;
+    private static final int tileSize = 93; // keeping resolution approx 1920 X 1080 p
+    private static final int rows = 12; // to keep the 16 x 9 aspect ratio
+    private static final int columns = 20;
+    private static int PLAYER_SIZE = 75;
     private static int scalingFactor;
     private static int[] INITIAL_POSITION;
     private static String gameName = "Dungeons";
@@ -38,7 +41,7 @@ public class Settings {
     /**
      * Frame width/height must be set before method call to center initial position.
      */
-    public static void centerInitialPosition(){setInitialPosition(getFrameWidth() / 2, getFrameHeight() / 2);}
+    public static void centerInitialPosition(){setInitialPosition(canvasWidth() / 2, canvasHeight() / 2);}
 
     public static void setFrameWidth(int frameWidth){
         FRAME_WIDTH = frameWidth;}
@@ -60,10 +63,10 @@ public class Settings {
         return MAX_HP;
     }
     public static int getPlayerSize(){
-        return PLAYER_SIZE * scalingFactor;
+        return PLAYER_SIZE;
     }
     public static int getPlayerSpeed(){
-        return PLAYER_SPEED * scalingFactor;
+        return PLAYER_SPEED;
     }
     public static int getAttributeRange() {return EQUIPMENT_ATTRIBUTE_RANGE;}
     public static int getPriceRange() {return PRICE_RANGE;}
@@ -84,5 +87,23 @@ public class Settings {
     }
     public static int getScalingFactor(){
         return scalingFactor;
+    }
+
+    public static int getColumns() {
+        return columns;
+    }
+
+    public static int getTileSize() {
+        return tileSize;
+    }
+
+    public static int getRows() {
+        return rows;
+    }
+    public static int canvasWidth(){
+        return tileSize * columns; // 1860
+    }
+    public static int canvasHeight(){
+        return tileSize * rows; // 1116
     }
 }

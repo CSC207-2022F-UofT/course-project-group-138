@@ -52,7 +52,7 @@ public class Engine {
                 loopActions();
                 // Sleep this thread for 15ms in case CPU is omega powerful. (however might sleep for 5-20ms)
                 try {
-                    Thread.sleep(15);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
