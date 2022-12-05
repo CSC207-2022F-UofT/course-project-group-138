@@ -1,23 +1,22 @@
 package entities.character;
 
+import entities.Entity;
 import entities.inventory.Inventory;
 
 /**
  * An abstract class to be extended by Player and Enemy.
  */
-public abstract class Character {
+public abstract class Character extends Entity{
     private final Inventory inventory;
     private int maximumHealth;
     private int currentHealth;
-    private int x;
-    private int y;
+    private boolean facing_right = false;
 
     public Character(Inventory inventory, int maximumHealth, int x, int y) {
+        super(x,y);
         this.inventory = inventory;
         this.maximumHealth = maximumHealth;
         this.currentHealth = this.maximumHealth;
-        this.x = x;
-        this.y = y;
     }
 
     /**
@@ -160,5 +159,15 @@ public abstract class Character {
      */
     public int gety(){
         return this.y;
+    /**
+     * Checks if this character is facing the right side. Otherwise, character is facing left side.
+     * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
+     * @param facing_right - True if and only if character is facing the right side
+     */
+    public void setFacing_right(boolean facing_right){
+        this.facing_right = facing_right;
+    }
+    public boolean isFacing_right(){
+        return facing_right;
     }
 }

@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        // @TODO don't need this class (already implemented)
 
         JFrame window = new JFrame();
         window.setVisible(true);
@@ -12,13 +13,13 @@ public class Main {
         window.setResizable(false); //can't resize
         window.setLocationRelativeTo(null); //centered
 
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        // GamePanel gamePanel = new GamePanel();
+        // window.add(gamePanel);
 
         window.pack(); //fit the size
 
 
-        gamePanel.startGameThread(); //will initiate the game loop through the gamepanel class
+        // gamePanel.startGameThread(); //will initiate the game loop through the gamepanel class
 
 
 

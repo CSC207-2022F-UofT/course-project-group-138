@@ -1,16 +1,10 @@
 package UI.presenters.statePresenters;
 
-import controllers.gameStates.State;
-
 import java.awt.*;
 
-public class MenuStatePresenter extends StatePresenter {
-    public MenuStatePresenter(Graphics graphics, State state) {
-        super(graphics, state);
-    }
-
+public class MenuStatePresenter implements StatePresenter {
     @Override
-    public void render() {
-        return;
+    public void render(Graphics2D graphics) {
+
     }
 }

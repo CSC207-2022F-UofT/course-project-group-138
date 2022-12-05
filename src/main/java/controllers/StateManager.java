@@ -1,14 +1,16 @@
-package controllers.gameStates;
+package controllers;
+
+import controllers.gameStates.State;
 
 import java.awt.*;
 
 public class StateManager {
     State currState;
     public void keyPressed(int keyCode){
-        currState.keyPressed(keyCode);
+        currState.keyPressEvents(keyCode);
     }
     public void keyReleased(int keyCode){
-        currState.keyReleased(keyCode);
+        currState.keyReleasedEvents(keyCode);
     }
     public void setCurrState(State newState){
         currState = newState;
@@ -17,8 +19,8 @@ public class StateManager {
         currState.loop();
 
     }
-    public void renderState(Graphics graphics){
-        currState.render();
+    public void renderState(Graphics2D graphics){
+        currState.getPresenter().render(graphics);
     }
 
 }
