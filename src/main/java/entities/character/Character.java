@@ -35,6 +35,10 @@ public abstract class Character extends Entity {
     public int getCoins() {
         return this.inv.getCoins();
     }
+
+    public void changeCoins(int coins) {
+        this.inv.changeCoins(coins);
+    }
     public int getHPmax() {
         return this.HPmax;
     }
