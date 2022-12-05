@@ -57,7 +57,7 @@ public class DungeonRoomBuilder {
 
                     int enemyHealth = this.rand.nextInt(ENEMY_HEALTH_RANGE[1] - ENEMY_HEALTH_RANGE[0] + 1) + ENEMY_HEALTH_RANGE[0];
 
-                    int enemyX = rand.nextInt(dungeonRoomSize[0]);      //
+                    int enemyX = rand.nextInt(dungeonRoomSize[0]);
                     int enemyY = rand.nextInt(dungeonRoomSize[1]);
 
                     newRoom.addNPC(new Enemy(enemyInventory, enemyHealth, enemyX, enemyY));
@@ -67,18 +67,20 @@ public class DungeonRoomBuilder {
             case 1:
                 if (this.merchantsAdded < this.numberOfMerchants) {
                     int randomItem = this.rand.nextInt(2);       // 0 = Armour, 1 = Weapon
+
+                    int merchantX = rand.nextInt(dungeonRoomSize[0]);
+                    int merchantY = rand.nextInt(dungeonRoomSize[1]);
                     if (randomItem == 0) {
-                        newRoom.addNPC(new Merchant(rand.nextInt(dungeonRoomSize[0]), rand.nextInt(dungeonRoomSize[1])));
+                        newRoom.addNPC(new Merchant("Armor", 20, merchantX, merchantY));
                     } else {
-                        newRoom.addNPC(new Merchant(rand.nextInt(dungeonRoomSize[0]), rand.nextInt(dungeonRoomSize[1])));
-                    }                                                 // TODO: Add Merchant constructor to assign item for sale (weapon/armor).
+                        newRoom.addNPC(new Merchant("Weapon", 30, merchantX, merchantY));
+                    }
                     this.merchantsAdded++;
                 }
                 break;
             case 2:
                 break;
         }
-
         return newRoom;
     }
 }

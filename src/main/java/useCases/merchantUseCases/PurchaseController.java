@@ -4,8 +4,6 @@ import entities.character.Merchant;
 import entities.character.Player;
 import settings.Settings;
 
-import java.util.HashMap;
-
 public class PurchaseController {
 
     private Player player;
