@@ -1,10 +1,11 @@
 # Course Project Group 138
 
-Start the program by running Game.java.
-It can be found in src/main/java/controllers/game/Game
-
 Our project is a adventure rpg game. The goal is to slay monsters, improve your equipment, and defeat the boss.
+It is designed for Windows and may have some compatibility issues with macOS.
 The controls are WASD for movement and the mouse left click to interact with buttons on-screen.
+
+Start the program by running Game.java. 
+It can be found in src/main/java/controllers/game/Game
 
 The test folder is found in src/main/tests
 The code is found in src/main/java, separated into packages based on their Clean Architecture layer.
