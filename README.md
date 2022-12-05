@@ -1,14 +1,19 @@
 # Course Project Group 138
 
+Start the program by running Game.java.
+It can be found in src/main/java/controllers/game/Game
+
+Our project is a adventure rpg game. The goal is to slay monsters, improve your equipment, and defeat the boss.
+The controls are WASD for movement and the mouse left click to interact with buttons on-screen.
+
+The test folder is found in src/main/tests
+The code is found in src/main/java, separated into packages based on their Clean Architecture layer.
+
 Make use of the readme and any other features you find useful to help your TA navigate your project and understand what you have done!
 Your readme should be updated from the default one we provided and needs to at least contain information about how to run your code.
 If the setup process to run your code is complicated and isn't feasible for your TA to do quickly, it would be a good idea to include a small demo / screenshots to demonstrate your current functionality.
 We highly recommend you consider adding additional information that would help someone understand what you've been working on.
 Consider targeting what you include to your TA who will appreciate having this extra info when they are grading!
-
-
-## Delete everything below after completion
-
 
 ## Checklist For Your Project
 - [ ] Verify the correct settings for your project repository
