@@ -31,14 +31,12 @@ public class Initializer {
         Settings.setRoomSize(Settings.getFrameWidth(), Settings.getFrameHeight());
 
         // Initialize Inventory
-        Weapon weapon = new Weapon(random.nextInt(Settings.getAttributeRange()) + 1,
-                random.nextInt(Settings.getPriceRange()) + 1);
-        Armor armor = new Armor(random.nextInt(Settings.getAttributeRange()) + 1,
-                random.nextInt(Settings.getPriceRange()) + 1);
-        Inventory inv = new Inventory(weapon, armor, 0);
+        Weapon weapon = new Weapon(Settings.getDefaultPlayerWeapon());
+        Armor armor = new Armor(Settings.getDefaultPlayerArmor());
+        Inventory inventory = new Inventory(100, weapon, armor);
 
         // Initialize player
-        player = new Player(inv, Settings.getMaxHp(), Settings.getInitialPosition()[0],
+        player = new Player(inventory, Settings.getMaxHp(), Settings.getInitialPosition()[0],
                 Settings.getInitialPosition()[1]);
 
         //TODO: Call paint program for player, weapon, armor, enemy & merchant
