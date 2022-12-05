@@ -7,6 +7,8 @@ public class PlayerMover {
     private boolean up, down, left, right;
     private final int speed = Settings.getPlayerSpeed();
     private final Player player;
+    private int width;
+    private int height;
 
     public PlayerMover(Player player){
         this.player = player;
@@ -18,19 +20,22 @@ public class PlayerMover {
 
     /**
      * Update the player's x, y values if user is holding the movement direction is set to true.
+     * Checks whether player is hitting the edge of the frame.
      */
     public void move() {
-        if (up) {
+        if (up && player.gety() > 0) {
             player.changey(-speed);
         }
-        if (down) {
+        if (down && player.gety() < Settings.canvasHeight() - Settings.getPlayerSize()) {
             player.changey(speed);
         }
-        if (left) {
+        if (left && player.getx() > 0) {
             player.changex(-speed);
+            player.setFacing_right(false);
         }
-        if (right) {
+        if (right && player.getx() < Settings.canvasWidth() - Settings.getPlayerSize()) {
             player.changex(speed);
+            player.setFacing_right(true);
         }
     }
     // true should be passed into methods below iff player if holding down the corresponding movement key

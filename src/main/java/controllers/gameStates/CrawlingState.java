@@ -1,15 +1,21 @@
 package controllers.gameStates;
 
+import UI.presenters.TilePresenter;
+import UI.presenters.statePresenters.CrawlingStatePresenter;
+import UI.presenters.statePresenters.StatePresenter;
+import controllers.DungeonController;
+import controllers.game.Engine;
 import entities.character.Player;
-import entities.dungeon.Dungeon;
 import settings.Settings;
+import useCases.KeyEventHandler;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class CrawlingState extends State {
+public class CrawlingState implements State {
     /**
      * This class represents the state of the game where the player is free to move/roam around the map
      * There is no combat in this state, only movement and room transitions between various dungeon rooms.
@@ -19,72 +25,59 @@ public class CrawlingState extends State {
     Player player;
     PlayerMover playerMover;
     PlayerViewModel playerViewModel;
-    Dungeon dungeon;
+    DungeonController dungeonController;
+    StatePresenter presenter;
 
     /**
      * Creates a MainPlayingState object. Initializes the player, dungeon, playerMover.
      */
     public CrawlingState(){
         super();
+        // Call the initializer
         Initializer initializer = new Initializer();
-        // The argument passed into the init method may change later...
         initializer.init();
         this.player = initializer.getPlayer();
-        this.dungeon = initializer.getDungeon();
+        // @TODO uncomment below code when dungeonController is done
+        // this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
-        this.playerViewModel = new PlayerViewModel(player, Settings.getPlayerSize());
+        initializePresenter();
     }
-    @Override
-    protected void loop() {
+    public void loop() {
         playerMover.move();
+        playerViewModel.updatePosition();
         // @TODO call to DungeonRoomController
     }
-
-    @Override
-    protected void render() {
-        // @TODO call PlayingStatePresenter
-    }
-
     /**
      * Updates PlayerMover so that the associated direction boolean will be true
      * @param code - keyCode corresponding to the key
      */
-    @Override
-    protected void keyPressed(int code) {
-        updatePlayerMover(code, true);
+    public void keyPressEvents(int code) {
+        KeyEventHandler.handleCrawingStateEvents(code, true, playerMover);
     }
-
     /**
      * Updates PlayerMover so that the associated direciton boolean will be false (since key released)
      * @param code - keyCode corresponding to the key
      */
+    public void keyReleasedEvents(int code) {
+        KeyEventHandler.handleCrawingStateEvents(code, false, playerMover);
+    }
     @Override
-    protected void keyReleased(int code) {
-        updatePlayerMover(code, false);
+    public StatePresenter getPresenter() {
+        return presenter;
     }
     public Player getPlayer(){
         return player;
     }
-
     /**
-     * Typical PC controls. WASD for up, left, down, right respectively
-     * @param code - keyCode corresponding to the key
-     * @param bool - the whether key is pressed or released
+     * Helper Method for initializing the PlayerViewModel and the CrawlingStatePresenter
      */
-    private void updatePlayerMover(int code, boolean bool){
-        switch(code) {
-            case KeyEvent.VK_W:
-                this.playerMover.movingUp(bool);
-                break;
-            case KeyEvent.VK_A:
-                this.playerMover.movingLeft(bool);
-                break;
-            case KeyEvent.VK_S:
-                this.playerMover.movingDown(bool);
-                break;
-            case KeyEvent.VK_D:
-                this.playerMover.movingRight(bool);
-                break;
-        }
+    private void initializePresenter(){
+        PlayerViewModel viewModel = new PlayerViewModel(player, Settings.getPlayerSize());
+        TilePresenter tilePresenter = new TilePresenter();
+        CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
+        crawlPresenter.setPlayerViewModel(viewModel);
+        crawlPresenter.setTilePresenter(tilePresenter);
+        this.playerViewModel = viewModel;
+        this.presenter = crawlPresenter;
     }
 }
