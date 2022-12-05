@@ -177,6 +177,28 @@ public class ImageGateway {
         return getImage("src/main/res/tiles/items/floor_mud_mid_1.png");
     }
 
+    /**
+     * Reads and returns the stone tile image from its specified file location
+     * @return - A representation of Merchant
+     */
+
+    public static BufferedImage getMerchantImg(){return getImage("src/main/res/encounterViewRes/sample_merchant.png");}
+
+
+    /**
+     * Reads and returns the stone tile image from its specified file location
+     * @return - A representation of an Enemy
+     */
+
+    public static BufferedImage getEnemyImg(){return getImage("src/main/res/encounterViewRes/regular_enemy.png");}
+
+
+    /**
+     * Reads and returns the stone tile image from its specified file location
+     * @return - A representation of the Final Boss
+     */
+
+    public static BufferedImage getFinalBoss(){return getImage("src/main/res/encounterViewRes/final_boss.png");}
 
 
 
