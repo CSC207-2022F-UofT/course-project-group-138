@@ -106,8 +106,8 @@ public class Settings {
 
 
     public static int[] getRoomSize() {
-//        return ROOM_SIZE;
-//    }
+        return ROOM_SIZE;
+  }
 
     public static int getDifficulty() {
         return DIFFICULTY;

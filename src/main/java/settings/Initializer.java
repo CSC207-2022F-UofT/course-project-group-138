@@ -28,7 +28,7 @@ public class Initializer {
         Settings.setFrameHeight((int) d.getHeight());
         Settings.determineScalingFactor();
         Settings.centerInitialPosition();
-        Settings.setRoomSize(Math.min(Settings.getFrameWidth(), Settings.getFrameHeight()));
+        Settings.setRoomSize(Settings.getFrameWidth(), Settings.getFrameHeight());
 
         // Initialize Inventory
         Weapon weapon = new Weapon(random.nextInt(Settings.getAttributeRange()) + 1,
