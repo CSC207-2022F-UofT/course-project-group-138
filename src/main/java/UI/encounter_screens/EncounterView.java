@@ -9,8 +9,8 @@ public abstract class EncounterView extends JFrame implements ActionListener {
 
     /**
      * An abstract class where the EnemyEncounterView and MerchantEncounterView can extend from.
-     * We create a frame that sets a default button on, and a image that displays an according image,
-     * or example, an image that represents a merchant might be incorporated in a merchant encounter view.
+     * We create a frame that sets a default button on, and an image that displays an according image,
+     * for example, an image that represents a merchant might be incorporated in a merchant encounter view.
      */
     protected JLabel label;
     protected Container c;

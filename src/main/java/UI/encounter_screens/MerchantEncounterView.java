@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class MerchantEncounterView extends EncounterView {
-
     /**
      * The Window will be poped up when the player hits the merchant.
      * The according image will be shown, as well as the according features, like purchase, and leave.

@@ -11,16 +11,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 public class EnemyEncounterView extends EncounterView {
-
     /**
      * The window that will be poped up, when the player hits enemies.
      * Provide more specific implementation of the EncounterView.
      */
     private JButton attack;
 
-
     EnemyEncounterView() {
-
 
         this.setTitle("EnemyEncountered"); // set the title of the frame
 

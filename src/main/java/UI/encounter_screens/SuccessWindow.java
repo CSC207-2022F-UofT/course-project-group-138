@@ -14,7 +14,6 @@ public class SuccessWindow extends JFrame implements ActionListener{
      * This window will be triggered, when the final boss has been slain.
      * Provide more specific implementation of the EncounterView.
      */
-
     private JButton exit;
 
     // TODO should be called in the game loop or else. Check when boss (enemy) has 0 HP or not to trigger.

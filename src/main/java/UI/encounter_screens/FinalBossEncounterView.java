@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 
 public class FinalBossEncounterView extends EncounterView {
 
-
     /**
      * The window will be poped up, when the player hits the final Boss.
      * Provide more specific implementation of the EncounterView.
