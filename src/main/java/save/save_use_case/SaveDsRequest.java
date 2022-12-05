@@ -94,7 +94,7 @@ public class SaveDsRequest {
     }
 
     public int getPlayerHp() {
-        return player.getHP();
+        return player.getCurrentHealth();
     }
 
     public int getPlayerX() {

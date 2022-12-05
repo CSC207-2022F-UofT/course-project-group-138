@@ -1,7 +1,7 @@
 package save.save_screen;
 
 import entities.character.Player;
-import entities.inventory.Equipment;
+import entities.inventory.EquipmentInterface;
 import entities.inventory.Inventory;
 import entities.temporary_entities.*;
 import save.save_use_case.SaveDsGateway;
@@ -71,9 +71,9 @@ public class GameSaveFiles implements SaveDsGateway {
                 InventoryCreator inventoryCreator = new CommonInventoryCreator();
                 CharacterCreator playerCreator = new CommonCharacterCreator();
 
-                Equipment weapon = equipmentCreator.createWeapon(Integer.parseInt(playerWeaponAttack),
+                EquipmentInterface weapon = equipmentCreator.createWeapon(Integer.parseInt(playerWeaponAttack),
                         Integer.parseInt(playerWeaponPrice));
-                Equipment armor = equipmentCreator.createArmor(Integer.parseInt(playerArmorHp),
+                EquipmentInterface armor = equipmentCreator.createArmor(Integer.parseInt(playerArmorHp),
                         Integer.parseInt(playerArmorPrice));
                 Inventory playerInventory = inventoryCreator.createInventory(weapon,
                         armor,

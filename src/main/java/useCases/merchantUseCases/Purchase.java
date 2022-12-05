@@ -1,17 +1,17 @@
 package useCases.merchantUseCases;
 
 import entities.character.Player;
-import entities.inventory.Equipment;
+import entities.inventory.EquipmentInterface;
 
 public class Purchase {
     /**
      * Use case for Purchasables
      */
 
-    private Equipment item;
+    private EquipmentInterface item;
     private Player steve;
 
-    public Purchase(Equipment item, Player player) {
+    public Purchase(EquipmentInterface item, Player player) {
         this.item = item;
         this.steve = player;
     }

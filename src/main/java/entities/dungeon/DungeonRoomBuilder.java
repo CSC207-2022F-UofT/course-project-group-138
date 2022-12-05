@@ -10,9 +10,10 @@ import settings.Settings;
 import java.util.Random;
 
 public class DungeonRoomBuilder {
-    static int[] ENEMY_WEAPON_ATTACK_RANGE = {5, 25};
+    static int[] ENEMY_WEAPON_RANGE = {5, 25};
+    static int[] ENEMY_ARMOR_RANGE = {20, 50};
+    static int[] ENEMY_HEALTH_RANGE = {75, 150};
     static double[] ENEMY_MULTIPLIER = {0.75, 1.0, 1.5, 2.0};
-    static int[] ENEMY_ARMOR_ATTACK_RANGE = {20, 50};
     private final int numberOfMerchants;
     private final int numberOfEnemies;
     private int merchantsAdded;
@@ -34,25 +35,42 @@ public class DungeonRoomBuilder {
      */
     public DungeonRoom buildNewRoom() {
         DungeonRoom newRoom = new DungeonRoom();
-        int dungeonRoomSize = Settings.getRoomSize();
+        int[] dungeonRoomSize = Settings.getRoomSize();
         int difficulty = Settings.getDifficulty();
-        int insertRandomNPC = this.rand.nextInt(3);             // 0 = Enemy, 1 = Merchant, 2 = None
+
+        int insertRandomNPC = this.rand.nextInt(3);              // 0 = Enemy, 1 = Merchant, 2 = None
         switch (insertRandomNPC) {
             case 0:
                 if (this.enemiesAdded < numberOfEnemies) {
-                    newRoom.addNPC(new Enemy(new Inventory(
-                            new Weapon((int)Math.round((rand.nextInt(ENEMY_WEAPON_ATTACK_RANGE[1] - ENEMY_WEAPON_ATTACK_RANGE[0]) + ENEMY_WEAPON_ATTACK_RANGE[0]) * ENEMY_MULTIPLIER[difficulty]), 0),
-                            new Armor((int)Math.round((rand.nextInt(ENEMY_ARMOR_ATTACK_RANGE[1] - ENEMY_ARMOR_ATTACK_RANGE[0]) + ENEMY_ARMOR_ATTACK_RANGE[0]) * ENEMY_MULTIPLIER[difficulty]), 0), 100), 100, rand.nextInt(dungeonRoomSize), rand.nextInt(dungeonRoomSize)));
+                    /*
+                    enemyAttackPower and enemyArmorDurability pick random values in the following ways:
+                        (1) Random.nextInt() picks a random number between 0 and the difference of the minimum and
+                            maximum values of their ranges (both ends inclusive).
+                        (2) The minimum value of their respective ranges is added to these numbers to bring them within
+                            the ranges.
+                        (3) enemyAttackPower has the added step of multiplying this final number (within its range)
+                            with a difficulty multiplier (based on game difficulty) and then rounding it off.
+                     */
+                    int enemyAttackPower = (int)Math.round((this.rand.nextInt(ENEMY_WEAPON_RANGE[1] - ENEMY_WEAPON_RANGE[0] + 1) + ENEMY_WEAPON_RANGE[0]) * ENEMY_MULTIPLIER[difficulty]);
+                    int enemyArmorDurability = this.rand.nextInt(ENEMY_ARMOR_RANGE[1] - ENEMY_ARMOR_RANGE[0] + 1) + ENEMY_ARMOR_RANGE[0];
+                    Inventory enemyInventory = new Inventory(100, new Weapon(enemyAttackPower), new Armor(enemyArmorDurability));
+
+                    int enemyHealth = this.rand.nextInt(ENEMY_HEALTH_RANGE[1] - ENEMY_HEALTH_RANGE[0] + 1) + ENEMY_HEALTH_RANGE[0];
+
+                    int enemyX = rand.nextInt(dungeonRoomSize[0]);      //
+                    int enemyY = rand.nextInt(dungeonRoomSize[1]);
+
+                    newRoom.addNPC(new Enemy(enemyInventory, enemyHealth, enemyX, enemyY));
                     this.enemiesAdded++;
                 }
                 break;
             case 1:
                 if (this.merchantsAdded < this.numberOfMerchants) {
-                    int randomItem = this.rand.nextInt(2);     // 0 = Armour, 1 = Weapon
+                    int randomItem = this.rand.nextInt(2);       // 0 = Armour, 1 = Weapon
                     if (randomItem == 0) {
-                        newRoom.addNPC(new Merchant(rand.nextInt(dungeonRoomSize), rand.nextInt(dungeonRoomSize)));
+                        newRoom.addNPC(new Merchant(rand.nextInt(dungeonRoomSize[0]), rand.nextInt(dungeonRoomSize[1])));
                     } else {
-                        newRoom.addNPC(new Merchant(rand.nextInt(dungeonRoomSize), rand.nextInt(dungeonRoomSize)));
+                        newRoom.addNPC(new Merchant(rand.nextInt(dungeonRoomSize[0]), rand.nextInt(dungeonRoomSize[1])));
                     }                                                 // TODO: Add Merchant constructor to assign item for sale (weapon/armor).
                     this.merchantsAdded++;
                 }
