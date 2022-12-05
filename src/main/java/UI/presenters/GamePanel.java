@@ -1,6 +1,7 @@
 package UI.presenters;
 
 import controllers.StateManager;
+import controllers.game.Engine;
 import settings.Settings;
 
 import javax.imageio.ImageIO;
@@ -25,7 +26,7 @@ public class GamePanel extends JPanel{
         super();
         this.stateManager = stateManager;
         this.setPreferredSize(new Dimension(Settings.getFrameWidth(), Settings.getFrameHeight()));
-        this.setBackground(Color.darkGray);
+        this.setBackground(new Color(0,0,0,1));
         this.setDoubleBuffered(true); // To improve rendering
         // Canvas to draw on (Buffered image) instead of drawing to Graphics directly
         this.gameCanvas = new BufferedImage(Settings.canvasWidth(), Settings.canvasHeight(),

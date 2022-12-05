@@ -19,21 +19,18 @@ public class GameWindow {
      * Constructs a JFrame, which will act as the game's main frame
      */
     public GameWindow(){
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // Alternatively, pass in a JFrame as parameter if this comforms better
-                // with Clean Architecture
-                gameFrame = new JFrame(Settings.getGameName());
-                // maybe add gameFrame.setBounds later. Might be unneccessary though
-                gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameFrame.setResizable(false);
-                setFullScreen();
+        SwingUtilities.invokeLater(() -> {
+            // Alternatively, pass in a JFrame as parameter if this comforms better
+            // with Clean Architecture
+            gameFrame = new JFrame(Settings.getGameName());
+            // maybe add gameFrame.setBounds later. Might be unneccessary though
+            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gameFrame.setResizable(false);
+            setFullScreen();
 //        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        gameFrame.setUndecorated(true);
-                gameFrame.setTitle(Settings.getGameName());
-                // Builds a new JFrame that is unresizable and exits on window close
-            }
+            gameFrame.setTitle(Settings.getGameName());
+            // Builds a new JFrame that is unresizable and exits on window close
         });
 
     }
@@ -62,12 +59,9 @@ public class GameWindow {
     }
     public void update(){
         try {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    gamePanel.drawCanvas();
-                    gamePanel.drawScreen();
-                }
+            SwingUtilities.invokeLater(() -> {
+                gamePanel.drawCanvas();
+                gamePanel.drawScreen();
             });
         } catch (Exception e){
             e.printStackTrace();
@@ -79,15 +73,11 @@ public class GameWindow {
      * Creates the GameWindow
      */
     public void createGameWindow(){
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                gameFrame.add(gamePanel);
-                gameFrame.pack();
-                gameFrame.setVisible(true);
-            }
+        EventQueue.invokeLater(() -> {
+            gameFrame.add(gamePanel);
+            gameFrame.pack();
+            gameFrame.setVisible(true);
         });
-
     }
     private void setFullScreen(){
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
