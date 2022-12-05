@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 
 public class GameWindow {
     /**
@@ -30,6 +31,7 @@ public class GameWindow {
 //        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        gameFrame.setUndecorated(true);
             gameFrame.setTitle(Settings.getGameName());
+            setCursor();
             // Builds a new JFrame that is unresizable and exits on window close
         });
 
@@ -78,6 +80,17 @@ public class GameWindow {
             gameFrame.pack();
             gameFrame.setVisible(true);
         });
+    }
+    public void setCursor(){
+        // Transparent 16 x 16 pixel cursor image.
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+
+        // Create a new blank cursor.
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+                cursorImg, new Point(0, 0), "blank cursor");
+
+    // Set the blank cursor to the JFrame.
+        gameFrame.getContentPane().setCursor(blankCursor);
     }
     private void setFullScreen(){
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

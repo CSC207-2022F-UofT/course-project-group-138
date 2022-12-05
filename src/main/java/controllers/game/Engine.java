@@ -16,8 +16,6 @@ public class Engine {
     /**
      * This class will contain the main game loop.
      */
-    private static Thread loop;
-    private static boolean isRunning;
     private static StateManager stateManager;
     // Below are references to presenters
     private static GameWindow gameWindow;
@@ -35,60 +33,24 @@ public class Engine {
 
         gameWindow = new GameWindow();
 
-        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
-        timer = timerStrategy.initTimer();
-        // threadStrategy = new MultithreadLoopStrategy();
+        //timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
+        //timer = timerStrategy.initTimer();
+        threadStrategy = new MultithreadLoopStrategy();
     }
 
     /**
      * Starts the 'Engine', starts the loop.
      */
     public static void start(){
-        isRunning = true;
         // @TODO Should start on MenuState whenever that is implemented.
         stateManager.setCurrState(new CrawlingState());
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
-        timer.start();
+        threadStrategy.start();
+        //timer.start();
 //        gameLoop();
 //        loop.start();
-    }
-    /**
-     * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
-     * may require SwingUtilities.invokeLater since we are no longer on EDT.
-     */
-    private static void gameLoop(){
-        /**
-         * Currently shows FPS for debugging on MacOS. @TODO remove later
-         */
-        loop = new Thread(()-> {
-            double interval = 1_000_000_000 / Settings.getFPS(); // time in nano seconds for 1/fps
-            double delta = 0;
-            long lastTime = System.nanoTime();
-            long currTime;
-            long timer = 0;
-            int drawCount = 0;
-            while (isRunning){
-                currTime = System.nanoTime();
-                delta += (currTime - lastTime) / interval;
-
-                timer += (currTime - lastTime);
-
-                lastTime = currTime;
-
-                if (delta >= 1){ // meaning that it has reached the time interval required to be under FPS
-                    loopActions();
-                    delta--;
-                    drawCount++;
-                }
-                if (timer >= 1000000000){
-                    System.out.println(drawCount);
-                    drawCount = 0;
-                    timer = 0;
-                }
-            }
-        });
     }
 
     /**
@@ -105,7 +67,7 @@ public class Engine {
      * End the game loop.
      */
     public static void end(){
-        isRunning = false;
+        threadStrategy.end();
     }
 
     // Keyboard actions

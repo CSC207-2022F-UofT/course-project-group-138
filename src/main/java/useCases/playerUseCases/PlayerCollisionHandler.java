@@ -1,7 +1,7 @@
 package useCases.playerUseCases;
 
 import entities.character.Character;
-import useCases.CollisionHandler;
+import controllers.CollisionHandler;
 
 import java.awt.*;
 

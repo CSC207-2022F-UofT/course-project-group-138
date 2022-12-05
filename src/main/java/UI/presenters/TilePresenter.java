@@ -7,8 +7,8 @@ import settings.Settings;
 import useCases.AnimationStrategy;
 
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 public class TilePresenter {
     /**
@@ -28,6 +28,7 @@ public class TilePresenter {
     private final Set<Integer> wallWTransparentTiles = new HashSet<>();
     private final Set<Integer> wallETransparentTiles = new HashSet<>();
     private final int tileSize = Settings.getTileSize();
+    private List<Integer> clipTiles;
 
     /**
      * Constructs a TilePresenter object, while noting the special tiles
@@ -51,6 +52,7 @@ public class TilePresenter {
 
         while (col < Settings.getColumns() && row < Settings.getRows()){
             int tileNum = tileMap[col][row];
+
             if (tileNum == 99){
                 tileNum = torchAnimator.getNextFrame();
             }
@@ -66,6 +68,9 @@ public class TilePresenter {
             }
             graphics2D.drawImage(tiles[tileNum].getImage(), x, y, tileSize, tileSize, null);
             miscTileCases(graphics2D, tileNum, x, y);
+            if (tiles[tileNum].clips()){
+                tiles[tileNum].setRectLocation(x, y);
+            }
             col++;
             x += Settings.getTileSize();
             if (col == Settings.getColumns()){
@@ -78,6 +83,14 @@ public class TilePresenter {
     }
 
     /**
+     * Returns all the Dungeon tiles on the map.
+     * @return
+     */
+    public DungeonTile[] getTiles() {
+        return tiles;
+    }
+
+    /**
      * Initialize all the tiles in the arrays and set their images.
      *
      * NOTE: This method does not access assets from resources directly.
@@ -87,6 +100,7 @@ public class TilePresenter {
         for (int i = 0; i < tiles.length; i++){
             tiles[i] = new DungeonTile();
         }
+        clipTiles = new ArrayList<>(Arrays.asList(1, 4, 6, 7, 13, 14, 15, 40, 48, 3, 9, 21, 11, 37, 38, 18));
         tiles[0].setImage(ImageGateway.getMud1());
         tiles[1].setImage(ImageGateway.getWallCenter());
         tiles[2].setImage(ImageGateway.getGrassImage());
@@ -143,6 +157,12 @@ public class TilePresenter {
         tiles[54].setImage(ImageGateway.getTorch6());
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
+        for (int tileNum : clipTiles){
+            tiles[tileNum].setClips(true);
+        }
+        for (DungeonTile tile : tiles){
+            tile.initializeRect();
+        }
     }
 
     /**

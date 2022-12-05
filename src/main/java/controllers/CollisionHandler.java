@@ -1,4 +1,4 @@
-package useCases;
+package controllers;
 
 import UI.presenters.ViewModel;
 import entities.character.Character;
