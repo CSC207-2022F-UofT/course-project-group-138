@@ -3,8 +3,6 @@ package useCases.merchantUseCases;
 import entities.character.Player;
 import entities.inventory.Equipment;
 
-import java.awt.event.ActionEvent;
-
 public class PurchaseController {
     /**
      * Controller for facilitating transaction between temporary_classes.Player and merchant_interactions.Merchant
@@ -30,9 +28,6 @@ public class PurchaseController {
             item = player.getInventory().getArmor();
         }
         purchase = new Purchase(item, steve);
-    }
-
-    public PurchaseController(ActionEvent e) {
     }
 
     /**
