@@ -157,8 +157,9 @@ public abstract class Character extends Entity{
     /**
      * @return the y-coordinate value of the Character.
      */
-    public int gety(){
+    public int gety() {
         return this.y;
+    }
     /**
      * Checks if this character is facing the right side. Otherwise, character is facing left side.
      * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
