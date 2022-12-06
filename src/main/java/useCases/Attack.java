@@ -18,7 +18,7 @@ public class Attack {
      * @param char2 - the character being attacked
      * @return - return whether or not the attack resulted in a kill
      */
-    public static boolean taketurn(Character char1, Character char2) {
+    public static boolean taketurnAlive(Character char1, Character char2) {
         int damage = char1.attack();
         char2.changeHP(-damage);
         return char2.isAlive();
@@ -31,7 +31,7 @@ public class Attack {
      * @param char2 - the character being attacked
      * @return - a list of integers representing the updated hp of both characters
      */
-     public static List<Integer> taketurnhp(Character char1, Character char2) {
+     public static List<Integer> taketurn(Character char1, Character char2) {
         int damage = char1.attack();
         char2.changeHP(-damage);
         List<Integer> resulting_HP = new ArrayList<>();

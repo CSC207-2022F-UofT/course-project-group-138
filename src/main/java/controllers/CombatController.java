@@ -15,10 +15,10 @@ public class CombatController {
      * Passes two characters and user input into Attack.taketurnhp()
      * @param userInput
      */
-    public void CombatController(Character char1, Character char2, String userInput) {
+    public void combatTurn(Character char1, Character char2, String userInput) {
         // TODO: Replace String with GUI.Button presses
         if (userInput.equals("Attack")) {
-            List<Integer> updatedHP = Attack.taketurnhp(char1, char2);
+            List<Integer> updatedHP = Attack.taketurn(char1, char2);
         }
     }
 
