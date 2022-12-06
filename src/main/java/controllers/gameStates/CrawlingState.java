@@ -1,6 +1,6 @@
 package controllers.gameStates;
 
-import UI.presenters.TileManager;
+import controllers.TileManager;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;

@@ -1,130 +1,36 @@
-package UI.presenters;
+package entities.builders;
 
 import entities.dungeon.DungeonTile;
 import gateways.ImageGateway;
-import gateways.MapReader;
+import org.w3c.dom.css.Rect;
 import settings.Settings;
-import useCases.AnimationStrategy;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class TileManager {
-    /**
-     * This class is responsible for Presenting every tile in the game. It follows that this
-     * class is respoonsible for presenting the entire map.
-     */
-    private final DungeonTile[] tiles;
-    private final MapReader mapReader;
-    // rectangular array representing the map in terms of tiles
-    private int[][] tileMap;
-    private final AnimationStrategy torchAnimator;
-    // Sets that contain tile codes that stack on different tiles (special tiles)
-    private TilePresenter tilePresenter;
-    private final Set<Integer> floorTransparentTiles = new HashSet<>();
-    private final Set<Integer> blackTransparentTiles = new HashSet<>();
-    private final Set<Integer> wallTransparentTiles = new HashSet<>();
-    private final Set<Integer> wallWTransparentTiles = new HashSet<>();
-    private final Set<Integer> wallETransparentTiles = new HashSet<>();
-    private final int tileSize = Settings.getTileSize();
+public class TileArrayBuilder {
+    private DungeonTile[] tiles;
     private List<Integer> clipTiles;
     private List<Rectangle> collisionArray;
-
-    /**
-     * Constructs a TilePresenter object, while noting the special tiles
-     */
-    public TileManager(){
-        mapReader = new MapReader();
+    private Set<Integer> floorTransparentTiles = new HashSet<>();
+    private Set<Integer> blackTransparentTiles = new HashSet<>();
+    private final Set<Integer> wallTransparentTiles = new HashSet<>();
+    public TileArrayBuilder(){
         tiles = new DungeonTile[75];
-
-        initializeTileArray();
-        populateTileMap(0);
-        addSpecialTiles();
-        tilePresenter = new TilePresenter();
-        torchAnimator = new AnimationStrategy(25, 8);
     }
 
     /**
-     * Render each tile from the tile map given.
-     * @param graphics2D - the game graphics
+     * Initializes all the tiles and assigns them to their corresponding image using the gateway
+     * @return - The array of tiles on the map
      */
-    public void renderTiles(Graphics2D graphics2D){
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
-
-        while (col < Settings.getColumns() && row < Settings.getRows()){
-            int tileNum = tileMap[col][row];
-
-            // Animate the Torch on the wall
-            if (tileNum == 99){
-                tileNum = torchAnimator.getNextFrame();
-            }
-
-            // Animate the Torch on the floor
-            if (tileNum == 98){
-                tileNum = torchAnimator.getNextFrame() + 24;
-            }
-            if (tiles[tileNum].clips()){
-                tiles[tileNum].setRectLocation(x, y);
-            }
-            tilePresenter.setLocation(x, y);
-            if (floorTransparentTiles.contains(tileNum)){
-                tilePresenter.render(tiles[0], graphics2D);
-            } else if (blackTransparentTiles.contains(tileNum)) {
-                tilePresenter.render(tiles[9], graphics2D);
-            } else if (wallTransparentTiles.contains(tileNum)) {
-                graphics2D.drawImage(tiles[12].getImage(), x, y, tileSize, tileSize, null);
-            }
-            graphics2D.drawImage(tiles[tileNum].getImage(), x, y, tileSize, tileSize, null);
-            miscTileCases(graphics2D, tileNum, x, y);
-            // Set the tile rectangle locations
-
-            col++;
-            x += Settings.getTileSize();
-            if (col == Settings.getColumns()){
-                col = 0;
-                x = 0;
-                row++;
-                y += Settings.getTileSize();
-            }
-        }
-    }
-
-    /**
-     * Returns all the Dungeon tiles on the map.
-     * @return- dungeons tiles on the map
-     */
-    public DungeonTile[] getTiles() {
-        return tiles;
-    }
-
-    public Rectangle[] getCollisionArray() {
-        return collisionArray.toArray(new Rectangle[0]);
-    }
-
-    /**
-     * Initialize all the tiles in the arrays and set their images.
-     *
-     * NOTE: This method does not access assets from resources directly.
-     * Instead, it calls the ImageGateway gateway, which returns the desired sprite.
-     */
-    private void initializeTileArray(){
+    public DungeonTile[] buildTileArray(){
+        // Initialize all the tiles in the array
         for (int i = 0; i < tiles.length; i++){
             tiles[i] = new DungeonTile();
         }
-        clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
-                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20,
-                21, 11, 37, 38, 18, 12, 15));
-        for (int i = 49; i <= 56; i++){
-            clipTiles.add(i);
-        }
-        for (int i = 25; i <= 33; i++){
-            clipTiles.add(i);
-        }
 
+        // Get Images from Gateway
         tiles[0].setImage(ImageGateway.getMud1());
         tiles[1].setImage(ImageGateway.getWallCenter());
         tiles[2].setImage(ImageGateway.getGrassImage());
@@ -181,18 +87,9 @@ public class TileManager {
         tiles[54].setImage(ImageGateway.getTorch6());
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
-        for (int tileNum : clipTiles){
-            tiles[tileNum].setClips(true);
-        }
-        for (DungeonTile tile : tiles){
-            tile.initializeRect();
-        }
+        return tiles;
     }
-
-    /**
-     * Adds the special tiles to its respective type
-     */
-    private void addSpecialTiles(){
+    public Set<Integer> buildFloorTransparentSet(){
         floorTransparentTiles.add(2);
         floorTransparentTiles.add(34);
         floorTransparentTiles.add(8);
@@ -206,50 +103,57 @@ public class TileManager {
         floorTransparentTiles.add(38);
         floorTransparentTiles.add(40);
         floorTransparentTiles.add(48);
-
         for (int i = 49; i <= 56; i++){
             floorTransparentTiles.add(i);
         }
-
+        return floorTransparentTiles;
+    }
+    public Set<Integer> buildBlackTransparentSet(){
         blackTransparentTiles.add(3);
         blackTransparentTiles.add(4);
         blackTransparentTiles.add(6);
         blackTransparentTiles.add(7);
         blackTransparentTiles.add(11);
-
+        return blackTransparentTiles;
+    }
+    public Set<Integer> buildWallTransparentSet(){
         wallTransparentTiles.add(33);
         for (int i = 25; i <= 33; i++){
             wallTransparentTiles.add(i);
         }
         wallTransparentTiles.add(37);
+        return wallTransparentTiles;
     }
 
     /**
-     * Renders the miscellaneous tile cases
-     * @param graphics2D - g2d object to render onto
-     * @param tileNum - miscellaneous tile in question
-     * @param x - x location to render
-     * @param y - y location to render
+     * This returns a integer list containing all the tiles that are collidable
+     * @return - Collidable array
      */
-    private void miscTileCases(Graphics2D graphics2D, int tileNum, int x, int y){
-        if (tileNum == 35 || tileNum == 47){
-            tilePresenter.render(tiles[18], x, y, graphics2D);
+    public List<Integer> buildClipArray(){
+        clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
+                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20,
+                21, 11, 37, 38, 18, 12, 15));
+        for (int i = 49; i <= 56; i++){
+            clipTiles.add(i);
         }
-        else if (tileNum == 38 || tileNum == 46) {
-            tilePresenter.render(tiles[15], x, y, graphics2D);
+        for (int i = 25; i <= 33; i++){
+            clipTiles.add(i);
         }
-
+        for (int tileNum : clipTiles){
+            tiles[tileNum].setClips(true);
+        }
+        for (DungeonTile tile : tiles){
+            tile.initializeRect();
+        }
+        return clipTiles;
     }
 
     /**
-     * Calls the load map method from the mapReader object. Gets the rectangular array.
-     * @param mapNum - code corresponding with each map
+     * Builds an array of tile locations which holds all the clip tiles.
+     * @param tileMap - the array representation of the map
+     * @return - Collision Array
      */
-    private void populateTileMap(int mapNum){
-        tileMap = mapReader.loadMap(mapNum);
-        populateCollisionArray();
-    }
-    public void populateCollisionArray(){
+    public List<Rectangle> buildCollisionArray(int[][] tileMap){
         Set<Integer> smallTiles = new HashSet<>();
         smallTiles.add(15);
         smallTiles.add(46);
@@ -285,6 +189,6 @@ public class TileManager {
                 y += Settings.getTileSize();
             }
         }
+        return collisionArray;
     }
 }
-

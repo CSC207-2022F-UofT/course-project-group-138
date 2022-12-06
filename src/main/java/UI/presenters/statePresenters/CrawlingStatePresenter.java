@@ -1,7 +1,7 @@
 package UI.presenters.statePresenters;
 
 import UI.presenters.PlayerViewModel;
-import UI.presenters.TileManager;
+import controllers.TileManager;
 import gateways.ImageGateway;
 
 import java.awt.*;
