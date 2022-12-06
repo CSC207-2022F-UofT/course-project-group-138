@@ -4,6 +4,7 @@ import useCases.Attack;
 import entities.character.Character;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CombatController {
@@ -13,13 +14,18 @@ public class CombatController {
 
     /**
      * Passes two characters and user input into Attack.taketurnhp()
-     * @param userInput
+     * @param char1     - Character that attacks first (player)
+     * @param char2     - Character that attacks second (enemy)
+     * @param userInput - user input
+     * @return A List of ints, first entry is char1's updated hp, second entry is char2's updated hp
      */
-    public void combatTurn(Character char1, Character char2, String userInput) {
+    public List<Integer> combatTurn(Character char1, Character char2, String userInput) {
         // TODO: Replace String with GUI.Button presses
+        List<Integer> updatedHP = null;
         if (userInput.equals("Attack")) {
-            List<Integer> updatedHP = Attack.taketurn(char1, char2);
+            updatedHP = Attack.taketurn(char1, char2);
         }
+        return updatedHP;
     }
 
     public CombatController(ActionEvent e) {
