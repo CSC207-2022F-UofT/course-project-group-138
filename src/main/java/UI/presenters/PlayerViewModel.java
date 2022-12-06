@@ -1,12 +1,6 @@
 package UI.presenters;
 
 import entities.character.Character;
-import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 
 /*
     Purpose of this class is to segregate back-end business logic and front-end GUI. Refer to the MVVM architectural
