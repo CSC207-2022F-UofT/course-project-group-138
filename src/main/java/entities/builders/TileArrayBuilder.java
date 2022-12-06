@@ -2,7 +2,6 @@ package entities.builders;
 
 import entities.dungeon.DungeonTile;
 import gateways.ImageGateway;
-import org.w3c.dom.css.Rect;
 import settings.Settings;
 
 import java.awt.*;
@@ -10,11 +9,9 @@ import java.util.*;
 import java.util.List;
 
 public class TileArrayBuilder {
-    private DungeonTile[] tiles;
-    private List<Integer> clipTiles;
-    private List<Rectangle> collisionArray;
-    private Set<Integer> floorTransparentTiles = new HashSet<>();
-    private Set<Integer> blackTransparentTiles = new HashSet<>();
+    private final DungeonTile[] tiles;
+    private final Set<Integer> floorTransparentTiles = new HashSet<>();
+    private final Set<Integer> blackTransparentTiles = new HashSet<>();
     private final Set<Integer> wallTransparentTiles = new HashSet<>();
     public TileArrayBuilder(){
         tiles = new DungeonTile[75];
@@ -31,31 +28,41 @@ public class TileArrayBuilder {
         }
 
         // Get Images from Gateway
+        // Primary floor
         tiles[0].setImage(ImageGateway.getMud1());
+        // Walls
         tiles[1].setImage(ImageGateway.getWallCenter());
         tiles[2].setImage(ImageGateway.getGrassImage());
         tiles[3].setImage(ImageGateway.getWallOuterEast());
         tiles[4].setImage(ImageGateway.getWallInnerSE());
+        // Secondary floor
         tiles[5].setImage(ImageGateway.getFloorPlain());
+        // Inner Walls
         tiles[6].setImage(ImageGateway.getWallInnerSW());
         tiles[7].setImage(ImageGateway.getWallOuterWest());
+        // Darkness and Black
         tiles[8].setImage(ImageGateway.getDarknessBottom());
         tiles[9].setImage(ImageGateway.getBlack());
         tiles[10].setImage(ImageGateway.getDoorClosed());
+        // Wall outer
         tiles[11].setImage(ImageGateway.getWallOuterNorth());
         tiles[12].setImage(ImageGateway.getWallFront());
+        // Small walls
         tiles[13].setImage(ImageGateway.getWallInnerE());
         tiles[14].setImage(ImageGateway.getWallInnerW());
         tiles[15].setImage(ImageGateway.getWallInnerNW());
         tiles[16].setImage(ImageGateway.getColumn());
+        // also small walls
         tiles[17].setImage(ImageGateway.getWallOuterTop());
         tiles[18].setImage(ImageGateway.getWallInnerNE());
+        // Special decorations and broken walls
         tiles[19].setImage(ImageGateway.getWallMissingBrick1());
         tiles[20].setImage(ImageGateway.getWallDrain());
         tiles[21].setImage(ImageGateway.getWallGratings());
         tiles[22].setImage(ImageGateway.getWallFlagRed());
         tiles[23].setImage(ImageGateway.getGargoyleRed());
         tiles[24].setImage(ImageGateway.getGargoyleGreen());
+        // Torch Animation on the wall
         tiles[25].setImage(ImageGateway.getTorch1());
         tiles[26].setImage(ImageGateway.getTorch2());
         tiles[27].setImage(ImageGateway.getTorch3());
@@ -64,21 +71,26 @@ public class TileArrayBuilder {
         tiles[30].setImage(ImageGateway.getTorch6());
         tiles[31].setImage(ImageGateway.getTorch7());
         tiles[32].setImage(ImageGateway.getTorch8());
+        // Darkness tiles for entrance
         tiles[33].setImage(ImageGateway.getDarknessLeft());
         tiles[34].setImage(ImageGateway.getDarknessLeft());
         tiles[35].setImage(ImageGateway.getDarknessLeft());
         tiles[36].setImage(ImageGateway.getDarknessRight());
         tiles[37].setImage(ImageGateway.getDarknessRight());
         tiles[38].setImage(ImageGateway.getDarknessRight());
+        // Box
         tiles[40].setImage(ImageGateway.getBox());
         tiles[41].setImage(ImageGateway.getBoxStacked());
+        //Stairs
         tiles[42].setImage(ImageGateway.getEdgeSingle());
         tiles[43].setImage(ImageGateway.getStairsTop());
         tiles[44].setImage(ImageGateway.getStairsMid());
         tiles[45].setImage(ImageGateway.getStairsBot());
         tiles[46].setImage(ImageGateway.getStairsMid());
         tiles[47].setImage(ImageGateway.getStairsMid());
+        // box on the left
         tiles[48].setImage(ImageGateway.getBoxLeft());
+        // Torch animation on the ground
         tiles[49].setImage(ImageGateway.getTorch1());
         tiles[50].setImage(ImageGateway.getTorch2());
         tiles[51].setImage(ImageGateway.getTorch3());
@@ -87,6 +99,14 @@ public class TileArrayBuilder {
         tiles[54].setImage(ImageGateway.getTorch6());
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
+
+        // Collision with these tiles switches the Room
+        tiles[57].setImage(ImageGateway.getDoorClosed());
+        tiles[58].setImage(ImageGateway.getDoorClosed());
+        tiles[59].setImage(ImageGateway.getDoorClosed());
+        tiles[60].setImage(ImageGateway.getDoorClosed());
+        tiles[61].setImage(ImageGateway.getDoorClosed());
+        tiles[62].setImage(ImageGateway.getDoorClosed());
         return tiles;
     }
     public Set<Integer> buildFloorTransparentSet(){
@@ -127,10 +147,9 @@ public class TileArrayBuilder {
 
     /**
      * This returns a integer list containing all the tiles that are collidable
-     * @return - Collidable array
      */
-    public List<Integer> buildClipArray(){
-        clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
+    public void buildClipTiles(){
+        List<Integer> clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
                 14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20,
                 21, 11, 37, 38, 18, 12, 15));
         for (int i = 49; i <= 56; i++){
@@ -145,7 +164,6 @@ public class TileArrayBuilder {
         for (DungeonTile tile : tiles){
             tile.initializeRect();
         }
-        return clipTiles;
     }
 
     /**
@@ -160,7 +178,7 @@ public class TileArrayBuilder {
         smallTiles.add(47);
         smallTiles.add(35);
         int size = Settings.getTileSize();
-        collisionArray = new ArrayList<>();
+        List<Rectangle> collisionArray = new ArrayList<>();
         int col = 0;
         int row = 0;
         int x = 0;
@@ -190,5 +208,23 @@ public class TileArrayBuilder {
             }
         }
         return collisionArray;
+    }
+    public enum Door{
+        TOP_LEFT,
+        TOP_MID,
+        TOP_RIGHT,
+        LEFT,
+        RIGHT,
+        BOTTOM
+    }
+    public HashMap<Integer, Enum<Door>> buildDoorMap(){
+        HashMap<Integer, Enum<Door>> doorMap = new HashMap<>();
+        doorMap.put(57, Door.TOP_LEFT);
+        doorMap.put(58, Door.TOP_MID);
+        doorMap.put(59, Door.TOP_RIGHT);
+        doorMap.put(60, Door.LEFT);
+        doorMap.put(61, Door.RIGHT);
+        doorMap.put(62, Door.BOTTOM);
+        return doorMap;
     }
 }

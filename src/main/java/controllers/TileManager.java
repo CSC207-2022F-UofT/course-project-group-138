@@ -28,8 +28,8 @@ public class TileManager {
     private Set<Integer> blackTransparentTiles;
     private Set<Integer> wallTransparentTiles;
     private final int tileSize = Settings.getTileSize();
-    private List<Integer> clipTiles;
     private List<Rectangle> collisionArray;
+    private HashMap<Integer, Enum<TileArrayBuilder.Door>> doorMap;
 
     /**
      * Constructs a TilePresenter object, while noting the special tiles
@@ -41,6 +41,7 @@ public class TileManager {
         initializeTileArray();
         populateTileMap(0);
         addSpecialTiles();
+        doorMap = tileBuilder.buildDoorMap();
         tilePresenter = new TilePresenter();
         // Since the start frame for the torch starts at 25, and 8 frames total
         torchAnimator = new AnimationStrategy(25, 8);
@@ -114,7 +115,7 @@ public class TileManager {
      */
     private void initializeTileArray(){
         tiles = tileBuilder.buildTileArray();
-        clipTiles = tileBuilder.buildClipArray();
+        tileBuilder.buildClipTiles();
     }
 
     /**
