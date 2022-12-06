@@ -15,7 +15,8 @@ public class Settings {
     private static final int columns = 20;
     private static int PLAYER_SIZE = 75;
     private static int scalingFactor;
-    private static int[] INITIAL_POSITION, ROOM_SIZE;
+    private static int[] INITIAL_POSITION;
+    private static int[] ROOM_SIZE = new int[2];
     private static String gameName = "Dungeons";
     private static Image playerImage;
 

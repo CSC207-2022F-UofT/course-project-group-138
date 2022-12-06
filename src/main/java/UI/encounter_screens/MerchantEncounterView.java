@@ -1,5 +1,6 @@
 package UI.encounter_screens;
 
+import entities.character.Merchant;
 import entities.character.Player;
 import useCases.merchantUseCases.PurchaseController;
 
@@ -12,6 +13,7 @@ public class MerchantEncounterView extends JFrame implements ActionListener {
     private JButton purchase;
     private Player player;
     private PurchaseController purchaseController;
+    private Merchant merchant;
 
     MerchantEncounterView(Player player) {
 
@@ -27,7 +29,7 @@ public class MerchantEncounterView extends JFrame implements ActionListener {
         this.getContentPane().setBackground(new Color(0x12345)); //rgb value
 
         this.player = player;
-        purchaseController = new PurchaseController(player, "Weapon");
+        purchaseController = new PurchaseController(player, merchant);
         //TODO: Change based on player input
 
         purchase = new JButton("purchase");

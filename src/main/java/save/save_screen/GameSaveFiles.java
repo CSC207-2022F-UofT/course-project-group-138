@@ -1,6 +1,7 @@
 package save.save_screen;
 
 import entities.character.Player;
+import entities.inventory.Equipment;
 import entities.inventory.EquipmentInterface;
 import entities.inventory.Inventory;
 import entities.temporary_entities.*;
@@ -71,9 +72,9 @@ public class GameSaveFiles implements SaveDsGateway {
                 InventoryCreator inventoryCreator = new CommonInventoryCreator();
                 CharacterCreator playerCreator = new CommonCharacterCreator();
 
-                EquipmentInterface weapon = equipmentCreator.createWeapon(Integer.parseInt(playerWeaponAttack),
+                Equipment weapon = equipmentCreator.createWeapon(Integer.parseInt(playerWeaponAttack),
                         Integer.parseInt(playerWeaponPrice));
-                EquipmentInterface armor = equipmentCreator.createArmor(Integer.parseInt(playerArmorHp),
+                Equipment armor = equipmentCreator.createArmor(Integer.parseInt(playerArmorHp),
                         Integer.parseInt(playerArmorPrice));
                 Inventory playerInventory = inventoryCreator.createInventory(weapon,
                         armor,
@@ -100,9 +101,9 @@ public class GameSaveFiles implements SaveDsGateway {
         String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",saveData.getFileName(),
                 saveData.getPlayerCoins(),
                 saveData.getPlayerWeaponAttack(),
-                saveData.getPlayerWeaponPrice(),
+                //saveData.getPlayerWeaponPrice(),
                 saveData.getPlayerArmorHp(),
-                saveData.getPlayerArmorPrice(),
+                //saveData.getPlayerArmorPrice(),
                 saveData.getPlayerHp(),
                 saveData.getPlayerKills(),
                 saveData.getCreationTime(),
