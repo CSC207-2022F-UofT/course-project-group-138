@@ -2,30 +2,10 @@ package entities.character;
 
 import entities.inventory.Inventory;
 
-public class Enemy extends Character{
-
-
-    /**
-     * Instance Variables
-     */
-
-    /**
-     * === Constructor ===
-     */
-
-    public Enemy(Inventory inv, int HPmax, int x, int y) {
-        super(inv, HPmax, x, y);
+public class Enemy extends Character {
+    public Enemy(Inventory inventory, int maximumHealth, int x, int y) {
+        super(inventory, maximumHealth, x, y);
     }
-
-    /**
-     * === Getters and Setters ===
-     */
-
-    /**
-     * === Methods ===
-     */
-
-
 }
 
 

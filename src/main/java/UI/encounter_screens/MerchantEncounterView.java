@@ -45,7 +45,7 @@ public class MerchantEncounterView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == purchase){
-            purchaseController.purchaseCheck();
+//            purchaseController.purchaseCheck();                       // TODO: Fix method with new PurchaseController implementation
 
             //should incorporate more features
         }

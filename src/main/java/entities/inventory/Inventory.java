@@ -1,45 +1,43 @@
 package entities.inventory;
 
-public class Inventory implements Inv{
+public class Inventory implements InventoryInterface {
     private int coins;
     private Weapon weapon;
     private Armor armor;
-    public Inventory(){
-        this.coins = 0;
-        this.weapon = new Weapon();
-        this.armor = new Armor();
-    }
-    public Inventory(Weapon weapon, Armor armor, int coins){
+
+    public Inventory(int coins, Weapon weapon, Armor armor) {
         this.coins = coins;
         this.weapon = weapon;
         this.armor = armor;
     }
-    public Weapon getWeapon(){
+
+    /**
+     * @return the Weapon stored in this Inventory.
+     */
+    public Weapon getWeapon() {
         return this.weapon;
     }
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-    public Armor getArmor(){
+
+    /**
+     * @return the Armor stored in this inventory.
+     */
+    public Armor getArmor() {
         return this.armor;
     }
-    public int getCoins(){
+
+    /**
+     * @return the number of coins stored in this inventory.
+     */
+    public int getBalance() {
         return this.coins;
     }
-    public void setCoins(int coins){
-        this.coins = coins;
-    }
 
-    /*
-     * Due to Merchant interactions below methods have been handled in the inventory.Weapon and inventory.Armor
-     * classes alone, not through inventory
-
-    public void upgrade(){
-        this.attribute += attribute;
-    }
-
-    }
-
+    /**
+     * Reduces the Inventory's coin balance by the specified cost an item being purchased.
+     *
+     * @param cost the cost of an item being purchased.
      */
-
+    public void reduceBalance(int cost) {
+        this.coins -= cost;
+    }
 }
