@@ -272,10 +272,10 @@ public class TilePresenter {
 
             if (tiles[tileNum].clips()){
                 if (smallTiles.contains(tileNum)){
-                    collisionArray.add(new Rectangle(x, (int) (y + Math.round(size * 0.66)), size + 5, size / 4 ));
+                    collisionArray.add(new Rectangle(x, (int) (y + Math.round(size * 0.66)), size, size / 4 ));
                 }
                 else {
-                    collisionArray.add(new Rectangle(x, y, size + 5, size));
+                    collisionArray.add(new Rectangle(x, y, size, size));
                 }
             }
             col++;
