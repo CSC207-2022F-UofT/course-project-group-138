@@ -164,11 +164,11 @@ public abstract class Character extends Entity {
          * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
          * @param facing_right - True if and only if character is facing the right side
          */
-        public void setFacing_right ( boolean facing_right){
-            this.facing_right = facing_right;
-        }
-        public boolean isFacing_right () {
-            return facing_right;
-        }
+    }
+    public void setFacing_right(boolean facing_right){
+        this.facing_right = facing_right;
+    }
+    public boolean isFacing_right() {
+        return facing_right;
     }
 }
