@@ -6,8 +6,10 @@ import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
 import controllers.game.Engine;
 import entities.character.Player;
+import entities.dungeon.DungeonTile;
 import settings.Settings;
 import useCases.KeyEventHandler;
+import useCases.playerUseCases.PlayerCollisionHandler;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
@@ -27,6 +29,7 @@ public class CrawlingState implements State {
     PlayerViewModel playerViewModel;
     DungeonController dungeonController;
     StatePresenter presenter;
+    PlayerCollisionHandler playerCollisionHandler;
 
     /**
      * Creates a MainPlayingState object. Initializes the player, dungeon, playerMover.
@@ -45,6 +48,7 @@ public class CrawlingState implements State {
     public void loop() {
         playerMover.move();
         playerViewModel.updatePosition();
+        playerCollisionHandler.handleTileCollisions();
         // @TODO call to DungeonRoomController
     }
     /**
@@ -79,5 +83,7 @@ public class CrawlingState implements State {
         crawlPresenter.setTilePresenter(tilePresenter);
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
+        this.playerCollisionHandler = new PlayerCollisionHandler(playerViewModel, playerMover,
+                tilePresenter.getCollisionArray());
     }
 }
