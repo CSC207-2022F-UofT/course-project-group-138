@@ -109,6 +109,11 @@ public class TileArrayBuilder {
         tiles[62].setImage(ImageGateway.getDoorClosed());
         return tiles;
     }
+
+    /**
+     * These tiles require stacking on floor
+     * @return - set of all the tiles requiring stacking on floor
+     */
     public Set<Integer> buildFloorTransparentSet(){
         floorTransparentTiles.add(2);
         floorTransparentTiles.add(34);
@@ -128,6 +133,10 @@ public class TileArrayBuilder {
         }
         return floorTransparentTiles;
     }
+
+    /**
+     * @return - Tiles that require stacking on black box
+     */
     public Set<Integer> buildBlackTransparentSet(){
         blackTransparentTiles.add(3);
         blackTransparentTiles.add(4);
@@ -136,6 +145,10 @@ public class TileArrayBuilder {
         blackTransparentTiles.add(11);
         return blackTransparentTiles;
     }
+
+    /**
+     * @return - Tiles that require stacking on wall
+     */
     public Set<Integer> buildWallTransparentSet(){
         wallTransparentTiles.add(33);
         for (int i = 25; i <= 33; i++){
@@ -209,6 +222,10 @@ public class TileArrayBuilder {
         }
         return collisionArray;
     }
+
+    /**
+     * Enum to note what tiles correspond to what door
+     */
     public enum Door{
         TOP_LEFT,
         TOP_MID,
@@ -217,6 +234,11 @@ public class TileArrayBuilder {
         RIGHT,
         BOTTOM
     }
+
+    /**
+     * Creates a HashMap and notes which tile numbers corresond with which gate
+     * @return - The door map
+     */
     public HashMap<Integer, Enum<Door>> buildDoorMap(){
         HashMap<Integer, Enum<Door>> doorMap = new HashMap<>();
         doorMap.put(57, Door.TOP_LEFT);
