@@ -36,22 +36,22 @@ public class PlayerCollisionHandler implements CollisionHandler {
             // point, just in case player is stuck in a immovable loop.
             if (self.y < object.y){
                 // TOP INTERSECTION
-                mover.setPlayerY(self.y - intersection.height);
+                mover.setPlayerY(mover.getY() - intersection.height);
             }
             else if (self.y > object.y) {
                 // BOTTOM INTERSECTION
-                mover.setPlayerY(self.y + intersection.height);
+                mover.setPlayerY(mover.getY() + intersection.height);
             }
         }
         // CASE 2: Left/Right collision
         else {
             // RIGHT COLLISION
             if (self.x < object.x){
-                mover.setPlayerX(self.x - intersection.width);
+                mover.setPlayerX(mover.getX() - intersection.width);
             }
             // LEFT COLLISION
             else {
-                mover.setPlayerX(self.x + intersection.width);;
+                mover.setPlayerX(mover.getX() + intersection.width);;
             }
         }
     }

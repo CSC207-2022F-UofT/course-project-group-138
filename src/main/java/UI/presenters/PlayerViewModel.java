@@ -24,15 +24,20 @@ public class PlayerViewModel extends CharacterViewModel{
     private final Rectangle collisionRect;
     public PlayerViewModel(Character character, int size) {
         super(character, size);
-        this.collisionRect = new Rectangle(size, size / 2);
+        this.collisionRect = new Rectangle(size, size / 3);
     }
     @Override
     public void updatePosition() {
         super.updatePosition();
         collisionRect.x = entity.getx();
-        collisionRect.y = entity.gety() - collisionRect.height;
+        collisionRect.y = entity.gety() + collisionRect.height * 2;
     }
     public Rectangle getCollisionRect() {
         return collisionRect;
+    }
+
+    @Override
+    public void render(@NotNull Graphics2D graphics) {
+        super.render(graphics);
     }
 }

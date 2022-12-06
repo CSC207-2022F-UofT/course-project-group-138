@@ -1,21 +1,16 @@
 package controllers.gameStates;
 
-import UI.presenters.TilePresenter;
+import UI.presenters.TileManager;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
-import controllers.game.Engine;
 import entities.character.Player;
-import entities.dungeon.DungeonTile;
 import settings.Settings;
 import useCases.KeyEventHandler;
 import useCases.playerUseCases.PlayerCollisionHandler;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class CrawlingState implements State {
     /**
@@ -77,13 +72,13 @@ public class CrawlingState implements State {
      */
     private void initializePresenter(){
         PlayerViewModel viewModel = new PlayerViewModel(player, Settings.getPlayerSize());
-        TilePresenter tilePresenter = new TilePresenter();
+        TileManager tileManager = new TileManager();
         CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
         crawlPresenter.setPlayerViewModel(viewModel);
-        crawlPresenter.setTilePresenter(tilePresenter);
+        crawlPresenter.setTilePresenter(tileManager);
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
-        this.playerCollisionHandler = new PlayerCollisionHandler(playerViewModel, playerMover,
-                tilePresenter.getCollisionArray());
+        this.playerCollisionHandler = new PlayerCollisionHandler(playerViewModel.getCollisionRect(), playerMover,
+                tileManager.getCollisionArray());
     }
 }

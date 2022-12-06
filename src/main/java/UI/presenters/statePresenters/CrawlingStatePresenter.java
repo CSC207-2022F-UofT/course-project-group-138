@@ -1,9 +1,8 @@
 package UI.presenters.statePresenters;
 
 import UI.presenters.PlayerViewModel;
-import UI.presenters.TilePresenter;
+import UI.presenters.TileManager;
 import gateways.ImageGateway;
-import settings.Settings;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,12 +13,12 @@ public class CrawlingStatePresenter implements StatePresenter {
      */
     PlayerViewModel playerViewModel;
     BufferedImage currentPlayerImage;
-    TilePresenter tilePresenter;
+    TileManager tileManager;
     public CrawlingStatePresenter() {
         updatePlayerImage();
     }
     public void render(Graphics2D graphics2D) {
-        tilePresenter.renderTiles(graphics2D);
+        tileManager.renderTiles(graphics2D);
         // Render Player after tiles
         playerViewModel.updateImage(currentPlayerImage);
         playerViewModel.render(graphics2D);
@@ -31,8 +30,8 @@ public class CrawlingStatePresenter implements StatePresenter {
         this.playerViewModel = playerViewModel;
     }
 
-    public void setTilePresenter(TilePresenter tilePresenter) {
-        this.tilePresenter = tilePresenter;
+    public void setTilePresenter(TileManager tileManager) {
+        this.tileManager = tileManager;
     }
 
     public void updatePlayerImage(){

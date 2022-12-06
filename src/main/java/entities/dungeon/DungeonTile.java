@@ -1,6 +1,5 @@
 package entities.dungeon;
 
-import entities.Entity;
 import settings.Settings;
 
 import java.awt.*;

@@ -58,6 +58,12 @@ public class PlayerMover {
     public void movingRight (boolean right){
         this.right = right;
     }
+    public int getX(){
+        return player.getx();
+    }
+    public int getY(){
+        return player.gety();
+    }
     public boolean isUp(){
         return  this.up;
     }
