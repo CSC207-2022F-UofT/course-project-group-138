@@ -7,7 +7,6 @@ public interface Inv {
      */
     int getCoins();
     void setCoins(int coins);
-    void changeCoins(int coins);
     Weapon getWeapon();
     Armor getArmor();
 }

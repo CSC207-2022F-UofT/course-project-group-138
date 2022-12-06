@@ -29,9 +29,6 @@ public class Inventory implements Inv{
     public void setCoins(int coins){
         this.coins = coins;
     }
-    public void changeCoins(int coins) {
-        this.coins += coins;
-    }
 
     /*
      * Due to Merchant interactions below methods have been handled in the inventory.Weapon and inventory.Armor

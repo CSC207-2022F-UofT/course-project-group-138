@@ -31,11 +31,12 @@ public class CombatLoop {
         }
 
         // Check for victor and call appropriate methods
-        if (PlayerAlive) {                  // If the player won
-            player.setHP();                 // heal their hp to full
+        if (PlayerAlive) {                     // If the player won
+            player.setHP();                    // heal their hp to full
             int coins = enemy.getCoins();
-            player.changeCoins(coins);      // and award them coins
-            return true;                    // and return that the player won
+            int current = player.getCoins();
+            player.setCoins(coins + current);  // and award them coins
+            return true;                       // and return that the player won
         }
 
         else {                              // If the player is defeated
