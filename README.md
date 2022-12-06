@@ -3,6 +3,7 @@
 Our project is a 2D topdown pixel adventure rpg game. The goal is to slay monsters, improve your equipment, and defeat the boss.
 The player can draw their own character.
 It is designed for Windows and may have some compatibility issues with macOS.
+If you are on macOS, navigate to src/main/java/settings/Settings and set the variable FPS to 10 instead of 60
 The controls are WASD for movement and the mouse left click to interact with buttons on-screen.
 
 Start the program by running Game.java. 
