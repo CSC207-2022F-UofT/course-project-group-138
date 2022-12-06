@@ -19,6 +19,9 @@ through. Upon getting close enough to an enemy, the game enters a combat state. 
 one another until one is victorious. If the player approaches a merchant, they will be given the option to upgrade their
 equipment. The player continues until they fight the final boss, and win the game if they defeat them.
 
+An image of the player character in a dungeon room.
+![image](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/attacking/images/readme/game_readme_1.jpg?raw=true)
+
 Make use of the readme and any other features you find useful to help your TA navigate your project and understand what you have done!
 Your readme should be updated from the default one we provided and needs to at least contain information about how to run your code.
 If the setup process to run your code is complicated and isn't feasible for your TA to do quickly, it would be a good idea to include a small demo / screenshots to demonstrate your current functionality.
