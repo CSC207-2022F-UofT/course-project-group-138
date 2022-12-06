@@ -12,6 +12,13 @@ It can be found in src/main/java/controllers/game/Game
 The test folder is found in src/main/tests
 The code is found in src/main/java, separated into packages based on their Clean Architecture layer.
 
+The code is based around a game loop class that keeps iterating. It calls methods to update character position and the 
+user interface as appropriate. The player is given a drawing interface to draw their own character, and is then spawned
+into the dungeon with starting equipment. The dungeon is a randomly generated set of rooms that the player can navigate 
+through. Upon getting close enough to an enemy, the game enters a combat state. The player and enemy take turns attacking
+one another until one is victorious. If the player approaches a merchant, they will be given the option to upgrade their
+equipment. The player continues until they fight the final boss, and win the game if they defeat them.
+
 Make use of the readme and any other features you find useful to help your TA navigate your project and understand what you have done!
 Your readme should be updated from the default one we provided and needs to at least contain information about how to run your code.
 If the setup process to run your code is complicated and isn't feasible for your TA to do quickly, it would be a good idea to include a small demo / screenshots to demonstrate your current functionality.
