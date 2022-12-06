@@ -11,9 +11,13 @@ public class CombatLoop {
      * A class with a single class method that handles the combat.
      */
 
+    // TODO implement user input functionality
+
     /**
      * A class method that gives turns to player and enemy to attack until one is dead.
-     * The player is healed and awarded if they win.
+     * The player is healed and awarded with coins if they win.
+     * The intention is that the method that calls CombatLoop will receive a boolean, and call the appropriate presenter
+     * from there.
      *
      * @param player - player
      * @param enemy  - enemy
