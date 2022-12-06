@@ -1,6 +1,7 @@
 # Course Project Group 138
 
-Our project is a adventure rpg game. The goal is to slay monsters, improve your equipment, and defeat the boss.
+Our project is a 2D topdown pixel adventure rpg game. The goal is to slay monsters, improve your equipment, and defeat the boss.
+The player can draw their own character.
 It is designed for Windows and may have some compatibility issues with macOS.
 The controls are WASD for movement and the mouse left click to interact with buttons on-screen.
 
