@@ -1,14 +1,23 @@
 package useCases.playerUseCases;
 
-import entities.character.Character;
-import controllers.CollisionHandler;
+import useCases.CollisionHandler;
+import entities.dungeon.DungeonTile;
 
 import java.awt.*;
 
-public class PlayerCollisionHandler extends CollisionHandler {
-
-    public PlayerCollisionHandler(Rectangle rectangle, Character character) {
-        super(rectangle, character);
+public class PlayerCollisionHandler implements CollisionHandler {
+    private Rectangle[] dungeonTiles;
+    protected Rectangle self;
+    protected PlayerMover mover;
+    public PlayerCollisionHandler(Rectangle rectangle, PlayerMover mover, Rectangle[] dungeonTiles){
+        this.self = rectangle;
+        this.mover = mover;
+        this.dungeonTiles = dungeonTiles;
+    }
+    public void handleTileCollisions(){
+        for (Rectangle tile: dungeonTiles){
+            handleCollision(tile);
+        }
     }
 
     @Override
@@ -16,6 +25,7 @@ public class PlayerCollisionHandler extends CollisionHandler {
 
         Rectangle intersection = self.intersection(object);
         if (intersection.isEmpty()){return;}
+        int playerTop = self.y - 30;
 
         // TOTAL 4 CASES: Top, Bottom, Left or right collisions
 
@@ -26,24 +36,24 @@ public class PlayerCollisionHandler extends CollisionHandler {
             // point, just in case player is stuck in a immovable loop.
             if (self.y < object.y){
                 // TOP INTERSECTION
-                character.setY(object.y - self.height);
+                mover.setPlayerY(self.y - intersection.height);
             }
-            else {
+            else if (self.y > object.y) {
                 // BOTTOM INTERSECTION
-                self.y = object.y + self.height;
-                character.setY(object.y + self.height);
+                mover.setPlayerY(self.y + intersection.height);
             }
         }
         // CASE 2: Left/Right collision
         else {
             // RIGHT COLLISION
             if (self.x < object.x){
-                character.setX(object.x - self.width);
+                mover.setPlayerX(self.x - intersection.width);
             }
             // LEFT COLLISION
             else {
-                character.setX(object.x + self.width);
+                mover.setPlayerX(self.x + intersection.width);;
             }
         }
     }
+
 }

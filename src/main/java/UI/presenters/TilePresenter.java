@@ -29,6 +29,7 @@ public class TilePresenter {
     private final Set<Integer> wallETransparentTiles = new HashSet<>();
     private final int tileSize = Settings.getTileSize();
     private List<Integer> clipTiles;
+    private List<Rectangle> collisionArray;
 
     /**
      * Constructs a TilePresenter object, while noting the special tiles
@@ -44,6 +45,10 @@ public class TilePresenter {
         torchAnimator = new AnimationStrategy(25, 8);
     }
 
+    /**
+     * Render each tile from the tile map given.
+     * @param graphics2D - the game graphics
+     */
     public void renderTiles(Graphics2D graphics2D){
         int col = 0;
         int row = 0;
@@ -53,11 +58,17 @@ public class TilePresenter {
         while (col < Settings.getColumns() && row < Settings.getRows()){
             int tileNum = tileMap[col][row];
 
+            // Animate the Torch on the wall
             if (tileNum == 99){
                 tileNum = torchAnimator.getNextFrame();
             }
+
+            // Animate the Torch on the floor
             if (tileNum == 98){
                 tileNum = torchAnimator.getNextFrame() + 24;
+            }
+            if (tiles[tileNum].clips()){
+                tiles[tileNum].setRectLocation(x, y);
             }
             if (floorTransparentTiles.contains(tileNum)){
                 graphics2D.drawImage(tiles[0].getImage(), x, y, tileSize, tileSize, null);
@@ -68,9 +79,8 @@ public class TilePresenter {
             }
             graphics2D.drawImage(tiles[tileNum].getImage(), x, y, tileSize, tileSize, null);
             miscTileCases(graphics2D, tileNum, x, y);
-            if (tiles[tileNum].clips()){
-                tiles[tileNum].setRectLocation(x, y);
-            }
+            // Set the tile rectangle locations
+
             col++;
             x += Settings.getTileSize();
             if (col == Settings.getColumns()){
@@ -84,10 +94,14 @@ public class TilePresenter {
 
     /**
      * Returns all the Dungeon tiles on the map.
-     * @return
+     * @return- dungeons tiles on the map
      */
     public DungeonTile[] getTiles() {
         return tiles;
+    }
+
+    public Rectangle[] getCollisionArray() {
+        return collisionArray.toArray(new Rectangle[0]);
     }
 
     /**
@@ -100,7 +114,16 @@ public class TilePresenter {
         for (int i = 0; i < tiles.length; i++){
             tiles[i] = new DungeonTile();
         }
-        clipTiles = new ArrayList<>(Arrays.asList(1, 4, 6, 7, 13, 14, 15, 40, 48, 3, 9, 21, 11, 37, 38, 18));
+        clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
+                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10,
+                21, 11, 37, 38, 18, 12, 15));
+        for (int i = 49; i <= 56; i++){
+            clipTiles.add(i);
+        }
+        for (int i = 25; i <= 33; i++){
+            clipTiles.add(i);
+        }
+
         tiles[0].setImage(ImageGateway.getMud1());
         tiles[1].setImage(ImageGateway.getWallCenter());
         tiles[2].setImage(ImageGateway.getGrassImage());
@@ -226,6 +249,44 @@ public class TilePresenter {
      */
     private void populateTileMap(int mapNum){
         tileMap = mapReader.loadMap(mapNum);
+        populateCollisionArray();
+    }
+    public void populateCollisionArray(){
+        Set<Integer> smallTiles = new HashSet<>();
+        smallTiles.add(15);
+        smallTiles.add(46);
+        smallTiles.add(47);
+        smallTiles.add(35);
+        int size = Settings.getTileSize();
+        collisionArray = new ArrayList<>();
+        int col = 0;
+        int row = 0;
+        int x = 0;
+        int y = 0;
+
+        while (col < Settings.getColumns() && row < Settings.getRows()){
+            int tileNum = tileMap[col][row];
+            if (tileNum > 90){
+                tileNum = 25;
+            }
+
+            if (tiles[tileNum].clips()){
+                if (smallTiles.contains(tileNum)){
+                    collisionArray.add(new Rectangle(x, (int) (y + Math.round(size * 0.66)), size + 5, size / 4 ));
+                }
+                else {
+                    collisionArray.add(new Rectangle(x, y, size + 5, size));
+                }
+            }
+            col++;
+            x += Settings.getTileSize();
+            if (col == Settings.getColumns()){
+                col = 0;
+                x = 0;
+                row++;
+                y += Settings.getTileSize();
+            }
+        }
     }
 }
 
