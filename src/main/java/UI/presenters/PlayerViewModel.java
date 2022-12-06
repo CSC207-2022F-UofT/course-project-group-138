@@ -21,8 +21,18 @@ public class PlayerViewModel extends CharacterViewModel{
      * @param character - This should be an instance of Player
      * @param size - The size of the player, retrieved from Settings
      */
+    private final Rectangle collisionRect;
     public PlayerViewModel(Character character, int size) {
         super(character, size);
+        this.collisionRect = new Rectangle(size, size / 2);
     }
-
+    @Override
+    public void updatePosition() {
+        super.updatePosition();
+        collisionRect.x = entity.getx();
+        collisionRect.y = entity.gety() - collisionRect.height;
+    }
+    public Rectangle getCollisionRect() {
+        return collisionRect;
+    }
 }

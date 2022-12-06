@@ -2,7 +2,6 @@ package UI.presenters;
 
 import entities.Entity;
 import org.jetbrains.annotations.NotNull;
-import settings.Settings;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,7 +35,6 @@ public abstract class ViewModel extends Rectangle {
      * @param graphics - Graphics object in which the player will be drawn.
      */
     public void render(@NotNull Graphics2D graphics){
-
         graphics.drawImage(entityImage, super.x, super.y, super.width, super.height, null);
     }
 }

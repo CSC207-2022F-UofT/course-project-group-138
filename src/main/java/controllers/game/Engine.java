@@ -4,20 +4,25 @@ import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;
+import settings.Settings;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Engine {
     /**
      * This class will contain the main game loop.
      */
-    private static Thread loop;
-    private static boolean isRunning;
     private static StateManager stateManager;
     // Below are references to presenters
     private static GameWindow gameWindow;
     private static GamePanel gamePanel;
+    private static TimerLoopStrategy timerStrategy;
+    private static MultithreadLoopStrategy threadStrategy;
+    private static Timer timer;
 
     /**
      * Should be called after Engine instantiation.
@@ -25,47 +30,35 @@ public class Engine {
     public static void onCreate(){
         stateManager = new StateManager();
         gamePanel = new GamePanel(stateManager);
+
         gameWindow = new GameWindow();
+
+        //timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
+        //timer = timerStrategy.initTimer();
+        threadStrategy = new MultithreadLoopStrategy();
     }
 
     /**
      * Starts the 'Engine', starts the loop.
      */
     public static void start(){
-        isRunning = true;
         // @TODO Should start on MenuState whenever that is implemented.
         stateManager.setCurrState(new CrawlingState());
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
-        gameLoop();
-        loop.start();
-    }
-    /**
-     * Will use put game loop in a separate thread to avoid clogging Event Dispatch Thread. GUI/UI calls
-     * may require SwingUtilities.invokeLater since we are no longer on EDT.
-     */
-    private static void gameLoop(){
-        loop = new Thread(()-> {
-            while (isRunning){
-                // looping stuff goes here
-                loopActions();
-                // Sleep this thread for 15ms in case CPU is omega powerful. (however might sleep for 5-20ms)
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+        threadStrategy.start();
+        //timer.start();
+//        gameLoop();
+//        loop.start();
     }
 
     /**
      * Things to do during the main game loop
      */
-    private static void loopActions(){
-        stateManager.loop();
-        gameWindow.update();
+    public static void loopActions(){
+        stateManager.loop(); // Loops and updates backend game logic
+        gameWindow.update(); // Loops and updates frontup UI
     }
     public static void quit(){
         gameWindow.close();
@@ -74,7 +67,7 @@ public class Engine {
      * End the game loop.
      */
     public static void end(){
-        isRunning = false;
+        threadStrategy.end();
     }
 
     // Keyboard actions
