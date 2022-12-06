@@ -188,7 +188,7 @@ public class ImageGateway {
             // Convert to Buffered Image first
             return BImageStrategy.toBufferedImage(ImageIO.read(new File(fileName)));
         } catch (IOException e){
-            System.out.println("Trouble getting image from characters.png");
+            System.out.println("Trouble getting image from res");
             e.printStackTrace();
             return null;
         }

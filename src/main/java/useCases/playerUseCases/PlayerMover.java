@@ -38,6 +38,12 @@ public class PlayerMover {
             player.setFacing_right(true);
         }
     }
+    public void setPlayerX(int x){
+        player.setX(x);
+    }
+    public void  setPlayerY(int y){
+        player.setY(y);
+    }
     // true should be passed into methods below iff player if holding down the corresponding movement key
     // Method calls below should result from a call stack originating from <engine>
     public void movingUp (boolean up){
@@ -51,5 +57,17 @@ public class PlayerMover {
     }
     public void movingRight (boolean right){
         this.right = right;
+    }
+    public boolean isUp(){
+        return  this.up;
+    }
+    public boolean isRight() {
+        return right;
+    }
+    public boolean isLeft() {
+        return left;
+    }
+    public boolean isDown() {
+        return down;
     }
 }

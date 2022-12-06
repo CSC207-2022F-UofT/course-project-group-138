@@ -16,7 +16,7 @@ public class AnimationStrategy {
 
     }
     public int getNextFrame(){
-        if (System.currentTimeMillis() - lastTime < 150){
+        if (System.currentTimeMillis() - lastTime < 200){
             return curr;
         }
         if (curr < startFrame + numFrames - 1){
