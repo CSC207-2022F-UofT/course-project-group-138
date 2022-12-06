@@ -1,4 +1,4 @@
-package combat;
+package useCases;
 
 import entities.character.Character;
 

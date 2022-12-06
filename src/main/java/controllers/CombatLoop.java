@@ -1,5 +1,6 @@
-package combat;
+package controllers;
 
+import useCases.Attack;
 import entities.character.Enemy;
 import entities.character.Player;
 
