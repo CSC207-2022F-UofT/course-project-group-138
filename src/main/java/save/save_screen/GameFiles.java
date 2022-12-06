@@ -1,20 +1,22 @@
 package save.save_screen;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import save.save_use_case.DsGateway;
 import save.save_use_case.DsRequest;
 import save.save_use_case.LoadRequest;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class GameFiles implements DsGateway {
 
-    private final File SAVE_FILES;
+    private File SAVE_FILES;
 
     private final Map<String, Integer> gameSavesDataOrder = new LinkedHashMap<>();
 
-    private final Map<String, DsRequest> gameSavesData = new HashMap<>();
+    private Map<String, DsRequest> gameSavesData = new HashMap<>();
 
 
     /**
@@ -29,8 +31,11 @@ public class GameFiles implements DsGateway {
         if(SAVE_FILES.length() != 0) {
             BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILES));
 
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
+            gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeDeserializer());
+            Gson gson = gsonBuilder.create();
 
-            Gson gson = new Gson();
             String row;
             while ((row = reader.readLine()) != null) {
                 DsRequest saveData = gson.fromJson(row, DsRequest.class);
@@ -53,13 +58,25 @@ public class GameFiles implements DsGateway {
     private void save() {
         BufferedWriter writer;
         try{
+            //int i = 0;
+            //System.out.println(i++);
             writer  = new BufferedWriter(new FileWriter(SAVE_FILES));
-            Gson gson = new Gson();
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
+            Gson gson = gsonBuilder.create();
+
+            //System.out.println(i++);
+
             for (DsRequest saveData : gameSavesData.values()) {
+                //System.out.println(i++);
+                //System.out.println(i++);
                 writer.write(gson.toJson(saveData));
                 writer.newLine();
+
             }
             writer.close();
+            //System.out.println(i);
         }
         catch (IOException e) {
             throw new RuntimeException(e);

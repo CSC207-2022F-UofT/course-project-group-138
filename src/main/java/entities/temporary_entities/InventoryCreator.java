@@ -1,8 +1,7 @@
 package entities.temporary_entities;
 
-import entities.inventory.EquipmentInterface;
 import entities.inventory.Inventory;
 
 public interface InventoryCreator {
-    Inventory createInventory(EquipmentInterface weapon, EquipmentInterface armor, int coins);
+    Inventory createInventory(int coins, int weaponAttribute, int armoAttribute);
 }

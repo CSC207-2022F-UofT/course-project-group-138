@@ -12,7 +12,7 @@ public class DsRequest {
 
     private Dungeon dungeon;
 
-    private final LocalDateTime creationTime;
+    private LocalDateTime creationTime;
 
     public DsRequest(String fileName, Player player, Dungeon dungeon, LocalDateTime creationTime) {
         this.fileName = fileName;

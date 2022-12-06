@@ -59,8 +59,10 @@ public class Settings {
     }
 
     public static void setRoomSize(int x, int y) {
-        ROOM_SIZE[0] = x;                                                   // Height, width of DungeonRoom
-        ROOM_SIZE[1] = y;
+        //ROOM_SIZE[0] = x;                                                   // Height, width of DungeonRoom
+        //1ROOM_SIZE[1] = y;
+        // need to allocate the memory
+        ROOM_SIZE = new int[]{x,y};
     }
 
     public static void setDifficulty(int difficulty) {
