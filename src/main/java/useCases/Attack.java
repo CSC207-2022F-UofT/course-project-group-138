@@ -29,7 +29,7 @@ public class Attack {
      * Returns the current HP of both characters instead.
      * @param char1 - the character attacking
      * @param char2 - the character being attacked
-     * @return - return whether or not the attack resulted in a kill
+     * @return - a list of integers representing the updated hp of both characters
      */
      public static List<Integer> taketurnhp(Character char1, Character char2) {
         int damage = char1.attack();
