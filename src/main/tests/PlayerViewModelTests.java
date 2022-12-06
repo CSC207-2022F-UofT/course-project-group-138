@@ -16,7 +16,7 @@ public class PlayerViewModelTests {
         speed = Settings.getPlayerSpeed();
         this.player =  new Player(new Inventory(), 10, 0, 0, 0);
         this.mover = new PlayerMover(this.player);
-        this.viewModel = new PlayerViewModel(player, 0);
+        this.viewModel = new PlayerViewModel(player);
     }
     @Test
     public void testPlayerViewModelPosition(){

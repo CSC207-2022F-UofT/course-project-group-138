@@ -119,13 +119,13 @@ public class Dungeon {
      * @param rooms a List of all DungeonRooms in this Dungeon.
      */
     private void connectEndRooms(Random rand, List<DungeonRoom> rooms) {
-        int randomSecondRoomIndex = rand.nextInt(rooms.size());
+        int randomSecondRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
 
         DungeonRoom gateRoom = new DungeonRoom();
-        int randomSecondLastRoomIndex = rand.nextInt(rooms.size());
+        int randomSecondLastRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
         if (randomSecondLastRoomIndex == randomSecondRoomIndex) {
             do {
-                randomSecondLastRoomIndex = rand.nextInt(rooms.size());
+                randomSecondLastRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
             } while (randomSecondLastRoomIndex == randomSecondRoomIndex);
         }
 
