@@ -1,4 +1,4 @@
-package entities.builders;
+package entities;
 
 import entities.dungeon.DungeonDoor;
 import entities.dungeon.DungeonTile;
@@ -9,12 +9,12 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class TileArrayBuilder {
+public class TileArrayInitializer {
     private final DungeonTile[] tiles;
     private final Set<Integer> floorTransparentTiles = new HashSet<>();
     private final Set<Integer> blackTransparentTiles = new HashSet<>();
     private final Set<Integer> wallTransparentTiles = new HashSet<>();
-    public TileArrayBuilder(){
+    public TileArrayInitializer(){
         tiles = new DungeonTile[75];
     }
 
@@ -172,7 +172,7 @@ public class TileArrayBuilder {
      */
     public void buildClipTiles(){
         List<Integer> clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
-                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20,
+                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20, 64, 65, 66,
                 21, 11, 37, 18, 12, 15));
         for (int i = 49; i <= 56; i++){
             clipTiles.add(i);

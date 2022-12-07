@@ -203,9 +203,6 @@ public class ImageGateway {
     public static BufferedImage getWallGoo(){
         return getImage("src/main/res/tiles/items/wall_goo.png");
     }
-
-
-
     public static BufferedImage getBackground(){
         return getImage("src/main/res/background/background.png");
     }

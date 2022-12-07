@@ -1,9 +1,8 @@
 package controllers;
 
 import UI.presenters.TilePresenter;
-import entities.builders.TileArrayBuilder;
+import entities.TileArrayInitializer;
 import entities.dungeon.DungeonDoor;
-import entities.dungeon.DungeonRoom;
 import entities.dungeon.DungeonTile;
 import gateways.MapReader;
 import settings.Settings;
@@ -25,7 +24,7 @@ public class TileManager {
     private final AnimationStrategy torchAnimator;
     // Sets that contain tile codes that stack on different tiles (special tiles)
     private final TilePresenter tilePresenter;
-    private final TileArrayBuilder tileBuilder;
+    private final TileArrayInitializer arrayInitializer;
     private Set<Integer> floorTransparentTiles;
     private Set<Integer> blackTransparentTiles;
     private Set<Integer> wallTransparentTiles;
@@ -39,9 +38,9 @@ public class TileManager {
     public TileManager(){
         mapReader = new MapReader();
         tiles = new DungeonTile[75];
-        tileBuilder = new TileArrayBuilder();
+        arrayInitializer = new TileArrayInitializer();
         initializeTileArray();
-        doors = tileBuilder.buildDoorArray();
+        doors = arrayInitializer.buildDoorArray();
         populateTileMap(0);
         addSpecialTiles();
         tilePresenter = new TilePresenter();
@@ -58,34 +57,38 @@ public class TileManager {
         int row = 0;
         int x = 0;
         int y = 0;
-
+        // Loops through the tile map and renders each tile individually
         while (col < Settings.getColumns() && row < Settings.getRows()){
             int tileNum = tileMap[col][row];
-
             // Animate the Torch on the wall
             if (tileNum == 99){
                 tileNum = torchAnimator.getNextFrame();
             }
-
             // Animate the Torch on the floor
             if (tileNum == 98){
                 tileNum = torchAnimator.getNextFrame() + 24;
             }
+            // In case it is a door
             if (tiles[tileNum].clips()){
                 tiles[tileNum].setRectLocation(x, y);
             }
+            // Sets the location for the presenter for this current iteration
             tilePresenter.setLocation(x, y);
+            // Render floor directly under
             if (floorTransparentTiles.contains(tileNum)){
                 tilePresenter.render(tiles[0], graphics2D);
-            } else if (blackTransparentTiles.contains(tileNum)) {
+            } // Render black tile directly under
+            else if (blackTransparentTiles.contains(tileNum)) {
                 tilePresenter.render(tiles[9], graphics2D);
-            } else if (wallTransparentTiles.contains(tileNum)) {
+            } // Render wall directly under
+            else if (wallTransparentTiles.contains(tileNum)) {
                 graphics2D.drawImage(tiles[12].getImage(), x, y, tileSize, tileSize, null);
             }
+            // Draw the current tile image
             graphics2D.drawImage(tiles[tileNum].getImage(), x, y, tileSize, tileSize, null);
             miscTileCases(graphics2D, tileNum, x, y);
             // Set the tile rectangle locations
-
+            // Updates row if column reaches end
             col++;
             x += Settings.getTileSize();
             if (col == Settings.getColumns()){
@@ -113,7 +116,7 @@ public class TileManager {
         return doors;
     }
     public void populateCollisionMap(){
-        collisionArray = tileBuilder.buildCollisionArray(tileMap);
+        collisionArray = arrayInitializer.buildCollisionArray(tileMap);
     }
     public void changeRoom(int roomType) {
         populateTileMap(roomType);
@@ -127,8 +130,8 @@ public class TileManager {
      * Instead, it calls the builder, which also calls the ImageGateway gateway, finally returning the desired sprite.
      */
     private void initializeTileArray(){
-        tiles = tileBuilder.buildTileArray();
-        tileBuilder.buildClipTiles();
+        tiles = arrayInitializer.buildTileArray();
+        arrayInitializer.buildClipTiles();
     }
 
 
@@ -136,9 +139,9 @@ public class TileManager {
      * Adds the special tiles to its respective type
      */
     private void addSpecialTiles(){
-        floorTransparentTiles = tileBuilder.buildFloorTransparentSet();
-        blackTransparentTiles = tileBuilder.buildBlackTransparentSet();
-        wallTransparentTiles = tileBuilder.buildWallTransparentSet();
+        floorTransparentTiles = arrayInitializer.buildFloorTransparentSet();
+        blackTransparentTiles = arrayInitializer.buildBlackTransparentSet();
+        wallTransparentTiles = arrayInitializer.buildWallTransparentSet();
     }
 
     /**

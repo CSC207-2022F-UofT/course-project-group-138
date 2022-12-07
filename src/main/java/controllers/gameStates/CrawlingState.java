@@ -46,7 +46,6 @@ public class CrawlingState implements State, RoomSwitcher {
         Initializer initializer = new Initializer();
         initializer.init();
         this.player = initializer.getPlayer();
-        // @TODO uncomment below code when dungeonController is done
         this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         playerMover.newRoom();
@@ -57,7 +56,6 @@ public class CrawlingState implements State, RoomSwitcher {
         playerViewModel.updatePosition();
         playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
         playerCollisionHandler.handleDoorCollisions(tileManager.getDoors(), roomType);
-        // @TODO call to DungeonRoomController
     }
     /**
      * Updates PlayerMover so that the associated direction boolean will be true
@@ -96,14 +94,20 @@ public class CrawlingState implements State, RoomSwitcher {
                 new PlayerCollisionHandler(playerViewModel.getCollisionRect(), playerMover, this);
     }
 
+    /**
+     * Change the door based on the Door that the player enters
+     * @param doorType - Door enum
+     */
     @Override
     public void changeRoom(Door doorType) {
+        // Remove previous room from connections array list first
         List<DungeonRoom> roomList = new ArrayList<>(dungeonController.getConnections());
         try {
             DungeonRoom prev = dungeonController.getCurrentRoom().getPreviousRoom();
             roomList.remove(prev);
         } catch (DungeonRoom.Object404Error ignored) { // No need to do anything
         }
+        // Check which door was entered
         switch (doorType){
             case BOTTOM:
                 dungeonController.goForward(roomList.get(2));
