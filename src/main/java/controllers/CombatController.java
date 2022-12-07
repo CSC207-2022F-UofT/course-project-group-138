@@ -28,7 +28,13 @@ public class CombatController {
         return updatedHP;
     }
 
-    public CombatController(ActionEvent e) {
-
+    /**
+     * Constructor
+     * @param char1
+     * @param char2
+     * @param e
+     */
+    public CombatController(Character char1, Character char2, ActionEvent e) {
+        combatTurn(char1, char2, "Attack");
     }
 }
