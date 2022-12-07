@@ -1,5 +1,6 @@
 package useCases;
 
+import controllers.StateManager;
 import useCases.Attack;
 import entities.character.Enemy;
 import entities.character.Player;
@@ -26,7 +27,7 @@ public class CombatRound {
 
         List<Integer> resultHP = Attack.taketurn(player, enemy);            // player attacks
 
-        if (enemy.isAlive()) {                 // If the attack killed the enemy
+        if (!enemy.isAlive()) {                 // If the attack killed the enemy
             player.rechargeHealth();           // heal their hp to full
             int coins = enemy.getCoins();
             player.spendCoins(-coins);         // and award them coins
@@ -35,7 +36,7 @@ public class CombatRound {
 
         // We assume at this point enemy is still alive, and they can attack.
         resultHP = Attack.taketurn(enemy, player);
-        if (player.isAlive()) {                // If the attack killed the player
+        if (!player.isAlive()) {                // If the attack killed the player
             player.rechargeHealth();           // revert their hp to pre combat
             return resultHP;
         }
