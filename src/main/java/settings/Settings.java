@@ -14,6 +14,7 @@ public class Settings {
     private static final int rows = 12; // to keep the 16 x 9 aspect ratio
     private static final int columns = 20;
     private static int PLAYER_SIZE = 75;
+    private static int FPS = 60;
     private static int scalingFactor;
     private static int[] INITIAL_POSITION;
     private static int[] ROOM_SIZE = new int[2];
@@ -45,6 +46,10 @@ public class Settings {
     public static void determineScalingFactor(){
         // Normalize scalingFactor based on control value (1440 pixels tall)
         scalingFactor = getFrameHeight() / 1440;
+    }
+
+    public static void setFPS(int FPS) {
+        Settings.FPS = FPS;
     }
 
     /**
@@ -109,6 +114,10 @@ public class Settings {
     public static int[] getRoomSize() {
         return ROOM_SIZE;
   }
+
+    public static int getFPS() {
+        return FPS;
+    }
 
     public static int getDifficulty() {
         return DIFFICULTY;
