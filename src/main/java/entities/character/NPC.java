@@ -5,4 +5,6 @@ public interface NPC {
     int  getY();
     void setX(int x);
     void setY(int y);
+    void setImageID(int id);
+    int getImageID();
 }

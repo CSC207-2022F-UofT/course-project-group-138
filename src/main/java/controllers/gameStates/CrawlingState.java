@@ -2,6 +2,7 @@ package controllers.gameStates;
 
 import UI.presenters.viewModels.EnemyViewModel;
 import UI.presenters.viewModels.MerchantViewModel;
+import controllers.NPCUIManager;
 import controllers.TileManager;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
@@ -35,6 +36,7 @@ public class CrawlingState implements State, RoomSwitcher {
     TileManager tileManager;
     StatePresenter presenter;
     PlayerCollisionHandler playerCollisionHandler;
+    NPCUIManager npcuiManager;
     private int roomType = 0;
     int acc = 0;
 
@@ -57,6 +59,7 @@ public class CrawlingState implements State, RoomSwitcher {
         playerViewModel.updatePosition();
         playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
         playerCollisionHandler.handleDoorCollisions(tileManager.getDoors(), roomType);
+        npcuiManager.update();
     }
     /**
      * Updates PlayerMover so that the associated direction boolean will be true
@@ -88,6 +91,7 @@ public class CrawlingState implements State, RoomSwitcher {
         CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
         crawlPresenter.setPlayerViewModel(viewModel);
         crawlPresenter.setTilePresenter(tileManager);
+        npcuiManager = new NPCUIManager();
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
         // Pass this as argument uses Dependency inversion so does not violate CA
@@ -138,19 +142,20 @@ public class CrawlingState implements State, RoomSwitcher {
 //        roomType = ThreadLocalRandom.current().nextInt(1, 6);
         System.out.println("New Room #: " + acc);
         System.out.println("Current Room has size: " + dungeonController.getConnections().size());
+        System.out.println("Enemies? " + dungeonController.getCurrentRoom().hasEnemy());
+        System.out.println("Merchants? " + dungeonController.getCurrentRoom().hasMerchant());
         acc++;
         tileManager.changeRoom(roomType - 1);
+        getEnemy();
         playerMover.newRoom();
     }
     public void getEnemy(){
-        if (dungeonController.getCurrentRoom().hasEnemy()){
-            try {
-                if (enemyViewModel == null) {
-                    enemyViewModel = new EnemyViewModel(dungeonController.getCurrentRoom().getEnemy(), Settings.getTileSize());
-                }
-            } catch (DungeonRoom.Object404Error e) {
-                e.printStackTrace();
+        DungeonRoom currRoom = dungeonController.getCurrentRoom();
+        if (currRoom.hasEnemy()) {
+            if (enemyViewModel == null) {
+                enemyViewModel = new EnemyViewModel(currRoom.getEnemy(), Settings.getTileSize());
             }
+            npcuiManager.spawnEnemy(dungeonController.getCurrentRoom(), enemyViewModel);
         }
     }
 }

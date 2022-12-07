@@ -2,7 +2,6 @@ package entities.dungeon;
 
 import entities.character.Enemy;
 import entities.character.Merchant;
-import entities.character.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class DungeonRoom {
      *
      * @param newNPC the new NPC to be added.
      */
-    public void addNPC(Enemy newNPC) {
+    public void addEnemy(Enemy newNPC) {
         this.enemy = newNPC;
     }
     public void addMerchant(Merchant merchant){
@@ -81,29 +80,35 @@ public class DungeonRoom {
      * @return whether this DungeonRoom contains an NPC or not.
      */
     public boolean hasEnemy() {
-        return this.enemy == null;
+        return this.enemy != null;
     }
     public boolean hasMerchant() {
-        return this.merchant == null;
+        return this.merchant != null;
     }
 
     /**
      * @return The NPC in this DungeonRoom.
      * @throws Object404Error if no NPC is found in this DungeonRoom.
      */
-    public Enemy getEnemy() throws Object404Error {
+    public Enemy getEnemy() {
         if (this.enemy == null) {
-            throw new Object404Error("Room does not contain an NPC");
-        } else {
-            return this.enemy;
+            try {
+                throw new Object404Error("Room does not contain an NPC");
+            } catch (Object404Error e) {
+                e.printStackTrace();
+            }
         }
+        return this.enemy;
     }
-    public Merchant getMerchant() throws Object404Error {
+    public Merchant getMerchant() {
         if (this.merchant == null) {
-            throw new Object404Error("Room does not contain an NPC");
-        } else {
-            return this.merchant;
+            try {
+                throw new Object404Error("Room does not contain an NPC");
+            } catch (Object404Error e) {
+                e.printStackTrace();
+            }
         }
+        return this.merchant;
     }
 
 

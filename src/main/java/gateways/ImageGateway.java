@@ -14,7 +14,7 @@ public class ImageGateway {
      * @return - the player image
      */
     public static BufferedImage getPlayerImage(){
-        return getImage("src/main/res/characters.png");
+        return getImage("src/main/res/default_character.png");
     }
 
     /**

@@ -5,7 +5,7 @@ public class Merchant extends Entity implements NPC{
     private final int originalPrice;
     private int currentPrice;
     private int timesPurchased;
-    private int x, y;
+    private int x, y, id;
 
     public Merchant(String item, int price, int x, int y) {
         super(x, y);
@@ -54,5 +54,15 @@ public class Merchant extends Entity implements NPC{
     @Override
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public void setImageID(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int getImageID() {
+        return id;
     }
 }

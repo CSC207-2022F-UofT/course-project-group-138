@@ -76,7 +76,7 @@ public class PaintCanvas extends JComponent{
     public void done() {
         Image transparentImage = makeColorTransparent(imageToBufferedImage(image), Color.white);
         try {
-            File outputFile = new File("src/main/photos/characters.png");
+            File outputFile = new File("src/main/photos/default_character.png");
             outputFile.createNewFile();
             ImageIO.write(imageToBufferedImage(transparentImage), "png", outputFile);
         } catch (IOException e) {

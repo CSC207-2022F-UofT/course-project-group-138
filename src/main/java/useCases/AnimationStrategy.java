@@ -3,10 +3,11 @@ package useCases;
 import java.util.Timer;
 
 public class AnimationStrategy {
-    static int curr;
-    static int numFrames;
-    static int startFrame;
-    static long lastTime;
+    int curr;
+    int curr2;
+    int numFrames;
+    int startFrame;
+    long lastTime;
     public AnimationStrategy(int startFrames, int totalFrames){
         startFrame = startFrames;
         curr = startFrame;
@@ -40,5 +41,9 @@ public class AnimationStrategy {
         }
         lastTime = System.currentTimeMillis();
         return curr;
+    }
+
+    public int getStartFrame() {
+        return startFrame;
     }
 }

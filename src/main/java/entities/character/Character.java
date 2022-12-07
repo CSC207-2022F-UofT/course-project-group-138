@@ -5,7 +5,7 @@ import entities.inventory.Inventory;
 /**
  * An abstract class to be extended by Player and Enemy.
  */
-public abstract class Character extends Entity implements NPC{
+public abstract class Character extends Entity{
     private final Inventory inventory;
     private int maximumHealth;
     private int currentHealth;

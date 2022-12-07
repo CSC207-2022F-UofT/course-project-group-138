@@ -59,8 +59,9 @@ public class DungeonRoomBuilder {
 
                     int enemyX = rand.nextInt(dungeonRoomSize[0]);
                     int enemyY = rand.nextInt(dungeonRoomSize[1]);
-
-                    newRoom.addNPC(new Enemy(enemyInventory, enemyHealth, enemyX, enemyY));
+                    Enemy enemy = new Enemy(enemyInventory, enemyHealth, enemyX, enemyY);
+                    enemy.setImageID(rand.nextInt(1));
+                    newRoom.addEnemy(enemy);
                     this.enemiesAdded++;
                 }
                 break;
@@ -71,9 +72,13 @@ public class DungeonRoomBuilder {
                     int merchantX = rand.nextInt(dungeonRoomSize[0]);
                     int merchantY = rand.nextInt(dungeonRoomSize[1]);
                     if (randomItem == 0) {
-                        newRoom.addMerchant(new Merchant("Armor", 20, merchantX, merchantY));
+                        Merchant merchant = new Merchant("Armor", 20, merchantX, merchantY);
+                        merchant.setImageID(0);
+                        newRoom.addMerchant(merchant);
                     } else {
-                        newRoom.addMerchant(new Merchant("Weapon", 30, merchantX, merchantY));
+                        Merchant merchant = new Merchant("Weapon", 30, merchantX, merchantY);
+                        merchant.setImageID(0);
+                        newRoom.addMerchant(merchant);
                     }
                     this.merchantsAdded++;
                 }
