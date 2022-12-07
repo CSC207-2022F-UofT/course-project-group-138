@@ -17,8 +17,6 @@ public class SuccessWindow extends JFrame implements ActionListener{
 
     private JButton exit;
 
-    // TODO should be called in the game loop or else. Check when boss (enemy) has 0 HP or not to trigger.
-
     SuccessWindow() {
 
         this.setTitle("Congrats!!! You made it!!!"); //Add the title to frame

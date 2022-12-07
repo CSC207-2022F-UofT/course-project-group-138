@@ -40,6 +40,10 @@ public class CombatState implements State{
         this.combatController = new CombatController(player, enemy);
         this.presenter = presenter;
     }
+
+    public CombatState() {
+    }
+
     public void loop() {
         combatController.combatTurn();
     }

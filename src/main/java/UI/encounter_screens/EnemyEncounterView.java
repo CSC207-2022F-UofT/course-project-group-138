@@ -1,7 +1,8 @@
 package UI.encounter_screens;
 
 import controllers.StateManager;
-import controllers.gameStates.CrawlingState;
+import controllers.gameStates.CombatState;
+import controllers.CombatController;
 import gateways.ImageGateway;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class EnemyEncounterView extends EncounterView {
 
@@ -53,20 +55,33 @@ public class EnemyEncounterView extends EncounterView {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == attack){
-            // System.out.println("Ouch!!!");
+            // set userinput received by the combat controller.
+            CombatController.setUserInput("Attack");
 
-            //should incorporate the features in player and enemy.
-            JOptionPane.showMessageDialog(null, "oh no you died :(");
-            // TODO Incorporate more functionality. Refer to MerchantEncounterView.java.
+            // set the state to combat state.
+            StateManager s = new StateManager();
+            s.setCurrState(new CombatState());
 
-            //attack.setEnabled(false);
+            // after one round of combat, get the corresponding HP
+            // for the enemy and the player.
+            List<Integer> l = CombatController.getHP();
+            Integer playerHP = l.get(0);
+            Integer enemyHP = l.get(1);
+
+            // After each round, the user is able to see the current HP
+            // for the player and the enemy. A window is poped up.
+
+            JOptionPane.showMessageDialog(null, "Current HP for the player:" +
+                    playerHP + "\n" + "Current HP for the enemy:" + enemyHP);
+
+            // if the player is unable to proceed, the button can't be pressed again.
+            // attack.setEnabled(false);
+
+            // TODO: how do we know if the player is dead or will be dead for the next round. there could be a checker.
         }
 
         if (e.getSource() == exit){
             System.exit(0);
         }
     }
-
-    // TODO: Display enemy's and player's current HP after one round (after the user clicks the button) on GUI.
-
 }

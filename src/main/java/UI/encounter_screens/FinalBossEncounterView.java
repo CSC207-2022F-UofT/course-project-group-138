@@ -1,13 +1,15 @@
 package UI.encounter_screens;
 
+import controllers.CombatController;
 import controllers.StateManager;
-import controllers.gameStates.CrawlingState;
+import controllers.gameStates.CombatState;
 import gateways.ImageGateway;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class FinalBossEncounterView extends EncounterView {
 
@@ -54,22 +56,34 @@ public class FinalBossEncounterView extends EncounterView {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == attack) {
-            // System.out.println("Ouch!!!");
+            // set userinput received by the combat controller.
+            CombatController.setUserInput("Attack");
 
-            //should incorporate the features in player and enemy.
-            JOptionPane.showMessageDialog(null, "oh no you died :(");
-            // TODO Incorporate more functionality. Refer to MerchantEncounterView.java.
+            // set the state to combat state. run the combat loop.
+            StateManager s = new StateManager();
+            s.setCurrState(new CombatState());
 
-            //attack.setEnabled(false);
+            // after one round of combat, get the corresponding HP
+            // for the enemy and the player.
+            List<Integer> l = CombatController.getHP();
+            Integer playerHP = l.get(0);
+            Integer enemyHP = l.get(1);
+
+            // After each round, the user is able to see the current HP
+            // for the player and the enemy. A window is poped up.
+
+            JOptionPane.showMessageDialog(null, "Current HP for the player:" +
+                    playerHP + "\n" + "Current HP for the enemy:" + enemyHP);
+
+            // if the player is unable to proceed, the button can't be pressed again.
+            // attack.setEnabled(false);
+
+            // TODO how the final boss scene will be triggered??? If there is no checker function
+            // if the final boss is slain, the success window is triggered.
+            // new SuccessWindow();
         }
 
         if (e.getSource() == exit) {
-            // System.out.println("Bye");
-            // TODO pass current main playing state
-            StateManager s = new StateManager();
-            s.setCurrState(new CrawlingState());
-            // also links back to the main play state
-
             System.exit(0);
         }
     }
