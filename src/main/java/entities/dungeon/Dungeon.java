@@ -69,8 +69,6 @@ public class Dungeon {
      * @param roomTwo the second DungeonRoom.
      */
     private void addHallway(DungeonRoom roomOne, DungeonRoom roomTwo) {
-        roomOne.addConnectedRoom(roomTwo);
-        roomTwo.addConnectedRoom(roomOne);
         this.map.get(roomOne).add(roomTwo);
         this.map.get(roomTwo).add(roomOne);
     }

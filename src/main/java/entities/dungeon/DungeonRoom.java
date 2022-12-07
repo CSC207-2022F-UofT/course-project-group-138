@@ -4,23 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonRoom {
-    private List<DungeonRoom> connectedRooms;
     private Object nonPlayerCharacter;
     private DungeonRoom previousRoom;
 
     public DungeonRoom() {
-        this.connectedRooms = new ArrayList<DungeonRoom>();
         this.nonPlayerCharacter = null;
         this.previousRoom = null;
-    }
-
-    /**
-     * Add a DungeonRoom to the List of connected DungeonRooms.
-     *
-     * @param newRoom the new DungeonRoom to be connected.
-     */
-    public void addConnectedRoom(DungeonRoom newRoom) {
-        this.connectedRooms.add(newRoom);
     }
 
     /**
@@ -60,13 +49,6 @@ public class DungeonRoom {
             this.clearPreviousRoom();
             return prevRoom;
         }
-    }
-
-    /**
-     * @return an array of all connected DungeonRooms.
-     */
-    public DungeonRoom[] getConnectedRooms() {
-        return this.connectedRooms.toArray(new DungeonRoom[0]);
     }
 
     /**
