@@ -1,16 +1,21 @@
 package entities.dungeon;
 
+import entities.character.Enemy;
+import entities.character.Merchant;
+import entities.character.NPC;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonRoom {
     private List<DungeonRoom> connectedRooms;
-    private Object nonPlayerCharacter;
+    private Enemy enemy;
+    private Merchant merchant;
     private DungeonRoom previousRoom;
 
     public DungeonRoom() {
         this.connectedRooms = new ArrayList<DungeonRoom>();
-        this.nonPlayerCharacter = null;
+        this.enemy = null;
         this.previousRoom = null;
     }
 
@@ -28,8 +33,11 @@ public class DungeonRoom {
      *
      * @param newNPC the new NPC to be added.
      */
-    public void addNPC(Object newNPC) {
-        this.nonPlayerCharacter = newNPC;
+    public void addNPC(Enemy newNPC) {
+        this.enemy = newNPC;
+    }
+    public void addMerchant(Merchant merchant){
+        this.merchant = merchant;
     }
 
     /**
@@ -72,21 +80,32 @@ public class DungeonRoom {
     /**
      * @return whether this DungeonRoom contains an NPC or not.
      */
-    public boolean hasNPC() {
-        return this.nonPlayerCharacter == null;
+    public boolean hasEnemy() {
+        return this.enemy == null;
+    }
+    public boolean hasMerchant() {
+        return this.merchant == null;
     }
 
     /**
      * @return The NPC in this DungeonRoom.
      * @throws Object404Error if no NPC is found in this DungeonRoom.
      */
-    public Object getNPC() throws Object404Error {
-        if (this.nonPlayerCharacter == null) {
+    public Enemy getEnemy() throws Object404Error {
+        if (this.enemy == null) {
             throw new Object404Error("Room does not contain an NPC");
         } else {
-            return this.nonPlayerCharacter;
+            return this.enemy;
         }
     }
+    public Merchant getMerchant() throws Object404Error {
+        if (this.merchant == null) {
+            throw new Object404Error("Room does not contain an NPC");
+        } else {
+            return this.merchant;
+        }
+    }
+
 
     public static class Object404Error extends Exception {
         public Object404Error(String message) {

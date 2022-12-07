@@ -1,6 +1,4 @@
-package entities;
-
-import entities.inventory.Inventory;
+package entities.character;
 
 public class Entity {
     protected int x;
@@ -16,10 +14,10 @@ public class Entity {
     /**
      * === Getters and Setters ===
      */
-    public int getx(){
+    public int getX(){
         return this.x;
     }
-    public int gety(){
+    public int getY(){
         return this.y;
     }
     public void setX(int x){

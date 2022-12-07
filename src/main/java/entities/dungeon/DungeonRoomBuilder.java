@@ -71,9 +71,9 @@ public class DungeonRoomBuilder {
                     int merchantX = rand.nextInt(dungeonRoomSize[0]);
                     int merchantY = rand.nextInt(dungeonRoomSize[1]);
                     if (randomItem == 0) {
-                        newRoom.addNPC(new Merchant("Armor", 20, merchantX, merchantY));
+                        newRoom.addMerchant(new Merchant("Armor", 20, merchantX, merchantY));
                     } else {
-                        newRoom.addNPC(new Merchant("Weapon", 30, merchantX, merchantY));
+                        newRoom.addMerchant(new Merchant("Weapon", 30, merchantX, merchantY));
                     }
                     this.merchantsAdded++;
                 }

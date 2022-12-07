@@ -1,6 +1,6 @@
 package UI.presenters.statePresenters;
 
-import UI.presenters.PlayerViewModel;
+import UI.presenters.viewModels.PlayerViewModel;
 import controllers.TileManager;
 import gateways.ImageGateway;
 

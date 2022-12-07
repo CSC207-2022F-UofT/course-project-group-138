@@ -203,8 +203,50 @@ public class ImageGateway {
     public static BufferedImage getWallGoo(){
         return getImage("src/main/res/tiles/items/wall_goo.png");
     }
+    public static BufferedImage getMonster1(){
+        return getImage("src/main/res/tiles/items/monster_demon.png");
+    }
+    public static BufferedImage getMonster2(){
+        return getImage("src/main/res/tiles/items/monster_chort.png");
+    }
+    public static BufferedImage getMonster3(){
+        return getImage("src/main/res/tiles/items/monster_demonolog.png");
+    }
+    public static BufferedImage getMonster4(){
+        return getImage("src/main/res/tiles/items/monster_tentackle.png");
+    }
+    public static BufferedImage getMonster5(){
+        return getImage("src/main/res/tiles/items/monster_orc_veteran.png");
+    }
+    public static BufferedImage getMonster6(){
+        return getImage("src/main/res/tiles/items/monster_rokita.png");
+    }
+    public static BufferedImage getMonster7(){
+        return getImage("src/main/res/tiles/items/monster_necromancer.png");
+    }
+    public static BufferedImage getMonster8(){
+        return getImage("src/main/res/tiles/items/monster_ogre.png");
+    }
+    public static BufferedImage getAnMonster1(){
+        return getImage("src/main/res/tiles/items/demonf1.png");
+    }
+    public static BufferedImage getAnMonster2(){
+        return getImage("src/main/res/tiles/items/demonf2.png");
+    }
+    public static BufferedImage getAnMonster3(){
+        return getImage("src/main/res/tiles/items/demonf3.png");
+    }
+    public static BufferedImage getAnMonster4(){
+        return getImage("src/main/res/tiles/items/demonf4.png");
+    }
     public static BufferedImage getBackground(){
         return getImage("src/main/res/background/background.png");
+    }
+    public static BufferedImage getMerchant1(){
+        return getImage("src/main/res/tiles/items/npc_merchant.png");
+    }
+    public static BufferedImage getMerchant2(){
+        return getImage("src/main/res/tiles/items/npc_merchant_2.png");
     }
     private static BufferedImage getImage(String fileName){
         try{

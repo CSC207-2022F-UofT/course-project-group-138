@@ -107,10 +107,12 @@ public class TileArrayInitializer {
         tiles[64].setImage(ImageGateway.getFlagBlue());
         tiles[65].setImage(ImageGateway.getFlagGreen());
         tiles[66].setImage(ImageGateway.getWallGoo());
-
-
-
-
+        tiles[67].setImage(ImageGateway.getAnMonster1());
+        tiles[68].setImage(ImageGateway.getAnMonster2());
+        tiles[69].setImage(ImageGateway.getAnMonster3());
+        tiles[70].setImage(ImageGateway.getAnMonster4());
+        tiles[71].setImage(ImageGateway.getMerchant1());
+        tiles[72].setImage(ImageGateway.getMerchant2());
 
         return tiles;
     }

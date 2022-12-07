@@ -28,4 +28,17 @@ public class AnimationStrategy {
         lastTime = System.currentTimeMillis();
         return curr;
     }
+    public int getNextFrameHalf(){
+        if (System.currentTimeMillis() - lastTime < 400){
+            return curr;
+        }
+        if (curr < startFrame + numFrames / 2 - 1){
+            curr++;
+        }
+        else {
+            curr = startFrame;
+        }
+        lastTime = System.currentTimeMillis();
+        return curr;
+    }
 }

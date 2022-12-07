@@ -1,11 +1,10 @@
-package UI.presenters;
+package UI.presenters.viewModels;
 
 import entities.character.Character;
 import org.jetbrains.annotations.NotNull;
+import useCases.playerUseCases.FlipStrategy;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 /*
@@ -15,7 +14,7 @@ import java.awt.image.BufferedImage;
     TLDR: This class (the view model) observes changes from player (the model) and communicates those changes to the
     graphics (the view).
  */
-public class PlayerViewModel extends CharacterViewModel{
+public class PlayerViewModel extends CharacterViewModel {
     /**
      * Constructs a PlayerViewModel object.
      * @param character - This should be an instance of Player
@@ -29,13 +28,15 @@ public class PlayerViewModel extends CharacterViewModel{
     @Override
     public void updatePosition() {
         super.updatePosition();
-        collisionRect.x = entity.getx();
-        collisionRect.y = entity.gety() + collisionRect.height * 2;
+        collisionRect.x = entity.getX();
+        collisionRect.y = entity.getY() + collisionRect.height * 2;
     }
     public Rectangle getCollisionRect() {
         return collisionRect;
     }
-
+    public void updateImage(BufferedImage image){
+        entityImage = FlipStrategy.getAnimationFrame((Character) entity, image);
+    }
     @Override
     public void render(@NotNull Graphics2D graphics) {
         super.render(graphics);

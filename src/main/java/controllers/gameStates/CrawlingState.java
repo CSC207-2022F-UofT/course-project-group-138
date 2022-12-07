@@ -5,20 +5,17 @@ import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
 import entities.character.Player;
-import entities.dungeon.DungeonDoor;
 import entities.dungeon.DungeonRoom;
 import settings.Settings;
 import useCases.KeyEventHandler;
 import useCases.playerUseCases.PlayerCollisionHandler;
 import useCases.playerUseCases.PlayerMover;
-import UI.presenters.PlayerViewModel;
+import UI.presenters.viewModels.PlayerViewModel;
 import settings.Initializer;
 import entities.dungeon.DungeonDoor.Door;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class CrawlingState implements State, RoomSwitcher {
     /**
@@ -140,5 +137,10 @@ public class CrawlingState implements State, RoomSwitcher {
         acc++;
         tileManager.changeRoom(roomType - 1);
         playerMover.newRoom();
+    }
+    public void getEnemy(){
+        if (dungeonController.getCurrentRoom().hasEnemy()){
+
+        }
     }
 }

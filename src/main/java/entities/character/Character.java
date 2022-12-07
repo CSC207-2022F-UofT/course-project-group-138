@@ -1,12 +1,11 @@
 package entities.character;
 
-import entities.Entity;
 import entities.inventory.Inventory;
 
 /**
  * An abstract class to be extended by Player and Enemy.
  */
-public abstract class Character extends Entity {
+public abstract class Character extends Entity implements NPC{
     private final Inventory inventory;
     private int maximumHealth;
     private int currentHealth;
@@ -150,14 +149,14 @@ public abstract class Character extends Entity {
     /**
      * @return the x-coordinate value of the Character.
      */
-    public int getx() {
+    public int getX() {
         return this.x;
     }
 
     /**
      * @return the y-coordinate value of the Character.
      */
-    public int gety() {
+    public int getY() {
         return this.y;
         /**
          * Checks if this character is facing the right side. Otherwise, character is facing left side.
