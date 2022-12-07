@@ -10,6 +10,11 @@ public class KeyEventHandler {
         updatePlayerMover(code, bool, playerMover);
         checkEscape(code);
     }
+
+    public static void handleCombatStateEvents(int code) {
+        checkEscape(code);
+    }
+
     /**
      * Typical PC controls. WASD for up, left, down, right respectively
      * @param code - keyCode corresponding to the key

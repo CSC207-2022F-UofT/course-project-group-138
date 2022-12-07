@@ -61,7 +61,7 @@ public class CrawlingState implements State {
         KeyEventHandler.handleCrawingStateEvents(code, true, playerMover);
     }
     /**
-     * Updates PlayerMover so that the associated direciton boolean will be false (since key released)
+     * Updates PlayerMover so that the associated direction boolean will be false (since key released)
      * @param code - keyCode corresponding to the key
      */
     public void keyReleasedEvents(int code) {

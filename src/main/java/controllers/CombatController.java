@@ -17,16 +17,33 @@ public class CombatController {
     private final Player player;
     private final Enemy enemy;
 
+    private String userInput;
+
 
     /**
      *  === Constructor ===
      * @param player - character 1
      * @param enemy - character 2
-     * @param e     - input
      */
-    public CombatController(Player player, Enemy enemy, ActionEvent e) {
+    public CombatController(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
+    }
+
+    /**
+     * Getter for userInput
+     * @return userInput - string representation of the user's click
+     */
+    public String getUserInput() {
+        return userInput;
+    }
+
+    /**
+     * Setter for userInput
+     * @param userInput - string representation of the user's click
+     */
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
