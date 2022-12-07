@@ -104,7 +104,10 @@ public class CrawlingState implements State, RoomSwitcher {
     }
 
     /**
-     * Change the door based on the Door that the player enters
+     * Change the door based on the Door that the player enters.
+     *
+     * =========PRECONDITION=========: Dungeon is built correctly, and each non start/end room contains min 2 connections and max 6
+     * NOTE: This should always work as long as Dungeon is built correctly
      * @param doorType - Door enum
      */
     @Override
@@ -122,6 +125,9 @@ public class CrawlingState implements State, RoomSwitcher {
                 dungeonController.goForward(roomList.get(2));
                 break;
             case LEFT:
+                /**
+                 * This should never throw an exception as long as Dungeon is built correctly
+                 */
                 try {
                     dungeonController.goBack();
                 } catch (DungeonRoom.Object404Error e) {
@@ -154,17 +160,21 @@ public class CrawlingState implements State, RoomSwitcher {
         getMerchant();
         playerMover.newRoom();
     }
+
+    /**
+     * Retrieves an enemy from the dungeon if it exists
+     */
     public void getEnemy(){
         DungeonRoom currRoom = dungeonController.getCurrentRoom();
         if (currRoom.hasEnemy()) {
             ((CrawlingStatePresenter)presenter).hasEnemy = true;
+            // Retrive location from map
             int[] location = tileManager.getEnemyLocation();
             Enemy enemy = currRoom.getEnemy();
             enemy.setX(location[0]);
             enemy.setY(location[1]);
             if (enemyViewModel == null) {
                 enemyViewModel = new EnemyViewModel(enemy, Settings.getTileSize());
-
                 ((CrawlingStatePresenter)presenter).setEnemyViewModel(enemyViewModel);
             }
             npcuiManager.spawnEnemy(dungeonController.getCurrentRoom(), enemyViewModel);
@@ -177,6 +187,10 @@ public class CrawlingState implements State, RoomSwitcher {
             }
         }
     }
+
+    /**
+     * Retrieves the merchant from the dungeon if it exists
+     */
     public void getMerchant(){
         DungeonRoom currRoom = dungeonController.getCurrentRoom();
         if (currRoom.hasMerchant()) {
@@ -188,7 +202,7 @@ public class CrawlingState implements State, RoomSwitcher {
             System.out.println(merchant.getX());
             System.out.println(merchant.getY());
             if (merchantViewModel == null) {
-                merchantViewModel = new MerchantViewModel(currRoom.getMerchant(), Settings.getTileSize());
+                merchantViewModel = new MerchantViewModel(merchant, Settings.getTileSize());
                 ((CrawlingStatePresenter)presenter).setMerchantViewModel(merchantViewModel);
             }
             npcuiManager.spawnMerchant(dungeonController.getCurrentRoom(), merchantViewModel);

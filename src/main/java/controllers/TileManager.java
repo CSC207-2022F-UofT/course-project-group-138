@@ -31,8 +31,6 @@ public class TileManager {
     private DungeonDoor[] doors;
     private final int tileSize = Settings.getTileSize();
     private List<Rectangle> collisionArray;
-    private int[] enemyLocation = new int[2];
-    private int[] merchantLocation = new int[2];
 
     /**
      * Constructs a TilePresenter object, while noting the special tiles
@@ -71,15 +69,9 @@ public class TileManager {
                 tileNum = torchAnimator.getNextFrame() + 24;
             }
             else if (tileNum == 97){
-                enemyLocation[0] = x;
-                enemyLocation[1] = y;
-                System.out.println(x);
-                System.out.println(y);
                 tileNum = 0;
             }
             else if (tileNum == 96){
-                merchantLocation[0] = x;
-                merchantLocation[1] = y;
                 tileNum = 0;
             }
             // In case it is a door
@@ -137,10 +129,10 @@ public class TileManager {
         populateCollisionMap();
     }
     public int[] getEnemyLocation(){
-        return enemyLocation;
+        return arrayInitializer.getEnemyLocation();
     }
     public int[] getMerchantLocation(){
-        return merchantLocation;
+        return arrayInitializer.getMerchantLocation();
     }
 
     /**
@@ -178,7 +170,6 @@ public class TileManager {
         else if (tileNum == 38 || tileNum == 46) {
             tilePresenter.render(tiles[15], x, y, graphics2D);
         }
-
     }
 
     /**

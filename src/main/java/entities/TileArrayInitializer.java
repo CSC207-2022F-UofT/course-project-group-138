@@ -17,6 +17,8 @@ public class TileArrayInitializer {
     public TileArrayInitializer(){
         tiles = new DungeonTile[100];
     }
+    private int[] enemyLocation = new int[2];
+    private int[] merchantLocation = new int[2];
 
     /**
      * Initializes all the tiles and assigns them to their corresponding image using the gateway
@@ -220,6 +222,15 @@ public class TileArrayInitializer {
             if (tileNum >= 98){
                 tileNum = 25;
             }
+            if (tileNum == 97){
+                enemyLocation[0] = x;
+                enemyLocation[1] = y;
+                tileNum = 25;
+            }
+            if (tileNum == 96){
+                merchantLocation[0] = x;
+                merchantLocation[1] = y;
+            }
 
             if (tiles[tileNum].clips()){
                 if (smallTiles.contains(tileNum)){
@@ -243,6 +254,14 @@ public class TileArrayInitializer {
             }
         }
         return collisionArray;
+    }
+
+    public int[] getEnemyLocation() {
+        return enemyLocation;
+    }
+
+    public int[] getMerchantLocation() {
+        return merchantLocation;
     }
 
     /**
