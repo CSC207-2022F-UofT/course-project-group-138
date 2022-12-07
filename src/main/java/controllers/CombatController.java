@@ -30,9 +30,9 @@ public class CombatController {
 
     /**
      * Constructor
-     * @param char1
-     * @param char2
-     * @param e
+     * @param char1 - character 1
+     * @param char2 - character 2
+     * @param e     - input
      */
     public CombatController(Character char1, Character char2, ActionEvent e) {
         combatTurn(char1, char2, "Attack");
