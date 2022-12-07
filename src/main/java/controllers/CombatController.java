@@ -2,11 +2,8 @@ package controllers;
 
 import entities.character.Enemy;
 import entities.character.Player;
-import useCases.Attack;
-import entities.character.Character;
 import useCases.CombatRound;
 
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class CombatController {
