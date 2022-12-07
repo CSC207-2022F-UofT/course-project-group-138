@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.character.Player;
 import entities.dungeon.Dungeon;
+import entities.dungeon.DungeonRoom;
 import org.junit.Test;
+import save.save_use_case.DsGateway;
 import save.save_use_case.DsRequest;
 import settings.Initializer;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class SerializeDsRequestTest {
@@ -45,24 +48,23 @@ public class SerializeDsRequestTest {
         // construct the dungeon
         Dungeon dungeon = new Dungeon();
         dungeon.generateDungeonMap();
-
         // construct a save request to the database
         String gameSaveName = "New Save 1";
         LocalDateTime creationTime = LocalDateTime.now();
         DsRequest dsRequest = new DsRequest(gameSaveName, player, dungeon, creationTime);
 
         String databasePath = "./gamesavedb";
-/*        DsGateway saveFiles;
+        DsGateway saveFiles;
         try {
             saveFiles = new GameFiles(databasePath);
         }
         catch (IOException e) {
             throw new RuntimeException("Fail to create file!");
-        }*/
+        }
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
-        gsonBuilder.registerTypeAdapter(dungeon.getStartingRoom().getClass(), new GsonConnectedRooms());
+        gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonConnectedRooms());
         Gson gson = gsonBuilder.create();
         System.out.println("reached");
         //String str = gson.toJson(dsRequest);
