@@ -48,6 +48,8 @@ public class CrawlingState implements State {
     public void loop() {
         playerMover.move();
         playerViewModel.updatePosition();
+
+        // dungeonController = new DungeonController();
         playerCollisionHandler.handleTileCollisions();
         // @TODO call to DungeonRoomController
     }

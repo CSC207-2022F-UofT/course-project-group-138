@@ -1,11 +1,11 @@
 package entities.inventory;
 
-public interface Inv {
-
+public interface InventoryInterface {
     /**
      * Interface for Inventory, requiring it to have all the methods Player and Enemy depends on.
      */
-    int getCoins();
+
+    int getBalance();
     Weapon getWeapon();
     Armor getArmor();
 }
