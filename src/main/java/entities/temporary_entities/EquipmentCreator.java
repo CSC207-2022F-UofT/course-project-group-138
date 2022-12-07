@@ -1,6 +1,7 @@
 package entities.temporary_entities;
 
 import entities.inventory.Equipment;
+import entities.inventory.EquipmentInterface;
 
 public interface EquipmentCreator {
 

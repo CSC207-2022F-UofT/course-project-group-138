@@ -74,27 +74,27 @@ public class SaveDsRequest {
     }
 
     public int getPlayerWeaponAttack() {
-        return player.getInventory().getWeapon().getAttribute();
+        return player.getAttackPower();
     }
 
-    public int getPlayerWeaponPrice() {
-        return player.getInventory().getWeapon().getPrice();
-    }
+//    public int getPlayerWeaponPrice() {
+//        return player.getInventory().getWeapon().getPrice();
+//    }
 
     public int getPlayerArmorHp() {
-        return player.getInventory().getArmor().getAttribute();
+        return player.getArmorDurability();
     }
 
-    public int getPlayerArmorPrice() {
-        return player.getInventory().getArmor().getPrice();
-    }
+//    public int getPlayerArmorPrice() {
+//        return player.getInventory().getArmor().getPrice();
+//    }
 
     public int getPlayerKills() {
         return player.getKills();
     }
 
     public int getPlayerHp() {
-        return player.getHP();
+        return player.getCurrentHealth();
     }
 
     public int getPlayerX() {
