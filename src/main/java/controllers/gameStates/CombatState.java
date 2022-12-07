@@ -5,6 +5,7 @@ import UI.presenters.statePresenters.StatePresenter;
 import controllers.CombatController;
 import entities.character.Enemy;
 import entities.character.Player;
+import useCases.ClickEventHandler;
 import useCases.KeyEventHandler;
 
 
@@ -42,15 +43,28 @@ public class CombatState implements State{
 //        combatController.combatTurn();
     }
 
+    /**
+     * Passes user key presses to KeyEventHandler.handleCombatStateEvents(code)
+     * @param code - keyCode corresponding to the key
+     */
     public void keyPressEvents(int code) {
         KeyEventHandler.handleCombatStateEvents(code);
     }
 
+    /**
+     * Passes user key presses to KeyEventHandler.handleCombatStateEvents(code)
+     * @param code - keyCode corresponding to the key
+     */
     public void keyReleasedEvents(int code) {
         KeyEventHandler.handleCombatStateEvents(code);
     }
 
+    /**
+     * Passes user clicks to ClickEventHandler.handleCombatStateEvents(code)
+     * @param code - clickCode corresponding to the click
+     */
     public void clickEvents(int code) {
+        ClickEventHandler.handleCombatStateEvents(code);
 
     }
 

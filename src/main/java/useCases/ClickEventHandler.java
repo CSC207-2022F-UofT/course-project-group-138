@@ -1,30 +1,24 @@
 package useCases;
 
-import controllers.game.Engine;
-import useCases.playerUseCases.PlayerMover;
-
 import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
 
 public class ClickEventHandler {
 
-//    private userLastClick
-
-    public static void handleCombatStateEvents(int code){
-
+    public static String handleCombatStateEvents(int code){
+        return updateCombatClicks(code);
     }
+
+    // TODO: the presenter for combat needs to modify this method to only respond to clicks within a specified region
     /**
-     * Typical PC controls. WASD for up, left, down, right respectively
-     * @param code - keyCode corresponding to the key
-     * @param bool - the whether key is pressed or released
+     * Click anywhere to return "Attack"
+     * @param code - clickCode corresponding to the code
      */
-    public static void updatePlayerMover(int code, boolean bool, PlayerMover playerMover) {
-        switch (code) {
-            case MouseEvent.MOUSE_CLICKED:
-                playerMover.movingUp(bool);
-                break;
-
+    private static String updateCombatClicks(int code) {
+        if (code == MouseEvent.MOUSE_CLICKED) {
+            return "Attack";
         }
+        return null;
     }
+
 }
 
