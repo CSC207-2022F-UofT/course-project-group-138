@@ -3,6 +3,7 @@ package controllers;
 import UI.presenters.TilePresenter;
 import entities.builders.TileArrayBuilder;
 import entities.dungeon.DungeonDoor;
+import entities.dungeon.DungeonRoom;
 import entities.dungeon.DungeonTile;
 import gateways.MapReader;
 import settings.Settings;
@@ -111,6 +112,13 @@ public class TileManager {
     public DungeonDoor[] getDoors() {
         return doors;
     }
+    public void populateCollisionMap(){
+        collisionArray = tileBuilder.buildCollisionArray(tileMap);
+    }
+    public void changeRoom(int roomType) {
+        populateTileMap(roomType);
+        populateCollisionMap();
+    }
 
     /**
      * Initialize all the tiles in the arrays and set their images.
@@ -159,8 +167,8 @@ public class TileManager {
         populateCollisionMap();
     }
 
-    public void populateCollisionMap(){
-        collisionArray = tileBuilder.buildCollisionArray(tileMap);
-    }
+
+
+
 }
 

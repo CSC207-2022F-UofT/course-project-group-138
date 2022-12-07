@@ -88,7 +88,7 @@ public class DungeonRoom {
         }
     }
 
-    private static class Object404Error extends Exception {
+    public static class Object404Error extends Exception {
         public Object404Error(String message) {
             super(message);
         }

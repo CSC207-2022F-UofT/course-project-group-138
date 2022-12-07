@@ -76,4 +76,9 @@ public class PlayerMover {
     public boolean isDown() {
         return down;
     }
+
+    public void newRoom() {
+        player.setX(Settings.canvasWidth() / 2);
+        player.setY(Settings.canvasHeight() * 3 / 4);
+    }
 }
