@@ -2,6 +2,7 @@ package save.save_screen;
 
 import entities.character.Player;
 import entities.inventory.Equipment;
+import entities.inventory.EquipmentInterface;
 import entities.inventory.Inventory;
 import entities.temporary_entities.*;
 import save.save_use_case.SaveDsGateway;
@@ -100,9 +101,9 @@ public class GameSaveFiles implements SaveDsGateway {
         String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",saveData.getFileName(),
                 saveData.getPlayerCoins(),
                 saveData.getPlayerWeaponAttack(),
-                saveData.getPlayerWeaponPrice(),
+                //saveData.getPlayerWeaponPrice(),
                 saveData.getPlayerArmorHp(),
-                saveData.getPlayerArmorPrice(),
+                //saveData.getPlayerArmorPrice(),
                 saveData.getPlayerHp(),
                 saveData.getPlayerKills(),
                 saveData.getCreationTime(),

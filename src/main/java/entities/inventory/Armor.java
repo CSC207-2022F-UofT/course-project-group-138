@@ -1,31 +1,33 @@
 package entities.inventory;
 
-public class Armor implements Equipment {
-    public int price;
-    public int hp;
-    public Armor(int hp, int price){
-        this.hp = hp;
-        this.price = price;
-    }
-    public Armor(){
-        this.price = 0;
-        this.hp = 0;
-    }
 
-    public int getAttribute() {
-        return hp;
+public class Armor extends Equipment {
+    public Armor(int durability) {
+        super(durability);
     }
 
     /**
-     * Merchant interactions
+     * Reduces the durability of the Armor when it takes damage.
+     *
+     * @param damage the damage taken by the Armor.
      */
-
-    @Override
-    public int getPrice() {
-        return price;
+    public void reduceDurability(int damage){
+        this.strength -= damage;
     }
-    @Override
-    public void upgrade(){
-        this.hp += hp;
+
+    /**
+     * Changes Armor durability to the provided durability, to renew broken Armor.
+     *
+     * @param durability the new durability of the Armor.
+     */
+    public void renewArmor(int durability) {
+        this.strength = durability;
+    }
+
+    /**
+     * @return whether the Armor durability is 0, therefore unable to absorb damage.
+     */
+    public boolean isBroken() {
+        return this.strength == 0;
     }
 }
