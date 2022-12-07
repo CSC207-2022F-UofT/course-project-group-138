@@ -10,7 +10,7 @@ public class MapReader {
     public MapReader(){
         tileMap = new int[20][12];
         mapFiles = new String[20];
-        mapFiles[0] = "src/main/res/room_maps/room1.txt";
+        mapFiles[0] = "src/main/res/room_maps/room4.txt";
         mapFiles[1] = "src/main/res/room_maps/room2.txt";
         mapFiles[2] = "src/main/res/room_maps/room3.txt";
         mapFiles[3] = "src/main/res/room_maps/room4.txt";

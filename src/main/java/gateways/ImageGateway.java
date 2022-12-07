@@ -176,7 +176,24 @@ public class ImageGateway {
     public static BufferedImage getMud1(){
         return getImage("src/main/res/tiles/items/floor_mud_mid_1.png");
     }
-
+    public static BufferedImage getFloorLight(){
+        return getImage("src/main/res/tiles/items/floor_light.png");
+    }
+    public static BufferedImage getFloorStain(){
+        return getImage("src/main/res/tiles/items/Floor_stain_n.png");
+    }
+    public static BufferedImage getMud_n1(){
+        return getImage("src/main/res/tiles/items/floor_mud_n_1.png");
+    }
+    public static BufferedImage getMud_n2(){
+        return getImage("src/main/res/tiles/items/floor_mud_n_2.png");
+    }
+    public static BufferedImage getMud_light(){
+        return getImage("src/main/res/tiles/items/floor_mud_light.png");
+    }
+    public static BufferedImage getChestGoldenClosed(){
+        return getImage("src/main/res/tiles/items/chest_golden_closed.png");
+    }
 
 
 
@@ -193,6 +210,5 @@ public class ImageGateway {
             return null;
         }
     }
-
 
 }

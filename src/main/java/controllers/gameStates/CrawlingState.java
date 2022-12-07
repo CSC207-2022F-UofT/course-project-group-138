@@ -32,6 +32,7 @@ public class CrawlingState implements State, RoomSwitcher {
     TileManager tileManager;
     StatePresenter presenter;
     PlayerCollisionHandler playerCollisionHandler;
+    private int roomType = 0;
     int acc = 0;
 
     /**
@@ -46,13 +47,14 @@ public class CrawlingState implements State, RoomSwitcher {
         // @TODO uncomment below code when dungeonController is done
         this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
+        playerMover.newRoom();
         initializePresenter();
     }
     public void loop() {
         playerMover.move();
         playerViewModel.updatePosition();
         playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
-        playerCollisionHandler.handleDoorCollisions(tileManager.getDoors());
+        playerCollisionHandler.handleDoorCollisions(tileManager.getDoors(), roomType);
         // @TODO call to DungeonRoomController
     }
     /**
@@ -102,6 +104,9 @@ public class CrawlingState implements State, RoomSwitcher {
         }
         switch (doorType){
             case BOTTOM:
+                dungeonController.goForward(roomList.get(2));
+                break;
+            case LEFT:
                 try {
                     dungeonController.goBack();
                 } catch (DungeonRoom.Object404Error e) {
@@ -109,26 +114,24 @@ public class CrawlingState implements State, RoomSwitcher {
                     e.printStackTrace();
                 }
                 break;
-            case LEFT:
-                dungeonController.goForward(roomList.get(1));
-                break;
             case RIGHT:
-                dungeonController.goForward(roomList.get(2));
+                dungeonController.goForward(roomList.get(0));
                 break;
             case TOP_LEFT:
                 dungeonController.goForward(roomList.get(3));
                 break;
             case TOP_MID:
-                dungeonController.goForward(roomList.get(0));
+                dungeonController.goForward(roomList.get(1));
                 break;
             case TOP_RIGHT:
                 dungeonController.goForward(roomList.get(4));
                 break;
         }
+        roomType = Math.min(dungeonController.getConnections().size(), 6);
         System.out.println("New Room #: " + acc);
-        System.out.println("next room has size: " + dungeonController.getConnections().size());
+        System.out.println("Current Room has size: " + dungeonController.getConnections().size());
         acc++;
-        tileManager.changeRoom(dungeonController.getConnections().size());
+        tileManager.changeRoom(roomType - 1);
         playerMover.newRoom();
     }
 }

@@ -100,6 +100,11 @@ public class TileArrayBuilder {
         tiles[54].setImage(ImageGateway.getTorch6());
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
+        tiles[60].setImage(ImageGateway.getMud_n1());
+        tiles[61].setImage(ImageGateway.getMud_n2());
+        tiles[62].setImage(ImageGateway.getFloorStain());
+        tiles[63].setImage(ImageGateway.getChestGoldenClosed());
+
 
 
         return tiles;
@@ -123,6 +128,7 @@ public class TileArrayBuilder {
         floorTransparentTiles.add(38);
         floorTransparentTiles.add(40);
         floorTransparentTiles.add(48);
+        floorTransparentTiles.add(63);
         for (int i = 49; i <= 56; i++){
             floorTransparentTiles.add(i);
         }
@@ -174,6 +180,7 @@ public class TileArrayBuilder {
         clipTiles.add(57);
         clipTiles.add(58);
         clipTiles.add(59);
+        clipTiles.add(63);
 
         for (int tileNum : clipTiles){
             tiles[tileNum].setClips(true);
@@ -267,18 +274,5 @@ public class TileArrayBuilder {
         bottom.setType(DungeonDoor.Door.BOTTOM);
         return new DungeonDoor[]{top_left, top_mid, top_right, left, right, bottom};
     }
-    /**
-     * Creates a HashMap and notes which tile numbers corresond with which gate
-     * @return - The door map
-     */
-    public HashMap<Integer, Enum<DungeonDoor.Door>> buildDoorMap(){
-        HashMap<Integer, Enum<DungeonDoor.Door>> doorMap = new HashMap<>();
-        doorMap.put(57, DungeonDoor.Door.TOP_LEFT);
-        doorMap.put(58, DungeonDoor.Door.TOP_MID);
-        doorMap.put(59, DungeonDoor.Door.TOP_RIGHT);
-        doorMap.put(60, DungeonDoor.Door.LEFT);
-        doorMap.put(61, DungeonDoor.Door.RIGHT);
-        doorMap.put(62, DungeonDoor.Door.BOTTOM);
-        return doorMap;
-    }
+
 }

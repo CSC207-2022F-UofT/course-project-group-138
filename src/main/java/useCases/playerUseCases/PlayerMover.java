@@ -78,7 +78,7 @@ public class PlayerMover {
     }
 
     public void newRoom() {
-        player.setX(Settings.canvasWidth() / 2);
-        player.setY(Settings.canvasHeight() * 3 / 4);
+        player.setX(10);
+        player.setY(Settings.canvasHeight() / 2 - 25);
     }
 }

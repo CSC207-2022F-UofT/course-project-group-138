@@ -10,7 +10,7 @@ public abstract class Character extends Entity {
     private final Inventory inventory;
     private int maximumHealth;
     private int currentHealth;
-    private boolean facing_right = false;
+    private boolean facing_right = true;
 
     public Character(Inventory inventory, int maximumHealth, int x, int y) {
         super(x, y);

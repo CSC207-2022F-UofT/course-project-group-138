@@ -3,26 +3,30 @@ package useCases.playerUseCases;
 import controllers.gameStates.RoomSwitcher;
 import entities.dungeon.DungeonDoor;
 import useCases.CollisionHandler;
+import entities.dungeon.DungeonDoor.Door;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class PlayerCollisionHandler implements CollisionHandler {
     protected Rectangle self;
     protected PlayerMover mover;
     RoomSwitcher roomSwitcher;
+    HashMap<Door, Integer> doorMap;
     public PlayerCollisionHandler(Rectangle rectangle, PlayerMover mover, RoomSwitcher switcher){
         this.self = rectangle;
         this.mover = mover;
         this.roomSwitcher = switcher;
+        doorMap = buildDoorMap();
     }
     public void handleTileCollisions(Rectangle[] dungeonTiles){
         for (Rectangle tile: dungeonTiles){
             handleCollision(tile);
         }
     }
-    public void handleDoorCollisions(DungeonDoor[] doors){
+    public void handleDoorCollisions(DungeonDoor[] doors, int roomType){
         for (DungeonDoor door : doors){
-            if (self.intersects(door.getRect())){
+            if (roomType >= doorMap.get(door.getType()) && self.intersects(door.getRect())){
                 roomSwitcher.changeRoom(door.getType());
             }
         }
@@ -60,5 +64,19 @@ public class PlayerCollisionHandler implements CollisionHandler {
                 mover.setPlayerX(mover.getX() + intersection.width);;
             }
         }
+    }
+    /**
+     * Creates a HashMap and notes which tiles correspond with which room type
+     * @return - The door map
+     */
+    private HashMap<Door, Integer> buildDoorMap(){
+        HashMap<Door, Integer> doorMap = new HashMap<>();
+        doorMap.put(Door.TOP_LEFT, 5);
+        doorMap.put(Door.TOP_MID, 3);
+        doorMap.put(Door.TOP_RIGHT, 6);
+        doorMap.put(Door.LEFT, 1);
+        doorMap.put(Door.RIGHT, 0);
+        doorMap.put(Door.BOTTOM, 4);
+        return doorMap;
     }
 }
