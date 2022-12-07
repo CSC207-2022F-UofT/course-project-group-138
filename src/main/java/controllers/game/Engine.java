@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Engine {
@@ -85,6 +86,10 @@ public class Engine {
         @Override
         public void keyReleased(KeyEvent e) {
             stateManager.keyReleased(e.getKeyCode());
+        }
+
+        public void click(MouseEvent e) {
+            stateManager.click(e.getID());
         }
     }
 
