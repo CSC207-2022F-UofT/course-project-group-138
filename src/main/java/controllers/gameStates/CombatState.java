@@ -3,7 +3,7 @@ package controllers.gameStates;
 import UI.presenters.statePresenters.StatePresenter;
 
 
-//TODO: implement method bodies make State have a click method, make all states have an empty click
+//TODO: implement method bodies
 
 
 public class CombatState implements State{
