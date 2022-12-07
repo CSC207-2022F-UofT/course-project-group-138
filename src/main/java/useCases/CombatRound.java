@@ -1,4 +1,4 @@
-package controllers;
+package useCases;
 
 import useCases.Attack;
 import entities.character.Enemy;
