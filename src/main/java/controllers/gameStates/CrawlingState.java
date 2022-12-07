@@ -1,5 +1,7 @@
 package controllers.gameStates;
 
+import UI.presenters.viewModels.EnemyViewModel;
+import UI.presenters.viewModels.MerchantViewModel;
 import controllers.TileManager;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
@@ -27,6 +29,8 @@ public class CrawlingState implements State, RoomSwitcher {
     Player player;
     PlayerMover playerMover;
     PlayerViewModel playerViewModel;
+    EnemyViewModel enemyViewModel;
+    MerchantViewModel merchantViewModel;
     DungeonController dungeonController;
     TileManager tileManager;
     StatePresenter presenter;
@@ -140,7 +144,13 @@ public class CrawlingState implements State, RoomSwitcher {
     }
     public void getEnemy(){
         if (dungeonController.getCurrentRoom().hasEnemy()){
-
+            try {
+                if (enemyViewModel == null) {
+                    enemyViewModel = new EnemyViewModel(dungeonController.getCurrentRoom().getEnemy(), Settings.getTileSize());
+                }
+            } catch (DungeonRoom.Object404Error e) {
+                e.printStackTrace();
+            }
         }
     }
 }

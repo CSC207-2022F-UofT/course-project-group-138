@@ -3,14 +3,14 @@ package useCases;
 import java.util.Timer;
 
 public class AnimationStrategy {
-    int curr;
-    int numFrames;
-    int startFrame;
-    long lastTime;
-    public AnimationStrategy(int startFrame, int numFrames){
-        this.startFrame = startFrame;
+    static int curr;
+    static int numFrames;
+    static int startFrame;
+    static long lastTime;
+    public AnimationStrategy(int startFrames, int totalFrames){
+        startFrame = startFrames;
         curr = startFrame;
-        this.numFrames = numFrames;
+        numFrames = totalFrames;
         lastTime = System.currentTimeMillis();
 
 

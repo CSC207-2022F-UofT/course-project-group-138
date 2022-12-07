@@ -1,5 +1,7 @@
 package UI.presenters.statePresenters;
 
+import UI.presenters.viewModels.EnemyViewModel;
+import UI.presenters.viewModels.MerchantViewModel;
 import UI.presenters.viewModels.PlayerViewModel;
 import controllers.TileManager;
 import gateways.ImageGateway;
@@ -13,6 +15,8 @@ public class CrawlingStatePresenter implements StatePresenter {
      */
     PlayerViewModel playerViewModel;
     BufferedImage currentPlayerImage;
+    EnemyViewModel enemyViewModel;
+    MerchantViewModel merchantViewModel;
     TileManager tileManager;
     public CrawlingStatePresenter() {
         updatePlayerImage();
