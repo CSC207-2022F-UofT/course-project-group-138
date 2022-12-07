@@ -104,6 +104,11 @@ public class TileArrayBuilder {
         tiles[61].setImage(ImageGateway.getMud_n2());
         tiles[62].setImage(ImageGateway.getFloorStain());
         tiles[63].setImage(ImageGateway.getChestGoldenClosed());
+        tiles[64].setImage(ImageGateway.getFlagBlue());
+        tiles[65].setImage(ImageGateway.getFlagGreen());
+        tiles[66].setImage(ImageGateway.getWallGoo());
+
+
 
 
 

@@ -194,6 +194,15 @@ public class ImageGateway {
     public static BufferedImage getChestGoldenClosed(){
         return getImage("src/main/res/tiles/items/chest_golden_closed.png");
     }
+    public static BufferedImage getFlagBlue(){
+        return getImage("src/main/res/tiles/items/wall_flag_blue.png");
+    }
+    public static BufferedImage getFlagGreen(){
+        return getImage("src/main/res/tiles/items/wall_flag_green.png");
+    }
+    public static BufferedImage getWallGoo(){
+        return getImage("src/main/res/tiles/items/wall_goo.png");
+    }
 
 
 

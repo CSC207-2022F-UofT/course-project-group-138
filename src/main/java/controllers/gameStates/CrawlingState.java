@@ -17,6 +17,8 @@ import entities.dungeon.DungeonDoor.Door;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CrawlingState implements State, RoomSwitcher {
     /**
@@ -128,6 +130,7 @@ public class CrawlingState implements State, RoomSwitcher {
                 break;
         }
         roomType = Math.min(dungeonController.getConnections().size(), 6);
+//        roomType = ThreadLocalRandom.current().nextInt(1, 6);
         System.out.println("New Room #: " + acc);
         System.out.println("Current Room has size: " + dungeonController.getConnections().size());
         acc++;
