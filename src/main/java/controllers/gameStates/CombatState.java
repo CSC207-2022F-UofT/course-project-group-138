@@ -16,6 +16,7 @@ public class CombatState implements State{
     /**
      * This class represents the state of the game where the player is in combat.
      * The player cannot move, but can click the Attack button on the screen to perform an attack.
+     * The player can still press non movement keys for non movement actions.
      */
 
     Player player;
