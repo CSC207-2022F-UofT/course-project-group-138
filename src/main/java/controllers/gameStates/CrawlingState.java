@@ -12,6 +12,7 @@ import useCases.playerUseCases.PlayerCollisionHandler;
 import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
+import entities.dungeon.DungeonDoor.Door;
 
 public class CrawlingState implements State, RoomSwitcher {
     /**
@@ -38,7 +39,7 @@ public class CrawlingState implements State, RoomSwitcher {
         initializer.init();
         this.player = initializer.getPlayer();
         // @TODO uncomment below code when dungeonController is done
-        // this.dungeonController = new DungeonController();
+        this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         initializePresenter();
     }
@@ -87,7 +88,20 @@ public class CrawlingState implements State, RoomSwitcher {
     }
 
     @Override
-    public void changeRoom(Enum<DungeonDoor.Door> doorType) {
-        System.out.println("room switch" + doorType);
+    public void changeRoom(Door doorType) {
+        switch (doorType){
+            case BOTTOM:
+                break;
+            case LEFT:
+                break;
+            case RIGHT:
+                break;
+            case TOP_LEFT:
+                break;
+            case TOP_MID:
+                break;
+            case TOP_RIGHT:
+                break;
+        }
     }
 }

@@ -8,7 +8,7 @@ public class DungeonDoor extends DungeonTile{
      * instantiated when generating the dungeon map.
      */
     DungeonRoom room; // Represents what room this door leads to
-    Enum<Door> type;
+    Door type;
 
     public enum Door{
         TOP_LEFT,
@@ -25,10 +25,10 @@ public class DungeonDoor extends DungeonTile{
         return this.tileRect;
     }
 
-    public Enum<Door> getType() {
+    public Door getType() {
         return type;
     }
-    public void setType(Enum<Door> type) {
+    public void setType(Door type) {
         this.type = type;
     }
 }
