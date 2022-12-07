@@ -2,13 +2,20 @@ package save.save_screen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import entities.dungeon.DungeonRoom;
+import save.CustomizedJsonDeserializer.GsonDungeonMapDeserializer;
+import save.CustomizedJsonDeserializer.GsonDungeonRoomDeserializer;
 import save.CustomizedJsonDeserializer.GsonLocalDateTimeDeserializer;
+import save.CustomizedJsonSerializer.GsonDungeonMapSerializer;
+import save.CustomizedJsonSerializer.GsonDungeonRoomSerializer;
 import save.CustomizedJsonSerializer.GsonLocalDateTimeSerializer;
 import save.save_use_case.DsGateway;
 import save.save_use_case.DsRequest;
 import save.save_use_case.LoadRequest;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -20,6 +27,8 @@ public class GameFiles implements DsGateway {
 
     private Map<String, DsRequest> gameSavesData = new HashMap<>();
 
+    private GsonBuilder gsonBuilder = new GsonBuilder();
+
 
     /**
      * Load the data from file with specifed file path into `gameSavesData`.
@@ -29,13 +38,16 @@ public class GameFiles implements DsGateway {
     public GameFiles(String filePath) throws IOException {
         SAVE_FILES = new File(filePath);
 
-        // if there is saved game data, then load them into `gameSavesData`
-        if(SAVE_FILES.length() != 0) {
+        // if there are saved game data, then load them into `gameSavesData`
+        if (SAVE_FILES.length() != 0) {
             BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILES));
 
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
             gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeDeserializer());
+            Type type = new TypeToken<HashMap<DungeonRoom, List<DungeonRoom>>>(){}.getType();
+            gsonBuilder.registerTypeAdapter(type, new GsonDungeonMapDeserializer());
+
+            gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomDeserializer());
+
             Gson gson = gsonBuilder.create();
 
             String row;
@@ -48,24 +60,28 @@ public class GameFiles implements DsGateway {
     }
 
     /**
-     * Save the request into the Map `gameSavesData`, then it calls `save()` to write the map into the database entry by entry
+     * Save the request into the Map `gameSavesData`. If the file name of save is already in the dadtabase, then its
+     * data will be replaced by the new data. After that, it calls `save(Class dungeonMapClass)` to write the map into
+     * the database entry by entry
      * @param dsRequest A save request to the database containing File name, Player, Dungeon, Creation Time
      */
     @Override
     public void save(DsRequest dsRequest) {
         gameSavesData.put(dsRequest.getFileName(), dsRequest);
-        this.save();
+        Class dungeonMapClass = dsRequest.getDungeon().getMap().getClass();
+        this.save(dungeonMapClass);
     }
 
-    private void save() {
+    private void save(Class dungeonMapClass) {
         BufferedWriter writer;
         try{
             //int i = 0;
             //System.out.println(i++);
             writer  = new BufferedWriter(new FileWriter(SAVE_FILES));
 
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
+            gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomSerializer())
+                    .registerTypeAdapter(dungeonMapClass, new GsonDungeonMapSerializer())
+                    .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
             Gson gson = gsonBuilder.create();
 
             //System.out.println(i++);

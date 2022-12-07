@@ -1,88 +1,78 @@
 package save.save_screen;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import entities.character.Player;
 import entities.dungeon.Dungeon;
-import entities.dungeon.DungeonRoom;
 import org.junit.Test;
-import save.CustomizedJsonSerializer.GsonConnectedRooms;
-import save.CustomizedJsonSerializer.GsonLocalDateTimeSerializer;
 import save.save_use_case.DsGateway;
 import save.save_use_case.DsRequest;
+import save.save_use_case.LoadRequest;
 import settings.Initializer;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import static org.junit.Assert.assertEquals;
+
 public class SerializeDsRequestTest {
 
+    private Initializer initializer = new Initializer();
+
+    private String databasePath = "./gamesavedb";
+
+    private DsGateway saveFiles;
+
+    private static final double DELTA = 1e-15;
 
     @Test
-    public void SerializeDsrequest() {
-/*
-        Settings.setPriceRange(3);
-        Settings.setAttributeRange(3);
-        Settings.setMaxHp(3);
-        Settings.setPlayerSpeed(12);
-        // Sets Window size based on monitor resolution
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        Settings.setFrameWidth((int) d.getWidth());
-        Settings.setFrameHeight((int) d.getHeight());
-        Settings.determineScalingFactor();
-        Settings.centerInitialPosition();
-        Settings.setRoomSize(Settings.getFrameWidth(), Settings.getFrameHeight());
-
-
-        // construct a player
-        CharacterCreator characterCreator = new CommonCharacterCreator();
-        Player player = characterCreator.createPlayer(100,
-                Settings.getDefaultPlayerWeapon(),
-                Settings.getDefaultPlayerArmor(),
-                Settings.getMaxHp(),
-                6,
-                1);
-*/
-
-        Initializer initializer = new Initializer();
+    public void SerializeDsRequest() {
         initializer.init();
-        Player player = initializer.getPlayer();
-        // construct the dungeon
-        Dungeon dungeon = new Dungeon();
-        dungeon.generateDungeonMap();
-        // construct a save request to the database
-        String gameSaveName = "New Save 1";
-        LocalDateTime creationTime = LocalDateTime.now();
-        DsRequest dsRequest = new DsRequest(gameSaveName, player, dungeon, creationTime);
 
-        String databasePath = "./gamesavedb";
-        DsGateway saveFiles;
         try {
             saveFiles = new GameFiles(databasePath);
         }
         catch (IOException e) {
             throw new RuntimeException("Fail to create file!");
         }
+        Player player = initializer.getPlayer();
+        // construct the dungeon
+        Dungeon dungeon = new Dungeon();
+        dungeon.generateDungeonMap();
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
-        gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonConnectedRooms());
-        Gson gson = gsonBuilder.create();
-        System.out.println("reached");
-        //String str = gson.toJson(dsRequest);
-        System.out.println(gson.toJson(dungeon.getStartingRoom()));
+        // construct a save request to the database
+        String gameSaveName = "New Save 1";
+        LocalDateTime creationTime = LocalDateTime.now();
+        DsRequest dsRequest = new DsRequest(gameSaveName, player, dungeon, creationTime);
 
-        /*BufferedWriter writer;
-        try{
-            writer = new BufferedWriter(new FileWriter(databasePath));
-            writer.write("123");
-            writer.newLine();
+        // write save request into the database
+        saveFiles.save(dsRequest);
 
-            writer.close();
+        // suppose the user closes the game afterwards, and he wants to load his last save file "New Save 1"
+        DsGateway loadedSaveFiles;
+        try {
+            loadedSaveFiles = new GameFiles(databasePath);
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
+            throw new RuntimeException("Fail to create file!");
+        }
 
+        // construct a load request to the database
+        LoadRequest loadRequest = new LoadRequest(gameSaveName);
+        DsRequest loadedSaves = loadedSaveFiles.load(loadRequest);
+
+        // construct another save
+        String gameSaveName2 = "New Save 2";
+        LocalDateTime creationTime2 = LocalDateTime.now();
+        DsRequest dsRequest2 = new DsRequest(gameSaveName2, player, dungeon, creationTime2);
+        loadedSaveFiles.save(dsRequest2);
+
+/*        DungeonRoom startingRoom = dsRequest.getDungeon().getStartingRoom();
+        DungeonRoom loadedStartingRoom = loadedSaves.getDungeon().getStartingRoom();
+        DungeonRoom[] connection = dsRequest.getDungeon().getMap().get(startingRoom).toArray(new DungeonRoom[0]);
+        DungeonRoom[] loadedConnection = dsRequest.getDungeon().getMap().get(loadedStartingRoom).toArray(new DungeonRoom[0]);
+        System.out.println(connection);*/
+
+        assertEquals("File Name does not Match!", dsRequest.getFileName(), loadedSaves.getFileName());
+        assertEquals("Dungeon difficulty field does not match!", 0, Double.compare(dsRequest.getDungeon().getDifficulty(), loadedSaves.getDungeon().getDifficulty()));
+        //assertTrue("Dugeon map key set does not match!", dsRequest.getDungeon().getMap().keySet().equals(loadedSaves.getDungeon().getMap().keySet()));
     }
 }

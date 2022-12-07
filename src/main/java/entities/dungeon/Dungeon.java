@@ -137,4 +137,9 @@ public class Dungeon {
     public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
         return map;
     }
+
+    // for testing
+    public double getDifficulty() {
+        return difficulty;
+    }
 }

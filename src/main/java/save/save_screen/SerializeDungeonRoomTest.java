@@ -10,11 +10,18 @@ import entities.inventory.Armor;
 import entities.inventory.Inventory;
 import entities.inventory.Weapon;
 import org.junit.Test;
+import save.CustomizedJsonDeserializer.GsonDungeonMapDeserializer;
+import save.CustomizedJsonDeserializer.GsonDungeonRoomDeserializer;
 import save.CustomizedJsonSerializer.GsonDungeonMapSerializer;
 import save.CustomizedJsonSerializer.GsonDungeonRoomSerializer;
 import settings.Initializer;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class SerializeDungeonRoomTest {
     private Dungeon dungeon = new Dungeon();
@@ -92,11 +99,33 @@ public class SerializeDungeonRoomTest {
         dungeon.generateDungeonMap();
 
         gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomSerializer())
-                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapSerializer());
+                .registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomDeserializer())
+                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapSerializer())
+                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapDeserializer());
 
         Gson gson = gsonBuilder.create();
         String gsonStr = gson.toJson(dungeon);
-        System.out.println(gsonStr);
+
+        Dungeon loadedDungeon =gson.fromJson(gsonStr, Dungeon.class);
+        String gsonStr2 = gson.toJson(loadedDungeon);
+
+        BufferedWriter writer;
+        try{
+            writer  = new BufferedWriter(new FileWriter("./dungeonmaptest"));
+            writer.write(gsonStr);
+            writer.newLine();
+            writer.write(gsonStr2);
+            writer.newLine();
+            writer.close();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(gsonStr2.length());
+        System.out.println(gsonStr.length());
+
+        assertTrue(gsonStr2.length() == gsonStr.length());
+
     }
 
     @Test
