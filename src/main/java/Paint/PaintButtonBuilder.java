@@ -18,6 +18,9 @@ public class PaintButtonBuilder {
     public JButton buildPaintBtn(String name, Color c){
         JButton colorBtn = new JButton(name);
         colorBtn.setFont(new Font("Courier", Font.BOLD, 14));
+        colorBtn.setBackground(Color.LIGHT_GRAY);
+        colorBtn.setBorderPainted(false);
+        colorBtn.setFocusPainted(false);
         buttonMap.put(colorBtn, new ColorAction(c));
         return colorBtn;
     }
@@ -33,6 +36,9 @@ public class PaintButtonBuilder {
     public JButton buildPaintBtn(String name){
         JButton actionBtn = new JButton(name);
         actionBtn.setFont(new Font("Courier", Font.BOLD, 14));
+        actionBtn.setBackground(Color.LIGHT_GRAY);
+        actionBtn.setBorderPainted(false);
+        actionBtn.setFocusPainted(false);
         buttonMap.put(actionBtn, new GeneralAction(name));
         return actionBtn;
     }
@@ -46,6 +52,9 @@ public class PaintButtonBuilder {
     public JButton buildPaintBtn(String name, int size){
         JButton sizeBtn = new JButton(name);
         sizeBtn.setFont(new Font("Courier", Font.BOLD, 14));
+        sizeBtn.setBackground(Color.LIGHT_GRAY);
+        sizeBtn.setBorderPainted(false);
+        sizeBtn.setFocusPainted(false);
         buttonMap.put(sizeBtn, new SizeAction(size));
         return sizeBtn;
     }

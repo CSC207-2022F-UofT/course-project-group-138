@@ -9,7 +9,6 @@ import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 
-
 public class PaintCanvas extends JComponent{
     // canvas
     private Image image;
@@ -79,6 +78,7 @@ public class PaintCanvas extends JComponent{
             File outputFile = new File("src/main/res/characters.png");
             outputFile.createNewFile();
             ImageIO.write(imageToBufferedImage(transparentImage), "png", outputFile);
+            PaintMain.quit();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

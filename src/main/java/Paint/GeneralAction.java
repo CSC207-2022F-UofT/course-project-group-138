@@ -25,7 +25,6 @@ public class GeneralAction implements PaintAction{
                 canvas.clear();
                 break;
             case "preview":
-                canvas.done();
                 canvas.preview();
                 break;
             case "done":

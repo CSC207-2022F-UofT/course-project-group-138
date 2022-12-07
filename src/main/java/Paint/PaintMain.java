@@ -15,7 +15,7 @@ public class PaintMain {
     JLabel sizeLabel, controlsLabel, previewLabel, canvasLabel;
     PaintButtonBuilder buttonBuilder = new PaintButtonBuilder();
     // Declare UI
-    JFrame mainFrame;
+    static JFrame mainFrame;
     static JLabel preview;
     PaintCanvas canvas;
     // Declare Event Handlers
@@ -80,6 +80,8 @@ public class PaintMain {
     public void buildLayout(){
         // Canvas and main JFrame
         mainFrame = new JFrame("Paint");
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setUndecorated(true);
         canvas = new PaintCanvas();
         // Labels
         sizeLabel = new JLabel("Sizes: ");
@@ -102,7 +104,7 @@ public class PaintMain {
         JPanel filler = new JPanel();
 
         Container contents = mainFrame.getContentPane();
-//        contents.setBackground(Color.BLACK);
+//        contents.setBackground(Color.DARK_GRAY);
         filler.setPreferredSize(new Dimension(100, 10));
         contents.setLayout(new GridBagLayout());
 
@@ -185,6 +187,10 @@ public class PaintMain {
         GridBagConstraints c = new GridBagConstraints(gridx, gridy, gridwidth, gridheight, weightx, weighty,
                 anchor, fill, insets, 0, 0);
         container.add(component, c);
+    }
+
+    public static void quit(){
+        mainFrame.dispose();
     }
 }
 
