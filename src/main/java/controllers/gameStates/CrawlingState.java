@@ -67,6 +67,16 @@ public class CrawlingState implements State {
     public void keyReleasedEvents(int code) {
         KeyEventHandler.handleCrawingStateEvents(code, false, playerMover);
     }
+
+    /**
+     * Currently this method has no body, as the player doesn't click while exploring. Future work on the game may
+     * implement mechanics that allow the player to click while exploring.
+     * @param code - clickCode corresponding to the click
+     */
+    public void clickEvents(int code) {
+
+    }
+
     @Override
     public StatePresenter getPresenter() {
         return presenter;

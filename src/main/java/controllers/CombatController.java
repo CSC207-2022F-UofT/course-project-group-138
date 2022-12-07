@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: make it implement State, make State have a click method, make all states have an empty click
 public class CombatController {
     /**
      * Controller for facillating data between the user interface and CombatLoop
