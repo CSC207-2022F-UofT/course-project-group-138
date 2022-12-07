@@ -1,5 +1,6 @@
 package entities.builders;
 
+import entities.dungeon.DungeonDoor;
 import entities.dungeon.DungeonTile;
 import gateways.ImageGateway;
 import settings.Settings;
@@ -100,13 +101,7 @@ public class TileArrayBuilder {
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
 
-        // Collision with these tiles switches the Room
-        tiles[57].setImage(ImageGateway.getDoorClosed());
-        tiles[58].setImage(ImageGateway.getDoorClosed());
-        tiles[59].setImage(ImageGateway.getDoorClosed());
-        tiles[60].setImage(ImageGateway.getDoorClosed());
-        tiles[61].setImage(ImageGateway.getDoorClosed());
-        tiles[62].setImage(ImageGateway.getDoorClosed());
+
         return tiles;
     }
 
@@ -155,6 +150,9 @@ public class TileArrayBuilder {
             wallTransparentTiles.add(i);
         }
         wallTransparentTiles.add(37);
+        wallTransparentTiles.add(57);
+        wallTransparentTiles.add(58);
+        wallTransparentTiles.add(59);
         return wallTransparentTiles;
     }
 
@@ -164,13 +162,19 @@ public class TileArrayBuilder {
     public void buildClipTiles(){
         List<Integer> clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
                 14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20,
-                21, 11, 37, 38, 18, 12, 15));
+                21, 11, 37, 18, 12, 15));
         for (int i = 49; i <= 56; i++){
             clipTiles.add(i);
         }
         for (int i = 25; i <= 33; i++){
             clipTiles.add(i);
         }
+        // These are the 3 top door tiles. No need to add bottom, left, right since those are implemented different
+        // because those do not require images.
+        clipTiles.add(57);
+        clipTiles.add(58);
+        clipTiles.add(59);
+
         for (int tileNum : clipTiles){
             tiles[tileNum].setClips(true);
         }
@@ -207,6 +211,10 @@ public class TileArrayBuilder {
                 if (smallTiles.contains(tileNum)){
                     collisionArray.add(new Rectangle(x, (int) (y + Math.round(size * 0.66)), size, size / 4 ));
                 }
+                // These will be the door tiles (Do not add to collision array)
+                else if (tileNum == 57 || tileNum == 58 || tileNum == 59){
+                    tiles[tileNum].setRectLocation(x, y);
+                }
                 else {
                     collisionArray.add(new Rectangle(x, y, size, size));
                 }
@@ -224,29 +232,53 @@ public class TileArrayBuilder {
     }
 
     /**
-     * Enum to note what tiles correspond to what door
+     * Maximum 6 doors.
      */
-    public enum Door{
-        TOP_LEFT,
-        TOP_MID,
-        TOP_RIGHT,
-        LEFT,
-        RIGHT,
-        BOTTOM
+    public DungeonDoor[] buildDoorArray(){
+        DungeonDoor top_left = new DungeonDoor();
+        top_left.setType(DungeonDoor.Door.TOP_LEFT);
+        DungeonDoor top_mid = new DungeonDoor();
+        top_mid.setType(DungeonDoor.Door.TOP_MID);
+        DungeonDoor top_right = new DungeonDoor();
+        top_right.setType(DungeonDoor.Door.TOP_RIGHT);
+        // So that these doors are recognized as both images and door collidables
+        top_left.setClips(true);
+        top_right.setClips(true);
+        top_mid.setClips(true);
+        // Initialize these rectangles
+        top_left.initializeRect();
+        top_mid.initializeRect();
+        top_right.initializeRect();
+        tiles[57] = top_left;
+        tiles[58] = top_mid;
+        tiles[59] = top_right;
+        // Collision with these tiles switches the Room
+        tiles[57].setImage(ImageGateway.getDoorClosed());
+        tiles[58].setImage(ImageGateway.getDoorClosed());
+        tiles[59].setImage(ImageGateway.getDoorClosed());
+        DungeonDoor left = new DungeonDoor();
+        left.setRect(new Rectangle(0, 0, 4, Settings.canvasHeight()));
+        left.setType(DungeonDoor.Door.LEFT);
+        DungeonDoor right = new DungeonDoor();
+        right.setRect(new Rectangle(Settings.canvasWidth() - 4, 0, 4, Settings.canvasHeight()));
+        right.setType(DungeonDoor.Door.RIGHT);
+        DungeonDoor bottom = new DungeonDoor();
+        bottom.setRect(new Rectangle(0, Settings.canvasHeight() - 4, Settings.canvasWidth(), 4));
+        bottom.setType(DungeonDoor.Door.BOTTOM);
+        return new DungeonDoor[]{top_left, top_mid, top_right, left, right, bottom};
     }
-
     /**
      * Creates a HashMap and notes which tile numbers corresond with which gate
      * @return - The door map
      */
-    public HashMap<Integer, Enum<Door>> buildDoorMap(){
-        HashMap<Integer, Enum<Door>> doorMap = new HashMap<>();
-        doorMap.put(57, Door.TOP_LEFT);
-        doorMap.put(58, Door.TOP_MID);
-        doorMap.put(59, Door.TOP_RIGHT);
-        doorMap.put(60, Door.LEFT);
-        doorMap.put(61, Door.RIGHT);
-        doorMap.put(62, Door.BOTTOM);
+    public HashMap<Integer, Enum<DungeonDoor.Door>> buildDoorMap(){
+        HashMap<Integer, Enum<DungeonDoor.Door>> doorMap = new HashMap<>();
+        doorMap.put(57, DungeonDoor.Door.TOP_LEFT);
+        doorMap.put(58, DungeonDoor.Door.TOP_MID);
+        doorMap.put(59, DungeonDoor.Door.TOP_RIGHT);
+        doorMap.put(60, DungeonDoor.Door.LEFT);
+        doorMap.put(61, DungeonDoor.Door.RIGHT);
+        doorMap.put(62, DungeonDoor.Door.BOTTOM);
         return doorMap;
     }
 }

@@ -5,6 +5,7 @@ import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
 import entities.character.Player;
+import entities.dungeon.DungeonDoor;
 import settings.Settings;
 import useCases.KeyEventHandler;
 import useCases.playerUseCases.PlayerCollisionHandler;
@@ -12,7 +13,7 @@ import useCases.playerUseCases.PlayerMover;
 import UI.presenters.PlayerViewModel;
 import settings.Initializer;
 
-public class CrawlingState implements State {
+public class CrawlingState implements State, RoomSwitcher {
     /**
      * This class represents the state of the game where the player is free to move/roam around the map
      * There is no combat in this state, only movement and room transitions between various dungeon rooms.
@@ -23,6 +24,7 @@ public class CrawlingState implements State {
     PlayerMover playerMover;
     PlayerViewModel playerViewModel;
     DungeonController dungeonController;
+    TileManager tileManager;
     StatePresenter presenter;
     PlayerCollisionHandler playerCollisionHandler;
 
@@ -43,7 +45,8 @@ public class CrawlingState implements State {
     public void loop() {
         playerMover.move();
         playerViewModel.updatePosition();
-        playerCollisionHandler.handleTileCollisions();
+        playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
+        playerCollisionHandler.handleDoorCollisions(tileManager.getDoors());
         // @TODO call to DungeonRoomController
     }
     /**
@@ -72,13 +75,19 @@ public class CrawlingState implements State {
      */
     private void initializePresenter(){
         PlayerViewModel viewModel = new PlayerViewModel(player, Settings.getPlayerSize());
-        TileManager tileManager = new TileManager();
+        tileManager = new TileManager();
         CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
         crawlPresenter.setPlayerViewModel(viewModel);
         crawlPresenter.setTilePresenter(tileManager);
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
-        this.playerCollisionHandler = new PlayerCollisionHandler(playerViewModel.getCollisionRect(), playerMover,
-                tileManager.getCollisionArray());
+        // Pass this as argument uses Dependency inversion so does not violate CA
+        this.playerCollisionHandler =
+                new PlayerCollisionHandler(playerViewModel.getCollisionRect(), playerMover, this);
+    }
+
+    @Override
+    public void changeRoom(Enum<DungeonDoor.Door> doorType) {
+        System.out.println("room switch" + doorType);
     }
 }

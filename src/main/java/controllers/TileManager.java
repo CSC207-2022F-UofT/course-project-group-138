@@ -2,6 +2,7 @@ package controllers;
 
 import UI.presenters.TilePresenter;
 import entities.builders.TileArrayBuilder;
+import entities.dungeon.DungeonDoor;
 import entities.dungeon.DungeonTile;
 import gateways.MapReader;
 import settings.Settings;
@@ -27,9 +28,9 @@ public class TileManager {
     private Set<Integer> floorTransparentTiles;
     private Set<Integer> blackTransparentTiles;
     private Set<Integer> wallTransparentTiles;
+    private DungeonDoor[] doors;
     private final int tileSize = Settings.getTileSize();
     private List<Rectangle> collisionArray;
-    private HashMap<Integer, Enum<TileArrayBuilder.Door>> doorMap;
 
     /**
      * Constructs a TilePresenter object, while noting the special tiles
@@ -39,9 +40,9 @@ public class TileManager {
         tiles = new DungeonTile[75];
         tileBuilder = new TileArrayBuilder();
         initializeTileArray();
+        doors = tileBuilder.buildDoorArray();
         populateTileMap(0);
         addSpecialTiles();
-        doorMap = tileBuilder.buildDoorMap();
         tilePresenter = new TilePresenter();
         // Since the start frame for the torch starts at 25, and 8 frames total
         torchAnimator = new AnimationStrategy(25, 8);
@@ -107,6 +108,10 @@ public class TileManager {
         return collisionArray.toArray(new Rectangle[0]);
     }
 
+    public DungeonDoor[] getDoors() {
+        return doors;
+    }
+
     /**
      * Initialize all the tiles in the arrays and set their images.
      *
@@ -117,6 +122,7 @@ public class TileManager {
         tiles = tileBuilder.buildTileArray();
         tileBuilder.buildClipTiles();
     }
+
 
     /**
      * Adds the special tiles to its respective type

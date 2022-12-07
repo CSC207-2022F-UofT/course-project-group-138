@@ -1,27 +1,33 @@
 package useCases.playerUseCases;
 
+import controllers.gameStates.RoomSwitcher;
+import entities.dungeon.DungeonDoor;
 import useCases.CollisionHandler;
-import entities.dungeon.DungeonTile;
 
 import java.awt.*;
 
 public class PlayerCollisionHandler implements CollisionHandler {
-    private Rectangle[] dungeonTiles;
     protected Rectangle self;
     protected PlayerMover mover;
-    public PlayerCollisionHandler(Rectangle rectangle, PlayerMover mover, Rectangle[] dungeonTiles){
+    RoomSwitcher roomSwitcher;
+    public PlayerCollisionHandler(Rectangle rectangle, PlayerMover mover, RoomSwitcher switcher){
         this.self = rectangle;
         this.mover = mover;
-        this.dungeonTiles = dungeonTiles;
+        this.roomSwitcher = switcher;
     }
-    public void handleTileCollisions(){
+    public void handleTileCollisions(Rectangle[] dungeonTiles){
         for (Rectangle tile: dungeonTiles){
             handleCollision(tile);
         }
     }
-
-    @Override
-    public void handleCollision(Rectangle object) {
+    public void handleDoorCollisions(DungeonDoor[] doors){
+        for (DungeonDoor door : doors){
+            if (self.intersects(door.getRect())){
+                roomSwitcher.changeRoom(door.getType());
+            }
+        }
+    }
+    private void handleCollision(Rectangle object) {
 
         Rectangle intersection = self.intersection(object);
         if (intersection.isEmpty()){return;}
@@ -55,5 +61,4 @@ public class PlayerCollisionHandler implements CollisionHandler {
             }
         }
     }
-
 }
