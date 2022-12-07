@@ -6,6 +6,8 @@ import entities.character.Player;
 import entities.dungeon.Dungeon;
 import entities.dungeon.DungeonRoom;
 import org.junit.Test;
+import save.CustomizedJsonSerializer.GsonConnectedRooms;
+import save.CustomizedJsonSerializer.GsonLocalDateTimeSerializer;
 import save.save_use_case.DsGateway;
 import save.save_use_case.DsRequest;
 import settings.Initializer;

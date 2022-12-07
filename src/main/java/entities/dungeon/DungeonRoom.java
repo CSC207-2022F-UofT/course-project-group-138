@@ -1,8 +1,5 @@
 package entities.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DungeonRoom {
     private Object nonPlayerCharacter;
     private DungeonRoom previousRoom;
@@ -75,4 +72,6 @@ public class DungeonRoom {
             super(message);
         }
     }
+
+    public boolean hasPreviousRoom() {return this.previousRoom == null; }
 }

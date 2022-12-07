@@ -1,4 +1,4 @@
-package save.save_screen;
+package save.CustomizedJsonSerializer;
 
 import com.google.gson.*;
 import entities.dungeon.DungeonRoom;
