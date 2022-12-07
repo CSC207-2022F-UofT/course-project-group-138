@@ -40,8 +40,15 @@ public abstract class Character extends Entity {
     /**
      * Fully recharges the Character's health to the maximum amount.
      */
-    public void rechargeHealthFull() {
+    public void rechargeHealth() {
         this.currentHealth = this.maximumHealth;
+    }
+
+    /**
+     * Returns whether or not the Character's health is > 0.
+     */
+    public boolean isAlive() {
+        return this.currentHealth > 0;
     }
 
     /**

@@ -22,6 +22,10 @@ public class MenuState implements State {
 
     }
 
+    public void clickEvents(int code) {
+
+    }
+
     @Override
     public StatePresenter getPresenter() {
         return presenter;
