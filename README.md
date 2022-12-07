@@ -51,8 +51,7 @@ equipment.
 
 # Gallery
 - An image of the player character in a dungeon room.
-![image](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/attacking/images/readme/game_readme_1.jpg?raw=true)
-
+![image](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/main/images/readme/game_readme_1.jpg)
 - A gif of the player exploring the dungeon.
 ![gif](https://raw.githubusercontent.com/CSC207-2022F-UofT/course-project-group-138/51700f7985c2929148ea779ffe033c9c5a90d227/images/Dungeons_2022-12-07_01-44-27.gif)
 
