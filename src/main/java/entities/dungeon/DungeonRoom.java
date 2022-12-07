@@ -73,5 +73,15 @@ public class DungeonRoom {
         }
     }
 
+    // temporary
+
     public boolean hasPreviousRoom() {return this.previousRoom == null; }
+
+    public Object getNonPlayerCharacter() {
+        return nonPlayerCharacter;
+    }
+
+    public DungeonRoom retrievePreviousRoom() {
+        return previousRoom;
+    }
 }

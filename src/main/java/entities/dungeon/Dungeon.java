@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Math.min;
 import static java.lang.Math.round;
 
 public class Dungeon {
@@ -117,13 +116,13 @@ public class Dungeon {
      * @param rooms a List of all DungeonRooms in this Dungeon.
      */
     private void connectEndRooms(Random rand, List<DungeonRoom> rooms) {
-        int randomSecondRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
+        int randomSecondRoomIndex = rand.nextInt(rooms.size());
 
         DungeonRoom gateRoom = new DungeonRoom();
-        int randomSecondLastRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
+        int randomSecondLastRoomIndex = rand.nextInt(rooms.size());
         if (randomSecondLastRoomIndex == randomSecondRoomIndex) {
             do {
-                randomSecondLastRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
+                randomSecondLastRoomIndex = rand.nextInt(rooms.size());
             } while (randomSecondLastRoomIndex == randomSecondRoomIndex);
         }
 
@@ -131,5 +130,11 @@ public class Dungeon {
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
         this.addHallway(this.startingRoom, rooms.get(randomSecondRoomIndex));
         this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex));
+    }
+
+    // temporary
+
+    public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
+        return map;
     }
 }

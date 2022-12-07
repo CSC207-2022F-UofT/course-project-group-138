@@ -31,7 +31,14 @@ public class DungeonTile {
     }
     public void initializeRect(){
         if (clips){
-            tileRect = new Rectangle();
+            tileRect = new Rectangle(0, 0, Settings.getTileSize(), Settings.getTileSize());
         }
+    }
+    public Rectangle getTileRect(){
+        return tileRect;
+    }
+    public void setRectLocation(int x, int y){
+        tileRect.x = x;
+        tileRect.y = y;
     }
 }

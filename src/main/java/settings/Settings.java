@@ -14,8 +14,10 @@ public class Settings {
     private static final int rows = 12; // to keep the 16 x 9 aspect ratio
     private static final int columns = 20;
     private static int PLAYER_SIZE = 75;
+    private static int FPS = 60;
     private static int scalingFactor;
-    private static int[] INITIAL_POSITION, ROOM_SIZE;
+    private static int[] INITIAL_POSITION;
+    private static int[] ROOM_SIZE = new int[2];
     private static String gameName = "Dungeons";
     private static Image playerImage;
 
@@ -46,6 +48,10 @@ public class Settings {
         scalingFactor = getFrameHeight() / 1440;
     }
 
+    public static void setFPS(int FPS) {
+        Settings.FPS = FPS;
+    }
+
     /**
      * Frame width/height must be set before method call to center initial position.
      */
@@ -59,10 +65,8 @@ public class Settings {
     }
 
     public static void setRoomSize(int x, int y) {
-        //ROOM_SIZE[0] = x;                                                   // Height, width of DungeonRoom
-        //1ROOM_SIZE[1] = y;
-        // need to allocate the memory
-        ROOM_SIZE = new int[]{x,y};
+        ROOM_SIZE[0] = x;                                                   // Height, width of DungeonRoom
+        ROOM_SIZE[1] = y;
     }
 
     public static void setDifficulty(int difficulty) {
@@ -110,6 +114,10 @@ public class Settings {
     public static int[] getRoomSize() {
         return ROOM_SIZE;
   }
+
+    public static int getFPS() {
+        return FPS;
+    }
 
     public static int getDifficulty() {
         return DIFFICULTY;
