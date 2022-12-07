@@ -7,6 +7,8 @@ import controllers.TileManager;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.DungeonController;
+import entities.character.Enemy;
+import entities.character.Merchant;
 import entities.character.Player;
 import entities.dungeon.DungeonRoom;
 import settings.Settings;
@@ -57,6 +59,8 @@ public class CrawlingState implements State, RoomSwitcher {
     public void loop() {
         playerMover.move();
         playerViewModel.updatePosition();
+        if (enemyViewModel != null) enemyViewModel.updatePosition();
+        if (merchantViewModel != null) merchantViewModel.updatePosition();
         playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
         playerCollisionHandler.handleDoorCollisions(tileManager.getDoors(), roomType);
         npcuiManager.update();
@@ -147,15 +151,54 @@ public class CrawlingState implements State, RoomSwitcher {
         acc++;
         tileManager.changeRoom(roomType - 1);
         getEnemy();
+        getMerchant();
         playerMover.newRoom();
     }
     public void getEnemy(){
         DungeonRoom currRoom = dungeonController.getCurrentRoom();
         if (currRoom.hasEnemy()) {
+            ((CrawlingStatePresenter)presenter).hasEnemy = true;
+            int[] location = tileManager.getEnemyLocation();
+            Enemy enemy = currRoom.getEnemy();
+            enemy.setX(location[0]);
+            enemy.setY(location[1]);
             if (enemyViewModel == null) {
-                enemyViewModel = new EnemyViewModel(currRoom.getEnemy(), Settings.getTileSize());
+                enemyViewModel = new EnemyViewModel(enemy, Settings.getTileSize());
+
+                ((CrawlingStatePresenter)presenter).setEnemyViewModel(enemyViewModel);
             }
             npcuiManager.spawnEnemy(dungeonController.getCurrentRoom(), enemyViewModel);
+        }
+        else{
+            ((CrawlingStatePresenter)presenter).hasEnemy = false;
+            if (enemyViewModel != null){
+                enemyViewModel.getEntity().setX(-100);
+                enemyViewModel.getEntity().setY(-100);
+            }
+        }
+    }
+    public void getMerchant(){
+        DungeonRoom currRoom = dungeonController.getCurrentRoom();
+        if (currRoom.hasMerchant()) {
+            ((CrawlingStatePresenter)presenter).hasMerchant = true;
+            int[] location = tileManager.getMerchantLocation();
+            Merchant merchant = currRoom.getMerchant();
+            merchant.setX(location[0]);
+            merchant.setY(location[1]);
+            System.out.println(merchant.getX());
+            System.out.println(merchant.getY());
+            if (merchantViewModel == null) {
+                merchantViewModel = new MerchantViewModel(currRoom.getMerchant(), Settings.getTileSize());
+                ((CrawlingStatePresenter)presenter).setMerchantViewModel(merchantViewModel);
+            }
+            npcuiManager.spawnMerchant(dungeonController.getCurrentRoom(), merchantViewModel);
+        }
+        else{
+            ((CrawlingStatePresenter)presenter).hasMerchant = false;
+            if (merchantViewModel != null){
+                merchantViewModel.getEntity().setX(-100);
+                merchantViewModel.getEntity().setY(-100);
+            }
         }
     }
 }

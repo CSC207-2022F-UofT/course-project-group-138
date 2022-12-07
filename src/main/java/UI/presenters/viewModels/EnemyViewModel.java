@@ -20,12 +20,7 @@ public class EnemyViewModel extends CharacterViewModel {
     }
     @Override
     public void updateImage(BufferedImage image) {
-        if (animated){
-
-        }
-        else{
-            this.entityImage = image;
-        }
+        this.entityImage = image;
     }
     public void updateEnemy(Enemy enemy){
         this.entity = enemy;

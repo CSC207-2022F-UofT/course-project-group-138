@@ -146,24 +146,6 @@ public abstract class Character extends Entity{
         return this.inventory.getArmor().getStrength();
     }
 
-    /**
-     * @return the x-coordinate value of the Character.
-     */
-    public int getX() {
-        return this.x;
-    }
-
-    /**
-     * @return the y-coordinate value of the Character.
-     */
-    public int getY() {
-        return this.y;
-        /**
-         * Checks if this character is facing the right side. Otherwise, character is facing left side.
-         * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
-         * @param facing_right - True if and only if character is facing the right side
-         */
-    }
     public void setFacing_right(boolean facing_right){
         this.facing_right = facing_right;
     }

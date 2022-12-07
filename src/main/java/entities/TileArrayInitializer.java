@@ -15,7 +15,7 @@ public class TileArrayInitializer {
     private final Set<Integer> blackTransparentTiles = new HashSet<>();
     private final Set<Integer> wallTransparentTiles = new HashSet<>();
     public TileArrayInitializer(){
-        tiles = new DungeonTile[75];
+        tiles = new DungeonTile[100];
     }
 
     /**
@@ -217,7 +217,7 @@ public class TileArrayInitializer {
 
         while (col < Settings.getColumns() && row < Settings.getRows()){
             int tileNum = tileMap[col][row];
-            if (tileNum > 90){
+            if (tileNum >= 98){
                 tileNum = 25;
             }
 

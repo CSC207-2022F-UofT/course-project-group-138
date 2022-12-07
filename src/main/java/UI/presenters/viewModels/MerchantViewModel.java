@@ -1,6 +1,7 @@
 package UI.presenters.viewModels;
 
 import entities.character.Entity;
+import entities.character.Merchant;
 
 import javax.swing.text.View;
 import java.awt.image.BufferedImage;
@@ -19,5 +20,8 @@ public class MerchantViewModel extends ViewModel {
     @Override
     public void updateImage(BufferedImage image) {
         this.entityImage = image;
+    }
+    public void updateMerchant(Merchant merchant){
+        this.entity = merchant;
     }
 }

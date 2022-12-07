@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class CrawlingStatePresenter implements StatePresenter {
+    public boolean hasMerchant;
+    public boolean hasEnemy;
     /**
      * Facade class kinda
      */
@@ -25,13 +27,23 @@ public class CrawlingStatePresenter implements StatePresenter {
         tileManager.renderTiles(graphics2D);
         // Render Player after tiles
         playerViewModel.updateImage(currentPlayerImage);
+        // Render the view models
         playerViewModel.render(graphics2D);
-
+        if (enemyViewModel != null && hasEnemy) enemyViewModel.render(graphics2D);
+        if (merchantViewModel != null && hasMerchant) merchantViewModel.render(graphics2D);
         // @TODO add render body here (call DungeonRoomPresenter)
     }
 
     public void setPlayerViewModel(PlayerViewModel playerViewModel) {
         this.playerViewModel = playerViewModel;
+    }
+
+    public void setEnemyViewModel(EnemyViewModel enemyViewModel) {
+        this.enemyViewModel = enemyViewModel;
+    }
+
+    public void setMerchantViewModel(MerchantViewModel merchantViewModel) {
+        this.merchantViewModel = merchantViewModel;
     }
 
     public void setTilePresenter(TileManager tileManager) {
