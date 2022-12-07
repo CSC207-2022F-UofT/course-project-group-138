@@ -16,8 +16,7 @@ public class CombatController {
 
     private final Player player;
     private final Enemy enemy;
-
-    private String userInput;
+    private static String userInput;
 
 
     /**
@@ -40,10 +39,10 @@ public class CombatController {
 
     /**
      * Setter for userInput
-     * @param userInput - string representation of the user's click
+     * @param userinput - string representation of the user's click
      */
-    public void setUserInput(String userInput) {
-        this.userInput = userInput;
+    public static void setUserInput(String userinput) {
+        userInput = userinput;
     }
 
     /**
@@ -54,7 +53,7 @@ public class CombatController {
      * @param userInput - user input
      * @return A List of ints, first entry is char1's updated hp, second entry is char2's updated hp
      */
-    public List<Integer> combatTurn(String userInput) {
+    public List<Integer> combatTurn() {
         // Does "Attack" need to be replaced with GUI.Button presses?
         List<Integer> updatedHP = null;
         if (userInput.equals("Attack")) {

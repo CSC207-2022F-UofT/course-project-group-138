@@ -1,11 +1,13 @@
 package useCases;
 
+import controllers.CombatController;
+
 import java.awt.event.MouseEvent;
 
 public class ClickEventHandler {
 
-    public static String handleCombatStateEvents(int code){
-        return updateCombatClicks(code);
+    public static void handleCombatStateEvents(int code){
+        CombatController.setUserInput(updateCombatClicks(code));
     }
 
     // TODO: the presenter for combat needs to modify this method to only respond to clicks within a specified region

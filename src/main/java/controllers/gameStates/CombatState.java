@@ -40,7 +40,7 @@ public class CombatState implements State{
         this.presenter = presenter;
     }
     public void loop() {
-//        combatController.combatTurn();
+        combatController.combatTurn();
     }
 
     /**
