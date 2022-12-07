@@ -26,18 +26,17 @@ public class CombatRound {
 
         List<Integer> resultHP = Attack.taketurn(player, enemy);            // player attacks
 
-        if (!enemy.isAlive()) {                 // If the attack killed the enemy
-            player.setHP();                     // heal their hp to full
+        if (enemy.isAlive()) {                 // If the attack killed the enemy
+            player.rechargeHealth();                     // heal their hp to full
             int coins = enemy.getCoins();
-            int current = player.getCoins();
-            player.setCoins(coins + current);  // and award them coins
+            player.spendCoins(-coins);         // and award them coins
             return resultHP;
         }
 
         // We assume at this point enemy is still alive, and they can attack.
         resultHP = Attack.taketurn(enemy, player);
-        if (!player.isAlive()) {                // If the attack killed the player
-            player.setHP();                     // revert their hp to pre combat
+        if (player.isAlive()) {                // If the attack killed the player
+            player.rechargeHealth();                     // revert their hp to pre combat
             return resultHP;
         }
 
