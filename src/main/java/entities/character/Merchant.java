@@ -5,7 +5,7 @@ public class Merchant extends Entity implements NPC{
     private final int originalPrice;
     private int currentPrice;
     private int timesPurchased;
-    private int x, y, id;
+    private int id;
 
     public Merchant(String item, int price, int x, int y) {
         super(x, y);

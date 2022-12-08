@@ -3,26 +3,29 @@ package save.save_use_case;
 import entities.character.Player;
 import entities.dungeon.Dungeon;
 
-// neeed to import the Player Class and inventory class
+import java.time.LocalDateTime;
 
-public class SaveRequest {
+public class DsRequest {
     private String fileName;
 
     private Player player;
 
     private Dungeon dungeon;
 
-    public SaveRequest(String fileName, Player player, Dungeon dungeon) {
+    private LocalDateTime creationTime;
+
+    public DsRequest(String fileName, Player player, Dungeon dungeon, LocalDateTime creationTime) {
         this.fileName = fileName;
         this.player = player;
         this.dungeon = dungeon;
+        this.creationTime = creationTime;
     }
 
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String filename) {
+    void setFileName(String filename) {
         this.fileName = filename;
     }
 
@@ -30,12 +33,12 @@ public class SaveRequest {
         return player;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Dungeon getDungeon() {
         return dungeon;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
     }
 }
 
