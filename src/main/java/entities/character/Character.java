@@ -25,6 +25,7 @@ public abstract class Character extends Entity{
      */
     public void upgradeMaximumHealth(int upgrade) {
         this.maximumHealth += upgrade;
+        this.rechargeHealth(upgrade);
     }
 
     /**
@@ -33,7 +34,13 @@ public abstract class Character extends Entity{
      * @param HP how much more health to grant the Character.
      */
     public void rechargeHealth(int HP) {
-        this.currentHealth += HP;
+        if (this.currentHealth + HP > maximumHealth) {
+            this.rechargeHealth();
+        }
+        else {
+            this.currentHealth += HP;
+        }
+
     }
 
     /**
