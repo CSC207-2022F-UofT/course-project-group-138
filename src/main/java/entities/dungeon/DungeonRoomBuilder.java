@@ -77,7 +77,7 @@ public class DungeonRoomBuilder {
                         newRoom.addMerchant(merchant);
                     } else {
                         Merchant merchant = new Merchant("Weapon", 30, merchantX, merchantY);
-                        merchant.setImageID(0);
+                        merchant.setImageID(1);
                         newRoom.addMerchant(merchant);
                     }
                     this.merchantsAdded++;
