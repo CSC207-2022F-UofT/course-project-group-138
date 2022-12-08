@@ -142,11 +142,8 @@ public class CrawlingState implements State, Switchable {
     public void changeRoom(Door doorType) {
         // Remove previous room from connections array list first
         List<DungeonRoom> roomList = new ArrayList<>(dungeonController.getConnections());
-        try {
-            DungeonRoom prev = dungeonController.getCurrentRoom().getPreviousRoom();
-            roomList.remove(prev);
-        } catch (DungeonRoom.Object404Error ignored) { // No need to do anything
-        }
+        DungeonRoom prev = dungeonController.getCurrentRoom().getPreviousRoom();
+        roomList.remove(prev);
         // Check which door was entered
         switch (doorType){
             case BOTTOM:
@@ -156,12 +153,7 @@ public class CrawlingState implements State, Switchable {
                 /**
                  * This should never throw an exception as long as Dungeon is built correctly
                  */
-                try {
-                    dungeonController.goBack();
-                } catch (DungeonRoom.Object404Error e) {
-                    System.out.println("Error! No room to go back to");
-                    e.printStackTrace();
-                }
+                dungeonController.goBack();
                 break;
             case RIGHT:
                 dungeonController.goForward(roomList.get(0));
