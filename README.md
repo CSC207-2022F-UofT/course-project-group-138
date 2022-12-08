@@ -30,8 +30,10 @@ equipment.
 - a
 
 # Adherence to Clean Architecture
-- Dependency Inversion was used throughout the project to ensure the implementation of use cases and controllers could be modified without breaking entities.
-- EquipmentInterface and InventoryInterface were implemented by Equipment and Inventory to reduce coupling. Classes in the character package called methods from Equipment and Inventory.
+- Dependency Inversion was used throughout the project to ensure that tasks could be executed from higher level use cases to lower level controllers without any dependencies.
+- Classes in the character package, such as Character called methods from Equipment and Inventory
+- This was an entity to entity dependency, and while not a violation of the dependency rule, were examples of unnecessary coupling EquipmentInterface and InventoryInterface were implemented by Equipment and Inventory respectively to decouple the classes
+
 
 # Use of Refactoring
 - In the early stages of the project, we were inexperienced in organizing a project, which resulted in a messy and hard to navigate project.
