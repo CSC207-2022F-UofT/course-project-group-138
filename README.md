@@ -30,7 +30,8 @@ equipment.
 - a
 
 # Adherence to Clean Architecture
-- a
+- Dependency Inversion was used throughout the project to ensure the implementation of use cases and controllers could be modified without breaking entities.
+- EquipmentInterface and InventoryInterface were implemented by Equipment and Inventory to reduce coupling. Classes in the character package called methods from Equipment and Inventory.
 
 # Use of Refactoring
 - In the early stages of the project, we were inexperienced in organizing a project, which resulted in a messy and hard to navigate project.
@@ -52,8 +53,8 @@ equipment.
 # Gallery
 - An image of the player character in a dungeon room.
 ![image](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/main/images/readme/game_readme_1.jpg)
-- A gif of the player exploring the dungeon.
-![gif](https://raw.githubusercontent.com/CSC207-2022F-UofT/course-project-group-138/51700f7985c2929148ea779ffe033c9c5a90d227/images/Dungeons_2022-12-07_01-44-27.gif)
+- A gif of the player exploring the dungeon and approaching enemies and merchants.
+![gif](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/08ab1c86747001afe59914cbff9ffc640e89f48b/images/readme/Dungeons_2022-12-07_21-50-05.gif)
 
 
 - Make use of the readme and any other features you find useful to help your TA navigate your project and understand what you have done!
