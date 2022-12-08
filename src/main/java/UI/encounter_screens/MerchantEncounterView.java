@@ -5,7 +5,6 @@ import controllers.MerchantController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
 
@@ -18,11 +17,11 @@ public class MerchantEncounterView extends EncounterView {
     private JButton Upgrade;
     private MerchantController merchantController;
 
-    MerchantEncounterView() {
+    public MerchantEncounterView() {
 
         this.setTitle("MerchantEncountered"); // set the title of the frame
 
-        BufferedImage img = ImageGateway.getMerchantImg(); // read the image.
+        BufferedImage img = ImageGateway.getMerchant1(); // read the image.
         Image dimg = img.getScaledInstance(200, 240, Image.SCALE_SMOOTH); // rescale the image displayed
         ImageIcon imageIcon = new ImageIcon(dimg); // create an instance of the image
 
@@ -36,14 +35,15 @@ public class MerchantEncounterView extends EncounterView {
 
         exit = new JButton("Exit");
         exit.setBounds(480, 290, 120, 90);
-        exit.addActionListener(this);
+        exit.addActionListener(merchantController.getMerchantListener());
+        exit.setActionCommand("Exit");
         exit.setFont(new Font("Comic Sans", Font.BOLD, 20));
         c.add(exit); // Add an Exit button on the container.
 
-        Upgrade = new JButton("Upgrade Weapon");
+        Upgrade = new JButton("Upgrade");
         Upgrade.setBounds(30, 290, 190, 90);
-        Upgrade.addActionListener(this);
-        Upgrade.setActionCommand("Weapon");
+        Upgrade.addActionListener(merchantController.getMerchantListener());
+        Upgrade.setActionCommand("Upgrade");
         Upgrade.setFont(new Font("Comic Sans", Font.BOLD, 17));
         c.add(Upgrade);// Add an Upgrade button on the container
 
@@ -70,15 +70,19 @@ public class MerchantEncounterView extends EncounterView {
 //        }
 //    };
 
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Upgrade){
-            //TODO: call MerchantController
+            state.clickEvents(0);
         }
         if(e.getSource() == exit){
             System.exit(0);
         }
-}
+
+    }
+
+     */
 }
 
 
