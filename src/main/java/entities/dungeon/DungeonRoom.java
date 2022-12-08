@@ -10,7 +10,7 @@ public class DungeonRoom {
     private List<DungeonRoom> connectedRooms;
     private Enemy enemy;
     private Merchant merchant;
-    private DungeonRoom previousRoom;
+    public DungeonRoom previousRoom;
 
     public DungeonRoom() {
         this.connectedRooms = new ArrayList<DungeonRoom>();
@@ -51,7 +51,7 @@ public class DungeonRoom {
     /**
      * Clears the information regarding the previous DungeonRoom the player entered this room from.
      */
-    private void clearPreviousRoom() {
+    public void clearPreviousRoom() {
         this.previousRoom = null;
     }
 
@@ -64,8 +64,8 @@ public class DungeonRoom {
             throw new Object404Error("Room does not have a previous room attached.");
         } else {
             DungeonRoom prevRoom = this.previousRoom;
-            this.clearPreviousRoom();
-            return prevRoom;
+//            this.clearPreviousRoom();
+            return this.previousRoom;
         }
     }
 

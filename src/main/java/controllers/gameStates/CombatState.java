@@ -44,6 +44,7 @@ public class CombatState implements State{
 
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
+        combatController = new CombatController(player, enemy);
     }
 
     public void loop() {

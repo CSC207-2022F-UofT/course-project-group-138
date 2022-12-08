@@ -2,8 +2,8 @@ package controllers.game;
 
 import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
-import controllers.States;
 import controllers.gameStates.CrawlingState;
+import controllers.gameStates.States;
 import controllers.StateManager;
 import controllers.StateFactory;
 
@@ -74,6 +74,7 @@ public class Engine {
     private static void initializeManager(){
 
         stateManager.crawlingState = stateFactory.getState(States.CRAWL);
+        ((CrawlingState) stateManager.crawlingState).setStateChanger(stateManager);
         stateManager.combatState = stateFactory.getState(States.COMBAT);
         stateManager.menuState = stateFactory.getState(States.MENU);
         stateManager.encounterState = stateFactory.getState(States.MERCHANT);

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.gameStates;
 
 public enum States {
     CRAWL,

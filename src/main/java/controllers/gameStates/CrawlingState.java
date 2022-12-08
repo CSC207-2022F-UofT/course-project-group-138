@@ -102,6 +102,10 @@ public class CrawlingState implements State, Switchable {
         }
     }
 
+    public void setStateChanger(StateChanger stateChanger) {
+        this.stateChanger = stateChanger;
+    }
+
     @Override
     public StatePresenter getPresenter() {
         return presenter;
