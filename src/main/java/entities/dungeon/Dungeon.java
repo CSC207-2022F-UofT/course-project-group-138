@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Math.min;
 import static java.lang.Math.round;
 
 public class Dungeon {
@@ -25,14 +24,8 @@ public class Dungeon {
 
     /**
      * Generates a random dungeon map with a random number of rooms within the class variable ranges.
-     *
-     * @return a HashMap of all DungeonRooms (except starting room and gate room) as keys and all connected DungeonRooms as values.
      */
-    public void generateDungeonMap() {
-        List<DungeonRoom> rooms = new ArrayList<DungeonRoom>();
-        this.startingRoom = new DungeonRoom();
-        rooms.add(this.startingRoom);
-
+    public void generateDungeonMap(){
         Random rand = new Random();
         int numberOfEnemies = rand.nextInt((ENEMY_RANGE[1] - ENEMY_RANGE[0]) + 1) + ENEMY_RANGE[0];
         int numberOfMerchants = rand.nextInt((MERCHANT_RANGE[1] - MERCHANT_RANGE[0]) + 1) + MERCHANT_RANGE[0];
@@ -46,6 +39,7 @@ public class Dungeon {
 
         DungeonRoomBuilder roomBuilder = new DungeonRoomBuilder(numberOfEnemies, numberOfMerchants);
 
+        DungeonRoom[] rooms = new DungeonRoom[numberOfRooms];
         this.insertRooms(numberOfRooms, roomBuilder, rooms);
         this.connectRooms(numberOfRooms, rand, rooms);
         this.connectEndRooms(rand, rooms);
@@ -58,8 +52,30 @@ public class Dungeon {
         return startingRoom;
     }
 
+    /**
+     * Returns the connected DungeonRooms to the specified DungeonRoom.
+     *
+     * @param room the room to return connections for.
+     * @return a List of connected DungeonRooms.
+     */
     public List<DungeonRoom> getConnections(DungeonRoom room) {
         return this.map.get(room);
+    }
+
+    /**
+     * @return the entire DungeonMap, to save the game.
+     */
+    public HashMap<DungeonRoom, List<DungeonRoom>> saveDungeon() {
+        return this.map;
+    }
+
+    /**
+     * Loads a previously saved Dungeon map.
+     *
+     * @param map the Dungeon map.
+     */
+    public void loadDungeon(HashMap<DungeonRoom, List<DungeonRoom>> map) {
+        this.map = map;
     }
 
     /**
@@ -69,8 +85,6 @@ public class Dungeon {
      * @param roomTwo the second DungeonRoom.
      */
     private void addHallway(DungeonRoom roomOne, DungeonRoom roomTwo) {
-        roomOne.addConnectedRoom(roomTwo);
-        roomTwo.addConnectedRoom(roomOne);
         this.map.get(roomOne).add(roomTwo);
         this.map.get(roomTwo).add(roomOne);
     }
@@ -82,11 +96,11 @@ public class Dungeon {
      * @param roomBuilder a DungeonRoomBuilder object.
      * @param rooms a List of all DungeonRooms in the Dungeon.
      */
-    private void insertRooms(int numberOfRooms, DungeonRoomBuilder roomBuilder, List<DungeonRoom> rooms) {
-        for (int i = 0; i < numberOfRooms + 1; i++) {
+    private void insertRooms(int numberOfRooms, DungeonRoomBuilder roomBuilder, DungeonRoom[] rooms) {
+        for (int i = 0; i < numberOfRooms; i++) {
             DungeonRoom newRoom = roomBuilder.buildNewRoom();
-            rooms.add(newRoom);
-            map.put(newRoom, new ArrayList<DungeonRoom>());
+            rooms[i] = newRoom;
+            this.map.put(newRoom, new ArrayList<DungeonRoom>());
         }
     }
 
@@ -97,17 +111,18 @@ public class Dungeon {
      * @param rand a Random object.
      * @param rooms a List of all DungeonRooms in this Dungeon.
      */
-    private void connectRooms(int numberOfRooms, Random rand, List<DungeonRoom> rooms) {
-        for (int i = 1; i < numberOfRooms; i++) {
-            int numberOfConnections = rand.nextInt(CONNECTION_RANGE[1] - CONNECTION_RANGE[0]) + CONNECTION_RANGE[0];
+    private void connectRooms(int numberOfRooms, Random rand, DungeonRoom[] rooms) {
+        for (int i = 0; i < numberOfRooms; i++) {
+            int numberOfConnections;
+            do {
+                numberOfConnections = rand.nextInt(CONNECTION_RANGE[1] - CONNECTION_RANGE[0] + 1) + CONNECTION_RANGE[0];
+            } while (this.map.get(rooms[i]).size() + numberOfConnections > (CONNECTION_RANGE[1] - CONNECTION_RANGE[0] + 1));
             for (int j = 0; j < numberOfConnections; j++) {
-                int connectedRoomIndex = rand.nextInt(numberOfRooms - 1) + 1;
-                if (connectedRoomIndex == i || this.map.get(rooms.get(i)).contains(rooms.get(connectedRoomIndex))) {
-                    do {
-                        connectedRoomIndex = rand.nextInt(numberOfRooms - 1) + 1;
-                    } while (connectedRoomIndex == i || this.map.get(rooms.get(i)).contains(rooms.get(connectedRoomIndex)));
-                }
-                this.addHallway(rooms.get(i), rooms.get(connectedRoomIndex));
+                int connectedRoomIndex;
+                do {
+                    connectedRoomIndex = rand.nextInt(numberOfRooms);
+                } while (connectedRoomIndex == i || this.map.get(rooms[i]).contains(rooms[connectedRoomIndex]) || this.map.get(rooms[connectedRoomIndex]).size() >= (CONNECTION_RANGE[1] - CONNECTION_RANGE[0] + 1));
+                this.addHallway(rooms[i], rooms[connectedRoomIndex]);
             }
         }
     }
@@ -118,20 +133,21 @@ public class Dungeon {
      * @param rand a Random object.
      * @param rooms a List of all DungeonRooms in this Dungeon.
      */
-    private void connectEndRooms(Random rand, List<DungeonRoom> rooms) {
-        int randomSecondRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
+    private void connectEndRooms(Random rand, DungeonRoom[] rooms) {
+        this.startingRoom = new DungeonRoom();
+        int randomSecondRoomIndex = rand.nextInt(rooms.length);
 
         DungeonRoom gateRoom = new DungeonRoom();
-        int randomSecondLastRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
+        int randomSecondLastRoomIndex = rand.nextInt(rooms.length);
         if (randomSecondLastRoomIndex == randomSecondRoomIndex) {
             do {
-                randomSecondLastRoomIndex = rand.nextInt(rooms.size() + 1) - 1;
+                randomSecondLastRoomIndex = rand.nextInt(rooms.length);
             } while (randomSecondLastRoomIndex == randomSecondRoomIndex);
         }
 
         this.map.put(this.startingRoom, new ArrayList<DungeonRoom>());
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
-        this.addHallway(this.startingRoom, rooms.get(randomSecondRoomIndex));
-        this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex));
+        this.addHallway(this.startingRoom, rooms[randomSecondRoomIndex]);
+        this.addHallway(gateRoom, rooms[randomSecondLastRoomIndex]);
     }
 }
