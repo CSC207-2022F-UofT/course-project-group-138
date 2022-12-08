@@ -68,8 +68,10 @@ public class Dungeon {
      * @param roomOne the first DungeonRoom.
      * @param roomTwo the second DungeonRoom.
      */
-    private void addHallway(DungeonRoom roomOne, DungeonRoom roomTwo) {
-        if (this.map.get(roomOne).size() < 6 && this.map.get(roomTwo).size() < 6) {
+    private void addHallway(DungeonRoom roomOne, DungeonRoom roomTwo, boolean isEndRoom) {
+        int maxConnectionSize;
+        if (isEndRoom) {maxConnectionSize = 5;} else {maxConnectionSize = 6;}
+        if (this.map.get(roomOne).size() < maxConnectionSize && this.map.get(roomTwo).size() < maxConnectionSize) {
             this.map.get(roomOne).add(roomTwo);
             this.map.get(roomTwo).add(roomOne);
         }
@@ -107,7 +109,7 @@ public class Dungeon {
                         connectedRoomIndex = rand.nextInt(numberOfRooms - 1) + 1;
                     } while (connectedRoomIndex == i || this.map.get(rooms.get(i)).contains(rooms.get(connectedRoomIndex)));
                 }
-                this.addHallway(rooms.get(i), rooms.get(connectedRoomIndex));
+                this.addHallway(rooms.get(i), rooms.get(connectedRoomIndex), false);
             }
         }
     }
@@ -131,7 +133,7 @@ public class Dungeon {
 
         this.map.put(this.startingRoom, new ArrayList<DungeonRoom>());
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
-        this.addHallway(this.startingRoom, rooms.get(randomSecondRoomIndex));
-        this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex));
+        this.addHallway(this.startingRoom, rooms.get(randomSecondRoomIndex), true);
+        this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex), true);
     }
 }
