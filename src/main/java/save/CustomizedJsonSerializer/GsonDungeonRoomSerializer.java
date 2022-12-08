@@ -19,8 +19,8 @@ public class GsonDungeonRoomSerializer implements JsonSerializer<DungeonRoom> {
             jsonObj.add("previousRoom",
                     dungeonRoom.hasPreviousRoom() ? context.serialize(dungeonRoom.getPreviousRoom()) : context.serialize(null));
         } catch (Exception ignore) {}*/
-        jsonObj.add("merchant", context.serialize(dungeonRoom.retrieveMerchant()));
-        jsonObj.add("enemy", context.serialize(dungeonRoom.retrieveEnemy()));
+        jsonObj.add("merchant", context.serialize(dungeonRoom.getMerchant()));
+        jsonObj.add("enemy", context.serialize(dungeonRoom.getEnemy()));
         jsonObj.add("previousRoom",context.serialize(dungeonRoom.retrievePreviousRoom()));
         return jsonObj;
     }

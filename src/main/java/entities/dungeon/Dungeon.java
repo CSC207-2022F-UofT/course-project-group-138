@@ -132,13 +132,12 @@ public class Dungeon {
         this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex));
     }
 
-    // temporary
+    // for implementation of serialization and test file for deserialization
 
     public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
         return map;
     }
 
-    // for testing
     public double getDifficulty() {
         return difficulty;
     }

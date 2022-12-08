@@ -68,27 +68,14 @@ public class DungeonRoom {
     }
 
     /**
+     * Should always call hasEnemy() or hasMerchant() first to avoid unexpected result
      * @return The NPC in this DungeonRoom.
      * @throws Object404Error if no NPC is found in this DungeonRoom.
      */
     public Enemy getEnemy() {
-        if (this.enemy == null) {
-            try {
-                throw new Object404Error("Room does not contain an NPC");
-            } catch (Object404Error e) {
-                e.printStackTrace();
-            }
-        }
         return this.enemy;
     }
     public Merchant getMerchant() {
-        if (this.merchant == null) {
-            try {
-                throw new Object404Error("Room does not contain an NPC");
-            } catch (Object404Error e) {
-                e.printStackTrace();
-            }
-        }
         return this.merchant;
     }
 
@@ -99,17 +86,9 @@ public class DungeonRoom {
         }
     }
 
-    // temporary
+    // for implementation of serialization and test file for deserialization
 
     public boolean hasPreviousRoom() {return this.previousRoom == null; }
-
-    public Merchant retrieveMerchant() {
-        return this.merchant;
-    }
-
-    public Enemy retrieveEnemy() {
-        return this.enemy;
-    }
 
     public DungeonRoom retrievePreviousRoom() {
         return previousRoom;
