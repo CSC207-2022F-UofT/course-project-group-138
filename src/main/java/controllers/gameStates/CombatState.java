@@ -11,8 +11,6 @@ import useCases.ClickEventHandler;
 import useCases.KeyEventHandler;
 
 
-//TODO: implement method bodies
-
 
 public class CombatState implements State{
     /**
@@ -49,7 +47,7 @@ public class CombatState implements State{
 
     public void loop() {
         combatController.combatTurn();
-        // TODO update the presenter (not yet implemented), something like combatPresenter.updatePresenter();
+        // TODO implement method render in CombatStatePresenter (not yet implemented), something like combatPresenter.updatePresenter();
     }
 
     /**
