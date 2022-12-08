@@ -1,8 +1,9 @@
-package save.save_screen;
+package save.serialize_test;
 
 import entities.character.Player;
 import entities.dungeon.Dungeon;
 import org.junit.Test;
+import save.save_screen.GameFiles;
 import save.save_use_case.DsGateway;
 import save.save_use_case.DsRequest;
 import save.save_use_case.LoadRequest;

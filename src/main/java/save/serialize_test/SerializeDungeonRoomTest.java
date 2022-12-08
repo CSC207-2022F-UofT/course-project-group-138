@@ -1,4 +1,4 @@
-package save.save_screen;
+package save.serialize_test;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
