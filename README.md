@@ -41,11 +41,17 @@ equipment.
 # Use of Design Patterns
 - a
 
+# Use of Github Features
+- utilized Github Projects to keep track of our issues, as well as who were assigned to which issues and the deadlines by which they should be resolved
+- utilized Github issues to keep track of what still needed to be done in the project, and assign work so that everyone contributed an equal amount
+- utilized branch protection, pull requests onto the main branch needed a minimum of 3 reviews from other group members to ensure the code was quality and to provide a range of viewpoints
+- utilized Github's version control to rollback commits 
+
 # Packaging
 - The code has been separated into packages based on their Clean Architecture layer.
 
-# Submitted Pull Requests
-- https://docs.google.com/document/d/1rU_-iCrRTYVsREWWy2CvWcDw59OQhoiAfLOFTAcruH0/edit
+# Submitted Pull Requests (Milestone 5)
+- https://docs.google.com/document/d/18DRfUxJNzydfDAzbBp-hSfb5gG8EHqPekr9HJpc1O2M/edit?usp=sharing
 
 # Presentation Slides
 - https://docs.google.com/presentation/d/1a0-S8YFYCXG00mNj6Nmjwqhp0c-89DcZs4jhiaQHHQM/edit?usp=share_link
