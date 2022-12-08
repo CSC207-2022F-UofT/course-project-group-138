@@ -2,16 +2,15 @@ package controllers.game;
 
 import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
+import controllers.States;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;
-import settings.Settings;
+import controllers.StateFactory;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Engine {
     /**
@@ -24,6 +23,7 @@ public class Engine {
     private static TimerLoopStrategy timerStrategy;
     private static MultithreadLoopStrategy threadStrategy;
     private static Timer timer;
+    private static final StateFactory stateFactory= new StateFactory();
 
     /**
      * Should be called after Engine instantiation.
@@ -44,7 +44,8 @@ public class Engine {
      */
     public static void start(){
         // @TODO Should start on MenuState whenever that is implemented.
-        stateManager.setCurrState(new CrawlingState());
+        initializeManager();
+
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
@@ -69,6 +70,15 @@ public class Engine {
      */
     public static void end(){
         threadStrategy.end();
+    }
+    private static void initializeManager(){
+
+        stateManager.crawlingState = stateFactory.getState(States.CRAWL);
+        stateManager.combatState = stateFactory.getState(States.COMBAT);
+        stateManager.menuState = stateFactory.getState(States.MENU);
+        stateManager.encounterState = stateFactory.getState(States.MERCHANT);
+        stateManager.toCrawlingState();
+
     }
 
     // Keyboard actions

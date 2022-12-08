@@ -3,6 +3,7 @@ package controllers.gameStates;
 import UI.presenters.viewModels.EnemyViewModel;
 import UI.presenters.viewModels.MerchantViewModel;
 import controllers.NPCUIManager;
+import controllers.StateChanger;
 import controllers.TileManager;
 import UI.presenters.statePresenters.CrawlingStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
@@ -37,9 +38,9 @@ public class CrawlingState implements State, Switchable {
     DungeonController dungeonController;
     TileManager tileManager;
     StatePresenter presenter;
+    StateChanger stateChanger;
     PlayerCollisionHandler playerCollisionHandler;
     NPCUIManager npcuiManager;
-    private final int stateCode = 0;
     private int roomType = 0;
     int acc = 0;
 
@@ -51,7 +52,7 @@ public class CrawlingState implements State, Switchable {
         // Call the initializer
         Initializer initializer = new Initializer();
         initializer.init();
-        this.player = initializer.getPlayer();
+        this.player = Initializer.getPlayer();
         this.dungeonController = new DungeonController();
         this.playerMover = new PlayerMover(player);
         playerMover.newRoom();
@@ -64,10 +65,8 @@ public class CrawlingState implements State, Switchable {
         if (merchantViewModel != null) merchantViewModel.updatePosition();
         playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
         playerCollisionHandler.handleDoorCollisions(tileManager.getDoors(), roomType);
-        if(playerCollisionHandler.enemyCollision(enemyViewModel)){
-
-        }
-
+        checkEnemyCollisions();
+        checkMerchantColiisions();
         npcuiManager.update();
     }
     /**
@@ -91,7 +90,16 @@ public class CrawlingState implements State, Switchable {
      * @param code - clickCode corresponding to the click
      */
     public void clickEvents(int code) {
-
+    }
+    private void checkEnemyCollisions(){
+        if(playerCollisionHandler.enemyCollision(enemyViewModel)){
+            stateChanger.toCombatState((Enemy) enemyViewModel.getEntity());
+        }
+    }
+    private void checkMerchantColiisions(){
+        if(playerCollisionHandler.merchantCollision(merchantViewModel)){
+            stateChanger.toEncounterState((Merchant) merchantViewModel.getEntity());
+        }
     }
 
     @Override
@@ -190,7 +198,7 @@ public class CrawlingState implements State, Switchable {
             enemy.setX(location[0]);
             enemy.setY(location[1]);
             if (enemyViewModel == null) {
-                enemyViewModel = new EnemyViewModel(enemy, Settings.getTileSize() * 2);
+                enemyViewModel = new EnemyViewModel(enemy, Settings.getTileSize() * 3);
                 ((CrawlingStatePresenter)presenter).setEnemyViewModel(enemyViewModel);
             }
             npcuiManager.spawnEnemy(dungeonController.getCurrentRoom(), enemyViewModel);

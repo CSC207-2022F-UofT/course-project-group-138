@@ -1,11 +1,14 @@
 package controllers;
 
-import controllers.gameStates.State;
+import controllers.gameStates.*;
+import entities.character.Enemy;
+import entities.character.Merchant;
 
 import java.awt.*;
 
-public class StateManager {
+public class StateManager implements StateChanger{
     State currState;
+    public State combatState, crawlingState, menuState, encounterState;
     public void keyPressed(int keyCode){
         currState.keyPressEvents(keyCode);
     }
@@ -24,5 +27,20 @@ public class StateManager {
     public void renderState(Graphics2D graphics){
         currState.getPresenter().render(graphics);
     }
-
+    @Override
+    public void toCrawlingState() {
+        currState = crawlingState;
+    }
+    @Override
+    public void toCombatState(Enemy enemy) {
+        currState = combatState;
+    }
+    @Override
+    public void toEncounterState(Merchant merchant) {
+        currState = encounterState;
+    }
+    @Override
+    public void toMenu() {
+        currState = menuState;
+    }
 }
