@@ -49,6 +49,7 @@ public class CombatState implements State{
 
     public void loop() {
         combatController.combatTurn();
+        // TODO update the presenter (not yet implemented), something like combatPresenter.updatePresenter();
     }
 
     /**

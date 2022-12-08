@@ -136,4 +136,14 @@ public class Dungeon {
         this.addHallway(this.startingRoom, rooms.get(randomSecondRoomIndex), true);
         this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex), true);
     }
+
+    // for implementation of serialization and test file for deserialization
+
+    public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
+        return map;
+    }
+
+    public double getDifficulty() {
+        return difficulty;
+    }
 }

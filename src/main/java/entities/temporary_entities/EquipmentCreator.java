@@ -1,10 +1,10 @@
 package entities.temporary_entities;
 
-import entities.inventory.Equipment;
-import entities.inventory.EquipmentInterface;
+import entities.inventory.Armor;
+import entities.inventory.Weapon;
 
 public interface EquipmentCreator {
 
-    Equipment createArmor(int attribute, int price);
-    Equipment createWeapon(int attribute, int price);
+    Armor createArmor(int attribute);
+    Weapon createWeapon(int attribute);
 }
