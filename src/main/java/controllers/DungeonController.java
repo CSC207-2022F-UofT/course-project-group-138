@@ -46,7 +46,8 @@ public class DungeonController {
      * Moves the player back to the previous room they entered the current room from.
      */
     public void goBack() {
+        DungeonRoom leavingRoom = this.currentRoom;
         this.currentRoom = this.currentRoom.getPreviousRoom();
-        this.currentRoom.clearPreviousRoom();
+        leavingRoom.clearPreviousRoom();
     }
 }
