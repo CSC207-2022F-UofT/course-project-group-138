@@ -37,7 +37,7 @@ public class NPCUIManager {
     }
     public void animateEnemy(){
         if (enemyViewModel.isAnimated()){
-            int currFrame = animator.getNextFrameHalf();
+            int currFrame = animator.getNextFrame();
             this.enemyViewModel.updateImage(monsterFrames[currFrame]);
         }
     }
