@@ -11,8 +11,6 @@ import useCases.ClickEventHandler;
 import useCases.KeyEventHandler;
 
 
-//TODO: implement method bodies
-
 
 public class CombatState implements State{
     /**
