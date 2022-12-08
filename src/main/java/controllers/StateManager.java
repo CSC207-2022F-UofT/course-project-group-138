@@ -12,6 +12,9 @@ public class StateManager {
     public void keyReleased(int keyCode){
         currState.keyReleasedEvents(keyCode);
     }
+    public void click(int clickCode){
+        currState.clickEvents(clickCode);
+    }
     public void setCurrState(State newState){
         currState = newState;
     }

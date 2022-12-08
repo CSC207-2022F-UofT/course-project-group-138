@@ -23,6 +23,10 @@ public class EncounterState implements State {
 
     }
 
+    public void clickEvents(int code) {
+
+    }
+
     @Override
     public StatePresenter getPresenter() {
         return presenter;
