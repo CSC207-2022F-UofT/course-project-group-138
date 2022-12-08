@@ -1,19 +1,18 @@
 package entities.character;
 
-public class Merchant {
+public class Merchant extends Entity implements NPC{
     private final String item;
     private final int originalPrice;
     private int currentPrice;
     private int timesPurchased;
-    private int x, y;
+    private int id;
 
     public Merchant(String item, int price, int x, int y) {
+        super(x, y);
         this.item = item;
         this.originalPrice = price;
         this.currentPrice = this.originalPrice;
         this.timesPurchased = 0;
-        this.x = x;
-        this.y = y;
     }
 
     public int getPrice(boolean renewArmor) {
@@ -35,5 +34,35 @@ public class Merchant {
     public void purchase() {
         this.timesPurchased++;
         this.currentPrice = this.originalPrice * 2^(this.timesPurchased / 2);
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public void setImageID(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int getImageID() {
+        return id;
     }
 }

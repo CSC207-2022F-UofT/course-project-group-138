@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.character.Enemy;
 import entities.character.Merchant;
+import entities.character.Player;
 import entities.dungeon.Dungeon;
 import entities.dungeon.DungeonRoom;
 import entities.inventory.Armor;
@@ -63,11 +64,11 @@ public class SerializeDungeonRoomTest {
         DungeonRoom startingRoom = new DungeonRoom();
 
         DungeonRoom dungeonRoom1 = new DungeonRoom();
-        dungeonRoom1.addNPC(new Merchant("Armor", 20, 1, 5));
+        dungeonRoom1.addMerchant(new Merchant("Armor", 20, 1, 5));
 
         DungeonRoom dungeonRoom2 = new DungeonRoom();
         Inventory enemyInventory = new Inventory(100, new Weapon(2), new Armor(3));
-        dungeonRoom2.addNPC(new Enemy(enemyInventory, 5, 2, 3));
+        dungeonRoom2.addEnemy(new Enemy(enemyInventory, 5, 2, 3));
 
         dungeonRoom2.setPreviousRoom(dungeonRoom1);
         dungeonRoom1.setPreviousRoom(startingRoom);
@@ -129,10 +130,20 @@ public class SerializeDungeonRoomTest {
     }
 
     @Test
-    public void SerializeCharacter() {
-        Object merchant = new Merchant("Armor", 20, 1, 5);
+    public void SerializeMerchant() {
+        Merchant merchant = new Merchant("Armor", 20, 1, 5);
         Gson gson = new Gson();
         String gsonStr = gson.toJson(merchant);
+        System.out.println(gsonStr);
+    }
+
+    @Test
+    public void SerializePlayer() {
+        Initializer initializer = new Initializer();
+        initializer.init();
+        Player player = initializer.getPlayer();
+        Gson gson = new Gson();
+        String gsonStr = gson.toJson(player);
         System.out.println(gsonStr);
     }
 }

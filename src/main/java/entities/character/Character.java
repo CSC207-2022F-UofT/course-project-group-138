@@ -1,6 +1,5 @@
 package entities.character;
 
-import entities.Entity;
 import entities.inventory.Inventory;
 
 /**
@@ -10,10 +9,10 @@ public abstract class Character extends Entity{
     private final Inventory inventory;
     private int maximumHealth;
     private int currentHealth;
-    private boolean facing_right = false;
+    private boolean facing_right = true;
 
     public Character(Inventory inventory, int maximumHealth, int x, int y) {
-        super(x,y);
+        super(x, y);
         this.inventory = inventory;
         this.maximumHealth = maximumHealth;
         this.currentHealth = this.maximumHealth;
@@ -82,7 +81,7 @@ public abstract class Character extends Entity{
      */
     public void damage(int damage) {
         if (!this.inventory.getArmor().isBroken()) {
-            int armorDamage = (int)Math.round(damage * (2.0 / 3.0));                // Armor will absorb two-thirds of incoming damage, upto its durability
+            int armorDamage = (int) Math.round(damage * (2.0 / 3.0));                // Armor will absorb two-thirds of incoming damage, upto its durability
             if (armorDamage > this.getArmorDurability()) {
                 armorDamage = this.getArmorDurability();
             }
@@ -147,28 +146,10 @@ public abstract class Character extends Entity{
         return this.inventory.getArmor().getStrength();
     }
 
-    /**
-     * @return the x-coordinate value of the Character.
-     */
-    public int getx(){
-        return this.x;
-    }
-
-    /**
-     * @return the y-coordinate value of the Character.
-     */
-    public int gety() {
-        return this.y;
-    }
-    /**
-     * Checks if this character is facing the right side. Otherwise, character is facing left side.
-     * Mostly used for player animation, but can also be used for Mechant, enemies, etc.
-     * @param facing_right - True if and only if character is facing the right side
-     */
     public void setFacing_right(boolean facing_right){
         this.facing_right = facing_right;
     }
-    public boolean isFacing_right(){
+    public boolean isFacing_right() {
         return facing_right;
     }
 }

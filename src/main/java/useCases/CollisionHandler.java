@@ -8,5 +8,5 @@ import java.awt.*;
  * An abstract class outlining Collision handling methodology
  */
 public interface CollisionHandler {
-    void handleCollision(Rectangle object);
+    void handleTileCollisions(Rectangle[] dungeonTiles);
 }

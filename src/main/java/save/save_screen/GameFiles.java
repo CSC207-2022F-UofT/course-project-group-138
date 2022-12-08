@@ -23,11 +23,11 @@ public class GameFiles implements DsGateway {
 
     private File SAVE_FILES;
 
-    private final Map<String, Integer> gameSavesDataOrder = new LinkedHashMap<>();
-
     private Map<String, DsRequest> gameSavesData = new HashMap<>();
 
     private GsonBuilder gsonBuilder = new GsonBuilder();
+
+    private final Type dungeonMapType = new TypeToken<HashMap<DungeonRoom, List<DungeonRoom>>>(){}.getType();
 
 
     /**
@@ -43,9 +43,7 @@ public class GameFiles implements DsGateway {
             BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILES));
 
             gsonBuilder.registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeDeserializer());
-            Type type = new TypeToken<HashMap<DungeonRoom, List<DungeonRoom>>>(){}.getType();
-            gsonBuilder.registerTypeAdapter(type, new GsonDungeonMapDeserializer());
-
+            gsonBuilder.registerTypeAdapter(this.dungeonMapType, new GsonDungeonMapDeserializer());
             gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomDeserializer());
 
             Gson gson = gsonBuilder.create();
@@ -61,40 +59,32 @@ public class GameFiles implements DsGateway {
 
     /**
      * Save the request into the Map `gameSavesData`. If the file name of save is already in the dadtabase, then its
-     * data will be replaced by the new data. After that, it calls `save(Class dungeonMapClass)` to write the map into
-     * the database entry by entry
+     * data will be replaced by the new data. After that, it calls `save()` to write the map intothe database entry by
+     * entry
      * @param dsRequest A save request to the database containing File name, Player, Dungeon, Creation Time
      */
     @Override
     public void save(DsRequest dsRequest) {
         gameSavesData.put(dsRequest.getFileName(), dsRequest);
-        Class dungeonMapClass = dsRequest.getDungeon().getMap().getClass();
-        this.save(dungeonMapClass);
+        this.save();
     }
 
-    private void save(Class dungeonMapClass) {
+    private void save() {
         BufferedWriter writer;
         try{
-            //int i = 0;
-            //System.out.println(i++);
             writer  = new BufferedWriter(new FileWriter(SAVE_FILES));
 
             gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomSerializer())
-                    .registerTypeAdapter(dungeonMapClass, new GsonDungeonMapSerializer())
+                    .registerTypeAdapter(dungeonMapType, new GsonDungeonMapSerializer())
                     .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeSerializer());
             Gson gson = gsonBuilder.create();
 
-            //System.out.println(i++);
-
             for (DsRequest saveData : gameSavesData.values()) {
-                //System.out.println(i++);
-                //System.out.println(i++);
                 writer.write(gson.toJson(saveData));
                 writer.newLine();
 
             }
             writer.close();
-            //System.out.println(i);
         }
         catch (IOException e) {
             throw new RuntimeException(e);

@@ -24,7 +24,7 @@ public class SerializeDsRequestTest {
     private static final double DELTA = 1e-15;
 
     @Test
-    public void SerializeDsRequest() {
+    public void OneSave() {
         initializer.init();
 
         try {
@@ -59,20 +59,33 @@ public class SerializeDsRequestTest {
         LoadRequest loadRequest = new LoadRequest(gameSaveName);
         DsRequest loadedSaves = loadedSaveFiles.load(loadRequest);
 
-        // construct another save
-        String gameSaveName2 = "New Save 2";
-        LocalDateTime creationTime2 = LocalDateTime.now();
-        DsRequest dsRequest2 = new DsRequest(gameSaveName2, player, dungeon, creationTime2);
-        loadedSaveFiles.save(dsRequest2);
-
-/*        DungeonRoom startingRoom = dsRequest.getDungeon().getStartingRoom();
-        DungeonRoom loadedStartingRoom = loadedSaves.getDungeon().getStartingRoom();
-        DungeonRoom[] connection = dsRequest.getDungeon().getMap().get(startingRoom).toArray(new DungeonRoom[0]);
-        DungeonRoom[] loadedConnection = dsRequest.getDungeon().getMap().get(loadedStartingRoom).toArray(new DungeonRoom[0]);
-        System.out.println(connection);*/
-
         assertEquals("File Name does not Match!", dsRequest.getFileName(), loadedSaves.getFileName());
         assertEquals("Dungeon difficulty field does not match!", 0, Double.compare(dsRequest.getDungeon().getDifficulty(), loadedSaves.getDungeon().getDifficulty()));
-        //assertTrue("Dugeon map key set does not match!", dsRequest.getDungeon().getMap().keySet().equals(loadedSaves.getDungeon().getMap().keySet()));
+    }
+    @Test
+    public void MultipleSaves() {
+        int numOfSaves = 5;
+        for (int i = 1; i <= numOfSaves; i++) {
+            initializer.init();
+            Player player = initializer.getPlayer();
+
+            StringBuilder saveName = new StringBuilder("New Save ");
+            saveName.append(i);
+
+            Dungeon dungeon = new Dungeon();
+            dungeon.generateDungeonMap();
+
+            LocalDateTime creationTime = LocalDateTime.now();
+
+            DsRequest dsRequest = new DsRequest(saveName.toString(), player, dungeon, creationTime);
+
+            try {
+                saveFiles = new GameFiles(databasePath);
+            } catch (IOException e) {
+                throw new RuntimeException("Fail to create file!");
+            }
+
+            saveFiles.save(dsRequest);
+        }
     }
 }
