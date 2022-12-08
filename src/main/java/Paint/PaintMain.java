@@ -4,21 +4,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
 
 public class PaintMain {
     // Declare Buttons/Button builder/Button Arrays
     JButton clearBtn, blackBtn, redBtn, blueBtn, greenBtn, eraserBtn,
-            doneBtn, size1Btn, size2Btn, size3Btn, size4Btn;
+            prevBtn, doneBtn, size1Btn, size2Btn, size3Btn, size4Btn;
     JButton[] buttons;
     PaintButtonBuilder buttonBuilder = new PaintButtonBuilder();
     // Declare UI
     JFrame mainFrame;
+    static JLabel preview;
     PaintCanvas canvas;
     // Declare Event Handlers
     PaintEventHandler eventHandler;
     ActionListener actionListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {eventHandler.handleButtonEvent(buttons, e);}
+        public void actionPerformed(ActionEvent e) {
+            try {
+                eventHandler.handleButtonEvent(buttons, e);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     };
 
     public static void main(String[] args) {
@@ -32,7 +41,11 @@ public class PaintMain {
         buildButtons();
         buildLayout();
 
-        mainFrame.setSize(1000, 1000);
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)size.getWidth();
+        int height = (int)size.getHeight();
+
+        mainFrame.setSize(width, height-40);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
 
@@ -51,6 +64,7 @@ public class PaintMain {
         eraserBtn = buttonBuilder.buildPaintBtn("erase", Color.WHITE);
         // Build non-color Action Buttons using buttonBuilder
         clearBtn = buttonBuilder.buildPaintBtn("clear");
+        prevBtn = buttonBuilder.buildPaintBtn("preview");
         doneBtn = buttonBuilder.buildPaintBtn("done");
         // Build size changing Buttons using buttonBuilder
         size1Btn = buttonBuilder.buildPaintBtn("1", 4);
@@ -65,15 +79,19 @@ public class PaintMain {
     public void buildLayout(){
         mainFrame = new JFrame("Paint");
         canvas = new PaintCanvas();
+        ImageIcon bg = new ImageIcon("src/main/photos/previewbg.png");
+        preview = new JLabel(bg);
         eventHandler = new PaintEventHandler(canvas, buttonBuilder.getButtonMap());
         JPanel controls = new JPanel();
         JPanel sizes = new JPanel();
 
         Container contents = mainFrame.getContentPane();
+        contents.setBackground(Color.BLACK);
         contents.setLayout(new BorderLayout());
         contents.add(canvas, BorderLayout.CENTER);
         contents.add(controls, BorderLayout.NORTH);
         contents.add(sizes, BorderLayout.SOUTH);
+        contents.add(preview, BorderLayout.EAST);
         addButtons(controls, sizes);
     }
 
@@ -84,7 +102,7 @@ public class PaintMain {
      * @param sizes - JPanel containing all the size buttons
      */
     public void addButtons(JPanel controls, JPanel sizes){
-        JButton[] controlChoices = {clearBtn, eraserBtn, blackBtn, redBtn, blueBtn, greenBtn, doneBtn};
+        JButton[] controlChoices = {clearBtn, eraserBtn, blackBtn, redBtn, blueBtn, greenBtn, prevBtn, doneBtn};
         JButton[] sizeChoices = {size1Btn, size2Btn, size3Btn, size4Btn};
         mergeBtnArrays(controlChoices, sizeChoices);
         for (JButton c : controlChoices) {

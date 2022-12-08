@@ -1,7 +1,7 @@
 package Paint;
 
 public class SizeAction implements PaintAction{
-        private int size;
+        private final int size;
         public SizeAction(int s){
             this.size = s;
         }
