@@ -1,15 +1,15 @@
-package useCases.merchantUseCases;
+package controllers;
 
 import entities.character.Merchant;
 import entities.character.Player;
 import settings.Settings;
 
-public class PurchaseController {
+public class MerchantController {
 
     private Player player;
     private Merchant merchant;
 
-    public PurchaseController(Player player, Merchant merchant) {
+    public MerchantController(Player player, Merchant merchant) {
         this.player = player;
         this.merchant = merchant;
     }

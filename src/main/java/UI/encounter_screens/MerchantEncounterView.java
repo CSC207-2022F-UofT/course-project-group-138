@@ -1,12 +1,11 @@
 package UI.encounter_screens;
 
 import gateways.ImageGateway;
-import useCases.merchantUseCases.PurchaseController;
+import controllers.MerchantController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 
@@ -16,8 +15,8 @@ public class MerchantEncounterView extends EncounterView {
      * The Window will be poped up when the player hits the merchant.
      * The according image will be shown, as well as the according features, like purchase, and leave.
      */
-    private JButton weaponUpgrade, armorUpgrade;
-    private PurchaseController purchaseController;
+    private JButton Upgrade;
+    private MerchantController merchantController;
 
     MerchantEncounterView() {
 
@@ -41,18 +40,13 @@ public class MerchantEncounterView extends EncounterView {
         exit.setFont(new Font("Comic Sans", Font.BOLD, 20));
         c.add(exit); // Add an Exit button on the container.
 
-        weaponUpgrade = new JButton("Upgrade Weapon");
-        weaponUpgrade.setBounds(30, 290, 190, 90);
-        weaponUpgrade.addActionListener(this);
-        weaponUpgrade.setActionCommand("Weapon");
-        weaponUpgrade.setFont(new Font("Comic Sans", Font.BOLD, 17));
-        c.add(weaponUpgrade);// Add an Upgrade Weapon button on the container
+        Upgrade = new JButton("Upgrade Weapon");
+        Upgrade.setBounds(30, 290, 190, 90);
+        Upgrade.addActionListener(this);
+        Upgrade.setActionCommand("Weapon");
+        Upgrade.setFont(new Font("Comic Sans", Font.BOLD, 17));
+        c.add(Upgrade);// Add an Upgrade button on the container
 
-        armorUpgrade = new JButton("Upgrade Armor");
-        armorUpgrade.setBounds(255, 290, 190, 90);
-        armorUpgrade.addActionListener(this);
-        armorUpgrade.setFont(new Font("Comic Sans", Font.BOLD, 18));
-        c.add(armorUpgrade);// Add an Upgrade Armor button on the container
 
     }
 
@@ -78,14 +72,11 @@ public class MerchantEncounterView extends EncounterView {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == Upgrade){
+            //TODO: call MerchantController
+        }
         if(e.getSource() == exit){
             System.exit(0);
-        }
-        if (e.getSource() == armorUpgrade){
-            // PurchaseController armor = new PurchaseController();
-        }
-        if (e.getSource() == weaponUpgrade){
-
         }
 }
 }

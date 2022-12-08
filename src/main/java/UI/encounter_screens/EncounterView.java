@@ -27,4 +27,8 @@ public abstract class EncounterView extends JFrame implements ActionListener {
         this.setVisible(true); // Exhibit the frame
     }
 
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
 }
