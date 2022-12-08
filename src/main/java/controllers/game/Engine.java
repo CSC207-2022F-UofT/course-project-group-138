@@ -4,6 +4,7 @@ import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
 import controllers.gameStates.CrawlingState;
 import controllers.StateManager;
+import controllers.gameStates.MenuState;
 import settings.Settings;
 
 import javax.swing.*;
@@ -44,7 +45,7 @@ public class Engine {
      */
     public static void start(){
         // @TODO Should start on MenuState whenever that is implemented.
-        stateManager.setCurrState(new CrawlingState());
+        stateManager.setCurrState(new MenuState());
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
@@ -63,6 +64,9 @@ public class Engine {
     }
     public static void close(){
         gameWindow.hide();
+    }
+    public static void open(){
+        gameWindow.show();
     }
     public static void quit(){
         gameWindow.close();

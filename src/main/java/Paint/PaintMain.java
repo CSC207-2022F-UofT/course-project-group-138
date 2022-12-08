@@ -1,5 +1,9 @@
 package Paint;
 
+import controllers.StateManager;
+import controllers.game.Engine;
+import controllers.gameStates.CrawlingState;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,11 +46,11 @@ public class PaintMain {
         buildButtons();
         buildLayout();
 
-        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int)size.getWidth();
-        int height = (int)size.getHeight();
-
-        mainFrame.setSize(width, height-40);
+//        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+//        int width = (int)size.getWidth();
+//        int height = (int)size.getHeight();
+//
+//        mainFrame.setSize(width, height-40);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
 
@@ -143,6 +147,12 @@ public class PaintMain {
                 GridBagConstraints.PAGE_START, GridBagConstraints.NONE, insets);
 
         addButtons(controls, sizes, saving);
+
+        mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                Engine.onCreate();
+                Engine.start();}});
     }
 
     /**

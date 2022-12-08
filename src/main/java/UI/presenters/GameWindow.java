@@ -103,5 +103,7 @@ public class GameWindow {
 
     public void hide() { gameFrame.hide();
     }
+    public void show() { gameFrame.show();
+    }
 
 }
