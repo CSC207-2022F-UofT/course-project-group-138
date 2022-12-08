@@ -1,6 +1,5 @@
 package entities.dungeon;
 
-import entities.Entity;
 import settings.Settings;
 
 import java.awt.*;
@@ -14,9 +13,9 @@ public class DungeonTile {
      *
      * This would be wasteful, since most of the tiles don't require a rectangle to check collisions.
      */
-    private boolean clips = false; // true if and only if it is collidable with player}
-    private BufferedImage image;
-    private Rectangle tileRect;
+    protected boolean clips = false; // true if and only if it is collidable with player}
+    protected BufferedImage image;
+    protected Rectangle tileRect;
     public BufferedImage getImage(){
         return image;
     }

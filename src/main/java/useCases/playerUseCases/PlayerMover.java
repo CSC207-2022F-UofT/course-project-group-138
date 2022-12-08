@@ -23,17 +23,17 @@ public class PlayerMover {
      * Checks whether player is hitting the edge of the frame.
      */
     public void move() {
-        if (up && player.gety() > 0) {
+        if (up && player.getY() > 0) {
             player.changey(-speed);
         }
-        if (down && player.gety() < Settings.canvasHeight() - Settings.getPlayerSize()) {
+        if (down && player.getY() < Settings.canvasHeight() - Settings.getPlayerSize()) {
             player.changey(speed);
         }
-        if (left && player.getx() > 0) {
+        if (left && player.getX() > 0) {
             player.changex(-speed);
             player.setFacing_right(false);
         }
-        if (right && player.getx() < Settings.canvasWidth() - Settings.getPlayerSize()) {
+        if (right && player.getX() < Settings.canvasWidth() - Settings.getPlayerSize()) {
             player.changex(speed);
             player.setFacing_right(true);
         }
@@ -58,6 +58,12 @@ public class PlayerMover {
     public void movingRight (boolean right){
         this.right = right;
     }
+    public int getX(){
+        return player.getX();
+    }
+    public int getY(){
+        return player.getY();
+    }
     public boolean isUp(){
         return  this.up;
     }
@@ -69,5 +75,10 @@ public class PlayerMover {
     }
     public boolean isDown() {
         return down;
+    }
+
+    public void newRoom() {
+        player.setX(10);
+        player.setY(Settings.canvasHeight() / 2 - 25);
     }
 }
