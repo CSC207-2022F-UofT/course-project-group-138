@@ -184,7 +184,7 @@ public class CrawlingState implements State, RoomSwitcher {
             enemy.setX(location[0]);
             enemy.setY(location[1]);
             if (enemyViewModel == null) {
-                enemyViewModel = new EnemyViewModel(enemy, Settings.getTileSize());
+                enemyViewModel = new EnemyViewModel(enemy, Settings.getTileSize() * 2);
                 ((CrawlingStatePresenter)presenter).setEnemyViewModel(enemyViewModel);
             }
             npcuiManager.spawnEnemy(dungeonController.getCurrentRoom(), enemyViewModel);

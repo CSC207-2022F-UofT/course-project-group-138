@@ -36,7 +36,6 @@ public abstract class ViewModel extends Rectangle {
      */
     public void render(@NotNull Graphics2D graphics){
         graphics.drawImage(entityImage, super.x, super.y, super.width, super.height, null);
-        graphics.fillRect(super.x, super.y, 40, 40);
     }
     public Entity getEntity() {
         return entity;

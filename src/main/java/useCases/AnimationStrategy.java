@@ -33,7 +33,7 @@ public class AnimationStrategy {
         if (System.currentTimeMillis() - lastTime < 400){
             return curr;
         }
-        if (curr < startFrame + numFrames / 2 - 1){
+        if (curr < startFrame + numFrames - 1){
             curr++;
         }
         else {
