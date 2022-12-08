@@ -6,7 +6,7 @@ import entities.character.Merchant;
 public class DungeonRoom {
     private Enemy enemy;
     private Merchant merchant;
-    private DungeonRoom previousRoom;
+    public DungeonRoom previousRoom;
 
     public DungeonRoom() {
         this.merchant = null;
@@ -39,7 +39,7 @@ public class DungeonRoom {
     /**
      * Clears the information regarding the previous DungeonRoom the player entered this room from.
      */
-    private void clearPreviousRoom() {
+    public void clearPreviousRoom() {
         this.previousRoom = null;
     }
 
@@ -47,14 +47,10 @@ public class DungeonRoom {
      * @return The DungeonRoom the player entered this room from.
      * @throws Object404Error if no previous DungeonRoom is attached to this one.
      */
-    public DungeonRoom getPreviousRoom() throws Object404Error {
-        if (this.previousRoom == null) {
-            throw new Object404Error("Room does not have a previous room attached.");
-        } else {
-            DungeonRoom prevRoom = this.previousRoom;
-            this.clearPreviousRoom();
-            return prevRoom;
-        }
+    public DungeonRoom getPreviousRoom() {
+        DungeonRoom prevRoom = this.previousRoom;
+//            this.clearPreviousRoom();
+        return this.previousRoom;
     }
 
     /**

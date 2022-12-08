@@ -31,7 +31,6 @@ public class CrawlingStatePresenter implements StatePresenter {
         if (enemyViewModel != null && hasEnemy) enemyViewModel.render(graphics2D);
         if (merchantViewModel != null && hasMerchant) merchantViewModel.render(graphics2D);
         playerViewModel.render(graphics2D);
-        // @TODO add render body here (call DungeonRoomPresenter)
     }
 
     public void setPlayerViewModel(PlayerViewModel playerViewModel) {
