@@ -63,7 +63,7 @@ public class Engine {
         gameWindow.update(); // Loops and updates frontup UI
     }
     public static void close(){
-        gameWindow.hide();
+        gameWindow.dispose();
     }
     public static void open(){
         gameWindow.show();

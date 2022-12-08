@@ -101,7 +101,7 @@ public class GameWindow {
         gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
     }
 
-    public void hide() { gameFrame.hide();
+    public void dispose() { gameFrame.dispose();
     }
     public void show() { gameFrame.show();
     }
