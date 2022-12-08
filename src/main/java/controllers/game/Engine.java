@@ -61,6 +61,9 @@ public class Engine {
         stateManager.loop(); // Loops and updates backend game logic
         gameWindow.update(); // Loops and updates frontup UI
     }
+    public static void close(){
+        gameWindow.hide();
+    }
     public static void quit(){
         gameWindow.close();
     }

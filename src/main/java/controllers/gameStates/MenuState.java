@@ -2,8 +2,10 @@ package controllers.gameStates;
 
 import UI.presenters.statePresenters.MenuStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
+import useCases.KeyEventHandler;
 
-import java.awt.*;
+// todo: after chlicking done on paint it switches to crawling state
+// todo: add popup on paint where if u skip drawing the character it goes to crawling state
 
 public class MenuState implements State {
     StatePresenter presenter;
@@ -14,14 +16,17 @@ public class MenuState implements State {
     }
 
     public void keyPressEvents(int code) {
-
+        // todo: add checking for menu version
+        KeyEventHandler.handleMenuStateEvents(code);
     }
 
 
     public void keyReleasedEvents(int code) {
-
+        // todo: add checking for menu version
+        KeyEventHandler.handleMenuStateEvents(code);
     }
 
+    @Override
     public void clickEvents(int code) {
 
     }
@@ -30,4 +35,5 @@ public class MenuState implements State {
     public StatePresenter getPresenter() {
         return presenter;
     }
+
 }

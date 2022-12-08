@@ -1,5 +1,6 @@
 package useCases;
 
+import Paint.PaintMain;
 import controllers.game.Engine;
 import useCases.playerUseCases.PlayerMover;
 
@@ -9,6 +10,25 @@ public class KeyEventHandler {
     public static void handleCrawingStateEvents(int code, boolean bool, PlayerMover playerMover){
         updatePlayerMover(code, bool, playerMover);
         checkEscape(code);
+    }
+    public static void handleMenuStateEvents(int code){
+        checkEscape(code);
+        switch(code) {
+            case KeyEvent.VK_P:
+                PaintMain paint = new PaintMain();
+                paint.show();
+                Engine.close();
+                break;
+            case KeyEvent.VK_S:
+                // save file
+                break;
+            case KeyEvent.VK_L:
+                // loads save
+                break;
+            case KeyEvent.VK_Q:
+                Engine.quit();
+                break;
+        }
     }
 
     public static void handleCombatStateEvents(int code) {
