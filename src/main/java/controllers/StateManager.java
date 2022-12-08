@@ -20,7 +20,6 @@ public class StateManager {
     }
     public void loop(){
         currState.loop();
-
     }
     public void renderState(Graphics2D graphics){
         currState.getPresenter().render(graphics);

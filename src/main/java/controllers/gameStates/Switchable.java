@@ -2,7 +2,7 @@ package controllers.gameStates;
 
 import entities.dungeon.DungeonDoor;
 
-public interface RoomSwitcher {
+public interface Switchable {
     /**
      * For Dependency inversion
      */

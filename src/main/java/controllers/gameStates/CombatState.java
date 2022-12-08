@@ -1,6 +1,6 @@
 package controllers.gameStates;
 
-import UI.presenters.PlayerViewModel;
+import UI.presenters.viewModels.PlayerViewModel;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.CombatController;
 import entities.character.Enemy;
