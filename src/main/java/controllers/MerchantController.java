@@ -5,6 +5,9 @@ import entities.character.Merchant;
 import entities.character.Player;
 import settings.Settings;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class MerchantController {
 
     private Player player;
