@@ -98,10 +98,10 @@ public class SaveDsRequest {
     }
 
     public int getPlayerX() {
-        return player.getx();
+        return player.getX();
     }
 
-    public int getPlayerY() { return player.gety(); }
+    public int getPlayerY() { return player.getY(); }
 
     public LocalDateTime getCreationTime() {
         return creationTime;
