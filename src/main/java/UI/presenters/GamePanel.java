@@ -47,8 +47,9 @@ public class GamePanel extends JPanel{
      */
     public void drawScreen(){
         Graphics graphics = getGraphics();
+        if (graphics != null){
         graphics.drawImage(gameCanvas, 0, 0, Settings.getFrameWidth(), Settings.getFrameHeight(), null);
-        graphics.dispose();
+        graphics.dispose();};
     }
 //    protected void paintComponent(Graphics graphics){
 //        super.paintComponent(graphics);

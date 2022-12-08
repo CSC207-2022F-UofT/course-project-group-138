@@ -25,9 +25,6 @@ public class KeyEventHandler {
             case KeyEvent.VK_L:
                 // loads save
                 break;
-            case KeyEvent.VK_Q:
-                Engine.quit();
-                break;
         }
     }
 

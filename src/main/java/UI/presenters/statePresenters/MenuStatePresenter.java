@@ -4,14 +4,19 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MenuStatePresenter implements StatePresenter {
-    private BufferedImage buttonImage1;
+    private BufferedImage menu;
+    private BufferedImage bg;
 
-    public void setButtonImage1(BufferedImage buttonImage1) {
-        this.buttonImage1 = buttonImage1;
+    public void setMenu(BufferedImage menu) {
+        this.menu = menu;
     }
 
-    public BufferedImage getButtonImage1() {
-        return buttonImage1;
+    public void setBG(BufferedImage bg) {
+        this.bg = bg;
+    }
+
+    public BufferedImage getMenu() {
+        return menu;
     }
 
     @Override
@@ -20,6 +25,7 @@ public class MenuStatePresenter implements StatePresenter {
         int width = (int)size.getWidth();
         int height = (int)size.getHeight();
 
-        graphics.drawImage(buttonImage1, height/4, height/4, height/2, height/2, null);
+//        graphics.drawImage(bg, 0, 0, width, height, null);
+        graphics.drawImage(menu, width/6, 0, height, height, null);
     }
 }

@@ -11,8 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-// todo: after clicking done on paint it switches to crawling state
-// todo: add popup on paint where if u skip drawing the character it goes to crawling state
+
 
 public class MenuState implements State {
     StatePresenter presenter;
@@ -25,10 +24,12 @@ public class MenuState implements State {
         Settings.setFrameWidth(width);
 
         MenuStatePresenter pre = new MenuStatePresenter();
-        BufferedImage button1;
+        BufferedImage menu;
+        BufferedImage bg;
         try {
-            button1 = ImageIO.read(new File("src/main/res/temp-menu.png"));
-            pre.setButtonImage1(button1);
+            menu = ImageIO.read(new File("src/main/res/temp-menu.png"));
+            bg = ImageIO.read(new File("src/main/res/previewbg.png"));
+            pre.setMenu(menu);
         } catch (IOException e) {
             e.printStackTrace();
         }

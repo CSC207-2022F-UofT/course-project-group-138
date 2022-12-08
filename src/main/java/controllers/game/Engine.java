@@ -35,9 +35,9 @@ public class Engine {
 
         gameWindow = new GameWindow();
 
-        //timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
-        //timer = timerStrategy.initTimer();
-        threadStrategy = new MultithreadLoopStrategy();
+        timerStrategy = new TimerLoopStrategy(stateManager, gameWindow);
+        timer = timerStrategy.initTimer();
+//        threadStrategy = new MultithreadLoopStrategy();
     }
 
     /**
@@ -49,8 +49,8 @@ public class Engine {
         gameWindow.addGamePanel(gamePanel);
         gameWindow.addKeyListener(new Keyboard());
         gameWindow.createGameWindow();
-        threadStrategy.start();
-        //timer.start();
+//        threadStrategy.start();
+        timer.start();
 //        gameLoop();
 //        loop.start();
     }
