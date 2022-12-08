@@ -12,12 +12,14 @@ public class StateManager {
     public void keyReleased(int keyCode){
         currState.keyReleasedEvents(keyCode);
     }
+    public void click(int clickCode){
+        currState.clickEvents(clickCode);
+    }
     public void setCurrState(State newState){
         currState = newState;
     }
     public void loop(){
         currState.loop();
-
     }
     public void renderState(Graphics2D graphics){
         currState.getPresenter().render(graphics);

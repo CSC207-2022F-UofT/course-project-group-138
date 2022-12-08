@@ -225,11 +225,12 @@ public class TileArrayInitializer {
             if (tileNum == 97){
                 enemyLocation[0] = x;
                 enemyLocation[1] = y;
-                tileNum = 25;
+                tileNum = 0;
             }
             if (tileNum == 96){
                 merchantLocation[0] = x;
                 merchantLocation[1] = y;
+                tileNum = 25;
             }
 
             if (tiles[tileNum].clips()){
