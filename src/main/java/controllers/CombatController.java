@@ -26,14 +26,14 @@ public class CombatController {
         this.player = player;
         this.enemy = enemy;
     }
-//
-//    /**
-//     * Getter for userInput
-//     * @return userInput - string representation of the user's click
-//     */
-//    public String getUserInput() {
-//        return userInput;
-//    }
+
+    /**
+     * Getter for userInput
+     * @return userInput - string representation of the user's click
+     */
+    public String getUserInput() {
+        return userInput;
+    }
 
     /**
      * Setter for userInput
@@ -48,16 +48,17 @@ public class CombatController {
      * This method is open for extension, adding a switch statement and a variety of cases allows the controller
      * to respond to a variety of string inputs, such as defending, retreating, or using an item.
      *
-     * Update the static variable currHP to updatedHP, so that currHP can be accessible by other classes.
+     *
      */
-    public void combatTurn() {
+    public List<Integer> combatTurn() {
         // Does "Attack" need to be replaced with GUI.Button presses?
         List<Integer> updatedHP = null;
         if (userInput.equals("Attack")) {
             updatedHP = CombatRound.combatRound(this.player, this.enemy);
-            userInput = null;
+            userInput = "none";
         }
         currHP = updatedHP;
+        return updatedHP;
     }
 
     /**

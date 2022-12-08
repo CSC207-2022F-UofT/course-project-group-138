@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class FinalBossEncounterView extends EncounterView {
+public class FinalBossEncounterView extends EncounterView implements SetLabel, SetCombatButtonsandLabel {
 
 
     /**
@@ -19,11 +19,7 @@ public class FinalBossEncounterView extends EncounterView {
      * Provide more specific implementation of the EncounterView.
      * A window of success will pop up if the final boss is slain.
      */
-    private JButton attack;
-
-
     FinalBossEncounterView() {
-
 
         this.setTitle("Final Boss Encountered"); // set the title of the frame
 
@@ -31,26 +27,29 @@ public class FinalBossEncounterView extends EncounterView {
         Image dimg = img.getScaledInstance(200, 240, Image.SCALE_SMOOTH); // rescale the image displayed
         ImageIcon imageIcon = new ImageIcon(dimg); // create an instance of the image
 
-        label = new JLabel(); //JLabel Creation
         label.setBounds(215, 55, 200, 240);
         label.setIcon(imageIcon); //Sets the image to be displayed as an icon
+        getContentPane().add(label);
 
         c = this.getContentPane(); //Gets the content layer
-        c.setBackground(new Color(0x12345)); //rgb value, set the background color
+        c.setBackground(new Color(0x1234)); //rgb value, set the background color
         c.add(label); //Adds objects to the container
 
-        attack = new JButton("Attack");
         attack.setBounds(30, 290, 120, 90);
         attack.addActionListener(this);
         attack.setFont(new Font("Comic Sans", Font.BOLD, 20));
-        c.add(attack); // Add a attack button on the container.
+        c.add(attack); // Add an attack button on the container.
 
-        exit = new JButton("Exit");
         exit.setBounds(480, 290, 120, 90);
         exit.addActionListener(this);
         exit.setFont(new Font("Comic Sans", Font.BOLD, 20));
         c.add(exit); // Add a leave button on the container.
 
+        hp.setText("Player HP Enemy HP:");
+        hp.setForeground(new Color(0xFFFFFF));
+        hp.setFont(new Font("Comic Sans", Font.PLAIN, 10));
+        hp.setBounds(20, 20, 300, 300);
+        c.add(hp);
     }
 
     @Override
@@ -75,12 +74,6 @@ public class FinalBossEncounterView extends EncounterView {
             JOptionPane.showMessageDialog(null, "Current HP for the player:" +
                     playerHP + "\n" + "Current HP for the enemy:" + enemyHP);
 
-            // if the player is unable to proceed, the button can't be pressed again.
-            // attack.setEnabled(false);
-
-            // TODO how the final boss scene will be triggered??? If there is no checker function
-            // if the final boss is slain, the success window is triggered.
-            // new SuccessWindow();
         }
 
         if (e.getSource() == exit) {

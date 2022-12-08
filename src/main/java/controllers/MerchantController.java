@@ -4,6 +4,7 @@ import controllers.gameStates.State;
 import entities.character.Merchant;
 import entities.character.Player;
 import settings.Settings;
+import java.awt.event.*;
 
 public class MerchantController {
 
@@ -14,6 +15,10 @@ public class MerchantController {
     public MerchantController(Player player, Merchant merchant) {
         this.player = player;
         this.merchant = merchant;
+    }
+
+    public MerchantController() {
+
     }
 
     public String getPurchaseOption() {
