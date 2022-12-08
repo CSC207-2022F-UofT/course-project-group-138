@@ -13,12 +13,13 @@ public class EnemyTests {
     }
 
     /**
-     * Tests whether x,y coords remain constant while directions set to false, and that default is set to false.
+     * Tests setImageID() and getImageID().
      */
     @Test
-    public void testMovePlayerFalse(){
+    public void testImageID(){
         initializeEnemy();
-        assert enemy.getX() == 0 : enemy.getY() == 0;
+        enemy.setImageID(10);
+        assert enemy.getImageID() == 10;
     }
 
 }
