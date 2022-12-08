@@ -1,6 +1,8 @@
 package controllers.gameStates;
 
 import UI.presenters.statePresenters.StatePresenter;
+import entities.character.Character;
+import entities.character.Entity;
 
 public interface State {
     void loop();

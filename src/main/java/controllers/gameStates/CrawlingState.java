@@ -22,7 +22,7 @@ import entities.dungeon.DungeonDoor.Door;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrawlingState implements State, RoomSwitcher {
+public class CrawlingState implements State, Switchable {
     /**
      * This class represents the state of the game where the player is free to move/roam around the map
      * There is no combat in this state, only movement and room transitions between various dungeon rooms.
@@ -39,6 +39,7 @@ public class CrawlingState implements State, RoomSwitcher {
     StatePresenter presenter;
     PlayerCollisionHandler playerCollisionHandler;
     NPCUIManager npcuiManager;
+    private final int stateCode = 0;
     private int roomType = 0;
     int acc = 0;
 
@@ -63,6 +64,10 @@ public class CrawlingState implements State, RoomSwitcher {
         if (merchantViewModel != null) merchantViewModel.updatePosition();
         playerCollisionHandler.handleTileCollisions(tileManager.getCollisionArray());
         playerCollisionHandler.handleDoorCollisions(tileManager.getDoors(), roomType);
+        if(playerCollisionHandler.enemyCollision(enemyViewModel)){
+
+        }
+
         npcuiManager.update();
     }
     /**
@@ -83,6 +88,7 @@ public class CrawlingState implements State, RoomSwitcher {
     public StatePresenter getPresenter() {
         return presenter;
     }
+
     public Player getPlayer(){
         return player;
     }

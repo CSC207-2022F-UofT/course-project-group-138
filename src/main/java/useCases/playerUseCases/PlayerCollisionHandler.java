@@ -1,6 +1,6 @@
 package useCases.playerUseCases;
 
-import controllers.gameStates.RoomSwitcher;
+import controllers.gameStates.Switchable;
 import entities.dungeon.DungeonDoor;
 import useCases.CollisionHandler;
 import entities.dungeon.DungeonDoor.Door;
@@ -11,12 +11,12 @@ import java.util.HashMap;
 public class PlayerCollisionHandler implements CollisionHandler {
     protected Rectangle self;
     protected PlayerMover mover;
-    RoomSwitcher roomSwitcher;
+    Switchable switchable;
     HashMap<Door, Integer> doorMap;
-    public PlayerCollisionHandler(Rectangle rectangle, PlayerMover mover, RoomSwitcher switcher){
+    public PlayerCollisionHandler(Rectangle rectangle, PlayerMover mover, Switchable switcher){
         this.self = rectangle;
         this.mover = mover;
-        this.roomSwitcher = switcher;
+        this.switchable = switcher;
         doorMap = buildDoorMap();
     }
     public void handleTileCollisions(Rectangle[] dungeonTiles){
@@ -27,15 +27,32 @@ public class PlayerCollisionHandler implements CollisionHandler {
     public void handleDoorCollisions(DungeonDoor[] doors, int roomType){
         for (DungeonDoor door : doors){
             if (roomType >= doorMap.get(door.getType()) && self.intersects(door.getRect())){
-                roomSwitcher.changeRoom(door.getType());
+                switchable.changeRoom(door.getType());
             }
         }
+    }
+    public boolean enemyCollision(Rectangle enemyViewModel){
+        if (enemyViewModel != null){
+            if (self.intersects(enemyViewModel)){
+                handleCollision(enemyViewModel);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean merchantCollision(Rectangle merchantViewModel){
+        if (merchantViewModel != null){
+            if (self.intersects(merchantViewModel)){
+                handleCollision(merchantViewModel);
+                return true;
+            }
+        }
+        return false;
     }
     private void handleCollision(Rectangle object) {
 
         Rectangle intersection = self.intersection(object);
         if (intersection.isEmpty()){return;}
-        int playerTop = self.y - 30;
 
         // TOTAL 4 CASES: Top, Bottom, Left or right collisions
 
@@ -61,7 +78,7 @@ public class PlayerCollisionHandler implements CollisionHandler {
             }
             // LEFT COLLISION
             else {
-                mover.setPlayerX(mover.getX() + intersection.width);;
+                mover.setPlayerX(mover.getX() + intersection.width);
             }
         }
     }
