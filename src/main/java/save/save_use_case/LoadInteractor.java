@@ -11,7 +11,7 @@ public class LoadInteractor implements LoadInputBoundary {
         this.SAVE_PRESENTER = saveLoadPresenter;
     }
     public LoadResponse performLoad(LoadRequest loadRequest) {
-        if (SAVE_DS_GATEWAY.fileExists(loadRequest.getFileName())) {
+        if (!SAVE_DS_GATEWAY.fileExists(loadRequest.getFileName())) {
             return SAVE_PRESENTER.loadFailView("File name does not exist!");
         }
 

@@ -1,6 +1,7 @@
 package useCases;
 
 import controllers.game.Engine;
+import save.ui.ScreenDriver;
 import useCases.playerUseCases.PlayerMover;
 
 import java.awt.event.KeyEvent;
@@ -36,6 +37,19 @@ public class KeyEventHandler {
                 break;
         }
     }
+
+    public static void handleMenuStateEvents(int code) {
+        checkEscape(code);
+            switch(code) {
+                case KeyEvent.VK_P:
+                    break;
+                case KeyEvent.VK_L:
+                    ScreenDriver driver = new ScreenDriver();
+                    driver.driveLoadScreen();
+                    break;
+            }
+    }
+
     /**
      * Quit if player presses escape. In the future, this should pause the game, prompt player
      * with several options

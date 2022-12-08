@@ -1,4 +1,4 @@
-package UI.game_menu;
+package save.ui;
 
 import save.save_screen.LoadController;
 import save.save_screen.SaveController;

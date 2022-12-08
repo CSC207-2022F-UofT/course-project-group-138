@@ -15,7 +15,7 @@ public class SaveInteractor implements SaveInputBoundry {
 
     @Override
     public SaveResponse performSave(SaveRequest saveRequest) {
-        if (SAVE_DS_GATEWAY.fileExists(saveRequest.getFileName())) {
+        if (!SAVE_DS_GATEWAY.fileExists(saveRequest.getFileName())) {
             return SAVE_PRESENTER.saveFailView("File name conflict!");
         }
 
