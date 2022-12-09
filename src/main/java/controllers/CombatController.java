@@ -14,6 +14,9 @@ public class CombatController {
     private final Player player;
     private final Enemy enemy;
     private static String userInput;
+    private static List<Integer> currHP;
+    private static int pHP;
+    private static int eHP;
 
 
     /**
@@ -47,7 +50,7 @@ public class CombatController {
      * This method is open for extension, adding a switch statement and a variety of cases allows the controller
      * to respond to a variety of string inputs, such as defending, retreating, or using an item.
      *
-     * @return A List of ints, first entry is char1's updated hp, second entry is char2's updated hp
+     *
      */
     public List<Integer> combatTurn() {
         // Does "Attack" need to be replaced with GUI.Button presses?
@@ -56,7 +59,35 @@ public class CombatController {
             updatedHP = CombatRound.combatRound(this.player, this.enemy);
             userInput = "none";
         }
+        currHP = updatedHP;
         return updatedHP;
+    }
+
+    /**
+     * Getter for the enemy's and the player's HP.
+     * @return currHP - A list of HP with the first entry, the player's, and the second entry, the enemy's.
+     */
+
+    public static List<Integer> getHP(){
+        return currHP;
+    }
+
+    /**
+     * Getter for the enemy's HP. Constantly changes.
+     * @return The enemy's HP.
+     */
+    public static int getEnemyHP(){
+        eHP = currHP.get(1);
+        return eHP;
+    }
+
+    /**
+     * Getter for the player's HP. Constantly changes.
+     * @return The player's HP.
+     */
+    public static int getPlayerHP(){
+        pHP = currHP.get(0);
+        return pHP;
     }
 
 

@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.gameStates.*;
+import entities.character.Merchant;
 
 public class StateFactory {
     public State getState(States state) {
