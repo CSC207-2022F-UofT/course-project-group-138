@@ -1,5 +1,6 @@
 package useCases;
 
+import controllers.StateChanger;
 import controllers.StateManager;
 import useCases.Attack;
 import entities.character.Enemy;
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 public class CombatRound {
+    static StateChanger stateChanger;
     /**
      * A class with a class methods that handles one round of combat.
      */
@@ -31,6 +33,7 @@ public class CombatRound {
             player.rechargeHealth();           // heal their hp to full
             int coins = enemy.getCoins();
             player.spendCoins(-coins);         // and award them coins
+            stateChanger.toCrawlingState();
             return resultHP;
         }
 
@@ -38,6 +41,7 @@ public class CombatRound {
         resultHP = Attack.taketurn(enemy, player);
         if (!player.isAlive()) {                // If the attack killed the player
             player.rechargeHealth();           // revert their hp to pre combat
+            stateChanger.toCrawlingState();
             return resultHP;
         }
 

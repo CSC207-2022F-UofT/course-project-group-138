@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-
+import static java.lang.Math.round;
 import static java.lang.Math.min;
 import static java.lang.Math.round;
 
@@ -131,7 +131,18 @@ public class Dungeon {
 
         this.map.put(this.startingRoom, new ArrayList<DungeonRoom>());
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
-        this.addHallway(this.startingRoom, rooms.get(randomSecondRoomIndex));
-        this.addHallway(gateRoom, rooms.get(randomSecondLastRoomIndex));
+
+        this.map.get(this.startingRoom).add(gateRoom);
+        this.map.get(gateRoom).add(this.startingRoom);
+    }
+
+    // for implementation of serialization and test file for deserialization
+
+    public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
+        return map;
+    }
+
+    public double getDifficulty() {
+        return difficulty;
     }
 }

@@ -1,6 +1,7 @@
 package save.save_use_case;
 
 import entities.character.Player;
+import entities.dungeon.Dungeon;
 
 // neeed to import the Player Class and inventory class
 
@@ -9,11 +10,12 @@ public class SaveRequest {
 
     private Player player;
 
-    // might need an attribute for dungeons
+    private Dungeon dungeon;
 
-    public SaveRequest(String fileName, Player player) {
+    public SaveRequest(String fileName, Player player, Dungeon dungeon) {
         this.fileName = fileName;
         this.player = player;
+        this.dungeon = dungeon;
     }
 
     public String getFileName() {
@@ -30,6 +32,10 @@ public class SaveRequest {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Dungeon getDungeon() {
+        return dungeon;
     }
 }
 

@@ -3,11 +3,17 @@ package save.save_use_case;
 public class LoadRequest {
     private String fileName;
 
-    private String sortMethod;
+    private boolean quickLoad;
 
-    public LoadRequest(String fileName, String sortMethod) {
+
+    public LoadRequest(boolean quickLoad) {
+        this.fileName = "a";
+        this.quickLoad = true;
+    }
+
+    public LoadRequest(String fileName) {
         this.fileName = fileName;
-        this.sortMethod = sortMethod;
+        this.quickLoad = false;
     }
 
     public String getFileName() {
@@ -18,11 +24,7 @@ public class LoadRequest {
         this.fileName = fileName;
     }
 
-    public String getSortMethod() {
-        return sortMethod;
-    }
-
-    void setSortMethod(String sortMethod) {
-        this.sortMethod = sortMethod;
+    public boolean isQuickLoad() {
+        return quickLoad;
     }
 }
