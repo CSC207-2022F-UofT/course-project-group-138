@@ -173,7 +173,7 @@ public class CrawlingState implements State, Switchable {
         System.out.println("Enemies? " + dungeonController.getCurrentRoom().hasEnemy());
         System.out.println("Merchants? " + dungeonController.getCurrentRoom().hasMerchant());
         acc++;
-        if (roomType == 0 && prev != null) roomType = 7; // Room type 0 implies boss room if prev is not null
+        if (roomType == 1 && prev != null) roomType = 7; // Room type 1 implies boss room if prev is not null
         tileManager.changeRoom(roomType - 1);
         getEnemy();
         getMerchant();
