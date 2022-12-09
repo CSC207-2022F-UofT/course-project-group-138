@@ -15,7 +15,7 @@ public class Dungeon {
     static int[] CONNECTION_RANGE = {1, 5};
     static double[] DIFFICULTY_RANGE = {0.10, 0.25, 0.50, 1.00};
     private final double difficulty;
-    private HashMap<DungeonRoom, List<DungeonRoom>> map;
+    private static HashMap<DungeonRoom, List<DungeonRoom>> map;
     private DungeonRoom startingRoom;
 
     public Dungeon() {
@@ -65,8 +65,8 @@ public class Dungeon {
     /**
      * @return the entire DungeonMap, to save the game.
      */
-    public HashMap<DungeonRoom, List<DungeonRoom>> saveDungeon() {
-        return this.map;
+    public static HashMap<DungeonRoom, List<DungeonRoom>> saveDungeon() {
+        return map;
     }
 
     /**

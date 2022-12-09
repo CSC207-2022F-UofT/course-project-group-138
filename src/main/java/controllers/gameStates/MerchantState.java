@@ -3,11 +3,9 @@ package controllers.gameStates;
 import UI.presenters.statePresenters.EncounterStatePresenter;
 import UI.presenters.statePresenters.StatePresenter;
 
-import java.awt.*;
-
-public class EncounterState implements State {
+public class MerchantState implements State {
     StatePresenter presenter;
-    public EncounterState(){
+    public MerchantState(){
         this.presenter = new EncounterStatePresenter();
     }
     public void loop() {
