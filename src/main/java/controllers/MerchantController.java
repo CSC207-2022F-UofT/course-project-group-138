@@ -1,17 +1,26 @@
-package useCases.merchantUseCases;
+package controllers;
 
+import controllers.gameStates.State;
 import entities.character.Merchant;
 import entities.character.Player;
 import settings.Settings;
 
-public class PurchaseController {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MerchantController {
 
     private Player player;
     private Merchant merchant;
+    State currState;
 
-    public PurchaseController(Player player, Merchant merchant) {
+    public MerchantController(Player player, Merchant merchant) {
         this.player = player;
         this.merchant = merchant;
+    }
+
+    public MerchantController(){
+
     }
 
     public String getPurchaseOption() {
@@ -56,9 +65,18 @@ public class PurchaseController {
         }
     }
 
-    private static class LowBalanceException extends Exception {
-        public LowBalanceException() {
-            super("Insufficient coinc balance to purchase item(s).");
-        }
+    public ActionListener getMerchantListener(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("Upgrade")){
+                    currState.clickEvents(0);
+                }
+                if(e.getActionCommand().equals("Exit")){
+                    System.exit(0);
+                }
+            }
+        };
     }
+
 }

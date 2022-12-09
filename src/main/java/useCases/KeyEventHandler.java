@@ -1,17 +1,30 @@
 package useCases;
 
+import controllers.LowBalanceException;
+import controllers.MerchantController;
 import controllers.game.Engine;
 import useCases.playerUseCases.PlayerMover;
 
 import java.awt.event.KeyEvent;
 
 public class KeyEventHandler {
+    private static final int MERCHANT_CODE = 0;
+    private static int merchantCode = 0;
+
     public static void handleCrawingStateEvents(int code, boolean bool, PlayerMover playerMover){
         updatePlayerMover(code, bool, playerMover);
         checkEscape(code);
     }
 
     public static void handleCombatStateEvents(int code) {
+        checkEscape(code);
+    }
+    public static void handleMerchantStateEvents(int code, MerchantController merchantController) {
+        try {
+            merchantController.purchase();
+        } catch (LowBalanceException e) {
+
+        }
         checkEscape(code);
     }
 
@@ -36,6 +49,8 @@ public class KeyEventHandler {
                 break;
         }
     }
+
+
     /**
      * Quit if player presses escape. In the future, this should pause the game, prompt player
      * with several options
