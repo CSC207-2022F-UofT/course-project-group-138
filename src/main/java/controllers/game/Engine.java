@@ -20,6 +20,7 @@ public class Engine {
     // Below are references to presenters
     private static GameWindow gameWindow;
     private static GamePanel gamePanel;
+
     private static TimerLoopStrategy timerStrategy;
     private static MultithreadLoopStrategy threadStrategy;
     private static Timer timer;

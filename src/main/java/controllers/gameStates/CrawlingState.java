@@ -150,9 +150,7 @@ public class CrawlingState implements State, Switchable {
                 dungeonController.goForward(roomList.get(2));
                 break;
             case LEFT:
-                /**
-                 * This should never throw an exception as long as Dungeon is built correctly
-                 */
+                // This should never throw an exception as long as Dungeon is built correctly
                 dungeonController.goBack();
                 break;
             case RIGHT:
@@ -175,6 +173,7 @@ public class CrawlingState implements State, Switchable {
         System.out.println("Enemies? " + dungeonController.getCurrentRoom().hasEnemy());
         System.out.println("Merchants? " + dungeonController.getCurrentRoom().hasMerchant());
         acc++;
+        if (roomType == 0 && prev != null) roomType = 7; // Room type 0 implies boss room if prev is not null
         tileManager.changeRoom(roomType - 1);
         getEnemy();
         getMerchant();
