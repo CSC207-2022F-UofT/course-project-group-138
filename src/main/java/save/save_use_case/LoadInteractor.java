@@ -17,7 +17,7 @@ public class LoadInteractor implements LoadInputBoundary {
 
         DsRequest loadedFile = SAVE_DS_GATEWAY.load(loadRequest);
 
-        LoadResponse loadResponse = new LoadResponse(loadedFile.getFileName(), loadedFile.getPlayer(), loadedFile.getDungeon());
+        LoadResponse loadResponse = new LoadResponse(loadedFile.getFileName(), loadedFile.getPlayer(), loadedFile.getMap());
         return SAVE_PRESENTER.loadSuccessView(loadResponse);
     }
 
@@ -27,7 +27,7 @@ public class LoadInteractor implements LoadInputBoundary {
         }
 
         DsRequest loadedFile = SAVE_DS_GATEWAY.load(loadRequest);
-        LoadResponse loadResponse = new LoadResponse(loadedFile.getFileName(), loadedFile.getPlayer(), loadedFile.getDungeon());
+        LoadResponse loadResponse = new LoadResponse(loadedFile.getFileName(), loadedFile.getPlayer(), loadedFile.getMap());
         return SAVE_PRESENTER.loadSuccessView(loadResponse);
     }
 }

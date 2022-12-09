@@ -2,22 +2,25 @@ package save.save_use_case;
 
 import entities.character.Player;
 import entities.dungeon.Dungeon;
+import entities.dungeon.DungeonRoom;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 public class DsRequest {
     private String fileName;
 
     private Player player;
 
-    private Dungeon dungeon;
+    private HashMap<DungeonRoom, List<DungeonRoom>> map;
 
     private LocalDateTime creationTime;
 
-    public DsRequest(String fileName, Player player, Dungeon dungeon, LocalDateTime creationTime) {
+    public DsRequest(String fileName, Player player, HashMap<DungeonRoom, List<DungeonRoom>> map, LocalDateTime creationTime) {
         this.fileName = fileName;
         this.player = player;
-        this.dungeon = dungeon;
+        this.map = map;
         this.creationTime = creationTime;
     }
 
@@ -33,8 +36,8 @@ public class DsRequest {
         return player;
     }
 
-    public Dungeon getDungeon() {
-        return dungeon;
+    public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
+        return map;
     }
 
     public LocalDateTime getCreationTime() {

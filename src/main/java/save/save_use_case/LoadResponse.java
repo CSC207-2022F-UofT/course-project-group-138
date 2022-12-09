@@ -1,7 +1,10 @@
 package save.save_use_case;
 
 import entities.character.Player;
-import entities.dungeon.Dungeon;
+import entities.dungeon.DungeonRoom;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class LoadResponse {
 
@@ -9,21 +12,18 @@ public class LoadResponse {
 
     private Player player;
 
-    private Dungeon dungeon;
+    private HashMap<DungeonRoom, List<DungeonRoom>> map;
 
-    public LoadResponse(String fileName, Player player, Dungeon dungeon) {
+    public LoadResponse(String fileName, Player player, HashMap<DungeonRoom, List<DungeonRoom>> map) {
         this.fileName = fileName;
         this.player = player;
-        this.dungeon = dungeon;
+        this.map = map;
     }
 
     public String getFilename() {
         return fileName;
     }
-
-    void setFilename(String fileName) {
-        this.fileName = fileName;
-    }
+    
 
     public Player getPlayer() {
         return player;

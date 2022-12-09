@@ -1,6 +1,13 @@
 package save.save_use_case;
 
+import entities.character.Player;
+import entities.dungeon.Dungeon;
+import entities.dungeon.DungeonRoom;
+import settings.Initializer;
+
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 public class SaveInteractor implements SaveInputBoundry {
 
@@ -20,12 +27,10 @@ public class SaveInteractor implements SaveInputBoundry {
         }
 
         LocalDateTime saveTime = LocalDateTime.now();
+        Player player = Initializer.getPlayer();
+        HashMap<DungeonRoom, List<DungeonRoom>> map = Dungeon.saveDungeon();
 
-        // need modification since class DsRequest change
-        DsRequest dsRequest = new DsRequest(saveRequest.getFileName(),
-                saveRequest.getPlayer(),
-                saveRequest.getDungeon(),
-                saveTime);
+        DsRequest dsRequest = new DsRequest(saveRequest.getFileName(), player, map, saveTime);
         SAVE_DS_GATEWAY.save(dsRequest);
 
         SaveResponse saveResponse = new SaveResponse(saveRequest.getFileName());

@@ -1,10 +1,7 @@
 package save.ui;
 
-import entities.character.Player;
-import entities.dungeon.Dungeon;
 import save.save_screen.FrameBuilder;
 import save.save_screen.SaveController;
-import settings.Initializer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,12 +36,6 @@ public class SaveScreen extends JFrame implements ActionListener, FrameBuilder {
         panel.add(fileNamePanel);
         panel.add(buttons);
 
-/*        window.add(panel);
-
-        window.pack();
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);*/
-
         buildFrame(window, panel);
 
         window.setVisible(true);
@@ -56,14 +47,7 @@ public class SaveScreen extends JFrame implements ActionListener, FrameBuilder {
 
         if (event.getSource() == saveButton)
         try {
-            Initializer initializer = new Initializer();
-            initializer.init();
-            Player player = initializer.getPlayer();
-
-            Dungeon dungeon = new Dungeon();
-            dungeon.generateDungeonMap();
-
-            this.saveController.performSave(fileName.getText(), player, dungeon);
+            this.saveController.performSave(fileName.getText());
             JOptionPane.showMessageDialog(this, String.format("%s created.", fileName.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
