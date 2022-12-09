@@ -33,11 +33,8 @@ public class MultithreadLoopStrategy {
             while (isRunning){
                 currTime = System.nanoTime();
                 delta += (currTime - lastTime) / interval;
-
                 timer += (currTime - lastTime);
-
                 lastTime = currTime;
-
                 if (delta >= 1){ // meaning that it has reached the time interval required to be under FPS
                     loopActions();
                     delta--;

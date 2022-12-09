@@ -10,17 +10,29 @@ import java.util.*;
 import java.util.List;
 
 public class TileArrayInitializer {
+    /**
+     * The methods in this class are usually only called either once per game or once every time the room switches.
+     * The main purpose of this class is to declutter the TileManager class. So all the initialization is done here.
+     */
     private final DungeonTile[] tiles;
+    // The foloowing sets contain all the tiles that must be stacked on a floor, black box, or wall respectively
     private final Set<Integer> floorTransparentTiles = new HashSet<>();
     private final Set<Integer> blackTransparentTiles = new HashSet<>();
     private final Set<Integer> wallTransparentTiles = new HashSet<>();
+
+    /**
+     * ==== Constructor ====
+     * Constructs a new TileArrayInitializer. Initializes the tile Array with size 100.
+     */
     public TileArrayInitializer(){
         tiles = new DungeonTile[100];
     }
-    private int[] enemyLocation = new int[2];
-    private int[] merchantLocation = new int[2];
+    private final int[] enemyLocation = new int[2]; // Updates every time room switching occurs
+    private final int[] merchantLocation = new int[2]; // Updates every time room switching occurs
 
     /**
+     * CALLED ONCE PER GAME: RETRIVES ALL THE ASSETS FROM THE IMAGE GATEWAY
+     *
      * Initializes all the tiles and assigns them to their corresponding image using the gateway
      * @return - The array of tiles on the map
      */
@@ -102,24 +114,21 @@ public class TileArrayInitializer {
         tiles[54].setImage(ImageGateway.getTorch6());
         tiles[55].setImage(ImageGateway.getTorch7());
         tiles[56].setImage(ImageGateway.getTorch8());
+        // Different texture floors
         tiles[60].setImage(ImageGateway.getMud_n1());
         tiles[61].setImage(ImageGateway.getMud_n2());
         tiles[62].setImage(ImageGateway.getFloorStain());
+        // Decorations
         tiles[63].setImage(ImageGateway.getChestGoldenClosed());
         tiles[64].setImage(ImageGateway.getFlagBlue());
         tiles[65].setImage(ImageGateway.getFlagGreen());
         tiles[66].setImage(ImageGateway.getWallGoo());
-        tiles[67].setImage(ImageGateway.getAnMonster1());
-        tiles[68].setImage(ImageGateway.getAnMonster2());
-        tiles[69].setImage(ImageGateway.getAnMonster3());
-        tiles[70].setImage(ImageGateway.getAnMonster4());
-        tiles[71].setImage(ImageGateway.getMerchant1());
-        tiles[72].setImage(ImageGateway.getMerchant2());
-
         return tiles;
     }
 
     /**
+     * NEVER CALLED ONCE PER GAME
+     *
      * These tiles require stacking on floor
      * @return - set of all the tiles requiring stacking on floor
      */
@@ -145,6 +154,8 @@ public class TileArrayInitializer {
     }
 
     /**
+     * NEVER CALLED MORE THAN ONCE PER GAME
+     *
      * @return - Tiles that require stacking on black box
      */
     public Set<Integer> buildBlackTransparentSet(){
@@ -157,6 +168,8 @@ public class TileArrayInitializer {
     }
 
     /**
+     * NEVER CALLED MORE THAN ONCE PER GAME
+     *
      * @return - Tiles that require stacking on wall
      */
     public Set<Integer> buildWallTransparentSet(){
@@ -172,6 +185,8 @@ public class TileArrayInitializer {
     }
 
     /**
+     * NEVER CALLED MORE THAN ONCE PER GAME
+     *
      * This returns a integer list containing all the tiles that are collidable
      */
     public void buildClipTiles(){
@@ -200,6 +215,8 @@ public class TileArrayInitializer {
     }
 
     /**
+     * CALLED EVERY TIME ROOM SWITCH IS TRIGGERED
+     *
      * Builds an array of tile locations which holds all the clip tiles.
      * @param tileMap - the array representation of the map
      * @return - Collision Array
@@ -216,7 +233,7 @@ public class TileArrayInitializer {
         int row = 0;
         int x = 0;
         int y = 0;
-
+        // Loop through the tile map rectangular array
         while (col < Settings.getColumns() && row < Settings.getRows()){
             int tileNum = tileMap[col][row];
             if (tileNum >= 98){
@@ -232,7 +249,7 @@ public class TileArrayInitializer {
                 merchantLocation[1] = y;
                 tileNum = 0;
             }
-
+            // Checks if the tile is collidable (All to the Collision map if this is true)
             if (tiles[tileNum].clips()){
                 if (smallTiles.contains(tileNum)){
                     collisionArray.add(new Rectangle(x, (int) (y + Math.round(size * 0.66)), size, size / 4 ));
@@ -245,11 +262,13 @@ public class TileArrayInitializer {
                     collisionArray.add(new Rectangle(x, y, size, size));
                 }
             }
+            // Increment the column
             col++;
             x += Settings.getTileSize();
             if (col == Settings.getColumns()){
                 col = 0;
                 x = 0;
+                // increment the row
                 row++;
                 y += Settings.getTileSize();
             }
@@ -257,16 +276,34 @@ public class TileArrayInitializer {
         return collisionArray;
     }
 
+    /**
+     * CALLED ONCE EVERY TIME ROOM SWITCHES
+     *NOTE: this method must be called after collision array is built
+     *
+     * Gets the location of the enemy on the map
+     * @return - the enemy location array in x and y
+     */
     public int[] getEnemyLocation() {
         return enemyLocation;
     }
 
+    /**
+     * CALLED ONCE EVERY TIME ROOM SWITCHES
+     *NOTE: this method must be called after collision array is built
+     *
+     * Gets the location of the merchant on the map
+     * @return - the merchant location array in x and y
+     */
     public int[] getMerchantLocation() {
         return merchantLocation;
     }
 
     /**
-     * Maximum 6 doors.
+     * CALLED ONCE EVERY TIME ROOM SWITCHES
+     * NOTE: this method must be called after collision array is built
+     *
+     * this method initializes the doors and creates sets their rectangles
+     * NOTE: if dungeon is bulit correctly, the each room can have maximum 6 doors.
      */
     public DungeonDoor[] buildDoorArray(){
         DungeonDoor top_left = new DungeonDoor();
@@ -275,6 +312,7 @@ public class TileArrayInitializer {
         top_mid.setType(DungeonDoor.Door.TOP_MID);
         DungeonDoor top_right = new DungeonDoor();
         top_right.setType(DungeonDoor.Door.TOP_RIGHT);
+
         // So that these doors are recognized as both images and door collidables
         top_left.setClips(true);
         top_right.setClips(true);

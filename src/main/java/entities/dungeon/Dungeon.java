@@ -15,7 +15,7 @@ public class Dungeon {
     static int[] CONNECTION_RANGE = {1, 5};
     static double[] DIFFICULTY_RANGE = {0.10, 0.25, 0.50, 1.00};
     private final double difficulty;
-    private HashMap<DungeonRoom, List<DungeonRoom>> map;
+    private static HashMap<DungeonRoom, List<DungeonRoom>> map;
     private DungeonRoom startingRoom;
 
     public Dungeon() {
@@ -25,7 +25,7 @@ public class Dungeon {
     /**
      * Generates a random dungeon map with a random number of rooms within the class variable ranges.
      */
-    public void generateDungeonMap(){
+    public void generateDungeonMap() {
         Random rand = new Random();
         int numberOfEnemies = rand.nextInt((ENEMY_RANGE[1] - ENEMY_RANGE[0]) + 1) + ENEMY_RANGE[0];
         int numberOfMerchants = rand.nextInt((MERCHANT_RANGE[1] - MERCHANT_RANGE[0]) + 1) + MERCHANT_RANGE[0];
@@ -65,8 +65,8 @@ public class Dungeon {
     /**
      * @return the entire DungeonMap, to save the game.
      */
-    public HashMap<DungeonRoom, List<DungeonRoom>> saveDungeon() {
-        return this.map;
+    public static HashMap<DungeonRoom, List<DungeonRoom>> saveDungeon() {
+        return map;
     }
 
     /**
@@ -149,14 +149,5 @@ public class Dungeon {
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
         this.addHallway(this.startingRoom, rooms[randomSecondRoomIndex]);
         this.addHallway(gateRoom, rooms[randomSecondLastRoomIndex]);
-    }
-    // for implementation of serialization and test file for deserialization
-
-    public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
-        return map;
-    }
-
-    public double getDifficulty() {
-        return difficulty;
     }
 }
