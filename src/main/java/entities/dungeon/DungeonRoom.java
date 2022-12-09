@@ -3,29 +3,17 @@ package entities.dungeon;
 import entities.character.Enemy;
 import entities.character.Merchant;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DungeonRoom {
-    private List<DungeonRoom> connectedRooms;
     private Enemy enemy;
     private Merchant merchant;
-    private DungeonRoom previousRoom;
+    public DungeonRoom previousRoom;
 
     public DungeonRoom() {
-        this.connectedRooms = new ArrayList<DungeonRoom>();
+        this.merchant = null;
         this.enemy = null;
         this.previousRoom = null;
     }
 
-    /**
-     * Add a DungeonRoom to the List of connected DungeonRooms.
-     *
-     * @param newRoom the new DungeonRoom to be connected.
-     */
-    public void addConnectedRoom(DungeonRoom newRoom) {
-        this.connectedRooms.add(newRoom);
-    }
 
     /**
      * Add a new NPC to the DungeonRoom.
@@ -51,7 +39,7 @@ public class DungeonRoom {
     /**
      * Clears the information regarding the previous DungeonRoom the player entered this room from.
      */
-    private void clearPreviousRoom() {
+    public void clearPreviousRoom() {
         this.previousRoom = null;
     }
 
@@ -59,21 +47,10 @@ public class DungeonRoom {
      * @return The DungeonRoom the player entered this room from.
      * @throws Object404Error if no previous DungeonRoom is attached to this one.
      */
-    public DungeonRoom getPreviousRoom() throws Object404Error {
-        if (this.previousRoom == null) {
-            throw new Object404Error("Room does not have a previous room attached.");
-        } else {
-            DungeonRoom prevRoom = this.previousRoom;
-            this.clearPreviousRoom();
-            return prevRoom;
-        }
-    }
-
-    /**
-     * @return an array of all connected DungeonRooms.
-     */
-    public DungeonRoom[] getConnectedRooms() {
-        return this.connectedRooms.toArray(new DungeonRoom[0]);
+    public DungeonRoom getPreviousRoom() {
+        DungeonRoom prevRoom = this.previousRoom;
+//            this.clearPreviousRoom();
+        return this.previousRoom;
     }
 
     /**
@@ -87,27 +64,14 @@ public class DungeonRoom {
     }
 
     /**
+     * Should always call hasEnemy() or hasMerchant() first to avoid unexpected result
      * @return The NPC in this DungeonRoom.
      * @throws Object404Error if no NPC is found in this DungeonRoom.
      */
     public Enemy getEnemy() {
-        if (this.enemy == null) {
-            try {
-                throw new Object404Error("Room does not contain an NPC");
-            } catch (Object404Error e) {
-                e.printStackTrace();
-            }
-        }
         return this.enemy;
     }
     public Merchant getMerchant() {
-        if (this.merchant == null) {
-            try {
-                throw new Object404Error("Room does not contain an NPC");
-            } catch (Object404Error e) {
-                e.printStackTrace();
-            }
-        }
         return this.merchant;
     }
 
@@ -116,5 +80,13 @@ public class DungeonRoom {
         public Object404Error(String message) {
             super(message);
         }
+    }
+
+    // for implementation of serialization and test file for deserialization
+
+    public boolean hasPreviousRoom() {return this.previousRoom == null; }
+
+    public DungeonRoom retrievePreviousRoom() {
+        return previousRoom;
     }
 }

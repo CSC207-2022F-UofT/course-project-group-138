@@ -34,6 +34,7 @@ public class StateManager implements StateChanger{
     @Override
     public void toCombatState(Enemy enemy) {
         currState = combatState;
+        ((CombatState)combatState).setEnemy(enemy);
     }
     @Override
     public void toEncounterState(Merchant merchant) {

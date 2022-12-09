@@ -1,18 +1,13 @@
 package entities.temporary_entities;
 
 import entities.inventory.Armor;
-import entities.inventory.Equipment;
-import entities.inventory.EquipmentInterface;
 import entities.inventory.Weapon;
 
-public class CommonEquipmentCreator implements EquipmentCreator{
-    @Override
-    public Equipment createArmor(int attribute, int price) {
+public class CommonEquipmentCreator implements EquipmentCreator {
+    public Armor createArmor(int attribute) {
         return new Armor(attribute);
     }
-
-    @Override
-    public Equipment createWeapon(int attribute, int price) {
+    public Weapon createWeapon(int attribute) {
         return new Weapon(attribute);
     }
 }
