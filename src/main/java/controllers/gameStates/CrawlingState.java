@@ -122,7 +122,7 @@ public class CrawlingState implements State, Switchable {
         tileManager = new TileManager();
         CrawlingStatePresenter crawlPresenter = new CrawlingStatePresenter();
         crawlPresenter.setPlayerViewModel(viewModel);
-        crawlPresenter.setTilePresenter(tileManager);
+        crawlPresenter.setTileManager(tileManager);
         npcuiManager = new NPCUIManager();
         this.playerViewModel = viewModel;
         this.presenter = crawlPresenter;
