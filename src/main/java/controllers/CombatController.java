@@ -15,6 +15,8 @@ public class CombatController {
     private final Enemy enemy;
     private static String userInput;
     private static List<Integer> currHP;
+    private static int pHP;
+    private static int eHP;
 
 
     /**
@@ -68,6 +70,24 @@ public class CombatController {
 
     public static List<Integer> getHP(){
         return currHP;
+    }
+
+    /**
+     * Getter for the enemy's HP. Constantly changes.
+     * @return The enemy's HP.
+     */
+    public static int getEnemyHP(){
+        eHP = currHP.get(1);
+        return eHP;
+    }
+
+    /**
+     * Getter for the player's HP. Constantly changes.
+     * @return The player's HP.
+     */
+    public static int getPlayerHP(){
+        pHP = currHP.get(0);
+        return pHP;
     }
 
 

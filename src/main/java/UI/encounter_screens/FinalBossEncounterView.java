@@ -55,32 +55,33 @@ public class FinalBossEncounterView extends EncounterView implements SetLabel, S
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == attack) {
-            // set userinput received by the combat controller.
-            CombatController.setUserInput("Attack");
 
-            // set the state to combat state. run the combat loop.
+            CombatController.setUserInput("Attack");
             StateManager s = new StateManager();
             s.setCurrState(new CombatState());
 
-            // after one round of combat, get the corresponding HP
-            // for the enemy and the player.
-            List<Integer> l = CombatController.getHP();
-            Integer playerHP = l.get(0);
-            Integer enemyHP = l.get(1);
+            // Same code as the one in enemyencounterview.
+
+            // Check if the enemy is slain or not,
+            if (CombatController.getEnemyHP() <= 0){
+                new SuccessWindow();
+            } else {
 
             // After each round, the user is able to see the current HP
             // for the player and the enemy. A window is poped up.
 
             JOptionPane.showMessageDialog(null, "Current HP for the player:" +
-                    playerHP + "\n" + "Current HP for the enemy:" + enemyHP);
+                    CombatController.getPlayerHP() + "\n" +
+                    "Current HP for the enemy:" + CombatController.getEnemyHP());}
 
         }
+
+        // The above chunk of code should not be refactored since there is an additional checker that facilitates the
+        // success window, and we need that local variable to be taken into consideration.
 
         if (e.getSource() == exit) {
             System.exit(0);
         }
     }
-
-// TODO: Display enemy's and player's current HP after one round (after the user clicks the button) on GUI.
 
 }

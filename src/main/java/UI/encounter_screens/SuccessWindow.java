@@ -29,7 +29,7 @@ public class SuccessWindow extends JFrame implements ActionListener{
         exit.setBounds(40, 40, 240, 120);
         exit.addActionListener(this);
         exit.setFont(new Font("Comic Sans", Font.BOLD, 15));
-        this.getContentPane().add(exit); // Add a leave button on the container.
+        this.getContentPane().add(exit); // Add a exit button on the container.
     }
 
     @Override

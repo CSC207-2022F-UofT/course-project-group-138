@@ -45,12 +45,6 @@ public class EnemyEncounterView extends EncounterView implements SetLabel, SetCo
         exit.setFont(new Font("Comic Sans", Font.BOLD, 20));
         c.add(exit); // Add a leave button on the container.
 
-        hp.setText("Player HP:" + "\n" + "Enemy HP:");
-        hp.setForeground(new Color(0xFFFFFF));
-        hp.setBounds(20, 20, 300, 300);
-        hp.setFont(new Font("Comic Sans", Font.PLAIN, 10));
-        getContentPane().add(hp);
-
     }
 
     @Override
@@ -65,20 +59,13 @@ public class EnemyEncounterView extends EncounterView implements SetLabel, SetCo
 
             // after one round of combat, get the corresponding HP
             // for the enemy and the player.
-            List<Integer> l = CombatController.getHP();
-            Integer playerHP = l.get(0);
-            Integer enemyHP = l.get(1);
 
-            hp.setText("Player HP:" + playerHP + "\n" + "Enemy HP:" + enemyHP);
-            hp.setForeground(new Color(0xFFFFFF));
-            hp.setBounds(20, 20, 300, 300);
-            c.add(hp);
 
             // After each round, the user is able to see the current HP
             // for the player and the enemy. A window is poped up.
 
             JOptionPane.showMessageDialog(null, "Current HP for the player:" +
-                    playerHP + "\n" + "Current HP for the enemy:" + enemyHP);
+                    CombatController.getPlayerHP() + "\n" + "Current HP for the enemy:" + CombatController.getEnemyHP());
 
             // if the player is unable to proceed, the button can't be pressed again.
             // attack.setEnabled(false);
