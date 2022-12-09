@@ -26,10 +26,6 @@ public class Dungeon {
      * Generates a random dungeon map with a random number of rooms within the class variable ranges.
      */
     public void generateDungeonMap() {
-        List<DungeonRoom> rooms = new ArrayList<DungeonRoom>();
-        this.startingRoom = new DungeonRoom();
-        rooms.add(this.startingRoom);
-
         Random rand = new Random();
         int numberOfEnemies = rand.nextInt((ENEMY_RANGE[1] - ENEMY_RANGE[0]) + 1) + ENEMY_RANGE[0];
         int numberOfMerchants = rand.nextInt((MERCHANT_RANGE[1] - MERCHANT_RANGE[0]) + 1) + MERCHANT_RANGE[0];
