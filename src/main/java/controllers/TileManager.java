@@ -68,11 +68,11 @@ public class TileManager {
             else if (tileNum == 98){
                 tileNum = torchAnimator.getNextFrame() + 24;
             }
-            else if (tileNum == 97 || tileNum == 96){
+            else if (tileNum == 97){
                 tileNum = 0;
             }
-            else if (tileNum == 95 || tileNum == 94){
-                tileNum -= 60;
+            else if (tileNum == 96){
+                tileNum = 0;
             }
             // In case it is a door
             if (tiles[tileNum].clips()){

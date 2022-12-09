@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import static java.lang.Math.round;
-import static java.lang.Math.min;
+
 import static java.lang.Math.round;
 
 public class Dungeon {
@@ -69,10 +68,8 @@ public class Dungeon {
      * @param roomTwo the second DungeonRoom.
      */
     private void addHallway(DungeonRoom roomOne, DungeonRoom roomTwo) {
-        if (this.map.get(roomOne).size() < 6 && this.map.get(roomTwo).size() < 6) {
-            this.map.get(roomOne).add(roomTwo);
-            this.map.get(roomTwo).add(roomOne);
-        }
+        this.map.get(roomOne).add(roomTwo);
+        this.map.get(roomTwo).add(roomOne);
     }
 
     /**
