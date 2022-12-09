@@ -4,7 +4,6 @@ import controllers.gameStates.State;
 import entities.character.Merchant;
 import entities.character.Player;
 import settings.Settings;
-import java.awt.event.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +19,7 @@ public class MerchantController {
         this.merchant = merchant;
     }
 
-    public MerchantController() {
+    public MerchantController(){
 
     }
 
@@ -67,7 +66,7 @@ public class MerchantController {
     }
 
     public ActionListener getMerchantListener(){
-        ActionListener listener = new ActionListener() {
+        return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("Upgrade")){
@@ -78,7 +77,6 @@ public class MerchantController {
                 }
             }
         };
-        return listener;
     }
 
 }

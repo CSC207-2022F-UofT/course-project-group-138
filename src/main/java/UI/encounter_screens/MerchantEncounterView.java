@@ -1,7 +1,6 @@
 package UI.encounter_screens;
 
 import gateways.ImageGateway;
-import controllers.MerchantController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,14 +39,14 @@ public class MerchantEncounterView extends EncounterView implements SetLabel, Se
 
         Upgrade.setBounds(30, 290, 190, 90);
         Upgrade.addActionListener(this);
-        Upgrade.setActionCommand("Weapon");
+        Upgrade.setActionCommand("Upgrade");
         Upgrade.setFont(new Font("Comic Sans", Font.BOLD, 17));
         c.add(Upgrade);// Add an Upgrade button on the container
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Upgrade){
-            //TODO: call MerchantController
+            merchantController.getMerchantListener();
         }
         if(e.getSource() == exit){
             System.exit(0);
