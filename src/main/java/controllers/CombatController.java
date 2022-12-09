@@ -54,7 +54,7 @@ public class CombatController {
         List<Integer> updatedHP = null;
         if (userInput.equals("Attack")) {
             updatedHP = CombatRound.combatRound(this.player, this.enemy);
-            userInput = null;
+            userInput = "none";
         }
         return updatedHP;
     }

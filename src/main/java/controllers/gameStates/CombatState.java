@@ -1,15 +1,15 @@
 package controllers.gameStates;
 
+import UI.presenters.statePresenters.CombatStatePresenter;
 import UI.presenters.viewModels.PlayerViewModel;
 import UI.presenters.statePresenters.StatePresenter;
 import controllers.CombatController;
 import entities.character.Enemy;
 import entities.character.Player;
+import settings.Initializer;
 import useCases.ClickEventHandler;
 import useCases.KeyEventHandler;
 
-
-//TODO: implement method bodies
 
 
 public class CombatState implements State{
@@ -21,27 +21,33 @@ public class CombatState implements State{
 
     Player player;
     Enemy enemy;
-    PlayerViewModel playerViewModel;
-
     CombatController combatController;
     StatePresenter presenter;
 
     /**
      * Constructor. The code responsible for passing control to CombatState will initialize an instance of it
-     * @param player             - the player character
      * @param enemy              - the enemy character
-     * @param playerViewModel    - the viewmodel responsible for displaying the player
-     * @param presenter          - the presenter responsible for displaying the game to the user
      */
-    public CombatState(Player player, Enemy enemy, PlayerViewModel playerViewModel, StatePresenter presenter) {
-        this.player = player;
+    public CombatState(Enemy enemy) {
+        this.player = Initializer.getPlayer();
         this.enemy = enemy;
-        this.playerViewModel = playerViewModel;
         this.combatController = new CombatController(player, enemy);
-        this.presenter = presenter;
+        this.presenter = new CombatStatePresenter();
     }
+
+    public CombatState() {
+        this.player = Initializer.getPlayer();
+        this.presenter = new CombatStatePresenter();
+    }
+
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+        combatController = new CombatController(player, enemy);
+    }
+
     public void loop() {
         combatController.combatTurn();
+        // TODO implement method render in CombatStatePresenter (not yet implemented), something like combatPresenter.updatePresenter();
     }
 
     /**
@@ -68,7 +74,6 @@ public class CombatState implements State{
         ClickEventHandler.handleCombatStateEvents(code);
 
     }
-
     @Override
     public StatePresenter getPresenter() {
         return presenter;

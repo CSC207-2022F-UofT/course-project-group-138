@@ -176,7 +176,7 @@ public class TileArrayInitializer {
      */
     public void buildClipTiles(){
         List<Integer> clipTiles = new ArrayList<>(Arrays.asList(1, 4, 22, 19, 6, 7, 13,
-                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20, 64, 65, 66,
+                14, 40, 48, 3, 9, 46, 47, 35, 23, 24, 10, 20, 64, 65, 66, 95, 94,
                 21, 11, 37, 18, 12, 15));
         for (int i = 49; i <= 56; i++){
             clipTiles.add(i);
@@ -222,15 +222,15 @@ public class TileArrayInitializer {
             if (tileNum >= 98){
                 tileNum = 25;
             }
-            if (tileNum == 97){
+            else if (tileNum == 97){
                 enemyLocation[0] = x;
                 enemyLocation[1] = y;
                 tileNum = 0;
             }
-            if (tileNum == 96){
+            else if (tileNum == 96){
                 merchantLocation[0] = x;
                 merchantLocation[1] = y;
-                tileNum = 25;
+                tileNum = 0;
             }
 
             if (tiles[tileNum].clips()){

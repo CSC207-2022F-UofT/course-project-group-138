@@ -30,7 +30,10 @@ equipment.
 - a
 
 # Adherence to Clean Architecture
-- a
+- Dependency Inversion was used throughout the project to ensure that tasks could be executed from higher level use cases to lower level controllers without any dependencies.
+- Classes in the character package, such as Character called methods from Equipment and Inventory
+- This was an entity to entity dependency, and while not a violation of the dependency rule, were examples of unnecessary coupling EquipmentInterface and InventoryInterface were implemented by Equipment and Inventory respectively to decouple the classes
+
 
 # Use of Refactoring
 - In the early stages of the project, we were inexperienced in organizing a project, which resulted in a messy and hard to navigate project.
@@ -40,11 +43,17 @@ equipment.
 # Use of Design Patterns
 - a
 
+# Use of Github Features
+- utilized Github Projects to keep track of our issues, as well as who were assigned to which issues and the deadlines by which they should be resolved
+- utilized Github issues to keep track of what still needed to be done in the project, and assign work so that everyone contributed an equal amount
+- utilized branch protection, pull requests onto the main branch needed a minimum of 3 reviews from other group members to ensure the code was quality and to provide a range of viewpoints
+- utilized Github's version control to rollback commits 
+
 # Packaging
 - The code has been separated into packages based on their Clean Architecture layer.
 
-# Submitted Pull Requests
-- https://docs.google.com/document/d/1rU_-iCrRTYVsREWWy2CvWcDw59OQhoiAfLOFTAcruH0/edit
+# Submitted Pull Requests (Milestone 5)
+- https://docs.google.com/document/d/18DRfUxJNzydfDAzbBp-hSfb5gG8EHqPekr9HJpc1O2M/edit?usp=sharing
 
 # Presentation Slides
 - https://docs.google.com/presentation/d/1a0-S8YFYCXG00mNj6Nmjwqhp0c-89DcZs4jhiaQHHQM/edit?usp=share_link
@@ -52,8 +61,8 @@ equipment.
 # Gallery
 - An image of the player character in a dungeon room.
 ![image](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/main/images/readme/game_readme_1.jpg)
-- A gif of the player exploring the dungeon.
-![gif](https://raw.githubusercontent.com/CSC207-2022F-UofT/course-project-group-138/51700f7985c2929148ea779ffe033c9c5a90d227/images/Dungeons_2022-12-07_01-44-27.gif)
+- A gif of the player exploring the dungeon and approaching enemies and merchants.
+![gif](https://github.com/CSC207-2022F-UofT/course-project-group-138/blob/08ab1c86747001afe59914cbff9ffc640e89f48b/images/readme/Dungeons_2022-12-07_21-50-05.gif)
 
 
 - Make use of the readme and any other features you find useful to help your TA navigate your project and understand what you have done!
