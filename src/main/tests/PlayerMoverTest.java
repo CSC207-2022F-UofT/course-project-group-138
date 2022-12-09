@@ -1,4 +1,6 @@
+import entities.inventory.Armor;
 import entities.inventory.Inventory;
+import entities.inventory.Weapon;
 import org.junit.Test;
 import useCases.playerUseCases.PlayerMover;
 import entities.character.Player;
@@ -11,7 +13,7 @@ public class PlayerMoverTest {
     public void initializeMover(){
         Settings.setPlayerSpeed(5);
         speed = Settings.getPlayerSpeed();
-        this.player =  new Player(new Inventory(), 10, 0, 0, 0);
+        this.player =  new Player(new Inventory(1, new Weapon(1), new Armor(1)), 10, 0, 0, 0);
         this.mover = new PlayerMover(this.player);
     }
 
@@ -22,7 +24,7 @@ public class PlayerMoverTest {
     public void testMovePlayerFalse(){
         initializeMover();
         mover.move();
-        assert player.getx() == 0 : player.gety() == 0;
+        assert player.getX() == 0 : player.getY() == 0;
     }
 
     /**
@@ -39,14 +41,14 @@ public class PlayerMoverTest {
         mover.movingDown(false);
         mover.move();
         mover.movingRight(true);
-        assert player.getx() == 0 : player.gety() == 2 * speed;
+        assert player.getX() == 0 : player.getY() == 2 * speed;
     }
     @Test
     public void testMovePlayerRight(){
         initializeMover();
         mover.movingRight(true);
         mover.move();
-        assert player.getx() == speed : player.gety() == 0;
+        assert player.getX() == speed : player.getY() == 0;
 
     }
     @Test
@@ -57,7 +59,7 @@ public class PlayerMoverTest {
         mover.movingUp(true);
         mover.movingDown(false);
         mover.move();
-        assert player.getx() == 0 : player.gety() == 0;
+        assert player.getX() == 0 : player.getY() == 0;
     }
     @Test
     public void testMovePlayerDownRight(){
@@ -65,6 +67,6 @@ public class PlayerMoverTest {
         mover.movingDown(true);
         mover.movingRight(true);
         mover.move();
-        assert player.getx() == speed : player.gety() == speed;
+        assert player.getX() == speed : player.getY() == speed;
     }
 }
