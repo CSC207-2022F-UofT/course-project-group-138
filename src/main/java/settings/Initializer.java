@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Initializer {
-    private Player player;
+    private static Player player;
     private Random random = new Random();
 
     public void init() {
@@ -44,7 +44,7 @@ public class Initializer {
     private Dimension getScreenSize(){
         return Toolkit.getDefaultToolkit().getScreenSize();
     }
-    public Player getPlayer(){
+    public static Player getPlayer(){
         return player;
     }
 }

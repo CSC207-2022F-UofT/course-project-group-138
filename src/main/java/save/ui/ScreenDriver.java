@@ -7,9 +7,11 @@ import save.save_screen.UpdateResponse;
 import save.save_use_case.*;
 import settings.Initializer;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class ScreenDriver {
+    String filePath = "./gamesavedb";
     public void driveSaveScreen() {
 /*        JFrame application = new JFrame("Login Example");
         CardLayout cardLayout = new CardLayout();
@@ -22,12 +24,9 @@ public class ScreenDriver {
         JPanel screens = new JPanel();
         gameWindow.add(screens);*/
 
-        Initializer initializer = new Initializer();
-        initializer.init();
-
         DsGateway saveFiles;
         try {
-            saveFiles = new GameFiles("./gamesavedb");
+            saveFiles = new GameFiles(filePath);
         }
         catch (IOException e) {
             throw new RuntimeException("Fail to create file!");
@@ -37,8 +36,10 @@ public class ScreenDriver {
         SaveInputBoundry saveInputBoundry = new SaveInteractor(saveFiles, presenter);
         SaveController controller = new SaveController(saveInputBoundry);
 
-        SaveScreen saveScreen = new SaveScreen(controller);
-        saveScreen.buildSaveScreen();
+        SaveScreen saveScreen = new SaveScreen();
+        saveScreen.buildSaveScreen(controller);
+
+
         //screens.add(saveScreen);
 /*        gameWindow.add(saveScreen);
 

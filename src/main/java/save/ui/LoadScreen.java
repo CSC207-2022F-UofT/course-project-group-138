@@ -1,14 +1,14 @@
 package save.ui;
 
 import save.save_screen.LoadController;
-import save.save_screen.PanelBuilder;
+import save.save_screen.FrameBuilder;
 import save.save_use_case.LoadResponse;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoadScreen extends JFrame implements ActionListener, PanelBuilder {
+public class LoadScreen extends JFrame implements ActionListener, FrameBuilder {
     JFrame window = new JFrame();
     JTextField fileName = new JTextField(15);
     JButton loadButton = new JButton("Load");
@@ -40,7 +40,9 @@ public class LoadScreen extends JFrame implements ActionListener, PanelBuilder {
         panel.add(fileNamePanel);
         panel.add(buttons);
 
-        buildPanel(window, panel);
+        buildFrame(window, panel);
+
+        window.setVisible(true);
     }
 
     @Override

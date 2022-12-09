@@ -2,7 +2,7 @@ package save.ui;
 
 import entities.character.Player;
 import entities.dungeon.Dungeon;
-import save.save_screen.PanelBuilder;
+import save.save_screen.FrameBuilder;
 import save.save_screen.SaveController;
 import settings.Initializer;
 
@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SaveScreen extends JFrame implements ActionListener, PanelBuilder {
+public class SaveScreen extends JFrame implements ActionListener, FrameBuilder {
     JFrame window = new JFrame();
     JTextField fileName = new JTextField(15);
     JButton saveButton = new JButton("Save");
@@ -18,11 +18,9 @@ public class SaveScreen extends JFrame implements ActionListener, PanelBuilder {
 
     SaveController saveController;
 
-    public SaveScreen (SaveController saveController) {
-        this.saveController = saveController;
-    }
 
-    public void buildSaveScreen() {
+    public void buildSaveScreen(SaveController saveController) {
+        this.saveController = saveController;
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -47,7 +45,9 @@ public class SaveScreen extends JFrame implements ActionListener, PanelBuilder {
         window.setLocationRelativeTo(null);
         window.setVisible(true);*/
 
-        buildPanel(window, panel);
+        buildFrame(window, panel);
+
+        window.setVisible(true);
     }
 
     @Override
