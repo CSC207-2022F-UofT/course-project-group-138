@@ -27,12 +27,21 @@ equipment.
 - The code is found in src/main/java.
 
 # Adherence to SOLID
-- a
+- Single responsibility  principle (SRP): Weapon class can only be changed through upgrading it (upgradeStrength).
+- Open/closed principle (OCP): Tilepresenter displays all the tiles, and can add more tiles without changing the code
+- Liskov substitution  principle (LSP): Character can be substituted for player or enemy class
+- Interface  segregation  principle (ISP): Character, Equipment and Inventory all have their respective interface for CharacterCreator, EquipmentCreator, InventoryCreator
+- Dependency inversion  principle (DIP): Paint event handler depends on PaintAction interface, instead of individual actions
+
 
 # Adherence to Clean Architecture
 - Dependency Inversion was used throughout the project to ensure that tasks could be executed from higher level use cases to lower level controllers without any dependencies.
 - Classes in the character package, such as Character called methods from Equipment and Inventory
 - This was an entity to entity dependency, and while not a violation of the dependency rule, were examples of unnecessary coupling EquipmentInterface and InventoryInterface were implemented by Equipment and Inventory respectively to decouple the classes
+- Entities such as Character, Player, Enemy, Inventory, Weapon, Armor stored in the Entity package 
+- Use cases such as merchantUseCases and playerUseCases stored in the useCases package
+- Controllers CombatState, CombatController, CrawlingState, MenuState, DungeonController, StateManager in the controllers package
+- Presenters
 
 
 # Use of Refactoring
@@ -41,7 +50,10 @@ equipment.
 - The pull request containing the repackaging can be found at https://github.com/CSC207-2022F-UofT/course-project-group-138/pull/39
 
 # Use of Design Patterns
-- a
+- Character class: Facade design pattern, Encapsulated actors such as Inventory, so that the Character class does not need to contain its own Weapon and Armor
+- StateFactory class: Factory design pattern
+
+
 
 # Use of Github Features
 - utilized Github Projects to keep track of our issues, as well as who were assigned to which issues and the deadlines by which they should be resolved

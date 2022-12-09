@@ -25,7 +25,11 @@ public class Dungeon {
     /**
      * Generates a random dungeon map with a random number of rooms within the class variable ranges.
      */
-    public void generateDungeonMap(){
+    public void generateDungeonMap() {
+        List<DungeonRoom> rooms = new ArrayList<DungeonRoom>();
+        this.startingRoom = new DungeonRoom();
+        rooms.add(this.startingRoom);
+
         Random rand = new Random();
         int numberOfEnemies = rand.nextInt((ENEMY_RANGE[1] - ENEMY_RANGE[0]) + 1) + ENEMY_RANGE[0];
         int numberOfMerchants = rand.nextInt((MERCHANT_RANGE[1] - MERCHANT_RANGE[0]) + 1) + MERCHANT_RANGE[0];
@@ -149,14 +153,5 @@ public class Dungeon {
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
         this.addHallway(this.startingRoom, rooms[randomSecondRoomIndex]);
         this.addHallway(gateRoom, rooms[randomSecondLastRoomIndex]);
-    }
-    // for implementation of serialization and test file for deserialization
-
-    public HashMap<DungeonRoom, List<DungeonRoom>> getMap() {
-        return map;
-    }
-
-    public double getDifficulty() {
-        return difficulty;
     }
 }
