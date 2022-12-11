@@ -10,19 +10,33 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class CrawlingStatePresenter implements StatePresenter {
+    /**
+     * This is the main presenter for the CrawlingState. It will call methods necessary to render the CharacterViewModels
+     * and tiles
+     */
     public boolean hasMerchant;
     public boolean hasEnemy;
     /**
-     * Facade class kinda
+     * Mainly facade Class, implementation is further down the call stack
      */
     PlayerViewModel playerViewModel;
     BufferedImage currentPlayerImage;
     EnemyViewModel enemyViewModel;
     MerchantViewModel merchantViewModel;
     TileManager tileManager;
+
+    /**
+     ==== Constructor ====
+     Initializes the player image
+     */
     public CrawlingStatePresenter() {
         updatePlayerImage();
     }
+
+    /**
+     * Renders in the following order: Tiles --> enemy --> merchant --> player.
+     * @param graphics2D - The Java Graphics2D object
+     */
     public void render(Graphics2D graphics2D) {
         tileManager.renderTiles(graphics2D);
         // Render Player after tiles
@@ -33,22 +47,41 @@ public class CrawlingStatePresenter implements StatePresenter {
         playerViewModel.render(graphics2D);
     }
 
+    /**
+     * Sets the reference to playerviewmodel
+     * @param playerViewModel - The Player's viewmodel
+     */
     public void setPlayerViewModel(PlayerViewModel playerViewModel) {
         this.playerViewModel = playerViewModel;
     }
 
+    /**
+     * Sets the reference to enemyviewmodel (ViewModel is shared between all enemies to save memory)
+     * @param enemyViewModel - The enemy view model (Note, this does not vary per enemy.)
+     */
     public void setEnemyViewModel(EnemyViewModel enemyViewModel) {
         this.enemyViewModel = enemyViewModel;
     }
 
+    /**
+     * Sets the reference to enemyviewmodel (ViewModel is shared between all merchants to save memory)
+     * @param merchantViewModel - The Merchant's view model (Does not vary per merchant)
+     */
     public void setMerchantViewModel(MerchantViewModel merchantViewModel) {
         this.merchantViewModel = merchantViewModel;
     }
 
-    public void setTilePresenter(TileManager tileManager) {
+    /**
+     * Sets the reference to the TileManager (TileManager is responsible to rendering EVERY TILE)
+     * @param tileManager - The main tile controller, however it holds a reference to TilePresenter.
+     */
+    public void setTileManager(TileManager tileManager) {
         this.tileManager = tileManager;
     }
 
+    /**
+     * Retrives and sets the player image from the Image Gateway class
+     */
     public void updatePlayerImage(){
         currentPlayerImage = ImageGateway.getPlayerImage();
     }

@@ -37,7 +37,7 @@ public class SerializeDungeonRoomTest {
         List<DungeonRoom> connectedRooms = dungeon.getConnections(dungeon.getStartingRoom());
 
         gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomSerializer())
-                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapSerializer());
+                .registerTypeAdapter(Dungeon.saveDungeon().getClass(), new GsonDungeonMapSerializer());
 
         Gson gson = gsonBuilder.create();
 
@@ -75,7 +75,7 @@ public class SerializeDungeonRoomTest {
 
 
         gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomSerializer())
-                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapSerializer());
+                .registerTypeAdapter(Dungeon.saveDungeon().getClass(), new GsonDungeonMapSerializer());
 
         Gson gson = gsonBuilder.create();
 
@@ -101,8 +101,8 @@ public class SerializeDungeonRoomTest {
 
         gsonBuilder.registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomSerializer())
                 .registerTypeAdapter(DungeonRoom.class, new GsonDungeonRoomDeserializer())
-                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapSerializer())
-                .registerTypeAdapter(dungeon.getMap().getClass(), new GsonDungeonMapDeserializer());
+                .registerTypeAdapter(Dungeon.saveDungeon().getClass(), new GsonDungeonMapSerializer())
+                .registerTypeAdapter(Dungeon.saveDungeon().getClass(), new GsonDungeonMapDeserializer());
 
         Gson gson = gsonBuilder.create();
         String gsonStr = gson.toJson(dungeon);

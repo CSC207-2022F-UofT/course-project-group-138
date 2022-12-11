@@ -1,58 +1,56 @@
 package UI.encounter_screens;
 
-import entities.character.Merchant;
-import entities.character.Player;
-import useCases.merchantUseCases.PurchaseController;
+import gateways.ImageGateway;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-public class MerchantEncounterView extends JFrame implements ActionListener {
-    private JButton purchase;
-    private Player player;
-    private PurchaseController purchaseController;
-    private Merchant merchant;
-
-    MerchantEncounterView(Player player) {
-
-        this.setVisible(true);
-        this.setSize(630, 420);
-        this.setTitle("MerchantEncountered");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of app
-        this.setResizable(false); // can't resize
-        this.setLocationRelativeTo(null); //centered
-        // ImageIcon image = new ImageIcon("logo.png");
-        // frame.setIconImage(image.getImage());
-        this.setLayout(null);
-        this.getContentPane().setBackground(new Color(0x12345)); //rgb value
-
-        this.player = player;
-        purchaseController = new PurchaseController(player, merchant);
-        //TODO: Change based on player input
-
-        purchase = new JButton("purchase");
-        purchase.setBounds(255, 350, 120, 30);
-
-        purchase.addActionListener(this);
-
-        add(purchase);
+import java.awt.image.BufferedImage;
 
 
+public class MerchantEncounterView extends EncounterView implements SetLabel, SetMerchantButtons{
 
-        // will add more buttons that characterize the features in the merchant class
+    /**
+     * The Window will be poped up when the player hits the merchant.
+     * The according image will be shown, as well as the according features, like purchase, and leave.
+     */
+
+
+    public MerchantEncounterView() {
+
+        this.setTitle("MerchantEncountered"); // set the title of the frame
+
+        BufferedImage img = ImageGateway.getMerchant1(); // read the image.
+        Image dimg = img.getScaledInstance(200, 240, Image.SCALE_SMOOTH); // rescale the image displayed
+        ImageIcon imageIcon = new ImageIcon(dimg); // create an instance of the image
+
+        label.setBounds(215, 30, 200, 240);
+        label.setIcon(imageIcon); //Sets the image to be displayed as an icon
+
+        c = this.getContentPane(); //Gets the content layer
+        c.setBackground(new Color(0xECE592)); //rgb value, set the background color
+        c.add(label); //Add later objects to the container
+
+        exit.setBounds(480, 290, 120, 90);
+        exit.addActionListener(this);
+        exit.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        c.add(exit); // Add an Exit button on the container.
+
+        Upgrade.setBounds(30, 290, 190, 90);
+        Upgrade.addActionListener(this);
+        Upgrade.setActionCommand("Upgrade");
+        Upgrade.setFont(new Font("Comic Sans", Font.BOLD, 17));
+        c.add(Upgrade);// Add an Upgrade button on the container
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == purchase){
-//            purchaseController.purchaseCheck();                       // TODO: Fix method with new PurchaseController implementation
-
-            //should incorporate more features
+        if (e.getSource() == Upgrade){
+            merchantController.getMerchantListener();
         }
-    }
-}
-
+        if(e.getSource() == exit){
+            System.exit(0);
+        }
+    }}
 
 

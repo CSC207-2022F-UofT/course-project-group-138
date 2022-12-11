@@ -132,8 +132,8 @@ public class Dungeon {
         this.map.put(this.startingRoom, new ArrayList<DungeonRoom>());
         this.map.put(gateRoom, new ArrayList<DungeonRoom>());
 
-        this.map.get(this.startingRoom).add(gateRoom);
-        this.map.get(gateRoom).add(this.startingRoom);
+        this.map.get(this.startingRoom).add(randomSecondRoomIndex);
+        this.map.get(gateRoom).add(randomSecondLastRoomIndex);
     }
 
     // for implementation of serialization and test file for deserialization

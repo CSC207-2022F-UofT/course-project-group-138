@@ -2,6 +2,7 @@ package controllers.game;
 
 import UI.presenters.GamePanel;
 import UI.presenters.GameWindow;
+import controllers.States;
 import controllers.gameStates.CrawlingState;
 import controllers.gameStates.States;
 import controllers.StateManager;
@@ -20,6 +21,7 @@ public class Engine {
     // Below are references to presenters
     private static GameWindow gameWindow;
     private static GamePanel gamePanel;
+
     private static TimerLoopStrategy timerStrategy;
     private static MultithreadLoopStrategy threadStrategy;
     private static Timer timer;

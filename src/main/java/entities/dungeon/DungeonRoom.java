@@ -3,18 +3,30 @@ package entities.dungeon;
 import entities.character.Enemy;
 import entities.character.Merchant;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DungeonRoom {
+    private List<DungeonRoom> connectedRooms;
     private Enemy enemy;
     private Merchant merchant;
     public DungeonRoom previousRoom;
 
     public DungeonRoom() {
+        this.connectedRooms = new ArrayList<DungeonRoom>();
         this.merchant = null;
         this.enemy = null;
         this.previousRoom = null;
     }
 
-
+    /**
+     * Add a DungeonRoom to the List of connected DungeonRooms.
+     *
+     * @param newRoom the new DungeonRoom to be connected.
+     */
+    public void addConnectedRoom(DungeonRoom newRoom) {
+        this.connectedRooms.add(newRoom);
+    }
     /**
      * Add a new NPC to the DungeonRoom.
      *
@@ -45,12 +57,16 @@ public class DungeonRoom {
 
     /**
      * @return The DungeonRoom the player entered this room from.
-     * @throws Object404Error if no previous DungeonRoom is attached to this one.
      */
     public DungeonRoom getPreviousRoom() {
-        DungeonRoom prevRoom = this.previousRoom;
-//            this.clearPreviousRoom();
         return this.previousRoom;
+    }
+
+    /**
+     * @return an array of all connected DungeonRooms.
+     */
+    public DungeonRoom[] getConnectedRooms() {
+        return this.connectedRooms.toArray(new DungeonRoom[0]);
     }
 
     /**
@@ -66,7 +82,6 @@ public class DungeonRoom {
     /**
      * Should always call hasEnemy() or hasMerchant() first to avoid unexpected result
      * @return The NPC in this DungeonRoom.
-     * @throws Object404Error if no NPC is found in this DungeonRoom.
      */
     public Enemy getEnemy() {
         return this.enemy;

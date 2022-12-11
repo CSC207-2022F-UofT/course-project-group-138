@@ -1,43 +1,81 @@
 package UI.encounter_screens;
 
+import controllers.StateManager;
+import controllers.gameStates.CombatState;
+import controllers.CombatController;
+import controllers.gameStates.CrawlingState;
+import gateways.ImageGateway;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.List;
 
-public class EnemyEncounterView extends JFrame implements ActionListener {
-    private JButton attack;
+public class EnemyEncounterView extends EncounterView implements SetLabel, SetCombatButtonsandLabel {
+
+    /**
+     * The window that will be poped up, when the player hits enemies.
+     * Provide more specific implementation of the EncounterView.
+     */
+
 
     EnemyEncounterView() {
 
+        this.setTitle("EnemyEncountered"); // set the title of the frame
 
-        this.setVisible(true);
-        this.setSize(630, 420);
-        this.setTitle("EnemyEncountered");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of app
-        this.setResizable(false); // can't resize
-        this.setLocationRelativeTo(null); //centered
-        // ImageIcon image = new ImageIcon("logo.png");
-        // frame.setIconImage(image.getImage());
-        this.setLayout(null);
-        this.getContentPane().setBackground(new Color(0x12345)); //rgb value
+        BufferedImage img = ImageGateway.getEnemyImg(); // read the image.
+        Image dimg = img.getScaledInstance(200, 240, Image.SCALE_SMOOTH); // rescale the image displayed
+        ImageIcon imageIcon = new ImageIcon(dimg); // create an instance of the image
 
+        label.setBounds(215, 55, 200, 240); //
+        label.setIcon(imageIcon); //Sets the image to be displayed as an icon
 
-        attack = new JButton("attack");
-        attack.setBounds(255, 350, 120, 30);
+        c = this.getContentPane(); //Gets the content layer
+        c.setBackground(new Color(0x123456)); //rgb value, set the background color
+        c.add(label); //Adds objects to the container
 
+        attack.setBounds(30, 290, 120, 90);
         attack.addActionListener(this);
+        attack.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        c.add(attack); // Add a attack button on the container.
 
-        add(attack);
+        exit.setBounds(480, 290, 120, 90);
+        exit.addActionListener(this);
+        exit.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        c.add(exit); // Add a leave button on the container.
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == attack){
-            System.out.println("Ha");
+            // set userinput received by the combat controller.
+            CombatController.setUserInput("Attack");
 
-            //should incorporate the features in player and enemy.
-            JOptionPane.showMessageDialog(null, "oh no you died :(");
+            // set the state to combat state.
+            StateManager s = new StateManager();
+            s.setCurrState(new CombatState());
+
+            // after one round of combat, get the corresponding HP
+            // for the enemy and the player.
+
+
+            // After each round, the user is able to see the current HP
+            // for the player and the enemy. A window is poped up.
+
+            JOptionPane.showMessageDialog(null, "Current HP for the player:" +
+                    CombatController.getPlayerHP() + "\n" + "Current HP for the enemy:" + CombatController.getEnemyHP());
+
+            // if the player is unable to proceed, the button can't be pressed again.
+            // attack.setEnabled(false);
+
+        }
+
+        if (e.getSource() == exit){
+            StateManager s = new StateManager();
+            s.setCurrState(new CrawlingState());
+            System.exit(0);
         }
     }
 }
