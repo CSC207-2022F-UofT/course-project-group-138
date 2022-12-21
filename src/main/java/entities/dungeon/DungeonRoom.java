@@ -14,6 +14,7 @@ public class DungeonRoom {
 
     public DungeonRoom() {
         this.connectedRooms = new ArrayList<DungeonRoom>();
+        this.merchant = null;
         this.enemy = null;
         this.previousRoom = null;
     }
@@ -26,7 +27,6 @@ public class DungeonRoom {
     public void addConnectedRoom(DungeonRoom newRoom) {
         this.connectedRooms.add(newRoom);
     }
-
     /**
      * Add a new NPC to the DungeonRoom.
      *
@@ -57,11 +57,8 @@ public class DungeonRoom {
 
     /**
      * @return The DungeonRoom the player entered this room from.
-     * @throws Object404Error if no previous DungeonRoom is attached to this one.
      */
     public DungeonRoom getPreviousRoom() {
-        DungeonRoom prevRoom = this.previousRoom;
-//            this.clearPreviousRoom();
         return this.previousRoom;
     }
 
@@ -83,27 +80,13 @@ public class DungeonRoom {
     }
 
     /**
+     * Should always call hasEnemy() or hasMerchant() first to avoid unexpected result
      * @return The NPC in this DungeonRoom.
-     * @throws Object404Error if no NPC is found in this DungeonRoom.
      */
     public Enemy getEnemy() {
-        if (this.enemy == null) {
-            try {
-                throw new Object404Error("Room does not contain an NPC");
-            } catch (Object404Error e) {
-                e.printStackTrace();
-            }
-        }
         return this.enemy;
     }
     public Merchant getMerchant() {
-        if (this.merchant == null) {
-            try {
-                throw new Object404Error("Room does not contain an NPC");
-            } catch (Object404Error e) {
-                e.printStackTrace();
-            }
-        }
         return this.merchant;
     }
 
@@ -112,5 +95,13 @@ public class DungeonRoom {
         public Object404Error(String message) {
             super(message);
         }
+    }
+
+    // for implementation of serialization and test file for deserialization
+
+    public boolean hasPreviousRoom() {return this.previousRoom == null; }
+
+    public DungeonRoom retrievePreviousRoom() {
+        return previousRoom;
     }
 }

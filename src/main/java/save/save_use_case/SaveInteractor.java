@@ -1,22 +1,23 @@
 package save.save_use_case;
 
 import entities.character.Player;
-
+import entities.dungeon.Dungeon;
+import entities.dungeon.DungeonRoom;
+import settings.Initializer;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 public class SaveInteractor implements SaveInputBoundry {
 
-    final SaveDsGateway SAVE_DS_GATEWAY;
+    final DsGateway SAVE_DS_GATEWAY;
 
-    final SavePresenter SAVE_PRESENTER;
+    final SaveLoadPresenter SAVE_PRESENTER;
 
-    final Player PLAYER;
-
-    public SaveInteractor(SaveDsGateway saveDsGateway, SavePresenter savePresenter, Player player) {
-        this.SAVE_DS_GATEWAY = saveDsGateway;
+    public SaveInteractor(DsGateway dsGateway, SaveLoadPresenter savePresenter) {
+        this.SAVE_DS_GATEWAY = dsGateway;
         this.SAVE_PRESENTER = savePresenter;
-        this.PLAYER = player;
     }
 
     @Override
@@ -26,12 +27,11 @@ public class SaveInteractor implements SaveInputBoundry {
         }
 
         LocalDateTime saveTime = LocalDateTime.now();
+        Player player = Initializer.getPlayer();
+        HashMap<DungeonRoom, List<DungeonRoom>> map = Dungeon.saveDungeon();
 
-        // need modification since class SaveDsRequest change
-        SaveDsRequest saveDsRequest = new SaveDsRequest(saveRequest.getFileName(),
-                saveRequest.getPlayer(),
-                saveTime);
-        SAVE_DS_GATEWAY.save(saveDsRequest);
+        DsRequest dsRequest = new DsRequest(saveRequest.getFileName(), player, map, saveTime);
+        SAVE_DS_GATEWAY.save(dsRequest);
 
         SaveResponse saveResponse = new SaveResponse(saveRequest.getFileName());
         return SAVE_PRESENTER.saveSuccessView(saveResponse);

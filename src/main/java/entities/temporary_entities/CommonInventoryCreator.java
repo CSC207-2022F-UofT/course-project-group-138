@@ -1,10 +1,15 @@
 package entities.temporary_entities;
 
-import entities.inventory.*;
+import entities.inventory.Inventory;
 
-public class CommonInventoryCreator implements InventoryCreator{
+public class CommonInventoryCreator implements InventoryCreator {
+
+    private EquipmentCreator equipmentCreator = new CommonEquipmentCreator();
+
     @Override
-    public Inventory createInventory(Equipment weapon, Equipment armor, int coins) {
-        return new Inventory(coins, (Weapon) weapon, (Armor) armor);
+    public Inventory createInventory(int coins, int weaponAttribute, int armoAttribute) {
+        return new Inventory(coins,
+                equipmentCreator.createWeapon(weaponAttribute),
+                equipmentCreator.createArmor(armoAttribute));
     }
 }
